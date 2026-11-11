@@ -1,4 +1,6 @@
-"""Reproduce original textbook diagrams and the two introductory notebooks."""
+"""Reproduce the introductory diagrams and Hebbian notebook.
+
+LIF notebook and RC/integration examples are delegated to build_lif_examples.py."""
 from pathlib import Path
 import textwrap
 import nbformat
@@ -12,66 +14,6 @@ ASSETS = ROOT / 'assets'
 ASSETS.mkdir(exist_ok=True)
 plt.rcParams.update({'font.size': 10, 'axes.titlesize': 11, 'figure.dpi': 140})
 
-lif_code = r'''
-import numpy as np
-import matplotlib.pyplot as plt
-
-def simulate_lif(current_pa=200.0, duration_ms=500.0, dt_ms=0.1):
-    tau_ms, leak_ns, rest_mv = 20.0, 10.0, -65.0
-    threshold_mv, reset_mv, refractory_ms = -50.0, -65.0, 2.0
-    voltage, hold_steps = reset_mv, 0
-    trace, spikes = [], []
-    for step in range(round(duration_ms / dt_ms)):
-        if hold_steps > 0:
-            voltage = reset_mv
-            hold_steps -= 1
-        else:
-            steady_mv = rest_mv + current_pa / leak_ns
-            voltage = steady_mv + (voltage - steady_mv) * np.exp(-dt_ms / tau_ms)
-            if voltage >= threshold_mv:
-                spikes.append((step + 1) * dt_ms)
-                voltage = reset_mv
-                hold_steps = round(refractory_ms / dt_ms)
-        trace.append(voltage)
-    return np.asarray(trace), np.asarray(spikes)
-
-def analytical_rate(current_pa):
-    steady_mv = -65.0 + current_pa / 10.0
-    if steady_mv <= -50.0:
-        return 0.0
-    crossing_ms = 20.0 * np.log((steady_mv + 65.0) / (steady_mv + 50.0))
-    return 1000.0 / (crossing_ms + 2.0)
-
-trace, spikes = simulate_lif()
-assert len(spikes) > 2
-assert abs(spikes[0] - 20.0 * np.log(4.0)) <= 0.11
-assert len(simulate_lif(100.0)[1]) == 0
-_, fine_spikes = simulate_lif(dt_ms=0.05)
-assert abs(np.diff(fine_spikes).mean() - (20 * np.log(4) + 2)) <= 0.11
-print('Analytical rate at 200 pA: %.2f Hz' % analytical_rate(200.0))
-print('Simulated rate at 200 pA: %.2f Hz' % (1000 / np.diff(spikes).mean()))
-'''
-lif_plot = r'''
-currents = np.linspace(80.0, 300.0, 23)
-simulated = []
-for current in currents:
-    _, events = simulate_lif(current_pa=current, duration_ms=2000.0)
-    simulated.append(0.0 if len(events) < 2 else 1000.0 / np.diff(events).mean())
-expected = np.array([analytical_rate(i) for i in currents])
-assert np.max(np.abs(np.array(simulated) - expected)) < 0.6
-fig, axes = plt.subplots(1, 2, figsize=(11, 3.8), constrained_layout=True)
-time_ms = (np.arange(len(trace)) + 1) * 0.1
-axes[0].plot(time_ms, trace, color='#24628a', label='Reset voltage trace')
-axes[0].vlines(spikes[spikes <= 160], -49, -44, color='#b6483b', label='Spike events')
-axes[0].axhline(-50, ls='--', color='0.5', lw=1, label='Threshold')
-axes[0].set(xlim=(0, 160), ylim=(-67, -41), xlabel='Time (ms)', ylabel='Voltage (mV)', title='A. LIF at 200 pA')
-axes[0].legend(fontsize=8, loc='lower right')
-axes[1].plot(currents, expected, '-', color='#24628a', label='Analytical')
-axes[1].plot(currents, simulated, 'o', ms=4, color='#b6483b', label='Simulated, step = 0.1 ms')
-axes[1].set(xlabel='Current (pA)', ylabel='Steady firing rate (Hz)', title='B. Constant-input response')
-axes[1].legend(fontsize=8)
-plt.show()
-'''
 hebb_code = r'''
 import numpy as np
 import matplotlib.pyplot as plt
@@ -124,8 +66,6 @@ plt.show()
 '''
 
 for name, title, intro, code, plot in [
-    ('lif_neuron', 'Laboratory 1 — Leaky Integrate-and-Fire Neuron',
-     'Companion to Chapter 3. All currents use pA, voltages mV, conductances nS, and time ms. The model uses an exact passive step and endpoint spike detection. Run all cells to reproduce the checks and figure. Parameters are pedagogical, not fitted to a biological recording.', lif_code, lif_plot),
     ('hebbian_learning', 'Laboratory 3 — Hebbian Association and STDP',
      'Companion to Chapter 4. This controlled pairing example uses dimensionless activities and supplied output patterns. It demonstrates partial-cue recall and ambiguity, not autonomous learning. The STDP window is illustrated separately and does not train the association matrix.', hebb_code, hebb_plot),
 ]:
@@ -134,8 +74,7 @@ for name, title, intro, code, plot in [
         nbformat.v4.new_code_cell(textwrap.dedent(code).strip()),
         nbformat.v4.new_code_cell(textwrap.dedent(plot).strip()),
         nbformat.v4.new_markdown_cell('## Experiments\n\n' +
-            ('1. Halve the time step and compare spike intervals.\n2. Double membrane capacitance with conductance fixed.\n3. Compare current-based input with a conductance-based extension.\n\n## References\n\n[1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics*, Cambridge University Press, 2014. [Online textbook](https://neuronaldynamics.epfl.ch/online/).' if name == 'lif_neuron' else
-             '1. Compare scores before and after pairing.\n2. Shuffle the output pairings and compare recall.\n3. Add overlapping patterns and measure interference.\n4. Change the STDP time constant and inspect the timing window.\n\n## References\n\n[1] D. O. Hebb, *The Organization of Behavior*, Wiley, 1949. [Catalog record](https://wellcomecollection.org/works/g4sfzum4).\n\n[2] G.-Q. Bi and M.-M. Poo, “Synaptic modifications in cultured hippocampal neurons: Dependence on spike timing, synaptic strength, and postsynaptic cell type,” *J. Neurosci.*, vol. 18, no. 24, pp. 10464–10472, 1998. [DOI](https://pubmed.ncbi.nlm.nih.gov/9852584/).'))
+             '1. Compare scores before and after pairing.\n2. Shuffle the output pairings and compare recall.\n3. Add overlapping patterns and measure interference.\n4. Change the STDP time constant and inspect the timing window.\n\n## References\n\n[1] D. O. Hebb, *The Organization of Behavior*, Wiley, 1949. [Catalog record](https://wellcomecollection.org/works/g4sfzum4).\n\n[2] G.-Q. Bi and M.-M. Poo, “Synaptic modifications in cultured hippocampal neurons: Dependence on spike timing, synaptic strength, and postsynaptic cell type,” *J. Neurosci.*, vol. 18, no. 24, pp. 10464–10472, 1998. [DOI](https://pubmed.ncbi.nlm.nih.gov/9852584/).')
     ])
     nb.metadata.kernelspec = {'display_name': 'Python 3', 'language': 'python', 'name': 'python3'}
     nb.metadata.language_info = {'name': 'python'}
@@ -149,7 +88,7 @@ for name, title, intro, code, plot in [
     original_show = plt.show
     plt.show = lambda: None
     exec(plot, namespace)
-    filename = 'lif-neuron-model.png' if name == 'lif_neuron' else 'hebbian-learning.png'
+    filename = 'hebbian-learning.png'
     namespace['fig'].savefig(ASSETS / filename, dpi=160, facecolor='white')
     plt.close('all')
     plt.show = original_show
@@ -201,4 +140,6 @@ svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 510" role="im
 <g font-size="16"><text x="52" y="413">Presynaptic spike → calcium entry</text><text x="650" y="414">Vesicles release transmitter</text><text x="650" y="445">Cleft → postsynaptic receptors</text><text x="52" y="458">Receptor activation changes postsynaptic state</text></g>
 </g></svg>'''
 (ASSETS/'neuron-synapse.svg').write_text(svg)
-print('Generated four original teaching figures and two executable notebooks.')
+import runpy
+runpy.run_path(str(ROOT / 'tools/build_lif_examples.py'), run_name='__main__')
+print('Generated introductory figures, the Hebbian notebook, and the LIF worked examples.')

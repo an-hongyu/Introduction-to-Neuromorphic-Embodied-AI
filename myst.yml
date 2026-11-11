@@ -3,32 +3,33 @@ project:
   title: Introduction to Neuromorphic Embodied AI
   subtitle: From Spatial Neural Circuits to Autonomous Learning Robots
   authors:
-    - name: Hongyu An
-      affiliations:
-        - Michigan Technological University
+  - name: Hongyu An
+    affiliations:
+    - Michigan Technological University
   keywords:
-    - neuromorphic computing
-    - embodied AI
-    - place cells
-    - spatial navigation
+  - neuromorphic computing
+  - embodied AI
+  - place cells
+  - spatial navigation
   github: https://github.com/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI
-  downloads:
-    - file: notebooks/place_cells.ipynb
-      title: Download Place Cell Notebook
-    - url: https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/place_cells.ipynb
-      title: Run Place Cell Notebook in Google Colab
   toc:
-    - file: index.md
-    - title: Foundations
-      children:
-        - file: chapters/01-introduction.md
-    - title: Spatial Cell Models
-      children:
-        - file: chapters/04-place-cells.md
-        - file: notebooks/place_cells.ipynb
-    - title: Roadmap
-      children:
-        - file: chapters/roadmap.md
+  - file: index.md
+  - title: Foundations
+    children:
+    - file: chapters/01-neuroscience-background.md
+    - file: chapters/02-spatial-cells.md
+    - file: chapters/03-computational-neuron-models.md
+    - file: chapters/04-hebbian-learning.md
+  - title: Computational Laboratories
+    children:
+    - file: chapters/04-place-cells.md
+    - file: notebooks/place_cells.ipynb
+    - file: notebooks/lif_neuron.ipynb
+    - file: notebooks/hebbian_learning.ipynb
+  - title: Context and Roadmap
+    children:
+    - file: chapters/01-introduction.md
+    - file: chapters/roadmap.md
 site:
   template: book-theme
   title: Introduction to Neuromorphic Embodied AI
@@ -36,6 +37,4 @@ site:
     logo: assets/logo.svg
     favicon: assets/favicon.svg
     folders: true
-    # Avoid a doubled BASE_URL in the current theme's breadcrumb home link.
-    # Sidebar, header home link, and previous/next navigation remain enabled.
     hide_breadcrumbs: true

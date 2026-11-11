@@ -17,3 +17,5 @@ The fifth-edition source is distinct from the supplied first-edition PDF snapsho
 | `ccn-synapse.png` | `fig_synapse.png` | `fig-synapse` | `a9713263d3d6c6a9bc8146948c6332383295325783699bd46c443b26c138b8b3` |
 | `ccn-excitation-inhibition.png` | `fig_vm_as_tug_of_war.png` | `fig-vm-as-tug-of-war` | `9f95f54b1dc842934793d7f232150596dca7bf7e0abcfd56a1f2451cafca0b9f` |
 | `ccn-integration-cases.png` | `fig_vm_as_tug_of_war_cases.png` | `fig-vm-as-tug-of-war-cases` | `d156a4532fe61acc1c1bc5e1068f0a31a6a0dbfd7e50c97e9e6ee45a69f13c92` |
+
+The two tug-of-war images are retained as attributed source assets but are no longer displayed in Chapter 1. The chapter uses the original `excitation-inhibition-balance.svg` teaching illustration instead.

@@ -24,6 +24,16 @@ A **neuron** is an electrically excitable cell specialized for receiving, transf
 
 Dendrites are not merely passive wires, and the soma is not a universal centralized calculator. Voltage-dependent channels and local dendritic events can change how signals combine. Likewise, not every neuron follows one rigid input-to-axon sequence: some cells communicate mainly through graded potentials, some fire spontaneously, and initiation sites vary with cell type. The table is a functional guide, not a universal wiring rule.
 
+```{figure} ../assets/ccn-neuron-detector.png
+:label: fig-ccn-neuron-detector
+:alt: Reference-textbook diagram comparing a detector with a neuron, labeling inputs, integration, output, dendrites, synapses, soma, and axon
+:width: 85%
+
+**Reference-book figure: input, integration, and output.** Reproduced unchanged from R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “Neuron as a detector” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_neuron_as_detect.png).
+```
+
+**Read the picture.** Follow the separate inputs toward the integration region and then the output axon. The diagram is a functional abstraction: integration can occur throughout dendrites as well as the soma, and the axon initial segment is an important spike-initiation site in many neurons. The purple cell body should not be interpreted as the only place where computation occurs.
+
 A **neural circuit** consists of connected neurons whose activity influences one another. **Convergence** means that several neurons send input to a common target; **divergence** means that one neuron sends output to multiple targets. These patterns allow a circuit to combine information and distribute its consequences. Inhibition can coordinate competing actions as well as suppress activity. For example, activating a pathway that contracts one muscle while inhibiting its antagonist supports coordinated movement [[1]](#neuro-ref-1), ch. 2.
 
 ```{figure} ../assets/neuron-synapse.svg
@@ -135,7 +145,7 @@ s_i(t)=\sum_k\delta\!\left(t-t_i^{(k)}\right),\qquad
 \widehat r_i=\frac{N_i}{T}.
 $$
 
-Here $t_i^{(k)}$ is spike $k$ of neuron $i$, $\delta$ is the Dirac delta, $N_i$ is the count in a window of duration $T$, and $\widehat r_i$ is a count-based rate estimate. Five spikes in 0.2 s give 25 Hz. Five evenly spaced spikes and five clustered spikes can have the same window-averaged rate while affecting a downstream neuron differently because of temporal integration and synaptic dynamics [[2]](#neuro-ref-2).
+Here $t_i^{(k)}$ is spike $k$ of neuron $i$, $\delta$ is the Dirac delta, $N_i$ is the count in a window of duration $T$, and $\widehat r_i$ is a count-based rate estimate. Five spikes in 0.2 s give 25 Hz. Five evenly spaced spikes and five clustered spikes can have the same window-averaged rate while affecting a downstream neuron differently because of temporal integration and synaptic dynamics [[3]](#neuro-ref-3).
 
 ## 1.5 Synapses: the connections between cells
 
@@ -146,6 +156,16 @@ A **synapse** is a specialized communication site between cells. The sending sid
 At a typical chemical synapse, the presynaptic terminal contains **synaptic vesicles** holding transmitter, release machinery concentrated at **active zones**, and voltage-gated calcium channels. The **synaptic cleft** is the extracellular gap between the cells. The postsynaptic membrane contains receptors and associated proteins that determine how it responds to the released chemical signal.
 
 Many excitatory contacts onto cortical pyramidal neurons occur on dendritic spines; other contacts occur on dendritic shafts, the soma, or axonal regions. Location affects function. A connection near a particular dendritic input can control that local interaction, while a connection near an output-triggering region can have strong influence over spike initiation. The biological synapse is therefore richer than a scalar weight attached to an abstract edge.
+
+```{figure} ../assets/ccn-synapse.png
+:label: fig-ccn-synapse
+:alt: Reference-textbook illustration of a presynaptic terminal and postsynaptic spine, with transmitter vesicles, glutamate, AMPA, NMDA, metabotropic receptors, and calcium channels
+:width: 78%
+
+**Reference-book figure: a glutamatergic chemical synapse.** Reproduced unchanged from O'Reilly *et al.*, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “Schematic of a synapse” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_synapse.png).
+```
+
+**Read the picture from bottom to top.** The lower terminal is presynaptic; its vesicles contain transmitter. The cleft separates it from the upper postsynaptic spine. Red transmitter molecules and the labeled ions are different entities: transmitter binds receptors, whereas ions carry current through suitable channels. AMPA and NMDA are ionotropic glutamate receptors; mGlu denotes a metabotropic glutamate receptor. VGCC denotes a voltage-gated calcium channel. This is an example glutamatergic synapse, not a diagram of every synapse type. The source uses `Ca++` for $\mathrm{Ca}^{2+}$ and `Na+` for $\mathrm{Na}^{+}$.
 
 ### 1.5.2 Chemical versus electrical synapses
 
@@ -214,6 +234,26 @@ Electrical activity in A is converted into chemical signaling and then into a re
 ## 1.8 Excitatory and inhibitory synaptic actions
 
 An **excitatory** action tends to increase the probability of postsynaptic firing under the relevant conditions. An **inhibitory** action tends to reduce it. An **excitatory postsynaptic potential (EPSP)** is a voltage response associated with excitation; an **inhibitory postsynaptic potential (IPSP)** is associated with inhibition. A small EPSP need not cause a spike, and inhibition need not produce a large negative-going voltage trace [[1]](#neuro-ref-1), ch. 10.
+
+```{figure} ../assets/ccn-excitation-inhibition.png
+:label: fig-ccn-excitation-inhibition
+:alt: Reference-textbook tug-of-war analogy showing excitatory and inhibitory conductances pulling membrane voltage toward their reversal potentials, with a marked spike threshold
+:width: 65%
+
+**Reference-book figure: a tug-of-war analogy for integration.** Reproduced unchanged from O'Reilly *et al.*, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “The neuron is a tug-of-war battleground between inhibition and excitation” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_vm_as_tug_of_war.png).
+```
+
+**Read the picture.** The flag represents membrane voltage $V_m$; $g_e$ and $g_i$ represent excitatory and inhibitory conductances, and $E_e$ and $E_i$ their reversal potentials. The marked $\theta$ is the source's illustrative spike threshold. The voltages in this cartoon are example choices, not universal constants or replacements for this chapter's separate worked-example values. The analogy emphasizes competing conductances; it does not replace the membrane equation, which also includes leak, capacitance, and other currents.
+
+```{figure} ../assets/ccn-integration-cases.png
+:label: fig-ccn-integration-cases
+:alt: Three textbook cartoon cases showing subthreshold balance, stronger excitation above threshold, and a similar balance with weaker overall conductances
+:width: 82%
+
+**Reference-book figure: three integration cases.** Reproduced unchanged from O'Reilly *et al.*, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “Specific cases in the tug-of-war scenario” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_vm_as_tug_of_war_cases.png).
+```
+
+**Compare the cases.** Panel (a) places $V_m$ below the comparison level; panel (b) shows a balance above it. Panel (c) illustrates why relative conductances matter. Equal ratios do not guarantee identical dynamics: changing absolute conductance changes the effective membrane time constant, and the leak and other currents must still be included. Ask which quantities are held fixed before turning this metaphor into a quantitative prediction.
 
 ### 1.8.1 Conductance and driving force
 
@@ -328,11 +368,15 @@ References use IEEE-style numbered citations. Each citation number links to its 
 
 (neuro-ref-2)=
 
-[2] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+[2] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 2. [Open textbook source](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-02.md); [edition and copyright](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md); [CC BY 4.0 license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/LICENSE).
+
+(neuro-ref-3)=
+
+[3] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
 
 
 ## Additional Reading Materials
 
-The main biological reference is *Principles of Neural Science*, fifth edition [[1]](#neuro-ref-1). Use Chapter 2 for the functional organization of a neuron, Chapters 6–7 for membrane properties and action potentials, Chapters 8 and 10 for synapses and integration, Chapters 11–13 for receptors, release, and neurotransmitters, and Chapters 66–67 for plasticity and memory. The explanations, diagrams, and numerical examples here are original teaching material. Parameter values in worked examples are stated assumptions, not measurements from a particular cell.
+The main biological reference is *Principles of Neural Science*, fifth edition [[1]](#neuro-ref-1). Use Chapter 2 for the functional organization of a neuron, Chapters 6–7 for membrane properties and action potentials, Chapters 8 and 10 for synapses and integration, Chapters 11–13 for receptors, release, and neurotransmitters, and Chapters 66–67 for plasticity and memory. The explanatory text, numerical examples, and figures identified as original were created for this book. Reproduced reference-book figures are credited separately in their captions. Parameter values in worked examples are stated assumptions, not measurements from a particular cell.
 
-For the computational treatment, use *Neuronal Dynamics* [[2]](#neuro-ref-2), Chapters 1–3 for single-neuron and synaptic models and Chapter 6 for spike trains and neuronal variability. See the [reference-book reading map](roadmap.md#reference-book-reading-map) for further selections across the textbook.
+For the computational treatment, use *Neuronal Dynamics* [[3]](#neuro-ref-3), Chapters 1–3 for single-neuron and synaptic models and Chapter 6 for spike trains and neuronal variability. See the [reference-book reading map](roadmap.md#reference-book-reading-map) for further selections across the textbook.

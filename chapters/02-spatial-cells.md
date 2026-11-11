@@ -124,28 +124,28 @@ Continue with the [Place Cell laboratory guide](04-place-cells.md) and [executab
 
 (spatial-ref-2)=
 
-[2] J. O'Keefe and J. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Res.*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://doi.org/10.1016/0006-8993(71)90358-1).
+[2] J. O'Keefe and J. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Res.*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://pubmed.ncbi.nlm.nih.gov/5124915/).
 
 (spatial-ref-3)=
 
-[3] T. Hafting, M. Fyhn, S. Molden, M.-B. Moser, and E. I. Moser, “Microstructure of a spatial map in the entorhinal cortex,” *Nature*, vol. 436, pp. 801–806, 2005, doi: [10.1038/nature03721](https://doi.org/10.1038/nature03721).
+[3] T. Hafting, M. Fyhn, S. Molden, M.-B. Moser, and E. I. Moser, “Microstructure of a spatial map in the entorhinal cortex,” *Nature*, vol. 436, pp. 801–806, 2005, doi: [10.1038/nature03721](https://pubmed.ncbi.nlm.nih.gov/15965463/).
 
 (spatial-ref-4)=
 
-[4] J. S. Taube, R. U. Muller, and J. B. Ranck, Jr., “Head-direction cells recorded from the postsubiculum in freely moving rats. I. Description and quantitative analysis,” *J. Neurosci.*, vol. 10, no. 2, pp. 420–435, 1990, doi: [10.1523/JNEUROSCI.10-02-00420.1990](https://doi.org/10.1523/JNEUROSCI.10-02-00420.1990).
+[4] J. S. Taube, R. U. Muller, and J. B. Ranck, Jr., “Head-direction cells recorded from the postsubiculum in freely moving rats. I. Description and quantitative analysis,” *J. Neurosci.*, vol. 10, no. 2, pp. 420–435, 1990, doi: [10.1523/JNEUROSCI.10-02-00420.1990](https://pubmed.ncbi.nlm.nih.gov/2303851/).
 
 (spatial-ref-5)=
 
-[5] T. Solstad, C. N. Boccara, E. Kropff, M.-B. Moser, and E. I. Moser, “Representation of geometric borders in the entorhinal cortex,” *Science*, vol. 322, no. 5909, pp. 1865–1868, 2008, doi: [10.1126/science.1166466](https://doi.org/10.1126/science.1166466).
+[5] T. Solstad, C. N. Boccara, E. Kropff, M.-B. Moser, and E. I. Moser, “Representation of geometric borders in the entorhinal cortex,” *Science*, vol. 322, no. 5909, pp. 1865–1868, 2008, doi: [10.1126/science.1166466](https://pubmed.ncbi.nlm.nih.gov/19095945/).
 
 (spatial-ref-6)=
 
-[6] E. Kropff, J. E. Carmichael, M.-B. Moser, and E. I. Moser, “Speed cells in the medial entorhinal cortex,” *Nature*, vol. 523, pp. 419–424, 2015, doi: [10.1038/nature14622](https://doi.org/10.1038/nature14622).
+[6] E. Kropff, J. E. Carmichael, M.-B. Moser, and E. I. Moser, “Speed cells in the medial entorhinal cortex,” *Nature*, vol. 523, pp. 419–424, 2015, doi: [10.1038/nature14622](https://pubmed.ncbi.nlm.nih.gov/26176924/).
 
 (spatial-ref-7)=
 
-[7] C. J. MacDonald, K. Q. Lepage, U. T. Eden, and H. Eichenbaum, “Hippocampal ‘time cells’ bridge the gap in memory for discontiguous events,” *Neuron*, vol. 71, no. 4, pp. 737–749, 2011, doi: [10.1016/j.neuron.2011.07.012](https://doi.org/10.1016/j.neuron.2011.07.012).
+[7] C. J. MacDonald, K. Q. Lepage, U. T. Eden, and H. Eichenbaum, “Hippocampal ‘time cells’ bridge the gap in memory for discontiguous events,” *Neuron*, vol. 71, no. 4, pp. 737–749, 2011, doi: [10.1016/j.neuron.2011.07.012](https://pubmed.ncbi.nlm.nih.gov/21867888/).
 
 (spatial-ref-8)=
 
-[8] D. Bush, C. Barry, and N. Burgess, “What do grid cells contribute to place cell firing?,” *Trends Neurosci.*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://doi.org/10.1016/j.tins.2013.12.003).
+[8] D. Bush, C. Barry, and N. Burgess, “What do grid cells contribute to place cell firing?,” *Trends Neurosci.*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://pubmed.ncbi.nlm.nih.gov/24485517/).

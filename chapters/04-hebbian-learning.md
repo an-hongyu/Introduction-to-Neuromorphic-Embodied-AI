@@ -176,16 +176,16 @@ Later SFN material will build on these ideas as a proposed research framework. I
 
 (hebb-ref-3)=
 
-[3] T. V. P. Bliss and T. Lømo, “Long-lasting potentiation of synaptic transmission in the dentate area of the anaesthetized rabbit following stimulation of the perforant path,” *J. Physiol.*, vol. 232, no. 2, pp. 331–356, 1973, doi: [10.1113/jphysiol.1973.sp010273](https://doi.org/10.1113/jphysiol.1973.sp010273).
+[3] T. V. P. Bliss and T. Lømo, “Long-lasting potentiation of synaptic transmission in the dentate area of the anaesthetized rabbit following stimulation of the perforant path,” *J. Physiol.*, vol. 232, no. 2, pp. 331–356, 1973, doi: [10.1113/jphysiol.1973.sp010273](https://pubmed.ncbi.nlm.nih.gov/4727084/).
 
 (hebb-ref-4)=
 
-[4] E. Oja, “A simplified neuron model as a principal component analyzer,” *J. Math. Biol.*, vol. 15, no. 3, pp. 267–273, 1982, doi: [10.1007/BF00275687](https://doi.org/10.1007/BF00275687).
+[4] E. Oja, “A simplified neuron model as a principal component analyzer,” *J. Math. Biol.*, vol. 15, no. 3, pp. 267–273, 1982, doi: [10.1007/BF00275687](https://pubmed.ncbi.nlm.nih.gov/7153672/).
 
 (hebb-ref-5)=
 
-[5] G.-Q. Bi and M.-M. Poo, “Synaptic modifications in cultured hippocampal neurons: Dependence on spike timing, synaptic strength, and postsynaptic cell type,” *J. Neurosci.*, vol. 18, no. 24, pp. 10464–10472, 1998, doi: [10.1523/JNEUROSCI.18-24-10464.1998](https://doi.org/10.1523/JNEUROSCI.18-24-10464.1998).
+[5] G.-Q. Bi and M.-M. Poo, “Synaptic modifications in cultured hippocampal neurons: Dependence on spike timing, synaptic strength, and postsynaptic cell type,” *J. Neurosci.*, vol. 18, no. 24, pp. 10464–10472, 1998, doi: [10.1523/JNEUROSCI.18-24-10464.1998](https://pubmed.ncbi.nlm.nih.gov/9852584/).
 
 (hebb-ref-6)=
 
-[6] W. Gerstner, M. Lehmann, V. Liakoni, D. Corneil, and J. Brea, “Eligibility traces and plasticity on behavioral time scales: Experimental support of neoHebbian three-factor learning rules,” *Front. Neural Circuits*, vol. 12, Art. no. 53, 2018, doi: [10.3389/fncir.2018.00053](https://doi.org/10.3389/fncir.2018.00053).
+[6] W. Gerstner, M. Lehmann, V. Liakoni, D. Corneil, and J. Brea, “Eligibility traces and plasticity on behavioral time scales: Experimental support of neoHebbian three-factor learning rules,” *Front. Neural Circuits*, vol. 12, Art. no. 53, 2018, doi: [10.3389/fncir.2018.00053](https://pubmed.ncbi.nlm.nih.gov/30108488/).

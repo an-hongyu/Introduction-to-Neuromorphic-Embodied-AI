@@ -2,7 +2,7 @@
 
 An open, computational textbook on biological spatial cells, spiking models, associative learning and embodied robotics.
 
-**Author:** Hongyu An · Michigan Technological University
+**Author:** Hongyu An
 
 ## Current textbook structure
 

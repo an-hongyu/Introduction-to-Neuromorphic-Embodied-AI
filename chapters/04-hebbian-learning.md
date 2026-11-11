@@ -147,6 +147,40 @@ The output patterns are supplied during pairing. This is a controlled associativ
 A bounded-duration teaching experiment: paired-pattern outer-product learning, partial-cue recall, and a separately illustrated STDP rule. The STDP window does not train the matrix shown in the first panel.
 ```
 
+### 4.8.1 Course case — a visual cue acquires a motor response
+
+Use a red visual cue as the conditioned stimulus (CS) and vibration as the unconditioned stimulus (US). Before training, US alone drives the output; CS alone does not. Pair them, freeze learning, then probe CS alone. This course variant is motivated by associative robotic learning [[7]](#hebb-ref-7). The published system uses different visual processing, network details, and hardware; our small example is not its reproduction.
+
+Let $x,u\in\{0,1\}$ denote detected CS and US, $w$ the CS weight, and $y=\mathbf1[wx+u>0.5]$ a trial-level teaching response. Choose a **bounded coactivity rule**:
+
+$$
+w_{k+1}=w_k+\eta x_k y_k(1-w_k),\qquad 0\leq\eta\leq1.
+$$
+
+All variables here are dimensionless. This is a chosen saturation rule, not Oja's rule or STDP. During paired trials $x=y=1$, so $w_k=1-(1-w_0)(1-\eta)^k$. With $w_0=0.05$, $\eta=0.1$, and 12 pairings, $w_{12}\approx0.73169$. Nonoverlapping CS and US presentations leave the weight unchanged in the default unpaired control because isolated CS never crosses the teaching threshold.
+
+```python
+# Standalone trial-level calculation; no simulator required.
+w, eta = 0.05, 0.1
+for _ in range(12):
+    cs, us = 1.0, 1.0
+    response = float(w * cs + us > 0.5)
+    w += eta * cs * response * (1 - w)
+print(w)  # 0.73169194034305
+```
+
+A separate LIF readout receives $I=50+200(wx+u)$ pA. CS alone therefore supplies 60 pA before learning and about 196.34 pA afterward. Use the Chapter 3 parameters and a fixed 500 ms probe; at least three events count as a response. Learning stays disabled throughout every probe. The trial-level variable $y$ trains the weight; the spiking readout evaluates its consequence. It does not retroactively supply spike-timing-dependent updates.
+
+```{figure} ../assets/conditioning-course-learning.png
+:label: fig-conditioning-learning
+:alt: Paired, unpaired, and frozen learning weights and before versus after frozen-probe spike counts
+:width: 100%
+
+Original synthetic results. Both unpaired and frozen-learning controls retain the initial weight. A larger learned weight alone is insufficient: compare the held-out response conditions too.
+```
+
+[Laboratory 5](../notebooks/conditioning.ipynb) contains the complete training function, physical-unit LIF readout, and controls. Change learning rate, trial count, or initial weight. A larger initial weight can make CS effective before pairing and change the unpaired control; state these conditions when interpreting results. [Chapter 10](10-associative-learning-robot.md) turns this example into a staged robot experiment with separate sensing, learning, and behavioral evaluation.
+
 ## 4.9 Connecting spatial representations to behavior
 
 A place-like population might provide context, an action population might describe a candidate movement, and a reward-related signal might modulate a local trace. This is a useful way to formulate a testable robot learning architecture. It still requires explicit action selection, weight constraints, exploration, and evaluation.
@@ -189,3 +223,12 @@ Later SFN material will build on these ideas as a proposed research framework. I
 (hebb-ref-6)=
 
 [6] W. Gerstner, M. Lehmann, V. Liakoni, D. Corneil, and J. Brea, “Eligibility traces and plasticity on behavioral time scales: Experimental support of neoHebbian three-factor learning rules,” *Front. Neural Circuits*, vol. 12, Art. no. 53, 2018, doi: [10.3389/fncir.2018.00053](https://pubmed.ncbi.nlm.nih.gov/30108488/).
+
+
+(hebb-ref-7)=
+
+[7] N. Zins, Y. Zhang, and H. An, “Implementation of Associative Memory Learning in Mobile Robots Using Neuromorphic Computing,” in *Neuromorphic Computing*, 2023, doi: [10.5772/intechopen.110364](https://www.intechopen.com/chapters/86265).
+
+## Additional Reading Materials
+
+Read Hebb's original proposal [[1]](#hebb-ref-1), then compare the explicit stabilization in Oja [[4]](#hebb-ref-4), the experimental timing dependence in Bi and Poo [[5]](#hebb-ref-5), and the delayed modulation discussed in Gerstner et al. [[6]](#hebb-ref-6). Read the robot chapter [[7]](#hebb-ref-7) alongside our course variant and list the differences in cues, learning rule, and deployment.

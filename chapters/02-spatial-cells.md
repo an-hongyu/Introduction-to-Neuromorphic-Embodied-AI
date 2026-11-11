@@ -149,3 +149,8 @@ Continue with the [Place Cell laboratory guide](04-place-cells.md) and [executab
 (spatial-ref-8)=
 
 [8] D. Bush, C. Barry, and N. Burgess, “What do grid cells contribute to place cell firing?,” *Trends Neurosci.*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://pubmed.ncbi.nlm.nih.gov/24485517/).
+
+
+## Additional Reading Materials
+
+Start with the original place-cell [[2]](#spatial-ref-2) and grid-cell [[3]](#spatial-ref-3) studies, then read the grid-to-place review [[8]](#spatial-ref-8). For an engineering bridge, compare the body-relative measurements in [Chapter 8](08-lidar-encoding.md) with the environment-relative spatial representations here. A 36-channel range encoder is a sensory input, not evidence that it implements 36 biological border cells.

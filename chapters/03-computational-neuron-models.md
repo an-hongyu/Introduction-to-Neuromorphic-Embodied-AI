@@ -368,7 +368,69 @@ $$
 
 Here $m$ and $h$ describe sodium activation and inactivation, while $n$ describes potassium activation in the classical model. If conductances are specified per membrane area, capacitance and current must also be specified per area. Do not mix a current density with the total capacitance used in the LIF example.
 
-A complete simulation additionally needs rate functions, reversal potentials, parameter values, temperature assumptions, initial conditions, and a numerical method. The equations above introduce the structure; they are not presented as a complete runnable Hodgkin–Huxley implementation or as a universal parameterization for hippocampal cells.
+### 3.6.1 A circuit with voltage-dependent conductances
+
+The capacitor still stores membrane charge. The sodium, potassium, and leak branches conduct in parallel; each branch has an effective reversal-potential source. Now $g_{\mathrm{Na}}=\overline g_{\mathrm{Na}}m^3h$ and $g_{\mathrm K}=\overline g_{\mathrm K}n^4$ vary with voltage and time. A reversal source represents an electrochemical driving force. Ion pumps maintain concentration gradients over longer times; the ideal source is not a literal pump circuit. Positive ionic current below is outward, whereas positive applied current drives depolarization.
+
+Sodium activation provides rapid positive feedback. Sodium inactivation and delayed potassium activation contribute to recovery. The action potential emerges from these dynamics: **there is no LIF-style threshold/reset rule**. Counting upward crossings of 0 mV is an analysis choice, not a mechanism that creates the waveform.
+
+### 3.6.2 Complete classical parameters and gate rates
+
+The [HH notebook](../notebooks/hodgkin_huxley.ipynb) implements a single compartment with the classical squid-axon kinetics at 6.3 °C, using the equations in the [Brian 2 reference implementation](https://brian2.readthedocs.io/en/stable/examples/compartmental.hodgkin_huxley_1952.html) with a shifted voltage origin [[2]](#models-ref-2). These are teaching parameters, not a fitted hippocampal neuron. The cortical parameter table in *Neuronal Dynamics* is a different parameterization.
+
+| Quantity | Value | Units |
+|---|---:|---|
+| $C_m$ | 1 | µF/cm² |
+| $\overline g_{\mathrm{Na}},\overline g_{\mathrm K},g_L$ | 120, 36, 0.3 | mS/cm² |
+| $E_{\mathrm{Na}},E_{\mathrm K},E_L$ | 50, −77, −54.387 | mV |
+| Applied current during 10–50 ms | 10 | µA/cm² |
+| Initial $V$; integration step | −65; 0.01 | mV; ms |
+
+For $V$ in mV, rate constants in ms$^{-1}$ are
+
+$$
+\begin{aligned}
+\alpha_m&=\frac{0.1(V+40)}{1-e^{-(V+40)/10}}, &\beta_m&=4e^{-(V+65)/18},\\
+\alpha_h&=0.07e^{-(V+65)/20}, &\beta_h&=\frac{1}{1+e^{-(V+35)/10}},\\
+\alpha_n&=\frac{0.01(V+55)}{1-e^{-(V+55)/10}}, &\beta_n&=0.125e^{-(V+65)/80}.
+\end{aligned}
+$$
+
+The apparent singularities at −40 and −55 mV have finite limits: $\alpha_m=1$ and $\alpha_n=0.1$ ms$^{-1}$. Evaluate these limits explicitly; do not allow a numerical `0/0`. At initialization set $q=\alpha_q/(\alpha_q+\beta_q)$. The notebook integrates all four states with fourth-order Runge–Kutta and no temperature rescaling. Brian's example uses resting voltage near 0 mV: converting it here requires shifting reversal potentials **and** rate-function arguments by −65 mV.
+
+```{figure} ../assets/hh-course-dynamics.png
+:label: fig-hh-course-dynamics
+:alt: Separate HH panels for applied current, membrane voltage, sodium and potassium gates, and signed ionic current densities
+:width: 100%
+
+Original notebook output: applied current, action-potential waveform, gates, and outward-positive ionic currents. Negative sodium current is inward. Membrane voltage is not combined with event markers.
+```
+
+### 3.6.3 Worked experiment — remove sodium conductance
+
+Run the definitions in [Laboratory 4](../notebooks/hodgkin_huxley.ipynb), then change one parameter:
+
+```python
+# simulate_hh is defined in Laboratory 4; units match the table above.
+t, applied, state, ionic, events = simulate_hh(drive=10, g_na=120, g_k=36)
+print("Upward 0 mV crossings (ms):", events)
+# Rerun with g_na=0, drive=5, or dt=0.005. Predict before running.
+```
+
+The default gives crossings near 11.901, 26.823, and 41.472 ms. Setting $\overline g_{\mathrm{Na}}=0$ eliminates these crossings under the same drive. This isolates a mechanism in this model; it is not a universal description of every pharmacological experiment.
+
+```{figure} ../assets/hh-course-ablation.png
+:label: fig-hh-course-ablation
+:alt: Voltage comparison for standard HH and sodium conductance removed, with a separate panel showing detected events
+:width: 100%
+
+Original controlled comparison with identical applied current. Events are detected from the waveform and shown in their own panel.
+```
+
+**Numerical checks.** The notebook checks near-rest stability without drive, bounded gates, finite singularity limits, sodium ablation, and time-step refinement. Halving the default step preserves event count and changes crossing times by less than 0.05 ms. Try larger steps deliberately: a curve that looks smooth is not sufficient evidence of numerical accuracy.
+
+[Open the complete HH experiment in Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/hodgkin_huxley.ipynb), or {download}`download it <../notebooks/hodgkin_huxley.ipynb>`.
+
 
 ## 3.7 Adaptive exponential and Izhikevich models
 
@@ -445,3 +507,8 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 (models-ref-5)=
 
 [5] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, sec. 1.3, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
+
+
+## Additional Reading Materials
+
+Read *Neuronal Dynamics*, chs. 1–2 [[1]](#models-ref-1), for the transition from membrane circuit to ion-channel kinetics. Compare the original HH paper and the linked Brian implementation [[2]](#models-ref-2) with Laboratory 4, recording voltage origin, temperature, and density units before comparing curves. For reduced excitation–recovery models, read Mallot, sec. 1.3 [[5]](#models-ref-5).

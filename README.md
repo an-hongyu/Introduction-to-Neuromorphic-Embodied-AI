@@ -11,9 +11,16 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 3. Computational Models of Neurons: rate/count models, LIF, Hodgkin–Huxley-type models, adaptive exponential models, and model selection.
 4. Hebbian Learning: association, constraints, Oja's rule, STDP, and eligibility traces.
 
+5. Neural Encoding and the ANN–SNN Bridge.
+6. Visual Perception and Visual Cue Encoding.
+7. Inertial Sensing and Vibration Encoding.
+8. LiDAR and Thirty-Six-Channel Spatial Encoding.
+9. Nengo, ROS 2, and Gazebo Integration (single-cell notebook plus integration guide).
+10. Capstone: An Associative Learning Robot (synthetic learning experiment plus robot validation protocol).
+
 References use IEEE-style numbered citations and hyperlinks. Original figures, defined units, worked examples, and exercises accompany the chapters. Existing introductory and Place Cell material remains available under supplementary reading and computational laboratories.
 
-The computational laboratories begin with a **Computational Models of Neurons** guide and follow this sequence: Laboratory 1, LIF neuron (`lif_neuron.ipynb`); Laboratory 2, Place Cells (`place_cells.ipynb`); Laboratory 3, Hebbian learning (`hebbian_learning.ipynb`).
+The computational laboratories begin with a **Computational Models of Neurons** guide and follow this sequence: Laboratory 1, LIF neuron (`lif_neuron.ipynb`); Laboratory 2, Place Cells (`place_cells.ipynb`); Laboratory 3, Hebbian learning (`hebbian_learning.ipynb`); Laboratory 4, Hodgkin–Huxley; Laboratory 5, Conditioning; Laboratory 6, Sensory Encoding; Laboratory 7, One Neuron in Nengo. See `chapters/course-reading-map.md`.
 
 ## Run the notebook
 
@@ -47,7 +54,7 @@ BASE_URL=/Introduction-to-Neuromorphic-Embodied-AI jupyter book build --html --s
 python tests/check_build.py
 ```
 
-The `.github/workflows/deploy.yml` workflow executes all three notebooks, builds Jupyter Book,
+The `.github/workflows/deploy.yml` workflow executes all seven notebooks, builds Jupyter Book,
 checks generated pages and local links, and deploys to GitHub Pages on `main`.
 Repository Settings → Pages must use **GitHub Actions** as the source.
 Pull requests run the build and checks without deploying.
@@ -76,3 +83,9 @@ python tools/build_teaching_assets.py
 ```
 
 This regenerates the original neuron/synapse schematic, synthetic spatial tuning figure, LIF figure, Hebbian-learning figure, and the two new laboratory source notebooks. It does not copy images or pages from the neuroscience reference textbook. The reference PDF is not distributed with this repository.
+
+## Course-aligned experiments
+
+Run `python tools/build_course_assets.py` to regenerate the four course notebooks and eight original figures. The generator checks HH rest/gates/ablation/time-step refinement, association controls, sensory masks, and the Nengo analytical firing rate. It supplements existing generators. Python 3.12 with Nengo 4.0.0 and NumPy 1.26.4 is the tested publishing environment.
+
+The ROS 2 Jazzy / Gazebo Harmonic integration chapter is a guide. A complete Gazebo world, controller package, physical robot, or neuromorphic hardware experiment is not supplied or validated by these notebooks.

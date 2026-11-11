@@ -10,15 +10,17 @@ root = Path(__file__).resolve().parents[1] / '_build/html'
 base = '/Introduction-to-Neuromorphic-Embodied-AI'
 html_files = list(root.rglob('*.html'))
 assert (root / 'index.html').is_file(), 'Homepage was not generated'
-assert len(html_files) >= 11, f'Expected eleven book pages, found {len(html_files)}'
+assert len(html_files) >= 22, f'Expected at least 22 book pages, found {len(html_files)}'
 all_html = '\n'.join(p.read_text() for p in html_files)
 for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
              'Neuroscience Background', 'Spatial Cells', 'Computational Models of Neurons',
-             'Hebbian Learning', 'Place Cell', 'Curriculum and Development Roadmap', 'colab.research.google.com']:
+             'Hebbian Learning', 'Place Cell', 'Neural Encoding', 'Visual Perception',
+             'Inertial Sensing', 'LiDAR', 'Nengo', 'Associative Learning Robot',
+             'Course-to-Book Reading Map', 'Curriculum and Development Roadmap', 'colab.research.google.com']:
     assert text in all_html, f'Missing published content: {text}'
 assert 'katex' in all_html or 'MathJax' in all_html or '<math' in all_html, 'No rendered mathematics'
-assert len(list(root.rglob('*.ipynb'))) >= 3, 'Expected three downloadable laboratories'
-assert len(list(root.rglob('*.png'))) >= 6, 'Expected at least six notebook figure outputs'
+assert len(list(root.rglob('*.ipynb'))) >= 7, 'Expected seven downloadable laboratories'
+assert len(list(root.rglob('*.png'))) >= 17, 'Expected at least seventeen notebook figure outputs'
 assert (root / 'lif-interactive.html').is_file(), 'Missing embedded LIF application'
 assert 'Interactive LIF neuron explorer' in all_html, 'Missing LIF iframe in chapter'
 

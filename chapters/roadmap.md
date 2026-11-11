@@ -4,50 +4,47 @@ title: Curriculum and Development Roadmap
 
 # Curriculum and Development Roadmap
 
-The four foundation chapters and three computational laboratories below are available. Later topics remain planned. Chapter numbers follow the revised teaching sequence.
+Ten chapters and seven computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
 
 ## Part I — Foundations: available
 
-1. [Neuroscience Background](01-neuroscience-background.md): neurons, membrane potential, action potentials, synapses, excitation, and inhibition.
-2. [Spatial Cells](02-spatial-cells.md): place, grid, head-direction, border/boundary, speed-related, and time-related activity.
-3. [Computational Models of Neurons](03-computational-neuron-models.md): rate/count models, LIF, conductance-based models, and model selection.
-4. [Hebbian Learning](04-hebbian-learning.md): two-factor updates, growth constraints, Oja's rule, STDP, and three-factor learning.
+1. [Neuroscience Background](01-neuroscience-background.md)
+2. [Spatial Cells](02-spatial-cells.md)
+3. [Computational Models of Neurons](03-computational-neuron-models.md): LIF, HH, reduced models, and model selection
+4. [Hebbian Learning](04-hebbian-learning.md): association, Oja, STDP, and eligibility traces
 
-## Companion laboratories: available
+## Part II — Encoding and embodied learning: available
 
-- [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and [Laboratory 1: LIF Neuron](../notebooks/lif_neuron.ipynb).
-- [Place Cell laboratory guide](04-place-cells.md) and [Laboratory 2 notebook](../notebooks/place_cells.ipynb).
-- [Laboratory 3: Hebbian Association and STDP](../notebooks/hebbian_learning.ipynb).
-- Supplementary [Neuromorphic Embodied AI overview](01-introduction.md).
+5. [Neural Encoding and the ANN–SNN Bridge](05-neural-encoding.md)
+6. [Visual Perception and Cue Encoding](06-visual-perception.md)
+7. [Inertial Sensing and Vibration Encoding](07-inertial-sensing.md)
+8. [LiDAR and Thirty-Six-Channel Spatial Encoding](08-lidar-encoding.md)
+9. [Nengo, ROS 2, and Gazebo Integration](09-nengo-ros-gazebo.md)
+10. [Capstone: An Associative Learning Robot](10-associative-learning-robot.md)
 
-## Part II — Spatial representations: planned
+The HH, conditioning, sensory, and single-neuron Nengo examples execute in Python. The ROS 2/Gazebo material is a staged integration guide, not a supplied and validated robot deployment. No neuromorphic hardware result is claimed by these teaching examples.
 
-5. Neural Encoding and Population Representations
-6. Place Cell Models and Remapping
-7. Grid Cell Models
-8. Head-Direction Cell Models
-9. Border and Boundary Vector Cells
-10. Speed Cells and Path Integration
-11. Time Cells and Sequential Encoding
+## Computational laboratories: available
 
-## Part III — Spatial networks and memory: planned
+See the [seven-laboratory table](course-reading-map.md) for the complete sequence. The [neuron-model laboratory guide](computational-neuron-models-lab.md), [Place Cell guide](04-place-cells.md), and [closed-loop overview](01-introduction.md) remain available. All seven notebooks execute during the publishing workflow.
 
-12. Coupling Grid and Place Cells
-13. Multimodal Sensory Integration
-14. Learning Spatial Representations through Plasticity
-15. Cognitive Maps and Population Decoding
-16. Associative Memory in Spiking Networks
-17. Spike Flow Networks: Models and Testable Hypotheses
-18. Reward-Guided Navigation and Memory Consolidation
-19. Goal-Directed Navigation and Planning
+## Advanced spatial representations and networks: planned
 
-## Part IV — Embodied implementations and validation: planned
+- Detailed place-cell models, remapping, and grid-to-place coupling
+- Grid, head-direction, border/boundary, speed, and time-cell implementations
+- Path integration and multimodal spatial representations
+- Learning spatial representations and population decoding
+- Associative memory capacity, interference, and consolidation
+- Spike Flow Networks: explicit models and testable hypotheses
+- Reward-guided navigation, goal relocation, and planning
 
-20. LiDAR-to-Spike Encoding (36 sectors, 10 degrees per sector)
-21. Spatial Cells in ROS and Gazebo
-22. Neuromorphic Hardware Implementation
-23. Calibration with Rodent Electrophysiology
-24. Benchmarks, Ablations, and Open Problems
+## Embodied validation and hardware: planned
+
+- A complete reproducible ROS 2/Gazebo robot package and recorded controlled trials
+- Spatial-cell networks driven by robot measurements
+- Neuromorphic hardware implementation and measured energy
+- Calibration with rodent electrophysiology
+- Benchmarks, ablations, failure cases, and open problems
 
 ## Writing and evidence conventions
 

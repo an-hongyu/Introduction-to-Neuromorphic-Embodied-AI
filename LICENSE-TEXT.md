@@ -1,0 +1,3 @@
+Book prose and illustrations are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+
+Copyright (c) 2026 Hongyu An. Third-party references retain their original rights.

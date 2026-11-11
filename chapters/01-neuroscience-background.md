@@ -2,13 +2,11 @@
 title: "Chapter 1 · Neuroscience Background"
 ---
 
-## 1.1 Learning objectives and reading guide
+## 1.1 Learning Objectives
 
 A neuron does more than receive a number and apply an activation function. It receives signals at particular places and times, combines them with its ongoing electrical and biochemical state, and influences other cells through specialized connections. Understanding that sequence is essential before building computational neurons, spatial representations, or learning robots.
 
 By the end of this chapter, you should be able to explain a neuron's input, integrative, conducting, and output functions; distinguish a graded postsynaptic potential from an action potential; explain threshold, spatial integration, and temporal integration; trace a chemical signal from one neuron to another; and distinguish excitation, inhibition, ordinary transmission, and synaptic plasticity.
-
-The main biological reference is *Principles of Neural Science*, fifth edition [[1]](#neuro-ref-1). Use Chapter 2 for the functional organization of a neuron, Chapters 6–7 for membrane properties and action potentials, Chapters 8 and 10 for synapses and integration, Chapters 11–13 for receptors, release, and neurotransmitters, and Chapters 66–67 for plasticity and memory. The explanations, diagrams, and numerical examples here are original teaching material. Parameter values in worked examples are stated assumptions, not measurements from a particular cell.
 
 ## 1.2 What is a neuron?
 
@@ -331,3 +329,10 @@ References use IEEE-style numbered citations. Each citation number links to its 
 (neuro-ref-2)=
 
 [2] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+
+
+## Additional Reading Materials
+
+The main biological reference is *Principles of Neural Science*, fifth edition [[1]](#neuro-ref-1). Use Chapter 2 for the functional organization of a neuron, Chapters 6–7 for membrane properties and action potentials, Chapters 8 and 10 for synapses and integration, Chapters 11–13 for receptors, release, and neurotransmitters, and Chapters 66–67 for plasticity and memory. The explanations, diagrams, and numerical examples here are original teaching material. Parameter values in worked examples are stated assumptions, not measurements from a particular cell.
+
+For the computational treatment, use *Neuronal Dynamics* [[2]](#neuro-ref-2), Chapters 1–3 for single-neuron and synaptic models and Chapter 6 for spike trains and neuronal variability. See the [reference-book reading map](roadmap.md#reference-book-reading-map) for further selections across the textbook.

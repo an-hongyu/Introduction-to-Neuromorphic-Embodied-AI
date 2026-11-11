@@ -4,8 +4,6 @@ project:
   subtitle: From Spatial Neural Circuits to Autonomous Learning Robots
   authors:
   - name: Hongyu An
-    affiliations:
-    - Michigan Technological University
   keywords:
   - neuromorphic computing
   - embodied AI

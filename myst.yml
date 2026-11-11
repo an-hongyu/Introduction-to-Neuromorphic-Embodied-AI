@@ -20,6 +20,14 @@ project:
     - file: chapters/02-spatial-cells.md
     - file: chapters/03-computational-neuron-models.md
     - file: chapters/04-hebbian-learning.md
+  - title: Encoding, Sensing, and Embodied Learning
+    children:
+    - file: chapters/05-neural-encoding.md
+    - file: chapters/06-visual-perception.md
+    - file: chapters/07-inertial-sensing.md
+    - file: chapters/08-lidar-encoding.md
+    - file: chapters/09-nengo-ros-gazebo.md
+    - file: chapters/10-associative-learning-robot.md
   - title: Computational Laboratories
     children:
     - file: chapters/computational-neuron-models-lab.md
@@ -27,8 +35,13 @@ project:
     - file: chapters/04-place-cells.md
     - file: notebooks/place_cells.ipynb
     - file: notebooks/hebbian_learning.ipynb
+    - file: notebooks/hodgkin_huxley.ipynb
+    - file: notebooks/conditioning.ipynb
+    - file: notebooks/sensory_encoding.ipynb
+    - file: notebooks/nengo_single_neuron.ipynb
   - title: Context and Roadmap
     children:
+    - file: chapters/course-reading-map.md
     - file: chapters/01-introduction.md
     - file: chapters/roadmap.md
 site:

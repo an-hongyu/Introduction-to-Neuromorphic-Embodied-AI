@@ -12,7 +12,7 @@ main{max-width:1040px;margin:auto;padding:20px}h1{font-size:25px;line-height:1.2
 .controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px;background:var(--pale);border:1px solid var(--line);padding:17px;border-radius:9px}.control label{display:flex;justify-content:space-between;align-items:baseline;gap:9px;font-size:12px;font-weight:650}.control output{white-space:nowrap;color:var(--blue);font-size:13px;font-variant-numeric:tabular-nums}input[type=range]{display:block;width:100%;margin:9px 0 0;accent-color:var(--blue);cursor:pointer;height:16px}.range-hint{font-size:10px;color:var(--muted)}
 .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:15px 0 10px}.metric{padding:10px 9px;border-bottom:3px solid #b8cfdc;background:#f8fafb}.metric span{display:block;font-size:10px;color:var(--muted);line-height:1.35}.metric strong{display:block;font-size:21px;color:var(--blue);margin-top:4px;font-variant-numeric:tabular-nums}.model-summary{font-size:12px;padding:7px 0 9px;color:var(--muted);font-variant-numeric:tabular-nums}.status{font-size:12px;padding:8px 10px;background:#edf4f7;border-left:3px solid var(--blue);margin-bottom:15px;min-height:36px}
 .chart{border:1px solid var(--line);border-radius:8px;margin:0 0 14px;padding:12px 12px 4px}.chart p{font-size:11px;color:var(--muted);margin:0 0 6px}svg{display:block;width:100%;height:auto;overflow:visible}svg text{font-family:inherit}.legend{font-size:11px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}.legend span:before{content:"";display:inline-block;width:16px;height:3px;background:var(--blue);vertical-align:middle;margin-right:5px}.legend .coral:before{background:var(--coral)}.legend .gray:before{background:#8b949e}.notes{font-size:11px;color:var(--muted);line-height:1.6}.notes strong{color:var(--ink)}.notes a{color:var(--blue)}noscript{display:block;padding:20px}
-@media(min-width:850px){main{padding:25px}.controls{grid-template-columns:repeat(3,minmax(0,1fr))}.chart-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:start}.chart svg{min-height:220px}.metrics .metric strong{font-size:25px}}
+@media(min-width:850px){main{padding:25px}.controls{grid-template-columns:repeat(3,minmax(0,1fr))}.chart-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:start}.chart svg{min-height:0}.metrics .metric strong{font-size:25px}}
 @media(max-width:420px){main{padding:12px}.controls{gap:12px;padding:12px}.control label{display:block;min-height:38px}.control output{display:block}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:23px}.metric strong{font-size:22px}}
 </style>
 </head>
@@ -44,7 +44,10 @@ main{max-width:1040px;margin:auto;padding:20px}h1{font-size:25px;line-height:1.2
   <div class="model-summary" id="model-summary"></div>
   <div class="status" id="status" role="status"></div>
   <div class="chart-grid">
-    <section class="chart"><h2>Membrane voltage and spike events</h2><p>First 160 ms of the 500 ms simulation. Short marks above threshold indicate events.</p><svg id="voltage-chart" viewBox="0 0 640 236" role="img" aria-labelledby="voltage-title voltage-desc"><title id="voltage-title">LIF membrane voltage</title><desc id="voltage-desc">The voltage trace, threshold, and spike-event marks update when you change a parameter.</desc></svg><div class="legend"><span>Voltage with reset</span><span class="coral">Spike events</span><span class="gray">Threshold</span></div></section>
+    <div class="trace-panels">
+      <section class="chart"><h2>Membrane potential</h2><p>Voltage and threshold only. First 160 ms of the 500 ms simulation.</p><svg id="voltage-chart" viewBox="0 0 640 236" role="img" aria-labelledby="voltage-title voltage-desc"><title id="voltage-title">Membrane potential in millivolts</title><desc id="voltage-desc">The membrane voltage and threshold are shown without spike-event markers. Voltage resets after a detected spike.</desc></svg><div class="legend"><span>Membrane potential</span><span class="gray">Threshold</span></div></section>
+      <section class="chart"><h2>Spike train</h2><p>Event times only. The time axis is aligned with the voltage panel above.</p><svg id="spike-chart" viewBox="0 0 640 126" role="img" aria-labelledby="spike-title spike-desc"><title id="spike-title">Output spike train</title><desc id="spike-desc">Each vertical tick is one spike event. The horizontal axis spans 0 to 160 milliseconds; there is no voltage axis.</desc></svg><div class="legend"><span class="coral">One tick = one spike</span></div></section>
+    </div>
     <section class="chart"><h2>Current–firing-rate curve</h2><p>Analytical constant-drive prediction; markers show the current selection.</p><svg id="rate-chart" viewBox="0 0 640 210" role="img" aria-labelledby="rate-title rate-desc"><title id="rate-title">Current versus firing rate</title><desc id="rate-desc">Changing cell parameters changes the analytical firing-rate curve. Changing applied current moves the selected point.</desc></svg><div class="legend"><span>Analytical curve / point</span><span class="coral">Simulated interval rate</span></div></section>
   </div>
   <div class="notes"><p><strong>Try:</strong> start with 100 pA, then 200 pA. Double capacitance while keeping current and leak fixed. Increase the refractory duration: the first spike stays at the same time, but subsequent spikes slow down.</p>
@@ -104,7 +107,7 @@ main{max-width:1040px;margin:auto;padding:20px}h1{font-size:25px;line-height:1.2
    const lo=Math.min(p.reset,-65)-3,hi=p.threshold+5;
    const x=t=>left+(right-left)*t/maxTime,y=v=>bottom-(bottom-top)*(v-lo)/(hi-lo);
    let s='';
-   for(let k=0;k<=4;k++){const value=lo+(hi-lo)*k/4,yy=y(value);s+=line(left,yy,right,yy)+txt(left-8,yy+4,fmt(value),'end');}
+   for(let value=Math.ceil(lo/5)*5;value<=hi;value+=5){const yy=y(value);s+=line(left,yy,right,yy)+txt(left-8,yy+4,fmt(value),'end');}
    for(let t=0;t<=160;t+=40)s+=txt(x(t),bottom+19,t);
    s+=line(left,bottom,right,bottom,gray)+line(left,top,left,bottom,gray);
    s+=txt((left+right)/2,232,'Time (ms)')+txt(left,12,'Voltage (mV)','start',12);
@@ -112,8 +115,18 @@ main{max-width:1040px;margin:auto;padding:20px}h1{font-size:25px;line-height:1.2
    let path='';const end=Math.min(r.voltages.length-1,Math.round(maxTime/r.dt));
    for(let k=0;k<=end;k++)path+=(k?'L':'M')+x(k*r.dt).toFixed(2)+','+y(r.voltages[k]).toFixed(2);
    s+=`<path d="${path}" fill="none" stroke="${blue}" stroke-width="2" stroke-linejoin="round"/>`;
-   for(const event of r.spikes)if(event<=maxTime)s+=`<line x1="${x(event)}" x2="${x(event)}" y1="${y(p.threshold+0.7)}" y2="${y(p.threshold+3)}" stroke="${coral}" stroke-width="2"/>`;
    chart('voltage-chart',s);
+ }
+ function spikeChart(r){
+   const left=58,right=625,bottom=70,maxTime=160;
+   const x=t=>left+(right-left)*t/maxTime;
+   let s=line(left,bottom,right,bottom,gray);
+   for(let t=0;t<=maxTime;t+=40)s+=txt(x(t),bottom+19,t);
+   s+=txt((left+right)/2,119,'Time (ms)');
+   const visible=r.spikes.filter(event=>event<=maxTime);
+   for(const event of visible)s+=`<line x1="${x(event)}" x2="${x(event)}" y1="20" y2="62" stroke="${coral}" stroke-width="2"/>`;
+   if(!visible.length)s+=txt((left+right)/2,44,'No spikes in this interval');
+   chart('spike-chart',s);
  }
  function rateChart(p,r){
    const left=58,right=625,top=17,bottom=165;
@@ -142,7 +155,7 @@ main{max-width:1040px;margin:auto;padding:20px}h1{font-size:25px;line-height:1.2
    byId('status').textContent=analytical===0?'Passive equilibrium is at or below threshold: no sustained firing from reset.':r.spikes.length<2?'The analytical model fires, but this 500 ms window contains fewer than two spikes; an interval rate is not yet available.':'Passive equilibrium exceeds threshold: voltage integrates, a spike is recorded, then reset and refractoriness follow.';
    // Zero events in a short window does not imply a zero long-run rate.
    if(r.spikes.length===0&&analytical>0)byId('sim-rate').textContent='—';
-   voltageChart(p,r);rateChart(p,r);
+   voltageChart(p,r);spikeChart(r);rateChart(p,r);
  }
  let pending=false;
  function schedule(){if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;render();});}}

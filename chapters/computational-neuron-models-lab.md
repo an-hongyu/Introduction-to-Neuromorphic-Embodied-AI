@@ -1,0 +1,88 @@
+---
+title: "Laboratory Guide · Computational Models of Neurons"
+---
+
+Begin the computational laboratories here, before the Place Cell experiment. [Chapter 3](03-computational-neuron-models.md) develops the theory; this section turns the equations into a reproducible single-neuron simulation. The first executable experiment uses a leaky integrate-and-fire (LIF) neuron. We then move from a neuron's temporal dynamics to spatial tuning in Laboratory 2.
+
+## L1.1 What will we model?
+
+A computational neuron maps inputs and internal state to an output. Choose what the experiment needs to explain before choosing a model [[1]](#neuron-lab-ref-1).
+
+| Model | State or output | Question to ask in an experiment |
+|---|---|---|
+| Rate model | Expected firing rate | How does a chosen input change mean activity? |
+| Poisson count model | Random spike counts conditional on a rate | How does stochastic sampling change an observed response? |
+| LIF model | Membrane voltage and discrete spike events | How do integration, leak, threshold, and reset determine spike timing? |
+| Conductance-based model | Voltage and channel-gating states | Which ionic mechanisms are needed to explain the voltage waveform? |
+
+These are different abstractions, not interchangeable names for the same computation. In particular, a place field describes how activity depends on position; it does not specify how membrane voltage produces a spike. Laboratory 2 imposes a position-dependent rate and samples Poisson counts. It does not silently substitute that procedure for an LIF simulation.
+
+## L1.2 Define the LIF experiment
+
+For a constant applied current, use
+
+$$
+C_m\frac{dV}{dt}=-g_L(V-E_L)+I.
+$$
+
+Here $V$ is membrane voltage, $C_m$ membrane capacitance, $g_L$ leak conductance, $E_L$ leak reversal potential, and $I$ applied current. When voltage reaches the threshold $V_{\mathrm{th}}$, record a spike event, reset voltage to $V_{\mathrm{reset}}$, and hold it there for an absolute refractory interval $t_{\mathrm{ref}}$. The event is an abstraction of a spike; the model does not reproduce its ionic waveform [[1]](#neuron-lab-ref-1).
+
+Use the same illustrative parameters as Chapter 3:
+
+| Quantity | Value |
+|---|---|
+| $C_m$ | 200 pF |
+| $g_L$ | 10 nS |
+| $E_L$ and $V_{\mathrm{reset}}$ | −65 mV |
+| $V_{\mathrm{th}}$ | −50 mV |
+| $t_{\mathrm{ref}}$ | 2 ms |
+| $I$ | 200 pA |
+| Simulation step $\Delta t$ | 0.1 ms |
+
+With pF, nS, mV, pA, and ms, both sides of the differential equation have units of pA. Define $\tau_m=C_m/g_L=20\,\mathrm{ms}$ and $V_\infty=E_L+I/g_L=-45\,\mathrm{mV}$. Between reset events, the exact passive update is
+
+$$
+V_{n+1}=V_\infty+(V_n-V_\infty)e^{-\Delta t/\tau_m}.
+$$
+
+The notebook checks threshold at the end of each step. Thus the passive voltage update is exact for constant current, while detected spike times still have finite time-step resolution.
+
+## L1.3 Run the notebook
+
+Open [Laboratory 1 — Leaky Integrate-and-Fire Neuron](../notebooks/lif_neuron.ipynb), [run it in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/lif_neuron.ipynb), or {download}`download the notebook <../notebooks/lif_neuron.ipynb>` for local JupyterLab.
+
+Run all cells in order. First inspect `simulate_lif`, which returns a voltage trace and a separate array of spike-event times. Then inspect `analytical_rate`, run the assertions, and plot the current–rate comparison. All numerical values are teaching assumptions, not parameters fitted to a biological recording.
+
+```{figure} ../assets/lif-neuron-model.png
+:alt: LIF reset voltage trace, separate spike-event markers, and analytical versus simulated firing rates
+
+The single-neuron experiment. Spike events are shown separately because the stored voltage trace resets immediately after a detected threshold crossing.
+```
+
+## L1.4 Check the result before interpreting it
+
+Starting at reset, the analytical first crossing time is
+
+$$
+t_{\mathrm{cross}}=\tau_m\ln\left(\frac{V_\infty-V_{\mathrm{reset}}}{V_\infty-V_{\mathrm{th}}}\right)
+=20\ln(4)\,\mathrm{ms}\approx27.73\,\mathrm{ms}.
+$$
+
+Adding the 2 ms refractory interval gives a steady firing rate of approximately $33.64\,\mathrm{Hz}$. The notebook's 0.1 ms endpoint detection produces approximately $33.56\,\mathrm{Hz}$. Compare interspike intervals rather than a short recording's total spike count, which also depends on the initial transient and observation window. At 100 pA, the steady voltage is −55 mV, below threshold, so this deterministic experiment should produce no spikes from the chosen initial state.
+
+Submit the voltage/event plot, the current–rate curve, your parameter values and units, and a short explanation of the analytical–numerical difference. A successful assertion confirms this implementation under its tested conditions; it does not establish biological validity.
+
+## L1.5 Exercises and next laboratory
+
+1. Change the time step from 0.1 ms to 0.05 ms. Compare the first spike time and mean interspike interval with the analytical values.
+2. Increase current from 100 pA to 200 pA. Explain the transition using $V_\infty$ and threshold.
+3. To study capacitance, replace the fixed `tau_ms` assignment with `capacitance_pf / leak_ns`. Double capacitance while keeping leak conductance fixed, then compare voltage rise and firing rate.
+4. Explain why searching the returned voltage trace for an action-potential peak will not recover the separate spike-event array.
+5. Before opening the Place Cell notebook, identify which input changes from a constant current to a position-dependent rate and which spike-generation assumption changes.
+
+Continue to the [Place Cell laboratory guide](04-place-cells.md) and [Laboratory 2 — Building a Place Cell from Scratch](../notebooks/place_cells.ipynb), followed by [Laboratory 3 — Hebbian Association and STDP](../notebooks/hebbian_learning.ipynb).
+
+## References
+
+(neuron-lab-ref-1)=
+[1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 1. [Online chapter](https://neuronaldynamics.epfl.ch/online/Ch1.html).

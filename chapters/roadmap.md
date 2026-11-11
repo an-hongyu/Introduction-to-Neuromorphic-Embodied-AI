@@ -15,8 +15,8 @@ The four foundation chapters and three computational laboratories below are avai
 
 ## Companion laboratories: available
 
-- [Place Cell laboratory guide](04-place-cells.md) and [Laboratory 1 notebook](../notebooks/place_cells.ipynb).
-- [Laboratory 2: LIF Neuron](../notebooks/lif_neuron.ipynb).
+- [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and [Laboratory 1: LIF Neuron](../notebooks/lif_neuron.ipynb).
+- [Place Cell laboratory guide](04-place-cells.md) and [Laboratory 2 notebook](../notebooks/place_cells.ipynb).
 - [Laboratory 3: Hebbian Association and STDP](../notebooks/hebbian_learning.ipynb).
 - Supplementary [Neuromorphic Embodied AI overview](01-introduction.md).
 

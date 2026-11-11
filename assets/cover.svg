@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-label="Cover: spatial fields, robot and spiking neural circuits">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#11253b"/><stop offset="1" stop-color="#0d4755"/></linearGradient><radialGradient id="field"><stop stop-color="#f4ca76" stop-opacity=".95"/><stop offset="1" stop-color="#f4ca76" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="560" fill="url(#bg)"/>
+<g stroke="#81c7d4" stroke-opacity=".12"><path d="M40 0V560 M90 0V560 M140 0V560 M190 0V560 M240 0V560 M290 0V560 M340 0V560 M390 0V560 M440 0V560 M490 0V560 M540 0V560 M590 0V560 M640 0V560 M690 0V560 M740 0V560 M790 0V560 M840 0V560 M890 0V560 M940 0V560 M990 0V560 M1040 0V560 M1090 0V560 M1140 0V560"/><path d="M0 40H1200 M0 90H1200 M0 140H1200 M0 190H1200 M0 240H1200 M0 290H1200 M0 340H1200 M0 390H1200 M0 440H1200 M0 490H1200 M0 540H1200"/></g>
+<circle cx="950" cy="170" r="115" fill="url(#field)"/><circle cx="1040" cy="395" r="95" fill="url(#field)"/><circle cx="755" cy="355" r="70" fill="url(#field)"/>
+<path d="M730 400 Q780 230 920 205 T1080 390" fill="none" stroke="#a6ebd7" stroke-width="5" stroke-dasharray="10 13"/>
+<g fill="#b8f5e7"><circle cx="730" cy="400" r="8"/><circle cx="920" cy="205" r="8"/><circle cx="1080" cy="390" r="8"/></g>
+<g transform="translate(876 257)"><rect x="0" y="0" width="98" height="60" rx="12" fill="#e5edf0"/><rect x="12" y="15" width="74" height="25" rx="5" fill="#287285"/><circle cx="18" cy="62" r="13" fill="#101c2e"/><circle cx="82" cy="62" r="13" fill="#101c2e"/><path d="M49 0V-24" stroke="#f9d88c" stroke-width="5"/><circle cx="49" cy="-26" r="8" fill="#f9d88c"/></g>
+<text x="68" y="135" fill="#d2f7ee" font-family="sans-serif" font-size="24" letter-spacing="4">INTERACTIVE TEXTBOOK</text>
+<text x="68" y="213" fill="white" font-family="sans-serif" font-size="55" font-weight="700">Introduction to</text>
+<text x="68" y="276" fill="white" font-family="sans-serif" font-size="55" font-weight="700">Neuromorphic</text>
+<text x="68" y="339" fill="white" font-family="sans-serif" font-size="55" font-weight="700">Embodied AI</text>
+<text x="70" y="408" fill="#b7d9dd" font-family="sans-serif" font-size="24">Spatial neural circuits · Spikes · Autonomous robots</text>
+<text x="70" y="504" fill="#ffe0a0" font-family="sans-serif" font-size="22">Hongyu An · 2026</text>
+</svg>

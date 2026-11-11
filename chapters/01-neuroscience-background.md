@@ -235,25 +235,21 @@ Electrical activity in A is converted into chemical signaling and then into a re
 
 An **excitatory** action tends to increase the probability of postsynaptic firing under the relevant conditions. An **inhibitory** action tends to reduce it. An **excitatory postsynaptic potential (EPSP)** is a voltage response associated with excitation; an **inhibitory postsynaptic potential (IPSP)** is associated with inhibition. A small EPSP need not cause a spike, and inhibition need not produce a large negative-going voltage trace [[1]](#neuro-ref-1), ch. 10.
 
-```{figure} ../assets/ccn-excitation-inhibition.png
-:label: fig-ccn-excitation-inhibition
-:alt: Reference-textbook tug-of-war analogy showing excitatory and inhibitory conductances pulling membrane voltage toward their reversal potentials, with a marked spike threshold
-:width: 65%
+```{figure} ../assets/excitation-inhibition-balance.svg
+:label: fig-conductance-balance
+:alt: Original conductance diagram showing excitatory, inhibitory, and leak currents, with three passive steady-state membrane-voltage comparisons
+:width: 100%
 
-**Reference-book figure: a tug-of-war analogy for integration.** Reproduced unchanged from O'Reilly *et al.*, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “The neuron is a tug-of-war battleground between inhibition and excitation” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_vm_as_tug_of_war.png).
+**Conductance balance and membrane voltage.** Original teaching illustration based on the conductance framework in [[1]](#neuro-ref-1), ch. 10, and [[3]](#neuro-ref-3). The shaded region lies above an illustrative −50 mV comparison level. The plotted values are passive steady-state predictions, not simulated action potentials.
 ```
 
-**Read the picture.** The flag represents membrane voltage $V_m$; $g_e$ and $g_i$ represent excitatory and inhibitory conductances, and $E_e$ and $E_i$ their reversal potentials. The marked $\theta$ is the source's illustrative spike threshold. The voltages in this cartoon are example choices, not universal constants or replacements for this chapter's separate worked-example values. The analogy emphasizes competing conductances; it does not replace the membrane equation, which also includes leak, capacitance, and other currents.
+**Read the diagram.** Each input changes a conductance and its associated ionic current. For constant conductances and no applied current, the passive equilibrium is
 
-```{figure} ../assets/ccn-integration-cases.png
-:label: fig-ccn-integration-cases
-:alt: Three textbook cartoon cases showing subthreshold balance, stronger excitation above threshold, and a similar balance with weaker overall conductances
-:width: 82%
+$$
+V_\infty=\frac{g_LE_L+g_EE_E+g_IE_I}{g_L+g_E+g_I}.
+$$
 
-**Reference-book figure: three integration cases.** Reproduced unchanged from O'Reilly *et al.*, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “Specific cases in the tug-of-war scenario” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_vm_as_tug_of_war_cases.png).
-```
-
-**Compare the cases.** Panel (a) places $V_m$ below the comparison level; panel (b) shows a balance above it. Panel (c) illustrates why relative conductances matter. Equal ratios do not guarantee identical dynamics: changing absolute conductance changes the effective membrane time constant, and the leak and other currents must still be included. Ask which quantities are held fixed before turning this metaphor into a quantitative prediction.
+Here $g_E$, $g_I$, and $g_L$ are excitatory, inhibitory, and leak conductances; $E_E$, $E_I$, and $E_L$ are their reversal potentials. In this teaching example, $g_L=10$ nS, $E_L=-65$ mV, $E_E=0$ mV, and $E_I=-75$ mV. Adding 4 nS of excitation shifts the passive equilibrium from −65 mV to approximately −46.4 mV. Keeping that excitation and adding 8 nS of inhibition shifts it back to approximately −56.8 mV. The voltage depends on the conductances and driving forces together; it is not obtained by simply subtracting a count of inhibitory inputs from a count of excitatory inputs. Reversal potentials and threshold are stated example values, not constants shared by all neurons.
 
 ### 1.8.1 Conductance and driving force
 

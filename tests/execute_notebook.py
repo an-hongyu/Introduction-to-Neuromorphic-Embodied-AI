@@ -4,7 +4,7 @@ import nbformat
 from nbclient import NotebookClient
 
 root = Path(__file__).resolve().parents[1]
-expected_figures = {'place_cells.ipynb': 4, 'lif_neuron.ipynb': 1, 'hebbian_learning.ipynb': 1}
+expected_figures = {'place_cells.ipynb': 4, 'lif_neuron.ipynb': 4, 'hebbian_learning.ipynb': 1}
 for name, minimum in expected_figures.items():
     path = root / 'notebooks' / name
     notebook = nbformat.read(path, as_version=4)

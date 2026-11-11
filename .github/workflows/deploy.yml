@@ -1,0 +1,58 @@
+name: Build and deploy textbook
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: textbook-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install textbook dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Execute Place Cell notebook
+        run: python tests/execute_notebook.py
+      - name: Build Jupyter Book
+        env:
+          BASE_URL: /${{ github.event.repository.name }}
+        run: jupyter book build --html --strict
+      - name: Check generated pages and links
+        run: python tests/check_build.py
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: ./_build/html
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Deploy textbook
+        id: deployment
+        uses: actions/deploy-pages@v4

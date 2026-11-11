@@ -19,3 +19,19 @@ The fifth-edition source is distinct from the supplied first-edition PDF snapsho
 | `ccn-integration-cases.png` | `fig_vm_as_tug_of_war_cases.png` | `fig-vm-as-tug-of-war-cases` | `d156a4532fe61acc1c1bc5e1068f0a31a6a0dbfd7e50c97e9e6ee45a69f13c92` |
 
 The two tug-of-war images are retained as attributed source assets but are no longer displayed in Chapter 1. The chapter uses the original `excitation-inhibition-balance.svg` teaching illustration instead.
+
+
+## Original RC circuit and LIF examples
+
+`lif-rc-circuit.svg`, `lif-rc-charging.png`, `lif-temporal-integration.png`,
+and `lif-spatial-integration.png` are original teaching illustrations, not
+reproductions of reference-book artwork. `lif-neuron-model.png` is regenerated
+from the same self-contained notebook model. The RC circuit follows the
+standard formulation in W. Gerstner et al., *Neuronal Dynamics*, Cambridge
+University Press, 2014, sec. 1.3.1, Fig. 1.6:
+https://neuronaldynamics.epfl.ch/online/Ch1.S3.html .
+
+Reproduce the diagram, all four plots, and `notebooks/lif_neuron.ipynb` with
+`python tools/build_lif_examples.py`. Code and notebook are released under the
+repository code license; original diagram and explanatory captions use the
+repository text license. All parameter values are stated teaching assumptions.

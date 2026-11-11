@@ -2,8 +2,6 @@
 title: "Chapter 4 · Hebbian Learning"
 ---
 
-# 4. Hebbian Learning
-
 ## 4.1 Learning objectives: changing connections through experience
 
 The previous chapters introduced signals, representations, and neuron dynamics. A network with fixed parameters can respond to input without learning. This chapter introduces rules that change connections according to activity, beginning with the organizing idea associated with Hebb [[1]](#hebb-ref-1).

@@ -2,8 +2,6 @@
 title: "Chapter 1 · Neuroscience Background"
 ---
 
-# 1. Neuroscience Background
-
 ## 1.1 Learning objectives and reading guide
 
 Before building a spiking robot, we need a vocabulary for the biological system that inspires it. By the end of this chapter, you should be able to identify the main parts of a neuron, explain how neurons communicate at synapses, distinguish a membrane potential from a spike, and separate neural activity from synaptic learning.

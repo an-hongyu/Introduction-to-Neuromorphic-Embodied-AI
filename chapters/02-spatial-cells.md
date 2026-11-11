@@ -2,8 +2,6 @@
 title: "Chapter 2 · Spatial Cells"
 ---
 
-# 2. Spatial Cells
-
 ## 2.1 Learning objectives: from spikes to representations
 
 [Chapter 1](01-neuroscience-background.md) described how neurons signal. This chapter asks what a neuron's activity is related to while an animal moves. You will learn to distinguish place, grid, head-direction, and boundary-related responses; explain the roles of speed and temporal context; and interpret a firing-rate map without confusing correlation with a proven mechanism.

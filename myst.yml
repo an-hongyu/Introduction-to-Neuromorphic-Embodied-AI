@@ -10,6 +10,8 @@ project:
   - place cells
   - spatial navigation
   github: https://github.com/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI
+  static_files:
+  - assets/lif-interactive.html
   toc:
   - file: index.md
   - title: Foundations
@@ -37,3 +39,4 @@ site:
     favicon: assets/favicon.svg
     folders: true
     hide_breadcrumbs: true
+    style: assets/lif-embed.css

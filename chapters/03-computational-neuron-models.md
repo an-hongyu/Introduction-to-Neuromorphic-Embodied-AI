@@ -193,6 +193,21 @@ Before using a neuron model in a spatial network, test a zero-input baseline, a 
 
 For the running LIF example, verify $\tau_m=20$ ms and $t_{\mathrm{cross}}\approx27.73$ ms analytically. Then compare the simulated interspike interval at 0.1 ms and 0.05 ms resolution. Agreement under refinement is more informative than an attractive voltage plot alone.
 
+### Model reduction: a two-variable excitable system
+
+Mallot introduces the FitzHugh–Nagumo system as a reduced description for studying excitation and recovery [[5]](#models-ref-5). One dimensionless form is
+
+$$
+\frac{dv}{ds}=v(a-v)(v-1)-w+j, \qquad
+\frac{dw}{ds}=bv-\gamma w.
+$$
+
+Here $v$ is an excitation variable, $w$ is a recovery variable, $s$ is scaled time, $j$ is an applied drive, and $a$, $b$, and $\gamma$ are model parameters. These variables are dimensionless; they must not be inserted into the LIF notebook as mV, ms, or pA without defining a transformation. The curves $w=v(a-v)(v-1)+j$ and $w=(b/\gamma)v$, for nonzero $\gamma$, are the nullclines. Their intersections are equilibrium candidates. Stability requires analysis of the dynamics near an intersection, rather than merely finding a crossing.
+
+This example adds a useful comparison: Hodgkin–Huxley describes explicit channel-gating variables; a two-variable reduction emphasizes excitation and recovery; LIF uses a passive voltage equation with discrete threshold/reset events. A reduced model can clarify qualitative behavior while leaving channel-specific questions unanswered. The present executable laboratory implements LIF; no FitzHugh–Nagumo implementation is claimed here.
+
+Begin the practical sequence with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md), then run Laboratory 1 before the Place Cell rate-model experiment.
+
 ## 3.9 Exercises
 
 1. Compute the expected spike count and probability of at least one event for 50 Hz in a 2 ms bin.
@@ -218,3 +233,8 @@ For the running LIF example, verify $\tau_m=20$ ms and $t_{\mathrm{cross}}\appro
 (models-ref-4)=
 
 [4] E. M. Izhikevich, “Simple model of spiking neurons,” *IEEE Trans. Neural Netw.*, vol. 14, no. 6, pp. 1569–1572, 2003, doi: [10.1109/TNN.2003.820440](https://pubmed.ncbi.nlm.nih.gov/18244602/).
+
+
+(models-ref-5)=
+
+[5] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, sec. 1.3, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).

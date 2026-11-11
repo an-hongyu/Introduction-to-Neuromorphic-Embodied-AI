@@ -13,13 +13,13 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 
 References use IEEE-style numbered citations and hyperlinks. Original figures, defined units, worked examples, and exercises accompany the chapters. Existing introductory and Place Cell material remains available under supplementary reading and computational laboratories.
 
-Three executable notebooks are included: `place_cells.ipynb`, `lif_neuron.ipynb`, and `hebbian_learning.ipynb`.
+The computational laboratories begin with a **Computational Models of Neurons** guide and follow this sequence: Laboratory 1, LIF neuron (`lif_neuron.ipynb`); Laboratory 2, Place Cells (`place_cells.ipynb`); Laboratory 3, Hebbian learning (`hebbian_learning.ipynb`).
 
 ## Run the notebook
 
 ```bash
 python -m pip install -r requirements.txt
-jupyter lab notebooks/place_cells.ipynb
+jupyter lab notebooks/lif_neuron.ipynb
 ```
 
 ## Preview the book locally

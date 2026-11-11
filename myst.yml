@@ -22,9 +22,10 @@ project:
     - file: chapters/04-hebbian-learning.md
   - title: Computational Laboratories
     children:
+    - file: chapters/computational-neuron-models-lab.md
+    - file: notebooks/lif_neuron.ipynb
     - file: chapters/04-place-cells.md
     - file: notebooks/place_cells.ipynb
-    - file: notebooks/lif_neuron.ipynb
     - file: notebooks/hebbian_learning.ipynb
   - title: Context and Roadmap
     children:

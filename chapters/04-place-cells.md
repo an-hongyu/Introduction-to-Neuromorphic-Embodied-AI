@@ -4,17 +4,17 @@ title: "Laboratory Guide · Place Cell Models"
 
 # Place Cell Laboratory Guide
 
-This guide accompanies [Chapter 2: Spatial Cells](02-spatial-cells.md), [Chapter 3: Computational Models of Neurons](03-computational-neuron-models.md), and Laboratory 1.
+This guide accompanies [Chapter 2: Spatial Cells](02-spatial-cells.md), [Chapter 3: Computational Models of Neurons](03-computational-neuron-models.md), and Laboratory 2. Start with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and its LIF notebook before this spatial-rate experiment.
 
 ## Objectives
 
 Build an idealized place field; convert a conditional rate into spikes; generate spatial rate maps that correct for occupancy; identify limitations of this baseline model.
 
-## L1.1 Biological motivation
+## L2.1 Biological motivation
 
 Place cells are neurons showing spatially modulated activity in particular contexts. Their fields can be influenced by sensory landmarks, movement, task demands, and environmental change. One Gaussian field is a **didactic approximation**, not a universal biological law.
 
-## L1.2 Gaussian firing-rate model
+## L2.2 Gaussian firing-rate model
 
 Let $\mathbf{x}=(x,y)$ be position and $\boldsymbol{\mu}_i$ a preferred location of neuron $i$. We use
 
@@ -25,7 +25,7 @@ $$
 
 All spatial coordinates and $\sigma_i$ use meters; firing rates use spikes/s (Hz). Peak rate occurs at $\mathbf{x}=\boldsymbol{\mu}_i$. At distance $\sigma_i$, the excess rate over baseline is $e^{-1/2}\approx0.607$ times its peak excess value.
 
-## L1.3 From expected rates to spikes
+## L2.3 From expected rates to spikes
 
 For a simulation time step $\Delta t$ in seconds, assume conditionally independent, inhomogeneous Poisson firing. The number of spikes in a bin has distribution
 
@@ -33,17 +33,17 @@ $$N_i[t]\sim\operatorname{Poisson}(r_i(\mathbf{x}_t)\Delta t).$$
 
 For bins small enough that multiple events are rare, a binary event can be drawn with probability $1-\exp[-r_i(\mathbf{x}_t)\Delta t]$. In this notebook we sample Poisson counts, which remain valid even for larger bins.
 
-## L1.4 Occupancy normalization
+## L2.4 Occupancy normalization
 
 Divide the arena into bins indexed by $b$. Let $T_b$ be total time spent in bin $b$, and $K_b$ the total observed spikes. A naive estimate is $\hat r_b=K_b/T_b$ for $T_b>0$. Bins with no visits should be masked, **not set to zero**, and low-occupancy estimates are noisy. Smoothness must not be confused with empirical evidence of a broad field.
 
-## L1.5 Executable laboratory
+## L2.5 Executable laboratory
 
 Open [Place Cell Notebook](../notebooks/place_cells.ipynb). It simulates a reproducible trajectory, plots true firing field, observed spikes and rate estimate, and reports occupancy coverage plus simple error metrics.
 
 [Run the notebook in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/place_cells.ipynb), or {download}`download the Jupyter notebook <../notebooks/place_cells.ipynb>` and run it locally with JupyterLab. The published notebook includes reproducible code, computed results, and figures.
 
-## L1.6 Research extensions
+## L2.6 Research extensions
 
 - Replace circular Gaussian fields with elliptical or multimodal fields.
 - Compare Poisson spiking with refractory or LIF mechanisms.

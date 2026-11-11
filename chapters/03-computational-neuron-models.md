@@ -8,7 +8,7 @@ A computational neuron model is a set of equations and event rules that predicts
 
 After this chapter, you should be able to distinguish rate models from spike-generation models, map an LIF equation to an RC circuit, implement a leaky integrate-and-fire neuron with explicit units, change parameters to test temporal and multisource integration, explain what conductance-based models add, and choose a model with a stated validation target.
 
-**Learn by changing a model.** Worked examples are part of the chapter, before the exercises. Follow **predict → run → change one parameter → explain**. The [self-contained LIF notebook](../notebooks/lif_neuron.ipynb) reproduces all four examples and plots. [Open it in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/lif_neuron.ipynb) to edit code and rerun it, or {download}`download the notebook <../notebooks/lif_neuron.ipynb>` for JupyterLab. The published page shows the code and reference outputs; execute edited code in Colab or JupyterLab.
+**Learn by changing a model.** Worked examples are part of the chapter, before the exercises. Follow **predict → run → change one parameter → explain**. The [self-contained LIF notebook](../notebooks/lif_neuron.ipynb) reproduces all four examples and plots. [Open it in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/lif_neuron.ipynb) to edit code and rerun it, or {download}`download the notebook <../notebooks/lif_neuron.ipynb>` for JupyterLab. The embedded interactive example below runs directly in this page. To edit the Python implementation itself, use Colab or JupyterLab.
 
 ## 3.2 Three levels of description
 
@@ -137,6 +137,25 @@ f=\frac{1000}{t_{\mathrm{cross}}+t_{\mathrm{ref}}}
 $$
 
 where 1000 converts a period in milliseconds into events per second. The expression assumes $V_\infty>V_{\mathrm{th}}$ and periodic constant drive. At or below the asymptotic threshold, this deterministic model does not repeatedly fire from reset.
+
+(lif-interactive-example)=
+
+### Interactive example — tune a LIF neuron in this page
+
+Drag a slider: no installation or external notebook is needed. Start with **Below threshold**, return to **Reset defaults**, then try **Double capacitance**. Watch the voltage trace, spike events, and current–firing-rate curve update together. The parameters and units match the Python implementation below.
+
+```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/lif-interactive.html
+:label: lif-live-playground
+:class: lif-playground
+:title: Interactive LIF neuron explorer
+:width: 100%
+```
+
+[Open the interactive experiment in a wider window](https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/lif-interactive.html).
+
+**Read the results.** The simulated steady rate uses the mean interspike interval (ISI), while the spike count uses a fixed 500 ms observation window. With fewer than two events, an interval rate cannot be estimated; the display uses a dash when the analytical model predicts firing but the window is too short. The current–rate curve is the analytical constant-input prediction; its red marker is the simulated interval rate. Changing current moves the operating point; changing capacitance, leak, threshold, reset, or refractory duration changes the curve itself. The plot shows the first 160 ms, with separate event markers rather than artificial action-potential waveforms.
+
+**Predict before moving a slider.** Which parameter changes first-spike time without changing the passive equilibrium? Which parameter leaves the first spike unchanged but slows later spikes? This browser simulation uses the same exact passive update, 0.1 ms endpoint detection, and fixed teaching assumptions as the notebook [[1]](#models-ref-1).
 
 (lif-editable-simulator)=
 

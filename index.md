@@ -36,8 +36,9 @@ The neuroscience background draws on *Principles of Neural Science*, fifth editi
 
 ## Computational laboratories
 
-- [Laboratory 1: Place Cells](notebooks/place_cells.ipynb): trajectory, stochastic spikes, and occupancy-normalized maps. See the [laboratory guide](chapters/04-place-cells.md).
-- [Laboratory 2: LIF Neuron](notebooks/lif_neuron.ipynb): membrane integration, threshold, reset, and analytical checks.
+- [Computational Models of Neurons: laboratory guide](chapters/computational-neuron-models-lab.md): begin with model choice, units, simulation steps, and validation.
+- [Laboratory 1: LIF Neuron](notebooks/lif_neuron.ipynb): membrane integration, threshold, reset, and analytical checks.
+- [Laboratory 2: Place Cells](notebooks/place_cells.ipynb): trajectory, stochastic spikes, and occupancy-normalized maps. See the [Place Cell laboratory guide](chapters/04-place-cells.md).
 - [Laboratory 3: Hebbian Learning](notebooks/hebbian_learning.ipynb): paired-pattern association, ambiguous cues, and an illustrative STDP window.
 
 Read the [Neuromorphic Embodied AI overview](chapters/01-introduction.md) for the closed-loop robot context and the [development roadmap](chapters/roadmap.md) for later topics.

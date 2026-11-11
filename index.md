@@ -20,8 +20,27 @@ How can a robot form a spatial representation, remember where it has been, and l
 Each computational chapter links **biological evidence**, **explicit assumptions**, **mathematical models**, **executable Python**, and **experiments**. No biological claim should be inferred solely from the behavior of a simulation.
 
 :::{card} Start here
-[Chapter 1: Introduction](chapters/01-introduction.md) introduces the scope, architecture and study roadmap. Continue to [Place Cells](chapters/04-place-cells.md) and the [executable notebook](notebooks/place_cells.ipynb).
+Begin with [Chapter 1: Neuroscience Background](chapters/01-neuroscience-background.md), then study [Chapter 2: Spatial Cells](chapters/02-spatial-cells.md), [Chapter 3: Computational Models of Neurons](chapters/03-computational-neuron-models.md), and [Chapter 4: Hebbian Learning](chapters/04-hebbian-learning.md).
 :::
+
+## A four-chapter foundation
+
+| Chapter | Central question | Worked material |
+|---|---|---|
+| [1. Neuroscience Background](chapters/01-neuroscience-background.md) | What are neurons, spikes, and synapses? | Membrane time constant and synaptic-current examples |
+| [2. Spatial Cells](chapters/02-spatial-cells.md) | How is activity related to space, movement, and time? | Original tuning diagrams and occupancy calculations |
+| [3. Computational Models of Neurons](chapters/03-computational-neuron-models.md) | How do equations produce neural activity? | Poisson counts, LIF derivation, and executable LIF notebook |
+| [4. Hebbian Learning](chapters/04-hebbian-learning.md) | How can experience change connections? | Outer-product association, Oja's rule, STDP, and eligibility traces |
+
+The neuroscience background draws on *Principles of Neural Science*, fifth edition. References use IEEE-style numbered citations with clickable source links. Equations, figures, and worked examples connect biological concepts to reproducible computational assumptions.
+
+## Computational laboratories
+
+- [Laboratory 1: Place Cells](notebooks/place_cells.ipynb): trajectory, stochastic spikes, and occupancy-normalized maps. See the [laboratory guide](chapters/04-place-cells.md).
+- [Laboratory 2: LIF Neuron](notebooks/lif_neuron.ipynb): membrane integration, threshold, reset, and analytical checks.
+- [Laboratory 3: Hebbian Learning](notebooks/hebbian_learning.ipynb): paired-pattern association, ambiguous cues, and an illustrative STDP window.
+
+Read the [Neuromorphic Embodied AI overview](chapters/01-introduction.md) for the closed-loop robot context and the [development roadmap](chapters/roadmap.md) for later topics.
 
 ## Learning outcomes
 
@@ -33,9 +52,9 @@ Each computational chapter links **biological evidence**, **explicit assumptions
 
 ## For students and researchers
 
-Prerequisites: introductory Python, linear algebra, elementary probability, and basic neuroscience vocabulary. The first notebook uses NumPy and Matplotlib only, and runs on a standard laptop or Google Colab.
+Prerequisites: introductory Python, linear algebra, elementary probability, and basic neuroscience vocabulary. The laboratories use NumPy and Matplotlib and run on a standard laptop or Google Colab.
 
-> **Project status.** This is the first teaching release. The later chapters listed in the roadmap are planned, not completed. The Spike Flow Networks material will be labeled as a research framework and separated from established neuroscience.
+> **Project status.** The four foundation chapters and three executable laboratories are available. The later chapters listed in the roadmap are planned, not completed. The Spike Flow Networks material will be labeled as a research framework and separated from established neuroscience.
 
 ## Citation
 

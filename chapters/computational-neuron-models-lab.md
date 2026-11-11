@@ -82,7 +82,22 @@ Submit the voltage/event plot, the current–rate curve, your parameter values a
 
 Continue to the [Place Cell laboratory guide](04-place-cells.md) and [Laboratory 2 — Building a Place Cell from Scratch](../notebooks/place_cells.ipynb), followed by [Laboratory 3 — Hebbian Association and STDP](../notebooks/hebbian_learning.ipynb).
 
+## L1.6 Read from mechanism to computation
+
+Mallot's treatment begins with excitable membranes and connects channel dynamics, reduced models, receptive fields, and network computation [[2]](#neuron-lab-ref-2). Use that progression to ask what each simplification retains: the LIF experiment retains passive integration and event timing but replaces the action-potential mechanism with a threshold/reset rule. Its threshold is a specified parameter, rather than a voltage-gated sodium current emerging from channel kinetics.
+
+O'Reilly and colleagues introduce neural computation through inputs, integration, outputs, and then networks and learning [[3]](#neuron-lab-ref-3). For this laboratory, distinguish the **instantaneous state** (voltage), the **output** (spike-event times), and **parameters** (leak, threshold, and reset). None of these parameters learns in the present experiment. Synaptic weight changes belong to the later Hebbian laboratory.
+
+For a membrane-level reading path, use Mallot Chapter 1, especially Sections 1.2–1.4. For a conceptual bridge toward cognition, read Chapters 2–4 of the supplied first-edition *Computational Cognitive Neuroscience*. The [reference-book reading map](roadmap.md#reference-book-reading-map) connects these readings to the four foundation chapters and identifies the editions used.
+
 ## References
 
 (neuron-lab-ref-1)=
 [1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 1. [Online chapter](https://neuronaldynamics.epfl.ch/online/Ch1.html).
+
+
+(neuron-lab-ref-2)=
+[2] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, ch. 1, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
+
+(neuron-lab-ref-3)=
+[3] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 1st ed. Wiki Book, 2012, chs. 2–4, supplied PDF snapshot generated Aug. 25, 2016. [Institutional publication record](https://experts.colorado.edu/display/pubid_85822); [current online edition](https://book.compcogneuro.org/).

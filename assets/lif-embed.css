@@ -1,0 +1,16 @@
+/* Keep this rule scoped to the LIF iframe; other book figures are unchanged. */
+.lif-playground > div {
+  width: 100% !important;
+  padding-bottom: 0 !important;
+  height: 1500px;
+}
+.lif-playground iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 1px solid #dbe4e9 !important;
+  border-radius: 10px;
+  background: white;
+}
+@media (max-width: 480px) {
+  .lif-playground > div { height: 1900px; }
+}

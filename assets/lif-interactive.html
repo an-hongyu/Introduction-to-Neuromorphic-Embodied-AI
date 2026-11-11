@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactive LIF neuron · Introduction to Neuromorphic Embodied AI</title>
+<style>
+:root{color-scheme:light;--ink:#203746;--muted:#61707d;--blue:#24628a;--coral:#b75d45;--line:#dbe4e9;--pale:#f2f7fa}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1040px;margin:auto;padding:20px}h1{font-size:25px;line-height:1.2;margin:0 0 7px;letter-spacing:-.5px}h2{font-size:15px;margin:0 0 5px}p{margin:0 0 12px}.intro{color:var(--muted);max-width:70ch}.eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:750;color:var(--blue);margin-bottom:7px}
+.presets{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}button{font:inherit;font-size:12px;border:1px solid #bdcfd9;border-radius:6px;padding:6px 10px;background:white;color:var(--blue);cursor:pointer}button:hover{background:var(--pale)}button:focus-visible,input:focus-visible{outline:3px solid #e59e64;outline-offset:3px}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px;background:var(--pale);border:1px solid var(--line);padding:17px;border-radius:9px}.control label{display:flex;justify-content:space-between;align-items:baseline;gap:9px;font-size:12px;font-weight:650}.control output{white-space:nowrap;color:var(--blue);font-size:13px;font-variant-numeric:tabular-nums}input[type=range]{display:block;width:100%;margin:9px 0 0;accent-color:var(--blue);cursor:pointer;height:16px}.range-hint{font-size:10px;color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:15px 0 10px}.metric{padding:10px 9px;border-bottom:3px solid #b8cfdc;background:#f8fafb}.metric span{display:block;font-size:10px;color:var(--muted);line-height:1.35}.metric strong{display:block;font-size:21px;color:var(--blue);margin-top:4px;font-variant-numeric:tabular-nums}.model-summary{font-size:12px;padding:7px 0 9px;color:var(--muted);font-variant-numeric:tabular-nums}.status{font-size:12px;padding:8px 10px;background:#edf4f7;border-left:3px solid var(--blue);margin-bottom:15px;min-height:36px}
+.chart{border:1px solid var(--line);border-radius:8px;margin:0 0 14px;padding:12px 12px 4px}.chart p{font-size:11px;color:var(--muted);margin:0 0 6px}svg{display:block;width:100%;height:auto;overflow:visible}svg text{font-family:inherit}.legend{font-size:11px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}.legend span:before{content:"";display:inline-block;width:16px;height:3px;background:var(--blue);vertical-align:middle;margin-right:5px}.legend .coral:before{background:var(--coral)}.legend .gray:before{background:#8b949e}.notes{font-size:11px;color:var(--muted);line-height:1.6}.notes strong{color:var(--ink)}.notes a{color:var(--blue)}noscript{display:block;padding:20px}
+@media(min-width:850px){main{padding:25px}.controls{grid-template-columns:repeat(3,minmax(0,1fr))}.chart-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:start}.chart svg{min-height:220px}.metrics .metric strong{font-size:25px}}
+@media(max-width:420px){main{padding:12px}.controls{gap:12px;padding:12px}.control label{display:block;min-height:38px}.control output{display:block}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:23px}.metric strong{font-size:22px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Live experiment · Chapter 3</div>
+  <h1>Tune a LIF neuron</h1>
+  <p class="intro">Drag one parameter and watch voltage, spike events, and firing rate change. All computations run here in your browser.</p>
+  <div class="presets" aria-label="Example presets">
+    <button type="button" id="default">Reset defaults</button>
+    <button type="button" id="subthreshold">Below threshold</button>
+    <button type="button" id="large-capacitance">Double capacitance</button>
+    <button type="button" id="fast">Stronger drive</button>
+  </div>
+  <section class="controls" aria-label="LIF parameters">
+    <div class="control"><label for="current">Applied current I <output id="current-value" for="current">200 pA</output></label><input aria-label="Applied current I (pA)" id="current" type="range" min="0" max="600" step="5" value="200"><div class="range-hint">0–600 pA</div></div>
+    <div class="control"><label for="capacitance">Membrane capacitance C <output id="capacitance-value" for="capacitance">200 pF</output></label><input aria-label="Membrane capacitance C (pF)" id="capacitance" type="range" min="50" max="500" step="10" value="200"><div class="range-hint">50–500 pF</div></div>
+    <div class="control"><label for="leak">Leak conductance g <output id="leak-value" for="leak">10 nS</output></label><input aria-label="Leak conductance g (nS)" id="leak" type="range" min="2" max="30" step="0.5" value="10"><div class="range-hint">2–30 nS; resistance R = 1/g</div></div>
+    <div class="control"><label for="threshold">Spike threshold <output id="threshold-value" for="threshold">−50 mV</output></label><input aria-label="Spike threshold (mV)" id="threshold" type="range" min="-60" max="-40" step="0.5" value="-50"><div class="range-hint">−60 to −40 mV</div></div>
+    <div class="control"><label for="refractory">Refractory duration <output id="refractory-value" for="refractory">2 ms</output></label><input aria-label="Refractory duration (ms)" id="refractory" type="range" min="0" max="10" step="0.5" value="2"><div class="range-hint">0–10 ms</div></div>
+    <div class="control"><label for="reset">Reset voltage <output id="reset-value" for="reset">−65 mV</output></label><input aria-label="Reset voltage (mV)" id="reset" type="range" min="-80" max="-61" step="1" value="-65"><div class="range-hint">−80 to −61 mV; leak reversal fixed at −65 mV</div></div>
+  </section>
+  <section class="metrics" aria-label="Simulation results" aria-live="polite" aria-atomic="true">
+    <div class="metric"><span>Simulated steady rate · ISI</span><strong id="sim-rate">—</strong></div>
+    <div class="metric"><span>Analytical steady rate</span><strong id="analytic-rate">—</strong></div>
+    <div class="metric"><span>Spikes in 500 ms</span><strong id="spike-count">—</strong></div>
+    <div class="metric"><span>First spike time</span><strong id="first-spike">—</strong></div>
+  </section>
+  <div class="model-summary" id="model-summary"></div>
+  <div class="status" id="status" role="status"></div>
+  <div class="chart-grid">
+    <section class="chart"><h2>Membrane voltage and spike events</h2><p>First 160 ms of the 500 ms simulation. Short marks above threshold indicate events.</p><svg id="voltage-chart" viewBox="0 0 640 236" role="img" aria-labelledby="voltage-title voltage-desc"><title id="voltage-title">LIF membrane voltage</title><desc id="voltage-desc">The voltage trace, threshold, and spike-event marks update when you change a parameter.</desc></svg><div class="legend"><span>Voltage with reset</span><span class="coral">Spike events</span><span class="gray">Threshold</span></div></section>
+    <section class="chart"><h2>Current–firing-rate curve</h2><p>Analytical constant-drive prediction; markers show the current selection.</p><svg id="rate-chart" viewBox="0 0 640 210" role="img" aria-labelledby="rate-title rate-desc"><title id="rate-title">Current versus firing rate</title><desc id="rate-desc">Changing cell parameters changes the analytical firing-rate curve. Changing applied current moves the selected point.</desc></svg><div class="legend"><span>Analytical curve / point</span><span class="coral">Simulated interval rate</span></div></section>
+  </div>
+  <div class="notes"><p><strong>Try:</strong> start with 100 pA, then 200 pA. Double capacitance while keeping current and leak fixed. Increase the refractory duration: the first spike stays at the same time, but subsequent spikes slow down.</p>
+    <p><strong>Model:</strong> C dV/dt = −g(V − E<sub>L</sub>) + I; E<sub>L</sub> = −65 mV. The same exact passive update and endpoint threshold/reset rule as the Python notebook are used, with Δt = 0.1 ms. Steady rate is 1000 / mean interspike interval, shown only after two spikes. A 500 ms spike count divided by 0.5 s is a different finite-window estimate. Spike markers do not model action-potential waveforms. These are teaching parameters, not a fit to a biological neuron.</p>
+    <p>Based on the RC/LIF framework in [1] W. Gerstner <em>et al.</em>, <em>Neuronal Dynamics</em>, Cambridge University Press, 2014, sec. 1.3. <a href="https://neuronaldynamics.epfl.ch/online/Ch1.S3.html" target="_blank" rel="noopener">Reference and equations</a>. Original interactive example for Hongyu An’s textbook.</p>
+  </div>
+  <noscript>This example needs JavaScript. The chapter and downloadable Python notebook contain the equations, code, and reference results.</noscript>
+</main>
+<script id="lif-model">
+"use strict";
+(function () {
+  const defaults = Object.freeze({current:200,capacitance:200,leak:10,threshold:-50,refractory:2,reset:-65});
+  function validate(p) {
+    for (const k of Object.keys(defaults)) if (!Number.isFinite(p[k])) throw new Error("Non-finite parameter: " + k);
+    if(p.capacitance<=0||p.leak<=0||p.refractory<0||p.reset>=p.threshold) throw new Error("Invalid LIF parameters");
+  }
+  function analyticalRate(p, current=p.current) {
+    const steady=-65+current/p.leak;
+    if(steady<=p.threshold) return 0;
+    const crossing=(p.capacitance/p.leak)*Math.log((steady-p.reset)/(steady-p.threshold));
+    return 1000/(crossing+p.refractory);
+  }
+  function simulate(p,dt=0.1,duration=500) {
+    validate(p);
+    if(!Number.isFinite(dt)||dt<=0||!Number.isFinite(duration)||duration<=0) throw new Error("Invalid timing");
+    const steps=Math.round(duration/dt), voltages=new Float64Array(steps+1),spikes=[];
+    const tau=p.capacitance/p.leak, decay=Math.exp(-dt/tau),steady=-65+p.current/p.leak;
+    const refractorySteps=Math.max(0,Math.ceil(p.refractory/dt-1e-12));
+    voltages[0]=p.reset;
+    let hold=0;
+    for(let k=0;k<steps;k++) {
+      if(hold>0){voltages[k+1]=p.reset;hold--;}
+      else {
+        voltages[k+1]=steady+(voltages[k]-steady)*decay;
+        if(voltages[k+1]>=p.threshold){spikes.push((k+1)*dt);voltages[k+1]=p.reset;hold=refractorySteps;}
+      }
+    }
+    const intervalRate=spikes.length>=2?1000*(spikes.length-1)/(spikes[spikes.length-1]-spikes[0]):null;
+    return {voltages,spikes,intervalRate,tau,steady,dt,duration};
+  }
+  window.LIFModel={defaults,simulate,analyticalRate};
+})();
+</script>
+<script id="lif-interface">
+"use strict";
+(function(){
+ const {defaults,simulate,analyticalRate}=window.LIFModel;
+ const ids=Object.keys(defaults),byId=id=>document.getElementById(id);
+ const units={current:'pA',capacitance:'pF',leak:'nS',threshold:'mV',refractory:'ms',reset:'mV'};
+ const blue='#24628a',coral='#b75d45',gray='#8b949e',ink='#526574',grid='#e4eaee';
+ const txt=(x,y,s,anchor='middle',size=13)=>`<text x="${x}" y="${y}" text-anchor="${anchor}" fill="${ink}" font-size="${size}">${s}</text>`;
+ const line=(x1,y1,x2,y2,color=grid,dash='')=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" ${dash?`stroke-dasharray="${dash}"`:''}/>`;
+ const fmt=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:1});
+ function chart(svgId,content){const svg=byId(svgId);const old=svg.querySelector('g');if(old)old.remove();const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.innerHTML=content;svg.appendChild(g);}
+ function voltageChart(p,r){
+   const left=58,right=625,top=20,bottom=192,maxTime=160;
+   const lo=Math.min(p.reset,-65)-3,hi=p.threshold+5;
+   const x=t=>left+(right-left)*t/maxTime,y=v=>bottom-(bottom-top)*(v-lo)/(hi-lo);
+   let s='';
+   for(let k=0;k<=4;k++){const value=lo+(hi-lo)*k/4,yy=y(value);s+=line(left,yy,right,yy)+txt(left-8,yy+4,fmt(value),'end');}
+   for(let t=0;t<=160;t+=40)s+=txt(x(t),bottom+19,t);
+   s+=line(left,bottom,right,bottom,gray)+line(left,top,left,bottom,gray);
+   s+=txt((left+right)/2,232,'Time (ms)')+txt(left,12,'Voltage (mV)','start',12);
+   s+=line(left,y(p.threshold),right,y(p.threshold),gray,'5 4');
+   let path='';const end=Math.min(r.voltages.length-1,Math.round(maxTime/r.dt));
+   for(let k=0;k<=end;k++)path+=(k?'L':'M')+x(k*r.dt).toFixed(2)+','+y(r.voltages[k]).toFixed(2);
+   s+=`<path d="${path}" fill="none" stroke="${blue}" stroke-width="2" stroke-linejoin="round"/>`;
+   for(const event of r.spikes)if(event<=maxTime)s+=`<line x1="${x(event)}" x2="${x(event)}" y1="${y(p.threshold+0.7)}" y2="${y(p.threshold+3)}" stroke="${coral}" stroke-width="2"/>`;
+   chart('voltage-chart',s);
+ }
+ function rateChart(p,r){
+   const left=58,right=625,top=17,bottom=165;
+   const ymax=Math.max(20,Math.ceil(analyticalRate(p,600)*1.12/10)*10);
+   const x=i=>left+(right-left)*i/600,y=f=>bottom-(bottom-top)*f/ymax;
+   let s='';
+   for(let k=0;k<=4;k++){const f=ymax*k/4;s+=line(left,y(f),right,y(f))+txt(left-8,y(f)+4,fmt(f),'end');}
+   for(let i=0;i<=600;i+=100)s+=txt(x(i),bottom+19,i);
+   s+=line(left,bottom,right,bottom,gray)+line(left,top,left,bottom,gray);
+   s+=txt((left+right)/2,207,'Applied current (pA)')+txt(left,11,'Rate (Hz)','start',12);
+   let path='';for(let i=0;i<=600;i+=2)path+=(i?'L':'M')+x(i).toFixed(2)+','+y(analyticalRate(p,i)).toFixed(2);
+   s+=`<path d="${path}" fill="none" stroke="${blue}" stroke-width="2"/>`;
+   s+=line(x(p.current),top,x(p.current),bottom,'#beced8','3 4');
+   s+=`<circle cx="${x(p.current)}" cy="${y(analyticalRate(p))}" r="5" fill="white" stroke="${blue}" stroke-width="2"/>`;
+   if(r.intervalRate!==null)s+=`<circle cx="${x(p.current)}" cy="${y(r.intervalRate)}" r="3" fill="${coral}"/>`;
+   chart('rate-chart',s);
+ }
+ function render(){
+   const p=Object.fromEntries(ids.map(id=>[id,Number(byId(id).value)])),r=simulate(p),analytical=analyticalRate(p);
+   for(const id of ids)byId(id+'-value').textContent=fmt(p[id])+' '+units[id];
+   byId('sim-rate').textContent=r.intervalRate===null?(r.spikes.length===0?'0.00 Hz':'—'):r.intervalRate.toFixed(2)+' Hz';
+   byId('analytic-rate').textContent=analytical.toFixed(2)+' Hz';
+   byId('spike-count').textContent=String(r.spikes.length);
+   byId('first-spike').textContent=r.spikes.length?r.spikes[0].toFixed(1)+' ms':'None';
+   byId('model-summary').textContent=`τ = C/g = ${r.tau.toFixed(1)} ms · R = ${(1000/p.leak).toFixed(1)} MΩ · passive V∞ = ${r.steady.toFixed(1)} mV`;
+   byId('status').textContent=analytical===0?'Passive equilibrium is at or below threshold: no sustained firing from reset.':r.spikes.length<2?'The analytical model fires, but this 500 ms window contains fewer than two spikes; an interval rate is not yet available.':'Passive equilibrium exceeds threshold: voltage integrates, a spike is recorded, then reset and refractoriness follow.';
+   // Zero events in a short window does not imply a zero long-run rate.
+   if(r.spikes.length===0&&analytical>0)byId('sim-rate').textContent='—';
+   voltageChart(p,r);rateChart(p,r);
+ }
+ let pending=false;
+ function schedule(){if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;render();});}}
+ for(const id of ids)byId(id).addEventListener('input',schedule);
+ function preset(changes){for(const id of ids)byId(id).value=String(changes[id]??defaults[id]);render();}
+ byId('default').addEventListener('click',()=>preset({}));
+ byId('subthreshold').addEventListener('click',()=>preset({current:100}));
+ byId('large-capacitance').addEventListener('click',()=>preset({capacitance:400}));
+ byId('fast').addEventListener('click',()=>preset({current:350}));
+ render();
+})();
+</script>
+</body>
+</html>

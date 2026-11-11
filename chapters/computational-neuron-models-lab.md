@@ -51,7 +51,16 @@ The notebook checks threshold at the end of each step. Thus the passive voltage 
 
 Open [Laboratory 1 — Leaky Integrate-and-Fire Neuron](../notebooks/lif_neuron.ipynb), [run it in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/lif_neuron.ipynb), or {download}`download the notebook <../notebooks/lif_neuron.ipynb>` for local JupyterLab.
 
-Run all cells in order. First inspect `simulate_lif`, which returns a voltage trace and a separate array of spike-event times. Then inspect `analytical_rate`, run the assertions, and plot the current–rate comparison. All numerical values are teaching assumptions, not parameters fitted to a biological recording.
+Run all cells in order. `simulate_lif` returns time, voltage, and a separate spike-event array. The notebook embeds its full simulation code, so Colab needs no repository imports. It contains four guided examples matching [Chapter 3, Section 3.5](03-computational-neuron-models.md#lif-editable-simulator):
+
+| Example | Edit | Observe |
+|---|---|---|
+| Constant-current LIF | Current, capacitance, leak, threshold, refractory duration | First-spike time and current–rate curve |
+| RC charging | Capacitance and pulse duration | Charging speed and return to rest |
+| Temporal integration | Pulse separation, amplitude, capacitance | Close versus separated inputs and spike events |
+| Multisource integration | B's weight/delay and negative input | Summed current, threshold crossings, and event counts |
+
+Predict first, edit one parameter, rerun that example, then explain the change. Parameters in each example are explicit; editing Example 1 does not silently change Examples 2–4. The published figures show reference outputs. Execute edits in Colab or local JupyterLab. All numerical values are teaching assumptions, not parameters fitted to a biological recording.
 
 ```{figure} ../assets/lif-neuron-model.png
 :alt: LIF reset voltage trace, separate spike-event markers, and analytical versus simulated firing rates
@@ -76,7 +85,7 @@ Submit the voltage/event plot, the current–rate curve, your parameter values a
 
 1. Change the time step from 0.1 ms to 0.05 ms. Compare the first spike time and mean interspike interval with the analytical values.
 2. Increase current from 100 pA to 200 pA. Explain the transition using $V_\infty$ and threshold.
-3. To study capacitance, replace the fixed `tau_ms` assignment with `capacitance_pf / leak_ns`. Double capacitance while keeping leak conductance fixed, then compare voltage rise and firing rate.
+3. Set `capacitance_pf` to 400 in the Example 1 parameter cell. The simulator already computes `tau_ms = capacitance_pf / leak_ns`. Compare voltage rise and firing rate while keeping leak and current fixed. Explain the RC charging plot as well.
 4. Explain why searching the returned voltage trace for an action-potential peak will not recover the separate spike-event array.
 5. Before opening the Place Cell notebook, identify which input changes from a constant current to a position-dependent rate and which spike-generation assumption changes.
 

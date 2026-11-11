@@ -36,3 +36,6 @@ site:
     logo: assets/logo.svg
     favicon: assets/favicon.svg
     folders: true
+    # Avoid a doubled BASE_URL in the current theme's breadcrumb home link.
+    # Sidebar, header home link, and previous/next navigation remain enabled.
+    hide_breadcrumbs: true

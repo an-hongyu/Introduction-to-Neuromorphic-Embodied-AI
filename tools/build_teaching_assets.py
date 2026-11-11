@@ -124,7 +124,7 @@ plt.show()
 '''
 
 for name, title, intro, code, plot in [
-    ('lif_neuron', 'Laboratory 2 — Leaky Integrate-and-Fire Neuron',
+    ('lif_neuron', 'Laboratory 1 — Leaky Integrate-and-Fire Neuron',
      'Companion to Chapter 3. All currents use pA, voltages mV, conductances nS, and time ms. The model uses an exact passive step and endpoint spike detection. Run all cells to reproduce the checks and figure. Parameters are pedagogical, not fitted to a biological recording.', lif_code, lif_plot),
     ('hebbian_learning', 'Laboratory 3 — Hebbian Association and STDP',
      'Companion to Chapter 4. This controlled pairing example uses dimensionless activities and supplied output patterns. It demonstrates partial-cue recall and ambiguity, not autonomous learning. The STDP window is illustrated separately and does not train the association matrix.', hebb_code, hebb_plot),

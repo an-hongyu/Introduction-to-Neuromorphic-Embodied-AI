@@ -2,6 +2,9 @@
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+import subprocess
+
+subprocess.run(['node', str(Path(__file__).with_name('test_lif_interactive.cjs'))], check=True)
 
 root = Path(__file__).resolve().parents[1] / '_build/html'
 base = '/Introduction-to-Neuromorphic-Embodied-AI'
@@ -16,6 +19,8 @@ for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
 assert 'katex' in all_html or 'MathJax' in all_html or '<math' in all_html, 'No rendered mathematics'
 assert len(list(root.rglob('*.ipynb'))) >= 3, 'Expected three downloadable laboratories'
 assert len(list(root.rglob('*.png'))) >= 6, 'Expected at least six notebook figure outputs'
+assert (root / 'lif-interactive.html').is_file(), 'Missing embedded LIF application'
+assert 'Interactive LIF neuron explorer' in all_html, 'Missing LIF iframe in chapter'
 
 class Links(HTMLParser):
     def __init__(self):
@@ -23,7 +28,7 @@ class Links(HTMLParser):
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if tag == 'a' and attrs.get('href'): self.urls.append(attrs['href'])
-        if tag in ('img', 'script') and attrs.get('src'): self.urls.append(attrs['src'])
+        if tag in ('img', 'script', 'iframe') and attrs.get('src'): self.urls.append(attrs['src'])
         if tag == 'link' and attrs.get('href'): self.urls.append(attrs['href'])
 
 checked = set()

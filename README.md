@@ -8,8 +8,8 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 
 1. Neuroscience Background: neurons, spikes, membrane potential, and synapses; informed by *Principles of Neural Science*, fifth edition.
 2. Computational Models of Neurons: rate/count models, LIF, Hodgkin–Huxley-type models, adaptive exponential models, and model selection.
-3. Spatial Cells: place, grid, head-direction, border/boundary, speed, and time-related activity.
-4. Hebbian Learning: association, constraints, Oja's rule, STDP, and eligibility traces.
+3. Hebbian Learning and Synaptic Plasticity: association, constraints, Oja's rule, STDP, and eligibility traces.
+4. Spatial Cells: place, grid, head-direction, border/boundary, speed, and time-related activity.
 
 5. Neural Encoding and the ANN–SNN Bridge.
 6. Visual Perception and Visual Cue Encoding.

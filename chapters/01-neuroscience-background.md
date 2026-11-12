@@ -163,12 +163,12 @@ At a typical chemical synapse, the presynaptic terminal contains **synaptic vesi
 
 Many excitatory contacts onto cortical pyramidal neurons occur on dendritic spines; other contacts occur on dendritic shafts, the soma, or axonal regions. Location affects function. A connection near a particular dendritic input can control that local interaction, while a connection near an output-triggering region can have strong influence over spike initiation. The biological synapse is therefore richer than a scalar weight attached to an abstract edge.
 
-```{figure} ../assets/ccn-synapse.png
+```{figure} ../assets/synapse-modern.svg
 :label: fig-ccn-synapse
-:alt: Reference-textbook illustration of a presynaptic terminal and postsynaptic spine, with transmitter vesicles, glutamate, AMPA, NMDA, metabotropic receptors, and calcium channels
-:width: 78%
+:alt: Original diagram of a presynaptic neuron and a postsynaptic neuron, showing axonal communication and an enlarged chemical synapse with vesicles, neurotransmitter, synaptic cleft, and postsynaptic receptors
+:width: 100%
 
-**Reference-book figure: a glutamatergic chemical synapse.** Reproduced unchanged from O'Reilly *et al.*, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “Schematic of a synapse” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_synapse.png).
+**Chemical communication between neurons.** A presynaptic action potential reaches an axon terminal and may trigger neurotransmitter release. The transmitter activates postsynaptic receptors, changing the receiving neuron's state. The inset illustrates the principal components of a chemical synapse; the drawing is schematic and not to scale.
 ```
 
 **Read the picture from bottom to top.** The lower terminal is presynaptic; its vesicles contain transmitter. The cleft separates it from the upper postsynaptic spine. Red transmitter molecules and the labeled ions are different entities: transmitter binds receptors, whereas ions carry current through suitable channels. AMPA and NMDA are ionotropic glutamate receptors; mGlu denotes a metabotropic glutamate receptor. VGCC denotes a voltage-gated calcium channel. This is an example glutamatergic synapse, not a diagram of every synapse type. The source uses `Ca++` for $\mathrm{Ca}^{2+}$ and `Na+` for $\mathrm{Na}^{+}$.

@@ -20,14 +20,14 @@ How can a robot form a spatial representation, remember where it has been, and l
 Each computational chapter links **biological evidence**, **explicit assumptions**, **mathematical models**, **executable Python**, and **experiments**. No biological claim should be inferred solely from the behavior of a simulation.
 
 :::{card} Start here
-Begin with [Chapter 1: Neuroscience Background](chapters/01-neuroscience-background.md), then study [Chapter 2: Computational Models of Neurons](chapters/03-computational-neuron-models.md), [Chapter 3: Hebbian Learning and Synaptic Plasticity](chapters/04-hebbian-learning.md), and [Chapter 4: Spatial Cells](chapters/02-spatial-cells.md).
+Begin with [Chapter 1: Neurons and Synapses](chapters/01-neuroscience-background.md), then study [Chapter 2: Computational Models of Neurons](chapters/03-computational-neuron-models.md), [Chapter 3: Hebbian Learning and Synaptic Plasticity](chapters/04-hebbian-learning.md), and [Chapter 4: Spatial Cells](chapters/02-spatial-cells.md).
 :::
 
 ## A four-chapter foundation
 
 | Chapter | Central question | Worked material |
 |---|---|---|
-| [1. Neuroscience Background](chapters/01-neuroscience-background.md) | What are neurons, spikes, and synapses? | Membrane time constant and synaptic-current examples |
+| [1. Neurons and Synapses](chapters/01-neuroscience-background.md) | What are neurons, spikes, and synapses? | Membrane time constant and synaptic-current examples |
 | [2. Computational Models of Neurons](chapters/03-computational-neuron-models.md) | How do equations produce neural activity? | Poisson counts, LIF interactive examples, HH gates, and sodium-ablation notebook |
 | [3. Hebbian Learning and Synaptic Plasticity](chapters/04-hebbian-learning.md) | How can experience change connections? | Association, Oja, STDP, eligibility traces, and paired-cue controls |
 | [4. Spatial Cells](chapters/02-spatial-cells.md) | How is activity related to space, movement, and time? | Original tuning diagrams and occupancy calculations |

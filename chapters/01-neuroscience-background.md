@@ -6,7 +6,13 @@ title: "Chapter 1 · Neuroscience Background"
 
 A neuron does more than receive a number and apply an activation function. It receives signals at particular places and times, combines them with its ongoing electrical and biochemical state, and influences other cells through specialized connections. Understanding that sequence is essential before building computational neurons, spatial representations, or learning robots.
 
-By the end of this chapter, you should be able to explain a neuron's input, integrative, conducting, and output functions; distinguish a graded postsynaptic potential from an action potential; explain threshold, spatial integration, and temporal integration; trace a chemical signal from one neuron to another; and distinguish excitation, inhibition, ordinary transmission, and synaptic plasticity.
+By the end of this chapter, you should be able to:
+
+- Explain a neuron's input, integrative, conducting, and output functions.
+- Distinguish a graded postsynaptic potential from an action potential.
+- Explain spike threshold, spatial integration, and temporal integration.
+- Trace chemical signaling from one neuron to another.
+- Distinguish excitation, inhibition, ordinary synaptic transmission, and synaptic plasticity.
 
 ## 1.2 What is a neuron?
 

@@ -1,8 +1,8 @@
 ---
-title: "Chapter 3 · Spatial Cells"
+title: "Chapter 4 · Spatial Cells"
 ---
 
-## 3.1 Learning objectives: from spikes to representations
+## 4.1 Learning objectives: from spikes to representations
 
 [Chapter 1](01-neuroscience-background.md) described how neurons signal. This chapter asks what a neuron's activity is related to while an animal moves. By the end of this chapter, you should be able to:
 
@@ -13,7 +13,7 @@ title: "Chapter 3 · Spatial Cells"
 
 The hippocampal formation and connected regions, including entorhinal cortex, are important for spatial and memory-related processing [[1]](#spatial-ref-1). We will use “spatial cells” as a teaching umbrella for experimentally characterized tuning patterns and their supporting signals. These labels do not imply that the brain contains independent, perfectly separated modules for every variable.
 
-## 3.2 What does “a cell represents position” mean?
+## 4.2 What does “a cell represents position” mean?
 
 Suppose we record spikes while tracking an animal's position $\mathbf{x}(t)$, heading $\theta(t)$, and speed $v(t)$. Saying that a cell has spatial tuning means that its discharge statistics depend on spatial variables in the measured conditions. A useful descriptive object is a conditional rate,
 
@@ -25,7 +25,7 @@ where $N_i(t,t+\Delta t)$ is a spike count, $\Delta t$ is a short observation in
 
 A **tuning model** predicts activity from a behavioral variable. A **neuron dynamics model**, developed in [Chapter 2](03-computational-neuron-models.md), predicts how internal state evolves and generates spikes. A Gaussian place field is a tuning model; a leaky integrate-and-fire neuron is a dynamics model. The two can be combined, but one is not evidence for the other.
 
-## 3.3 Place cells: location-selective activity
+## 4.3 Place cells: location-selective activity
 
 O'Keefe and Dostrovsky reported hippocampal units with activity related to the animal's location [[2]](#spatial-ref-2). A region in which a cell fires more strongly is called a **place field**. The field is defined in the conditions of a recording session, not as a permanent GPS coordinate stored in the neuron.
 
@@ -42,7 +42,7 @@ Here $r_0$ and $r_{\mathrm{peak}}$ are baseline and peak rates in Hz; $\boldsymb
 
 **Worked example.** If $r_0=0.2$ Hz, $r_{\mathrm{peak}}=25$ Hz, and $\sigma=0.14$ m, the rate at the field center is 25 Hz. At a distance of one $\sigma$, it is $0.2+24.8e^{-1/2}\approx15.24$ Hz. A short stochastic spike count can still be zero at either position.
 
-## 3.4 Grid cells: repeated spatial firing fields
+## 4.4 Grid cells: repeated spatial firing fields
 
 Grid cells in medial entorhinal cortex can exhibit multiple firing fields arranged in an approximately hexagonal spatial pattern [[3]](#spatial-ref-3). Three descriptive properties are particularly useful:
 
@@ -56,13 +56,13 @@ Unlike a single localized place field, a grid pattern repeats. A single grid cel
 
 Grid activity motivates models of path integration, in which self-motion updates an internal location estimate. That interpretation is a hypothesis to implement and evaluate, not a consequence of drawing a hexagonal pattern.
 
-### 3.4.1 From grid spacing to a place-like readout
+### 4.4.1 From grid spacing to a place-like readout
 
 The [Grid Cells and Grid-to-Place Mapping section](grid-to-place.md) now provides the complete cosine equations, spacing–frequency conversion, orientation/phase conventions, and weighted threshold readout. It follows Liu et al.'s published grid/threshold framework and an available later author manuscript, with all teaching extensions identified. An embedded interactive experiment lets you vary spacing, angle, phase, gain, baseline, weights, population size, and threshold. [Laboratory 8](../notebooks/grid_to_place.ipynb) reproduces the equations in editable Python.
 
 Start with one grid, compare six identical grids, then try six diverse inputs. Repeated fields survive the first two constructions. A designed common peak in the diverse example illustrates a possible readout, not a demonstrated learning mechanism.
 
-## 3.5 Head-direction cells: orientation rather than travel direction
+## 4.5 Head-direction cells: orientation rather than travel direction
 
 Head-direction cells discharge preferentially when the animal's head points in a particular direction relative to a reference frame [[4]](#spatial-ref-4). Heading is different from location, and it is also different from the velocity direction: an animal can turn its head while stationary or move with its head oriented away from its travel direction.
 
@@ -76,13 +76,13 @@ where $\theta$ and $\theta_0$ are angles in radians, $A$ is the peak rate above 
 
 For a robot, distinguish body yaw, sensor orientation, and motion direction explicitly before choosing which variable drives a head-direction-like population.
 
-## 3.6 Border and boundary-related cells: geometry as a reference
+## 4.6 Border and boundary-related cells: geometry as a reference
 
 Entorhinal border cells can show elevated firing near environmental boundaries [[5]](#spatial-ref-5). Broader boundary-related modeling also considers distance and direction to a boundary. These descriptions should not be collapsed into the statement that every boundary-related cell is simply a distance-to-the-nearest-wall sensor.
 
 A robot's LiDAR beam reports range along a sensor-relative direction. A wall-related response defined in an environment-fixed frame requires additional geometry and an orientation estimate. Thus, one LiDAR sector is not automatically one biological border cell. The proposed 36-sector encoder is a sensor representation that could supply inputs to a later spatial network.
 
-## 3.7 Speed cells and time cells: complementary variables
+## 4.7 Speed cells and time cells: complementary variables
 
 Speed-related entorhinal activity provides evidence for a movement-related signal that can support navigation models [[6]](#spatial-ref-6). A simple teaching rate might increase with nonnegative speed, but any such relationship must be tested over the speeds and behavioral states actually sampled. Speed measures movement magnitude; heading provides an angular reference.
 
@@ -98,7 +98,7 @@ Grid-to-place interactions also cannot be reduced to a universally established o
 Synthetic tuning examples. All fields and curves are generated from explicit teaching functions; none are recordings or evidence that a circuit learned these representations. Spatial axes are in meters, angular axes in degrees, rates in Hz, and elapsed time in seconds.
 ```
 
-## 3.8 How to estimate a spatial firing-rate map
+## 4.8 How to estimate a spatial firing-rate map
 
 For spatial bin $b$, let $K_b$ be the number of recorded spikes and $T_b$ the time spent in the bin. An occupancy-normalized estimate is
 
@@ -110,7 +110,7 @@ Consider two bins: one has 20 spikes in 2 s, and another has 10 spikes in 0.5 s.
 
 For a defensible analysis, record position and spikes on an aligned time base, report occupancy and bin size, impose a stated minimum occupancy, and assess reproducibility across sessions or trials. If you smooth a map, report the procedure and do not treat smooth appearance as independent evidence of tuning. For a learned decoder, separate fitting from evaluation and avoid randomly splitting highly adjacent trajectory samples without considering temporal dependence.
 
-## 3.9 A robot example and the first laboratory
+## 4.9 A robot example and the first laboratory
 
 Imagine a robot at $(0.5,0.4)$ m facing north near the east wall. A place-like population can depend on its location; a heading population can depend on its orientation; boundary-related inputs can depend on the east wall; and speed-related signals can remain low if it is stationary. These signals describe different aspects of the same state.
 
@@ -118,7 +118,7 @@ A successful localization system must estimate state from available observations
 
 Continue with the [Place Cell laboratory guide](04-place-cells.md) and [executable Place Cell notebook](../notebooks/place_cells.ipynb). The notebook uses a one-meter-square arena, a 300 s synthetic trajectory, and Poisson spike counts. It reports occupancy coverage and errors relative to the imposed rate field.
 
-## 3.10 Exercises
+## 4.10 Exercises
 
 1. Explain why one grid cell cannot uniquely identify position across a large environment.
 2. Give a situation in which head orientation and travel direction differ.

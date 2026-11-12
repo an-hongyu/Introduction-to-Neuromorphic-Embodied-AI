@@ -6,7 +6,13 @@ title: Grid Cells and Grid-to-Place Mapping
 
 ## Learning objectives
 
-After this section you should be able to implement a periodic hexagonal grid field, distinguish lattice spacing from spatial frequency, predict the effects of orientation and phase, and construct an explicit grid-to-place readout. You should also be able to explain why summing periodic inputs does not automatically produce one learned place field. Read [Chapter 3](02-spatial-cells.md) first; this section supplies its mathematical and interactive companion.
+By the end of this section, you should be able to:
+
+- Implement a periodic hexagonal grid-cell firing field.
+- Distinguish lattice spacing from spatial frequency.
+- Predict how grid orientation and phase affect a firing pattern.
+- Construct an explicit grid-to-place readout.
+- Explain why summing periodic inputs does not automatically yield a single learned place field. Read [Chapter 3](02-spatial-cells.md) first; this section supplies its mathematical and interactive companion.
 
 ## 1. Read the source models before choosing parameters
 

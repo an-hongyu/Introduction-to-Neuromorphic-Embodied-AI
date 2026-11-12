@@ -1,0 +1,1730 @@
+[
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 1,
+    "threshold": 0.78,
+    "x": 0.0,
+    "y": 0.0,
+    "rates": [
+      0.0,
+      2.8159633437460463,
+      10.671903448845866,
+      16.469104683655083,
+      20.498388322303818,
+      23.477165771913633
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 1,
+    "threshold": 0.78,
+    "x": 0.12,
+    "y": -0.08,
+    "rates": [
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0
+    ],
+    "drive": 1.0,
+    "rate": 25.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 1,
+    "threshold": 0.3,
+    "x": -0.71,
+    "y": 0.39,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      27.243044481921068,
+      22.24547599295287
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 1,
+    "threshold": 0.95,
+    "x": 0.41,
+    "y": -0.55,
+    "rates": [
+      0.0,
+      15.924911822440695,
+      14.071792557325047,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 3,
+    "threshold": 0.78,
+    "x": 0.0,
+    "y": 0.0,
+    "rates": [
+      0.0,
+      2.8159633437460463,
+      10.671903448845866,
+      16.469104683655083,
+      20.498388322303818,
+      23.477165771913633
+    ],
+    "drive": 0.14986518658435458,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 3,
+    "threshold": 0.78,
+    "x": 0.12,
+    "y": -0.08,
+    "rates": [
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0
+    ],
+    "drive": 1.0,
+    "rate": 25.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 3,
+    "threshold": 0.3,
+    "x": -0.71,
+    "y": 0.39,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      27.243044481921068,
+      22.24547599295287
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 3,
+    "threshold": 0.95,
+    "x": 0.41,
+    "y": -0.55,
+    "rates": [
+      0.0,
+      15.924911822440695,
+      14.071792557325047,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.33329671533073046,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 6,
+    "threshold": 0.78,
+    "x": 0.0,
+    "y": 0.0,
+    "rates": [
+      0.0,
+      2.8159633437460463,
+      10.671903448845866,
+      16.469104683655083,
+      20.498388322303818,
+      23.477165771913633
+    ],
+    "drive": 0.4107362531692469,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 6,
+    "threshold": 0.78,
+    "x": 0.12,
+    "y": -0.08,
+    "rates": [
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0
+    ],
+    "drive": 1.0,
+    "rate": 25.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 6,
+    "threshold": 0.3,
+    "x": -0.71,
+    "y": 0.39,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      27.243044481921068,
+      22.24547599295287
+    ],
+    "drive": 0.27493622486041075,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.47,
+        "orientation": 7,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.59,
+        "orientation": 14,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.73,
+        "orientation": 21,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.89,
+        "orientation": 28,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 1.09,
+        "orientation": 35,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 6,
+    "threshold": 0.95,
+    "x": 0.41,
+    "y": -0.55,
+    "rates": [
+      0.0,
+      15.924911822440695,
+      14.071792557325047,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.16664835766536523,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 1,
+    "threshold": 0.78,
+    "x": 0.0,
+    "y": 0.0,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 1,
+    "threshold": 0.78,
+    "x": 0.12,
+    "y": -0.08,
+    "rates": [
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0
+    ],
+    "drive": 1.0,
+    "rate": 25.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 1,
+    "threshold": 0.3,
+    "x": -0.71,
+    "y": 0.39,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 1,
+    "threshold": 0.95,
+    "x": 0.41,
+    "y": -0.55,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 3,
+    "threshold": 0.78,
+    "x": 0.0,
+    "y": 0.0,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 3,
+    "threshold": 0.78,
+    "x": 0.12,
+    "y": -0.08,
+    "rates": [
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0
+    ],
+    "drive": 1.0,
+    "rate": 25.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 3,
+    "threshold": 0.3,
+    "x": -0.71,
+    "y": 0.39,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 3,
+    "threshold": 0.95,
+    "x": 0.41,
+    "y": -0.55,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 6,
+    "threshold": 0.78,
+    "x": 0.0,
+    "y": 0.0,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 6,
+    "threshold": 0.78,
+    "x": 0.12,
+    "y": -0.08,
+    "rates": [
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0,
+      30.0
+    ],
+    "drive": 1.0,
+    "rate": 25.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 6,
+    "threshold": 0.3,
+    "x": -0.71,
+    "y": 0.39,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  },
+  {
+    "cells": [
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      },
+      {
+        "spacing": 0.38,
+        "orientation": 0,
+        "phaseX": 0.12,
+        "phaseY": -0.08,
+        "kappa": 0.5,
+        "zeta": 0.0,
+        "weight": 1.0
+      }
+    ],
+    "count": 6,
+    "threshold": 0.95,
+    "x": 0.41,
+    "y": -0.55,
+    "rates": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "drive": 0.0,
+    "rate": 0.0
+  }
+]

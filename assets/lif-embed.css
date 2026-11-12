@@ -20,3 +20,22 @@
 .grid-place-playground iframe {width:100% !important;height:100% !important;border:1px solid #d9e4eb !important;border-radius:9px;background:white}
 @media(max-width:767px){.grid-place-playground > div{height:4300px}}
 @media(max-width:400px){.grid-place-playground > div{height:4800px}}
+
+
+/* IEEE-style hanging indentation for bibliography entries.
+   MyST currently renders [n] reference records as ordinary paragraphs. */
+h2#references ~ p {
+  padding-left: 2.25rem;
+  text-indent: -2.25rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+/* Some chapters place further reading after their bibliography.
+   Restore normal paragraph layout after that subsequent heading. */
+h2#references ~ h2 ~ p,
+h2#references ~ h3 ~ p {
+  padding-left: 0;
+  text-indent: 0;
+}

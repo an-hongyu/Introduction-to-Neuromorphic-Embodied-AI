@@ -4,7 +4,7 @@ title: "Chapter 2 · Computational Models of Neurons"
 
 ## 2.1 Learning objectives and the modeling question
 
-A computational neuron model is a set of equations and event rules that predicts some aspect of a neuron's response. The right model depends on the question: membrane-current mechanisms, spike timing, population activity, learning dynamics, or hardware cost. More state variables do not automatically make a model more useful, and fewer state variables do not automatically make it biologically wrong [[1]](#models-ref-1).
+A computational neuron model is a set of mathematical equations that describe neuron's electrophysical activities [[1]](#models-ref-1).
 
 By the end of this chapter, you should be able to:
 

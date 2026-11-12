@@ -7,8 +7,8 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 ## Current textbook structure
 
 1. Neuroscience Background: neurons, spikes, membrane potential, and synapses; informed by *Principles of Neural Science*, fifth edition.
-2. Spatial Cells: place, grid, head-direction, border/boundary, speed, and time-related activity.
-3. Computational Models of Neurons: rate/count models, LIF, Hodgkin–Huxley-type models, adaptive exponential models, and model selection.
+2. Computational Models of Neurons: rate/count models, LIF, Hodgkin–Huxley-type models, adaptive exponential models, and model selection.
+3. Spatial Cells: place, grid, head-direction, border/boundary, speed, and time-related activity.
 4. Hebbian Learning: association, constraints, Oja's rule, STDP, and eligibility traces.
 
 5. Neural Encoding and the ANN–SNN Bridge.
@@ -18,7 +18,7 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 9. Nengo, ROS 2, and Gazebo Integration (single-cell notebook plus integration guide).
 10. Capstone: An Associative Learning Robot (synthetic learning experiment plus robot validation protocol).
 
-References use IEEE-style numbered citations and hyperlinks. Original figures, defined units, worked examples, and exercises accompany the chapters. Existing introductory and Place Cell material remains available under supplementary reading and computational laboratories.
+References use IEEE-style numbered citations and hyperlinks, with one paragraph per reference, full author names, and full journal titles. Original figures, defined units, worked examples, and exercises accompany the chapters. Existing introductory and Place Cell material remains available under supplementary reading and computational laboratories.
 
 The computational laboratories begin with a **Computational Models of Neurons** guide and follow this sequence: Laboratory 1, LIF neuron (`lif_neuron.ipynb`); Laboratory 2, Place Cells (`place_cells.ipynb`); Laboratory 3, Hebbian learning (`hebbian_learning.ipynb`); Laboratory 4, Hodgkin–Huxley; Laboratory 5, Conditioning; Laboratory 6, Sensory Encoding; Laboratory 7, One Neuron in Nengo; Laboratory 8, Grid Cells to Place-Like Fields. See `chapters/course-reading-map.md`.
 

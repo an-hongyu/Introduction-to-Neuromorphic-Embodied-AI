@@ -36,7 +36,7 @@ current_pa = 50 + 250*z
 print(z, current_pa)  # 1.0, 300.0 pA
 ```
 
-[Laboratory 6](../notebooks/sensory_encoding.ipynb) applies each current for 500 ms to the Chapter 3 LIF neuron. The baseline is below rheobase. Dim red in this example reaches exactly 150 pA and remains below the event threshold over a finite run; full red elicits repeated events. These are encoding results under chosen parameters, not camera detection accuracies.
+[Laboratory 6](../notebooks/sensory_encoding.ipynb) applies each current for 500 ms to the Chapter 2 LIF neuron. The baseline is below rheobase. Dim red in this example reaches exactly 150 pA and remains below the event threshold over a finite run; full red elicits repeated events. These are encoding results under chosen parameters, not camera detection accuracies.
 
 ```{figure} ../assets/sensor-course-vision.png
 :label: fig-sensor-vision
@@ -67,7 +67,7 @@ For the Chapter 10 association experiment, threshold a calibrated feature into a
 
 (vision-ref-1)=
 
-[1] P. Corke, *Robotics, Vision and Control: Fundamental Algorithms in Python*, 3rd ed. Cham, Switzerland: Springer, 2023, doi: [10.1007/978-3-031-06469-2](https://link.springer.com/book/10.1007/978-3-031-06469-2).
+[1] Peter Corke, *Robotics, Vision and Control: Fundamental Algorithms in Python*, 3rd ed. Cham, Switzerland: Springer, 2023, doi: [10.1007/978-3-031-06469-2](https://link.springer.com/book/10.1007/978-3-031-06469-2).
 
 ## Additional Reading Materials
 

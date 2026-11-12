@@ -1,8 +1,8 @@
 ---
-title: "Chapter 3 · Computational Models of Neurons"
+title: "Chapter 2 · Computational Models of Neurons"
 ---
 
-## 3.1 Learning objectives and the modeling question
+## 2.1 Learning objectives and the modeling question
 
 A computational neuron model is a set of equations and event rules that predicts some aspect of a neuron's response. The right model depends on the question: membrane-current mechanisms, spike timing, population activity, learning dynamics, or hardware cost. More state variables do not automatically make a model more useful, and fewer state variables do not automatically make it biologically wrong [[1]](#models-ref-1).
 
@@ -10,7 +10,7 @@ After this chapter, you should be able to distinguish rate models from spike-gen
 
 **Learn by changing a model.** Worked examples are part of the chapter, before the exercises. Follow **predict → run → change one parameter → explain**. The [self-contained LIF notebook](../notebooks/lif_neuron.ipynb) reproduces all four examples and plots. [Open it in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/lif_neuron.ipynb) to edit code and rerun it, or {download}`download the notebook <../notebooks/lif_neuron.ipynb>` for JupyterLab. The embedded interactive example below runs directly in this page. To edit the Python implementation itself, use Colab or JupyterLab.
 
-## 3.2 Three levels of description
+## 2.2 Three levels of description
 
 | Description | Example output | What it does not establish by itself |
 |---|---|---|
@@ -18,9 +18,9 @@ After this chapter, you should be able to distinguish rate models from spike-gen
 | Point spiking-neuron model | Voltage-like state and emitted spike times | Full dendritic geometry or molecular mechanisms |
 | Conductance-based or compartmental model | Ionic currents, voltage dynamics, and possibly spatial compartments | Correctness for a cell type without parameter calibration |
 
-The [Gaussian place field in Chapter 2](02-spatial-cells.md) belongs to the first category. A prescribed rate can drive a stochastic spike generator, or it can be mapped into an input current for a dynamical neuron. Those are different model constructions, with different assumptions and calibration requirements.
+The [Gaussian place field in Chapter 3](02-spatial-cells.md) belongs to the first category. A prescribed rate can drive a stochastic spike generator, or it can be mapped into an input current for a dynamical neuron. Those are different model constructions, with different assumptions and calibration requirements.
 
-## 3.3 A rate model with Poisson spike counts
+## 2.3 A rate model with Poisson spike counts
 
 Let $r_i(t)$ be a nonnegative rate in Hz. A convenient conditional model for counts in bins of duration $\Delta t$ seconds is
 
@@ -47,7 +47,7 @@ print("Spikes in one simulated second:", counts.sum())
 
 The expected total is 20; an individual realization need not equal 20. Independent Poisson sampling does not include an absolute refractory period, adaptation, or history-dependent firing. It is a baseline assumption to test, not a definition of biological spiking [[1]](#models-ref-1).
 
-## 3.4 Leaky integrate-and-fire: integrate, cross threshold, reset
+## 2.4 Leaky integrate-and-fire: integrate, cross threshold, reset
 
 The **leaky integrate-and-fire (LIF)** model uses a passive voltage equation between spikes:
 
@@ -79,7 +79,7 @@ $$
 
 The exponential update is exact between events under the constant-input assumption. Detecting a threshold crossing only at time-step endpoints still quantizes spike times.
 
-### 3.4.1 Where are the resistor and capacitor?
+### 2.4.1 Where are the resistor and capacitor?
 
 Yes: the passive part of LIF has an **RC equivalent circuit**. The membrane separates charge, represented by capacitance $C_m$. A leak path is represented by resistance $R_m=1/g_L$. A reversal-potential source $E_L$ sets the voltage to which the membrane relaxes without input. The capacitor is connected between the intracellular node and extracellular reference; the resistor and reversal source form the parallel leak branch. See the standard [*Neuronal Dynamics*, Fig. 1.6 and Section 1.3.1](https://neuronaldynamics.epfl.ch/online/Ch1.S3.html) [[1]](#models-ref-1).
 
@@ -107,7 +107,7 @@ $$
 
 Rearranging gives the LIF subthreshold equation. With 10 nS leak, $R_m=100$ MΩ; with 200 pF capacitance, $R_mC_m=20$ ms. The source represents a reversal potential phenomenologically, not a literal cellular battery. **An RC circuit alone charges and discharges; the threshold/reset rule adds the “fire” part.** Changing capacitance while keeping resistance fixed changes the speed but not the constant-current equilibrium $E_L+R_m I$.
 
-## 3.5 A worked LIF neuron with units
+## 2.5 A worked LIF neuron with units
 
 Use these pedagogical parameters:
 
@@ -159,7 +159,7 @@ Drag a slider: no installation or external notebook is needed. Start with **Belo
 
 (lif-editable-simulator)=
 
-### 3.5.1 A simulator with editable physical parameters
+### 2.5.1 A simulator with editable physical parameters
 
 Run this definition once before the example cells below. It accepts a **current array**, one value per time interval. Unlike a fixed-time-constant implementation, it computes `tau_ms = capacitance_pf / leak_ns`, so changing capacitance or resistance changes the dynamics correctly. Returned voltage includes the initial state and is one sample longer than the input. A separate event list stores spikes because the trace resets immediately after detection.
 
@@ -214,7 +214,7 @@ def pulse_train(time_ms, starts_ms, width_ms=4.0, amplitude_pa=600.0):
 
 Use pF, nS, mV, pA, and ms throughout: pF × mV/ms and nS × mV both give pA. Current is held constant within each interval. The passive update is exact under that assumption, but spike times are detected only at endpoints. The refractory interval rounds upward to whole steps. Halve the time step to check timing sensitivity.
 
-### 3.5.2 Example 1 — Change current, capacitance, leak, and threshold
+### 2.5.2 Example 1 — Change current, capacitance, leak, and threshold
 
 **Predict.** A 100 pA current approaches −55 mV and remains below threshold. A 200 pA current approaches −45 mV and produces repeated events. What happens if capacitance doubles while the input stays at 200 pA?
 
@@ -256,7 +256,7 @@ plt.legend(); plt.show()
 **Example 1 reference output.** The notebook displays separate event markers and compares simulated long-run interval rates with the analytical curve. Vertical markers are events, not modeled action-potential waveforms. All parameters are teaching assumptions.
 ```
 
-### 3.5.3 Example 2 — Watch the capacitor charge
+### 2.5.3 Example 2 — Watch the capacitor charge
 
 **Predict.** Inject the same 100 pA step into cells with 100, 200, and 400 pF capacitance while keeping leak at 10 nS. All have the same passive equilibrium of −55 mV. Their time constants are 10, 20, and 40 ms.
 
@@ -280,7 +280,7 @@ plt.legend(); plt.show()
 **Example 2 reference output.** Capacitance controls the approach to equilibrium and the return toward rest after the current ends. The right panel shows the common input; no spike/reset mechanism is active.
 ```
 
-### 3.5.4 Example 3 — Temporal integration: same source, different arrival times
+### 2.5.4 Example 3 — Temporal integration: same source, different arrival times
 
 One source delivers two identical 600 pA pulses, each lasting 4 ms. Compare onset separations of 6 ms and 40 ms. The charge per pulse stays fixed. In the closer pair, the second pulse arrives while much of the first voltage response remains.
 
@@ -309,7 +309,7 @@ plt.legend(); plt.show()
 **Example 3 reference output.** Top: LIF reset trace and passive RC prediction without reset. Bottom: identical-charge input pulses at different separations. Matching voltage and current scales support comparison.
 ```
 
-### 3.5.5 Example 4 — Spatial integration: different input sources
+### 2.5.5 Example 4 — Spatial integration: different input sources
 
 At the point-neuron level, spatial summation means combining **distinct input sources** into the same compartment. Write their current contributions as
 
@@ -349,7 +349,7 @@ plt.legend(); plt.show()
 
 **Scope of the example.** A single-compartment LIF model has no dendritic coordinates: it cannot predict the difference between a distal and proximal synapse or branch-specific nonlinear integration. Those questions need cable or multicompartment models [[1]](#models-ref-1), secs. 1.4.4, 3.2, and 3.4. Also, a negative prescribed current is an inhibitory *approximation*: it does not implement conductance-dependent shunting, changing input resistance, or a reversal potential. The [conductance example in Chapter 1](01-neuroscience-background.md#fig-conductance-balance) explains that distinction. Passive voltage shifts superpose before threshold/reset; full spike-output responses need not superpose.
 
-## 3.6 Conductance-based models and Hodgkin–Huxley
+## 2.6 Conductance-based models and Hodgkin–Huxley
 
 The Hodgkin–Huxley framework describes voltage through ionic conductances and gating variables [[2]](#models-ref-2). In a modern inward-positive input convention, a representative equation is
 
@@ -368,13 +368,13 @@ $$
 
 Here $m$ and $h$ describe sodium activation and inactivation, while $n$ describes potassium activation in the classical model. If conductances are specified per membrane area, capacitance and current must also be specified per area. Do not mix a current density with the total capacitance used in the LIF example.
 
-### 3.6.1 A circuit with voltage-dependent conductances
+### 2.6.1 A circuit with voltage-dependent conductances
 
 The capacitor still stores membrane charge. The sodium, potassium, and leak branches conduct in parallel; each branch has an effective reversal-potential source. Now $g_{\mathrm{Na}}=\overline g_{\mathrm{Na}}m^3h$ and $g_{\mathrm K}=\overline g_{\mathrm K}n^4$ vary with voltage and time. A reversal source represents an electrochemical driving force. Ion pumps maintain concentration gradients over longer times; the ideal source is not a literal pump circuit. Positive ionic current below is outward, whereas positive applied current drives depolarization.
 
 Sodium activation provides rapid positive feedback. Sodium inactivation and delayed potassium activation contribute to recovery. The action potential emerges from these dynamics: **there is no LIF-style threshold/reset rule**. Counting upward crossings of 0 mV is an analysis choice, not a mechanism that creates the waveform.
 
-### 3.6.2 Complete classical parameters and gate rates
+### 2.6.2 Complete classical parameters and gate rates
 
 The [HH notebook](../notebooks/hodgkin_huxley.ipynb) implements a single compartment with the classical squid-axon kinetics at 6.3 °C, using the equations in the [Brian 2 reference implementation](https://brian2.readthedocs.io/en/stable/examples/compartmental.hodgkin_huxley_1952.html) with a shifted voltage origin [[2]](#models-ref-2). These are teaching parameters, not a fitted hippocampal neuron. The cortical parameter table in *Neuronal Dynamics* is a different parameterization.
 
@@ -406,7 +406,7 @@ The apparent singularities at −40 and −55 mV have finite limits: $\alpha_m=1
 Original notebook output: applied current, action-potential waveform, gates, and outward-positive ionic currents. Negative sodium current is inward. Membrane voltage is not combined with event markers.
 ```
 
-### 3.6.3 Worked experiment — remove sodium conductance
+### 2.6.3 Worked experiment — remove sodium conductance
 
 Run the definitions in [Laboratory 4](../notebooks/hodgkin_huxley.ipynb), then change one parameter:
 
@@ -432,7 +432,7 @@ Original controlled comparison with identical applied current. Events are detect
 [Open the complete HH experiment in Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/hodgkin_huxley.ipynb), or {download}`download it <../notebooks/hodgkin_huxley.ipynb>`.
 
 
-## 3.7 Adaptive exponential and Izhikevich models
+## 2.7 Adaptive exponential and Izhikevich models
 
 The adaptive exponential integrate-and-fire model adds an exponential spike-initiation term and a recovery current [[3]](#models-ref-3):
 
@@ -454,7 +454,7 @@ The Izhikevich model uses two coupled state variables with a reset and can repro
 | Izhikevich model | Voltage-like and recovery variables | Which qualitative firing regimes affect the network? |
 | Hodgkin–Huxley-type model | Voltage and channel gates | Which ionic mechanisms shape the response? |
 
-## 3.8 Synaptic input and model validation
+## 2.8 Synaptic input and model validation
 
 A current-based synapse prescribes a current waveform. A conductance-based synapse uses a term such as $g_{\mathrm{syn}}(t)(E_{\mathrm{syn}}-V)$ and therefore changes both current and effective membrane conductance. State which form you use, along with its time course, delay, units, and sign convention.
 
@@ -477,7 +477,7 @@ This example adds a useful comparison: Hodgkin–Huxley describes explicit chann
 
 Begin the practical sequence with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md), then run Laboratory 1 before the Place Cell rate-model experiment.
 
-## 3.9 Exercises
+## 2.9 Exercises
 
 1. Compute the expected spike count and probability of at least one event for 50 Hz in a 2 ms bin.
 2. For the LIF parameters above, explain why 100 pA does not produce sustained firing from reset.
@@ -489,24 +489,24 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 
 (models-ref-1)=
 
-[1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 5–6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+[1] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 5–6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
 
 (models-ref-2)=
 
-[2] A. L. Hodgkin and A. F. Huxley, “A quantitative description of membrane current and its application to conduction and excitation in nerve,” *J. Physiol.*, vol. 117, no. 4, pp. 500–544, 1952, doi: [10.1113/jphysiol.1952.sp004764](https://pubmed.ncbi.nlm.nih.gov/12991237/).
+[2] Alan L. Hodgkin and Andrew F. Huxley, “A quantitative description of membrane current and its application to conduction and excitation in nerve,” *The Journal of Physiology*, vol. 117, no. 4, pp. 500–544, 1952, doi: [10.1113/jphysiol.1952.sp004764](https://pubmed.ncbi.nlm.nih.gov/12991237/).
 
 (models-ref-3)=
 
-[3] R. Brette and W. Gerstner, “Adaptive exponential integrate-and-fire model as an effective description of neuronal activity,” *J. Neurophysiol.*, vol. 94, no. 5, pp. 3637–3642, 2005, doi: [10.1152/jn.00686.2005](https://pubmed.ncbi.nlm.nih.gov/16014787/).
+[3] Romain Brette and Wulfram Gerstner, “Adaptive exponential integrate-and-fire model as an effective description of neuronal activity,” *Journal of Neurophysiology*, vol. 94, no. 5, pp. 3637–3642, 2005, doi: [10.1152/jn.00686.2005](https://pubmed.ncbi.nlm.nih.gov/16014787/).
 
 (models-ref-4)=
 
-[4] E. M. Izhikevich, “Simple model of spiking neurons,” *IEEE Trans. Neural Netw.*, vol. 14, no. 6, pp. 1569–1572, 2003, doi: [10.1109/TNN.2003.820440](https://pubmed.ncbi.nlm.nih.gov/18244602/).
+[4] Eugene M. Izhikevich, “Simple model of spiking neurons,” *IEEE Transactions on Neural Networks*, vol. 14, no. 6, pp. 1569–1572, 2003, doi: [10.1109/TNN.2003.820440](https://pubmed.ncbi.nlm.nih.gov/18244602/).
 
 
 (models-ref-5)=
 
-[5] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, sec. 1.3, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
+[5] Hanspeter A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, sec. 1.3, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
 
 
 ## Additional Reading Materials

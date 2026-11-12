@@ -16,7 +16,7 @@ $$
 f(J)=\left[\tau_{\mathrm{ref}}+\tau_{\mathrm{RC}}\ln\left(\frac{J}{J-1}\right)\right]^{-1}.
 $$
 
-The analytical rate is about 41.71 Hz; the 1 ms-step simulation gives about 41.67 Hz. These normalized voltage and current values are not mV and pA. Compare with Chapter 3 only after deriving a conversion and aligning reset and refractory conventions.
+The analytical rate is about 41.71 Hz; the 1 ms-step simulation gives about 41.67 Hz. These normalized voltage and current values are not mV and pA. Compare with Chapter 2 only after deriving a conversion and aligning reset and refractory conventions.
 
 ```python
 import nengo

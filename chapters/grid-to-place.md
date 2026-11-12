@@ -6,7 +6,7 @@ title: Grid Cells and Grid-to-Place Mapping
 
 ## Learning objectives
 
-After this section you should be able to implement a periodic hexagonal grid field, distinguish lattice spacing from spatial frequency, predict the effects of orientation and phase, and construct an explicit grid-to-place readout. You should also be able to explain why summing periodic inputs does not automatically produce one learned place field. Read [Chapter 2](02-spatial-cells.md) first; this section supplies its mathematical and interactive companion.
+After this section you should be able to implement a periodic hexagonal grid field, distinguish lattice spacing from spatial frequency, predict the effects of orientation and phase, and construct an explicit grid-to-place readout. You should also be able to explain why summing periodic inputs does not automatically produce one learned place field. Read [Chapter 3](02-spatial-cells.md) first; this section supplies its mathematical and interactive companion.
 
 ## 1. Read the source models before choosing parameters
 
@@ -169,15 +169,19 @@ Evaluate stability across independent exploration trajectories, remote responses
 
 (grid-ref-1)=
 
-[1] T. Liu, K. J. Bai, and H. An, “Replicating associative learning of rodents with a neuromorphic robot in an open-field arena,” *Front. Neurosci.*, vol. 19, Art. no. 1565780, 2025, doi: [10.3389/fnins.2025.1565780](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1565780/full), secs. 2.1.1–2.1.2, eqs. (1)–(7), Fig. 2. Open access, CC BY; equations discussed with attribution.
+[1] Tianze Liu, Kang Jun Bai, and Hongyu An, “Replicating associative learning of rodents with a neuromorphic robot in an open-field arena,” *Frontiers in Neuroscience*, vol. 19, Art. no. 1565780, 2025, doi: [10.3389/fnins.2025.1565780](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1565780/full).
+
+**Model provenance for [1].** Sections 2.1.1–2.1.2, eqs. (1)–(7), Fig. 2. Open access, CC BY; equations discussed with attribution.
 
 (grid-ref-2)=
 
-[2] T. Liu, Z. Jin, D. Song, and H. An, “A Neuromorphic Robot as a Digital Twin for Rodent Spatial Representation in Dynamic Environment Navigation,” *IEEE J. Emerg. Sel. Topics Circuits Syst.*, 2026, doi: [10.1109/JETCAS.2026.3733540](https://doi.org/10.1109/JETCAS.2026.3733540). The cosine form was checked against the available author manuscript, sec. III-D, eq. (8); final publication metadata: [institutional record](https://digitalcommons.mtu.edu/michigantech-p2/3029/).
+[2] Tianze Liu, Zihan Jin, Dong Song, and Hongyu An, “A Neuromorphic Robot as a Digital Twin for Rodent Spatial Representation in Dynamic Environment Navigation,” *IEEE Journal on Emerging and Selected Topics in Circuits and Systems*, 2026, doi: [10.1109/JETCAS.2026.3733540](https://doi.org/10.1109/JETCAS.2026.3733540).
+
+**Model provenance for [2].** The cosine form was checked against the available author manuscript, sec. III-D, eq. (8); final publication metadata: [institutional record](https://digitalcommons.mtu.edu/michigantech-p2/3029/).
 
 (grid-ref-3)=
 
-[3] D. Bush, C. Barry, and N. Burgess, “What do grid cells contribute to place cell firing?,” *Trends Neurosci.*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://pubmed.ncbi.nlm.nih.gov/24485517/).
+[3] Daniel Bush, Caswell Barry, and Neil Burgess, “What do grid cells contribute to place cell firing?,” *Trends in Neurosciences*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://pubmed.ncbi.nlm.nih.gov/24485517/).
 
 ## Additional Reading Materials
 

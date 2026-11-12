@@ -61,7 +61,7 @@ $$
 
 A real mounting offset adds a rigid transform. For $(x_r,y_r)=(1,2)$ m, $\psi=90^\circ$, $\theta=0$, and $d=1$ m, the endpoint is $(1,3)$ m. A forward beam becomes a different world direction when the robot turns.
 
-A 36-channel sensory encoder is not itself a place-cell, grid-cell, or border-cell model. Connecting it to [Chapter 2](02-spatial-cells.md) requires an explicit representation and a test: for example, does activity remain tied to a world boundary across changes in heading? Robot pose error and scan distortion can produce apparent remapping. Retain raw timestamps, frame transforms, and occupancy information when testing that claim.
+A 36-channel sensory encoder is not itself a place-cell, grid-cell, or border-cell model. Connecting it to [Chapter 3](02-spatial-cells.md) requires an explicit representation and a test: for example, does activity remain tied to a world boundary across changes in heading? Robot pose error and scan distortion can produce apparent remapping. Retain raw timestamps, frame transforms, and occupancy information when testing that claim.
 
 ## 8.5 Exercises
 
@@ -78,4 +78,4 @@ A 36-channel sensory encoder is not itself a place-cell, grid-cell, or border-ce
 
 ## Additional Reading Materials
 
-Read the course's LiDAR ranging material and the complete message fields in [[1]](#lidar-ref-1), especially scan and per-ray timing. Compare this compact encoder with Chapter 2's distinction between sensory input and an environment-relative spatial firing field. More detailed learned spatial networks remain on the [research roadmap](roadmap.md).
+Read the course's LiDAR ranging material and the complete message fields in [[1]](#lidar-ref-1), especially scan and per-ray timing. Compare this compact encoder with Chapter 3's distinction between sensory input and an environment-relative spatial firing field. More detailed learned spatial networks remain on the [research roadmap](roadmap.md).

@@ -29,7 +29,7 @@ Dendrites are not merely passive wires, and the soma is not a universal centrali
 :alt: Reference-textbook diagram comparing a detector with a neuron, labeling inputs, integration, output, dendrites, synapses, soma, and axon
 :width: 85%
 
-**Reference-book figure: input, integration, and output.** Reproduced unchanged from R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “Neuron as a detector” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_neuron_as_detect.png).
+**Reference-book figure: input, integration, and output.** Reproduced unchanged from Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “Neuron as a detector” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_neuron_as_detect.png).
 ```
 
 **Read the picture.** Follow the separate inputs toward the integration region and then the output axon. The diagram is a functional abstraction: integration can occur throughout dendrites as well as the soma, and the axon initial segment is an important spike-initiation site in many neurons. The purple cell body should not be interpreted as the only place where computation occurs.
@@ -126,7 +126,7 @@ $$
 
 The leak term draws voltage toward $E_L$. Capacitance makes voltage change gradually rather than instantaneously under a finite current. The passive membrane time constant is $\tau_m=C_m/g_L$; this helps explain why the timing of inputs matters. The model omits the active currents needed to generate a biological spike.
 
-**Worked example.** With $C_m=200$ pF and $g_L=10$ nS, $\tau_m=20$ ms. A constant 100 pA input produces a passive steady-state shift of $I_{\mathrm{in}}/g_L=10$ mV. Starting from $E_L=-65$ mV, voltage approaches $-55$ mV. It does not reach this asymptote instantaneously. If a threshold is placed exactly at that asymptote, a neuron starting below it does not cross it in finite time in the ideal passive equation. [Chapter 3](03-computational-neuron-models.md) adds explicit spike-generation rules and checks their numerical implementation.
+**Worked example.** With $C_m=200$ pF and $g_L=10$ nS, $\tau_m=20$ ms. A constant 100 pA input produces a passive steady-state shift of $I_{\mathrm{in}}/g_L=10$ mV. Starting from $E_L=-65$ mV, voltage approaches $-55$ mV. It does not reach this asymptote instantaneously. If a threshold is placed exactly at that asymptote, a neuron starting below it does not cross it in finite time in the ideal passive equation. [Chapter 2](03-computational-neuron-models.md) adds explicit spike-generation rules and checks their numerical implementation.
 
 ## 1.4 Action potentials, propagation, and spike trains
 
@@ -356,19 +356,19 @@ This project's planned LiDAR example uses 36 angular sectors of $10^\circ$ each.
 
 ## References
 
-References use IEEE-style numbered citations. Each citation number links to its entry; each entry links to the source. Chapter selections identify the material used for the biological explanations.
+References use IEEE-style numbered citations, with one paragraph per entry, full author names, and full journal titles. Each citation number links to its entry; each entry links to the source. Chapter selections identify the material used for the biological explanations.
 
 (neuro-ref-1)=
 
-[1] E. R. Kandel, J. H. Schwartz, T. M. Jessell, S. A. Siegelbaum, and A. J. Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013, chs. 2, 6–8, 10–13, and 66–67. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
+[1] Eric R. Kandel, James H. Schwartz, Thomas M. Jessell, Steven A. Siegelbaum, and Albert James Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013, chs. 2, 6–8, 10–13, and 66–67. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
 
 (neuro-ref-2)=
 
-[2] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 2. [Open textbook source](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-02.md); [edition and copyright](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md); [CC BY 4.0 license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/LICENSE).
+[2] Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 2. [Open textbook source](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-02.md); [edition and copyright](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md); [CC BY 4.0 license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/LICENSE).
 
 (neuro-ref-3)=
 
-[3] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+[3] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
 
 
 ## Additional Reading Materials

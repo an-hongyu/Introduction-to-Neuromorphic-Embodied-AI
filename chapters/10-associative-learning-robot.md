@@ -96,7 +96,7 @@ Only call the Gazebo phase complete when those recordings exist. A physical robo
 
 (capstone-ref-1)=
 
-[1] N. Zins, Y. Zhang, and H. An, “Implementation of Associative Memory Learning in Mobile Robots Using Neuromorphic Computing,” in *Neuromorphic Computing*, 2023, doi: [10.5772/intechopen.110364](https://www.intechopen.com/chapters/86265).
+[1] Noah Zins, Yan Zhang, and Hongyu An, “Implementation of Associative Memory Learning in Mobile Robots Using Neuromorphic Computing,” in *Neuromorphic Computing*, 2023, doi: [10.5772/intechopen.110364](https://www.intechopen.com/chapters/86265).
 
 ## Additional Reading Materials
 

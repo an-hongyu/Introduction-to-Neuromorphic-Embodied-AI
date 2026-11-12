@@ -1,4 +1,4 @@
-"""Reproduce Chapter 3's original RC diagram, worked plots, and LIF notebook.
+"""Reproduce Chapter 2's original RC diagram, worked plots, and LIF notebook.
 
 Run from any directory: python tools/build_lif_examples.py
 The notebook embeds all simulation code; Colab needs no repository imports.
@@ -239,7 +239,7 @@ def build_notebook_and_plots():
     nb = nbformat.v4.new_notebook(cells=[
         markdown(r'''# Laboratory 1 — Leaky Integrate-and-Fire Neuron
 
-        Four worked examples accompany Chapter 3: current/rate, RC charging,
+        Four worked examples accompany Chapter 2: current/rate, RC charging,
         temporal integration, and multisource integration. **Run all cells once.
         Then edit one parameter cell and rerun its example.** Code is self-contained
         and uses NumPy and Matplotlib (available in Colab). All values are teaching
@@ -307,7 +307,7 @@ def build_notebook_and_plots():
 
         ## References
 
-        [1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski,
+        [1] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski,
         *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*.
         Cambridge, U.K.: Cambridge University Press, 2014, secs. 1.3–1.4.
         [RC circuit and integration](https://neuronaldynamics.epfl.ch/online/Ch1.S3.html);

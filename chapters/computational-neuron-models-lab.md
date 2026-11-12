@@ -2,7 +2,7 @@
 title: "Laboratory Guide · Computational Models of Neurons"
 ---
 
-Begin the computational laboratories here, before the Place Cell experiment. [Chapter 3](03-computational-neuron-models.md) develops the theory; this section turns the equations into a reproducible single-neuron simulation. The first executable experiment uses a leaky integrate-and-fire (LIF) neuron. We then move from a neuron's temporal dynamics to spatial tuning in Laboratory 2.
+Begin the computational laboratories here, before the Place Cell experiment. [Chapter 2](03-computational-neuron-models.md) develops the theory; this section turns the equations into a reproducible single-neuron simulation. The first executable experiment uses a leaky integrate-and-fire (LIF) neuron. We then move from a neuron's temporal dynamics to spatial tuning in Laboratory 2.
 
 ## L1.1 What will we model?
 
@@ -27,7 +27,7 @@ $$
 
 Here $V$ is membrane voltage, $C_m$ membrane capacitance, $g_L$ leak conductance, $E_L$ leak reversal potential, and $I$ applied current. When voltage reaches the threshold $V_{\mathrm{th}}$, record a spike event, reset voltage to $V_{\mathrm{reset}}$, and hold it there for an absolute refractory interval $t_{\mathrm{ref}}$. The event is an abstraction of a spike; the model does not reproduce its ionic waveform [[1]](#neuron-lab-ref-1).
 
-Use the same illustrative parameters as Chapter 3:
+Use the same illustrative parameters as Chapter 2:
 
 | Quantity | Value |
 |---|---|
@@ -51,7 +51,7 @@ The notebook checks threshold at the end of each step. Thus the passive voltage 
 
 Open [Laboratory 1 — Leaky Integrate-and-Fire Neuron](../notebooks/lif_neuron.ipynb), [run it in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/lif_neuron.ipynb), or {download}`download the notebook <../notebooks/lif_neuron.ipynb>` for local JupyterLab.
 
-Run all cells in order. `simulate_lif` returns time, voltage, and a separate spike-event array. The notebook embeds its full simulation code, so Colab needs no repository imports. It contains four guided examples matching [Chapter 3, Section 3.5](03-computational-neuron-models.md#lif-editable-simulator):
+Run all cells in order. `simulate_lif` returns time, voltage, and a separate spike-event array. The notebook embeds its full simulation code, so Colab needs no repository imports. It contains four guided examples matching [Chapter 2, Section 2.5](03-computational-neuron-models.md#lif-editable-simulator):
 
 | Example | Edit | Observe |
 |---|---|---|
@@ -102,11 +102,11 @@ For a membrane-level reading path, use Mallot Chapter 1, especially Sections 1.2
 ## References
 
 (neuron-lab-ref-1)=
-[1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 1. [Online chapter](https://neuronaldynamics.epfl.ch/online/Ch1.html).
+[1] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 1. [Online chapter](https://neuronaldynamics.epfl.ch/online/Ch1.html).
 
 
 (neuron-lab-ref-2)=
-[2] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, ch. 1, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
+[2] Hanspeter A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, ch. 1, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
 
 (neuron-lab-ref-3)=
-[3] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 1st ed. Wiki Book, 2012, chs. 2–4, supplied PDF snapshot generated Aug. 25, 2016. [Institutional publication record](https://experts.colorado.edu/display/pubid_85822); [current online edition](https://book.compcogneuro.org/).
+[3] Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 1st ed. Wiki Book, 2012, chs. 2–4, supplied PDF snapshot generated Aug. 25, 2016. [Institutional publication record](https://experts.colorado.edu/display/pubid_85822); [current online edition](https://book.compcogneuro.org/).

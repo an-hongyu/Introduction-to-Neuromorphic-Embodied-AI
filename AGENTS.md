@@ -9,3 +9,6 @@ This repository belongs to the SFN research project.
 - Validate with `python tests/execute_notebook.py`, `BASE_URL=/Introduction-to-Neuromorphic-Embodied-AI jupyter book build --html --strict`, and `python tests/check_build.py`.
 - Pull requests build and test the book. Merging to `main` automatically deploys GitHub Pages.
 - Do not change other repositories.
+
+- References throughout chapters, notebooks, interactive pages, and generators use one paragraph per numbered entry, full given names and surnames (retain published middle initials), and full journal titles. Keep IEEE-style bibliographic ordering and linked DOI/source records.
+- Foundation order: Chapter 1 Neuroscience Background; Chapter 2 Computational Models of Neurons; Chapter 3 Spatial Cells; Chapter 4 Hebbian Learning. Source filenames are stable for existing links.

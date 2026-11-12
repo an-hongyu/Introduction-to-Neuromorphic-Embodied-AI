@@ -81,9 +81,11 @@ Spacing is the nearest-neighbor lattice distance in metres. The angular frequenc
 Grid activities are normalized by their theoretical maxima before weighted averaging. This removes pure multiplicative gain changes when offset is zero. A chosen threshold and rectifier map the pooled drive into a 0–25 Hz proxy. See the chapter for the paper/version distinctions and complete equations.'''
     nb=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell(intro),nbformat.v4.new_code_cell(MODEL),nbformat.v4.new_markdown_cell('## Change one grid parameter and inspect all input fields'),nbformat.v4.new_code_cell(PLOT),nbformat.v4.new_markdown_cell('## Compare repeated versus localized outputs\n\nChange `threshold` or `count` in the examples. Field uniqueness is assessed only within the sampled arena. A fixed readout does not demonstrate learned place-field formation.'),nbformat.v4.new_code_cell(COMPARE),nbformat.v4.new_markdown_cell('''## References and further reading
 
-[1] T. Liu, K. J. Bai, and H. An, “Replicating associative learning of rodents with a neuromorphic robot in an open-field arena,” *Front. Neurosci.*, vol. 19, Art. 1565780, 2025, doi: [10.3389/fnins.2025.1565780](https://doi.org/10.3389/fnins.2025.1565780).
+[1] Tianze Liu, Kang Jun Bai, and Hongyu An, “Replicating associative learning of rodents with a neuromorphic robot in an open-field arena,” *Frontiers in Neuroscience*, vol. 19, Art. no. 1565780, 2025, doi: [10.3389/fnins.2025.1565780](https://doi.org/10.3389/fnins.2025.1565780).
 
-[2] T. Liu, Z. Jin, D. Song, and H. An, “A Neuromorphic Robot as a Digital Twin for Rodent Spatial Representation in Dynamic Environment Navigation,” *IEEE JETCAS*, 2026, doi: [10.1109/JETCAS.2026.3733540](https://doi.org/10.1109/JETCAS.2026.3733540). Cosine form checked against the available author manuscript, sec. III-D, eq. (8).
+[2] Tianze Liu, Zihan Jin, Dong Song, and Hongyu An, “A Neuromorphic Robot as a Digital Twin for Rodent Spatial Representation in Dynamic Environment Navigation,” *IEEE Journal on Emerging and Selected Topics in Circuits and Systems*, 2026, doi: [10.1109/JETCAS.2026.3733540](https://doi.org/10.1109/JETCAS.2026.3733540).
+
+**Model provenance.** The cosine form was checked against the available author manuscript, sec. III-D, eq. (8).
 
 Read the chapter before treating an imposed peak alignment as learned spatial coding. The notebook's normalization, 20 Hz scale, weights, and threshold are explicit teaching choices.''')])
     nb.metadata.kernelspec={'display_name':'Python 3','language':'python','name':'python3'}

@@ -48,7 +48,7 @@ See the [laboratory table](course-reading-map.md) for the complete sequence. The
 
 ## Writing and evidence conventions
 
-Use IEEE-style numbered references in order of first citation within each chapter. Citation numbers link to reference entries, and entries link to DOI records, publisher pages, or authoritative online texts. Define variables and units at their first use and distinguish biological observations from chosen model assumptions.
+Use IEEE-style numbered references in order of first citation within each chapter. Put each reference in a separate paragraph; write full author names and full journal titles, retaining middle initials as published. Citation numbers link to reference entries, and entries link to DOI records, publisher pages, or authoritative online texts. Define variables and units at their first use and distinguish biological observations from chosen model assumptions.
 
 The neuroscience foundation uses *Principles of Neural Science*, fifth edition, as a reference. Original teaching figures and examples are created for this book. A chapter should distinguish prior experimental evidence, established modeling precedents, pedagogical assumptions, and proposed research. Planned material is not evidence of a completed model or validated robot.
 
@@ -73,16 +73,16 @@ The explanations and teaching assets in this textbook are original. References s
 ### Book references
 
 (reading-ref-1)=
-[1] E. R. Kandel, J. H. Schwartz, T. M. Jessell, S. A. Siegelbaum, and A. J. Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
+[1] Eric R. Kandel, James H. Schwartz, Thomas M. Jessell, Steven A. Siegelbaum, and Albert James Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
 
 (reading-ref-2)=
-[2] M. F. Bear, B. W. Connors, and M. A. Paradiso, *Neuroscience: Exploring the Brain*, 4th ed. Philadelphia, PA, USA: Wolters Kluwer, 2016. [National Library of Medicine catalog](https://www.ncbi.nlm.nih.gov/nlmcatalog/101647616).
+[2] Mark F. Bear, Barry W. Connors, and Michael A. Paradiso, *Neuroscience: Exploring the Brain*, 4th ed. Philadelphia, PA, USA: Wolters Kluwer, 2016. [National Library of Medicine catalog](https://www.ncbi.nlm.nih.gov/nlmcatalog/101647616).
 
 (reading-ref-3)=
-[3] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
+[3] Hanspeter A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, doi: 10.1007/978-3-319-00861-5. [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
 
 (reading-ref-4)=
-[4] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 1st ed. Wiki Book, 2012, supplied PDF snapshot generated Aug. 25, 2016. [Institutional publication record](https://experts.colorado.edu/display/pubid_85822); [current online edition](https://book.compcogneuro.org/).
+[4] Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 1st ed. Wiki Book, 2012, supplied PDF snapshot generated Aug. 25, 2016. [Institutional publication record](https://experts.colorado.edu/display/pubid_85822); [current online edition](https://book.compcogneuro.org/).
 
 (reading-ref-5)=
-[5] R. Kozma, C. Alippi, Y. Choe, and F. C. Morabito, Eds., *Artificial Intelligence in the Age of Neural Networks and Brain Computing*. London, U.K.: Academic Press, 2019. [Publisher](https://www.sciencedirect.com/science/book/9780128154809).
+[5] Robert Kozma, Cesare Alippi, Yoonsuck Choe, and Francesco Carlo Morabito, Eds., *Artificial Intelligence in the Age of Neural Networks and Brain Computing*. London, U.K.: Academic Press, 2019. [Publisher](https://www.sciencedirect.com/science/book/9780128154809).

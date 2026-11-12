@@ -11,11 +11,11 @@ This map connects the supplied course lectures and final project to the textbook
 | Course material | Textbook destination | Worked activity and present scope |
 |---|---|---|
 | Introduction; neurons | [Chapter 1](01-neuroscience-background.md) | Membrane voltage, threshold, temporal/spatial integration, original biological schematics |
-| Synapses; associative learning and plasticity | [Chapters 1](01-neuroscience-background.md) and [4](04-hebbian-learning.md) | Transmission, excitation/inhibition, bounded learning versus Oja/STDP |
-| Spatial representations | [Chapter 3](02-spatial-cells.md) | Primary evidence, occupancy normalization, Place Cell notebook |
+| Synapses; associative learning and plasticity | [Chapters 1](01-neuroscience-background.md) and [3](04-hebbian-learning.md) | Transmission, excitation/inhibition, bounded learning versus Oja/STDP |
+| Spatial representations | [Chapter 4](02-spatial-cells.md) | Primary evidence, occupancy normalization, Place Cell notebook |
 | Hodgkin–Huxley model | [Chapter 2, HH section](03-computational-neuron-models.md#fig-hh-course-dynamics) | Complete gates/units, RK4 notebook, sodium ablation and convergence checks |
 | Leaky integrate-and-fire model | [Chapter 2](03-computational-neuron-models.md) | RC circuit, embedded interactive experiment, temporal and multisource integration |
-| Hebbian learning | [Chapter 4](04-hebbian-learning.md) | Outer-product memory and controlled visual–vibration association |
+| Hebbian learning | [Chapter 3](04-hebbian-learning.md) | Outer-product memory and controlled visual–vibration association |
 | From neural systems to ANN | [Chapter 5](05-neural-encoding.md) | ANN/SNN abstractions, feature contracts, event count versus latency |
 | Visual Perception I/II | [Chapter 6](06-visual-perception.md) | Imaging context, color feature, filtering discussion, synthetic RGB-to-LIF experiment |
 | IMU | [Chapter 7](07-inertial-sensing.md) | Units/frames, gravity limitations, causal RMS vibration detector |
@@ -23,7 +23,7 @@ This map connects the supplied course lectures and final project to the textbook
 | ROS, Nengo, Gazebo project preparation | [Chapter 9](09-nengo-ros-gazebo.md) | Executed single-cell Nengo notebook; simulator integration milestones and message contract |
 | Final associative robot project | [Chapter 10](10-associative-learning-robot.md) | CS/US protocol, executed NumPy/LIF example, controls, frozen evaluation, Gazebo extension guide |
 
-The foundation sequence is neuroscience background (Chapter 1), computational neuron models (Chapter 2), spatial cells (Chapter 3), and Hebbian learning (Chapter 4). Sensory and implementation material follows them rather than inserting an unexplained coding laboratory ahead of neuron models. Spatial-cell research remains central: sensory measurements are explicitly distinguished from place/grid/border representations.
+The foundation sequence is Neurons and Synapses (Chapter 1), Computational Models of Neurons (Chapter 2), Hebbian Learning and Synaptic Plasticity (Chapter 3), and Spatial Cells (Chapter 4). Sensory and implementation material follows them rather than inserting an unexplained coding laboratory ahead of neuron models. Spatial-cell research remains central: sensory measurements are explicitly distinguished from place/grid/border representations.
 
 ## Eight executable laboratories
 

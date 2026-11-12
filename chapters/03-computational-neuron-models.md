@@ -6,7 +6,14 @@ title: "Chapter 2 · Computational Models of Neurons"
 
 A computational neuron model is a set of equations and event rules that predicts some aspect of a neuron's response. The right model depends on the question: membrane-current mechanisms, spike timing, population activity, learning dynamics, or hardware cost. More state variables do not automatically make a model more useful, and fewer state variables do not automatically make it biologically wrong [[1]](#models-ref-1).
 
-After this chapter, you should be able to distinguish rate models from spike-generation models, map an LIF equation to an RC circuit, implement a leaky integrate-and-fire neuron with explicit units, change parameters to test temporal and multisource integration, explain what conductance-based models add, and choose a model with a stated validation target.
+By the end of this chapter, you should be able to:
+
+- Distinguish firing-rate models from spike-generation models.
+- Map the leaky integrate-and-fire (LIF) equation to an equivalent RC circuit.
+- Implement an LIF neuron with explicit physical units.
+- Vary model parameters to investigate temporal and multisource integration.
+- Explain what conductance-based neuron models add beyond LIF.
+- Select a neuron model for a clearly stated validation target.
 
 **Learn by changing a model.** Worked examples are part of the chapter, before the exercises. Follow **predict → run → change one parameter → explain**. The [self-contained LIF notebook](../notebooks/lif_neuron.ipynb) reproduces all four examples and plots. [Open it in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/lif_neuron.ipynb) to edit code and rerun it, or {download}`download the notebook <../notebooks/lif_neuron.ipynb>` for JupyterLab. The embedded interactive example below runs directly in this page. To edit the Python implementation itself, use Colab or JupyterLab.
 

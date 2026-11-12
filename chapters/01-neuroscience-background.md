@@ -324,7 +324,7 @@ where $w_{ij}$ is a maximal conductance in nS and $z_{ij}(t)$ is a dimensionless
 
 **Worked example.** A controlled test input produces an average 1 mV EPSP before an induction protocol and 1.5 mV afterward. Under comparable recording and membrane conditions, this is a 50% increase in the measured response. It supports a change in effective transmission; it does not by itself identify whether release probability, receptor properties, or another factor caused it. Ongoing voltage changes and trial-to-trial release variability must be considered before attributing a response difference to plasticity.
 
-[Chapter 4](04-hebbian-learning.md) turns selected plasticity ideas into explicit learning rules, including Hebbian updates and STDP. Those rules are mathematical hypotheses about changes in a model, not complete molecular accounts of memory. Plasticity contributes to learning and memory, but a lasting change at one connection alone does not explain an entire learned behavior.
+[Chapter 3](04-hebbian-learning.md) turns selected plasticity ideas into explicit learning rules, including Hebbian updates and STDP. Those rules are mathematical hypotheses about changes in a model, not complete molecular accounts of memory. Plasticity contributes to learning and memory, but a lasting change at one connection alone does not explain an entire learned behavior.
 
 ## 1.10 From a biological circuit to embodied AI
 

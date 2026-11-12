@@ -4,7 +4,12 @@ title: "Chapter 6 · Visual Perception and Visual Cue Encoding"
 
 ## 6.1 Learning objectives
 
-You will connect image formation to a measured visual feature, implement a simple red-cue encoder, explain lighting and camera limitations, and evaluate a visual cue independently of the learning rule. This chapter follows the course's camera, color, and image-processing lectures [[1]](#vision-ref-1).
+By the end of this chapter, you should be able to:
+
+- Connect image formation to measurable visual features.
+- Implement a simple red-cue neural encoder.
+- Explain how illumination and camera limitations affect visual measurements.
+- Evaluate visual cue detection independently of the learning rule. This chapter follows the course's camera, color, and image-processing lectures [[1]](#vision-ref-1).
 
 ## 6.2 From scene to pixels
 

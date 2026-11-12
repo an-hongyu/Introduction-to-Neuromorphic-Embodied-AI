@@ -362,7 +362,7 @@ This project's planned LiDAR example uses 36 angular sectors of $10^\circ$ each.
 
 ## References
 
-References use IEEE-style numbered citations, with one paragraph per entry, full author names, and full journal titles. Each citation number links to its entry; each entry links to the source. Chapter selections identify the material used for the biological explanations.
+
 
 (neuro-ref-1)=
 

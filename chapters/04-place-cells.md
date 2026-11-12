@@ -4,7 +4,7 @@ title: "Laboratory Guide · Place Cell Models"
 
 # Place Cell Laboratory Guide
 
-This guide accompanies [Chapter 3: Spatial Cells](02-spatial-cells.md), [Chapter 2: Computational Models of Neurons](03-computational-neuron-models.md), and Laboratory 2. Start with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and its LIF notebook before this spatial-rate experiment.
+This guide accompanies [Chapter 4: Spatial Cells](02-spatial-cells.md), [Chapter 2: Computational Models of Neurons](03-computational-neuron-models.md), and Laboratory 2. Start with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and its LIF notebook before this spatial-rate experiment.
 
 ## Objectives
 

@@ -19,8 +19,8 @@ project:
     children:
     - file: chapters/01-neuroscience-background.md
     - file: chapters/03-computational-neuron-models.md
-    - file: chapters/02-spatial-cells.md
     - file: chapters/04-hebbian-learning.md
+    - file: chapters/02-spatial-cells.md
   - title: Spatial Cell Models
     children:
     - file: chapters/grid-to-place.md

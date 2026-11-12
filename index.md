@@ -32,7 +32,7 @@ Begin with [Chapter 1: Neuroscience Background](chapters/01-neuroscience-backgro
 | [3. Spatial Cells](chapters/02-spatial-cells.md) | How is activity related to space, movement, and time? | Original tuning diagrams and occupancy calculations |
 | [4. Hebbian Learning](chapters/04-hebbian-learning.md) | How can experience change connections? | Association, Oja, STDP, eligibility traces, and paired-cue controls |
 
-The neuroscience background draws on *Principles of Neural Science*, fifth edition. References use IEEE-style numbered entries with clickable source links. Each reference has its own paragraph, full author names, and a full journal title. Equations, figures, and worked examples connect biological concepts to reproducible computational assumptions.
+The neuroscience background draws on *Principles of Neural Science*, fifth edition. Equations, figures, and worked examples connect biological concepts to reproducible computational assumptions.
 
 ## From course topics to an embodied experiment
 

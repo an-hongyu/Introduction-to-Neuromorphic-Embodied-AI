@@ -4,7 +4,7 @@ title: Curriculum and Development Roadmap
 
 # Curriculum and Development Roadmap
 
-Ten chapters and seven computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
+Ten numbered chapters, a detailed grid-to-place section, and eight computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
 
 ## Part I — Foundations: available
 
@@ -26,11 +26,11 @@ The HH, conditioning, sensory, and single-neuron Nengo examples execute in Pytho
 
 ## Computational laboratories: available
 
-See the [seven-laboratory table](course-reading-map.md) for the complete sequence. The [neuron-model laboratory guide](computational-neuron-models-lab.md), [Place Cell guide](04-place-cells.md), and [closed-loop overview](01-introduction.md) remain available. All seven notebooks execute during the publishing workflow.
+See the [laboratory table](course-reading-map.md) for the complete sequence. The [neuron-model laboratory guide](computational-neuron-models-lab.md), [Place Cell guide](04-place-cells.md), and [closed-loop overview](01-introduction.md) remain available. All eight notebooks execute during the publishing workflow.
 
 ## Advanced spatial representations and networks: planned
 
-- Detailed place-cell models, remapping, and grid-to-place coupling
+- Learned place-cell models, remapping, and grid-to-place connectivity (the [fixed readout and interactive grid example](grid-to-place.md) are now available)
 - Grid, head-direction, border/boundary, speed, and time-cell implementations
 - Path integration and multimodal spatial representations
 - Learning spatial representations and population decoding

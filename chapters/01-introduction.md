@@ -81,10 +81,10 @@ A robot starts at $(0.1,0.1)$ m and moves to $(0.5,0.5)$ m. A place cell centere
 
 ## References
 
-[1] J. O'Keefe and J. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Res.*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://pubmed.ncbi.nlm.nih.gov/5124915/).
+[1] John O'Keefe and Jonathan O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Research*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://pubmed.ncbi.nlm.nih.gov/5124915/).
 
-[2] T. Hafting, M. Fyhn, S. Molden, M.-B. Moser, and E. I. Moser, “Microstructure of a spatial map in the entorhinal cortex,” *Nature*, vol. 436, pp. 801–806, 2005, doi: [10.1038/nature03721](https://pubmed.ncbi.nlm.nih.gov/15965463/).
+[2] Torkel Hafting, Marianne Fyhn, Sturla Molden, May-Britt Moser, and Edvard I. Moser, “Microstructure of a spatial map in the entorhinal cortex,” *Nature*, vol. 436, pp. 801–806, 2005, doi: [10.1038/nature03721](https://pubmed.ncbi.nlm.nih.gov/15965463/).
 
-[3] J. S. Taube, R. U. Muller, and J. B. Ranck, Jr., “Head-direction cells recorded from the postsubiculum in freely moving rats. I. Description and quantitative analysis,” *J. Neurosci.*, vol. 10, no. 2, pp. 420–435, 1990, doi: [10.1523/JNEUROSCI.10-02-00420.1990](https://pubmed.ncbi.nlm.nih.gov/2303851/).
+[3] Jeffrey S. Taube, Robert U. Muller, and James B. Ranck, Jr., “Head-direction cells recorded from the postsubiculum in freely moving rats. I. Description and quantitative analysis,” *The Journal of Neuroscience*, vol. 10, no. 2, pp. 420–435, 1990, doi: [10.1523/JNEUROSCI.10-02-00420.1990](https://pubmed.ncbi.nlm.nih.gov/2303851/).
 
-[4] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+[4] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014. [Online textbook](https://neuronaldynamics.epfl.ch/online/).

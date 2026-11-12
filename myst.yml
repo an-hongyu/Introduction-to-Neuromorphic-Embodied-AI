@@ -44,6 +44,11 @@ project:
     - file: notebooks/sensory_encoding.ipynb
     - file: notebooks/nengo_single_neuron.ipynb
     - file: notebooks/grid_to_place.ipynb
+  - title: Solutions to Exercises
+    children:
+    - file: chapters/solutions-foundations.md
+    - file: chapters/solutions-embodied.md
+    - file: chapters/solutions-laboratories.md
   - title: Context and Roadmap
     children:
     - file: chapters/course-reading-map.md

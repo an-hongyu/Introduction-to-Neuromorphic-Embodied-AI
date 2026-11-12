@@ -36,6 +36,12 @@ jobs:
         run: jupyter book build --html --strict
       - name: Check generated pages and links
         run: python tests/check_build.py
+      - name: Include standalone T-maze simulator in published site
+        run: |
+          mkdir -p ./_build/html/simulator
+          cp -R ./simulator/tmaze ./_build/html/simulator/tmaze
+          test -f ./_build/html/simulator/tmaze/index.html
+          test -f ./_build/html/simulator/tmaze/spatial.js
       - name: Preserve build diagnostics
         if: failure()
         uses: actions/upload-artifact@v4

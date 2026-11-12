@@ -18,7 +18,7 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 9. Nengo, ROS 2, and Gazebo Integration (single-cell notebook plus integration guide).
 10. Capstone: An Associative Learning Robot (synthetic learning experiment plus robot validation protocol).
 
-References use IEEE-style numbered citations and hyperlinks, with one paragraph per reference, full author names, and full journal titles. Original figures, defined units, worked examples, and exercises accompany the chapters. Existing introductory and Place Cell material remains available under supplementary reading and computational laboratories.
+Original figures, defined units, worked examples, and exercises accompany the chapters. Existing introductory and Place Cell material remains available under supplementary reading and computational laboratories.
 
 The computational laboratories begin with a **Computational Models of Neurons** guide and follow this sequence: Laboratory 1, LIF neuron (`lif_neuron.ipynb`); Laboratory 2, Place Cells (`place_cells.ipynb`); Laboratory 3, Hebbian learning (`hebbian_learning.ipynb`); Laboratory 4, Hodgkin–Huxley; Laboratory 5, Conditioning; Laboratory 6, Sensory Encoding; Laboratory 7, One Neuron in Nengo; Laboratory 8, Grid Cells to Place-Like Fields. See `chapters/course-reading-map.md`.
 

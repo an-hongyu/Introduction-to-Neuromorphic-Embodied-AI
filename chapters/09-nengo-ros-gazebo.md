@@ -4,7 +4,12 @@ title: "Chapter 9 · Nengo, ROS 2, and Gazebo Integration"
 
 ## 9.1 Learning objectives and scope
 
-You will run one LIF neuron in Nengo, distinguish normalized neural values from physical units, define a sensor-to-controller message contract, and organize a staged ROS 2/Gazebo validation. The notebook experiment is executable and checked. **The ROS 2/Gazebo material below is an implementation and validation guide; a complete simulated robot is not supplied or claimed to have run in this release.**
+By the end of this chapter, you should be able to:
+
+- Run a single LIF neuron in Nengo.
+- Distinguish normalized neural variables from quantities with physical units.
+- Define a sensor-to-controller message contract.
+- Organize a staged validation plan for ROS 2 and Gazebo. The notebook experiment is executable and checked. **The ROS 2/Gazebo material below is an implementation and validation guide; a complete simulated robot is not supplied or claimed to have run in this release.**
 
 ## 9.2 One LIF neuron in Nengo
 

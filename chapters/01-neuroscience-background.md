@@ -364,7 +364,6 @@ For the computational treatment, use *Neuronal Dynamics* [[3]](#neuro-ref-3), Ch
 11. Distinguish synaptic transmission, short-term plasticity, LTP/LTD, and intrinsic excitability changes. Which of these does a fixed-weight LIF network necessarily include?
 12. Design a robot example that separately identifies a measured input, a dynamic state, a connection efficacy, and an observable output. State what evidence would be needed to claim learning.
 
-**Numerical checks.** Exercise 3: $6+6e^{-1}\approx8.21$ mV, below the 10 mV shift required by that example. Exercise 8: $+195$ pA, with driving force decreasing toward zero as voltage approaches 0 mV. Exercise 9: $200/30\approx6.67$ ms and $120/30=4$ mV. These checks use the stated teaching assumptions.
 
 ## References
 

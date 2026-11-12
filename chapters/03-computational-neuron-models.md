@@ -25,7 +25,7 @@ By the end of this chapter, you should be able to:
 | Point spiking-neuron model | Voltage-like state and emitted spike times | Full dendritic geometry or molecular mechanisms |
 | Conductance-based or compartmental model | Ionic currents, voltage dynamics, and possibly spatial compartments | Correctness for a cell type without parameter calibration |
 
-The [Gaussian place field in Chapter 3](02-spatial-cells.md) belongs to the first category. A prescribed rate can drive a stochastic spike generator, or it can be mapped into an input current for a dynamical neuron. Those are different model constructions, with different assumptions and calibration requirements.
+The [Gaussian place field in Chapter 4](02-spatial-cells.md) belongs to the first category. A prescribed rate can drive a stochastic spike generator, or it can be mapped into an input current for a dynamical neuron. Those are different model constructions, with different assumptions and calibration requirements.
 
 ## 2.3 A rate model with Poisson spike counts
 

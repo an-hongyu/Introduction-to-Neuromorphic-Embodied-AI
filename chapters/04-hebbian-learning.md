@@ -169,7 +169,7 @@ for _ in range(12):
 print(w)  # 0.73169194034305
 ```
 
-A separate LIF readout receives $I=50+200(wx+u)$ pA. CS alone therefore supplies 60 pA before learning and about 196.34 pA afterward. Use the Chapter 3 parameters and a fixed 500 ms probe; at least three events count as a response. Learning stays disabled throughout every probe. The trial-level variable $y$ trains the weight; the spiking readout evaluates its consequence. It does not retroactively supply spike-timing-dependent updates.
+A separate LIF readout receives $I=50+200(wx+u)$ pA. CS alone therefore supplies 60 pA before learning and about 196.34 pA afterward. Use the Chapter 2 parameters and a fixed 500 ms probe; at least three events count as a response. Learning stays disabled throughout every probe. The trial-level variable $y$ trains the weight; the spiking readout evaluates its consequence. It does not retroactively supply spike-timing-dependent updates.
 
 ```{figure} ../assets/conditioning-course-learning.png
 :label: fig-conditioning-learning
@@ -202,32 +202,32 @@ Later SFN material will build on these ideas as a proposed research framework. I
 
 (hebb-ref-1)=
 
-[1] D. O. Hebb, *The Organization of Behavior: A Neuropsychological Theory*. New York, NY, USA: Wiley, 1949. [Original-edition catalog record](https://wellcomecollection.org/works/g4sfzum4); [publisher's 2002 reissue](https://www.routledge.com/The-Organization-of-Behavior-A-Neuropsychological-Theory/Hebb/p/book/9780805843002).
+[1] Donald O. Hebb, *The Organization of Behavior: A Neuropsychological Theory*. New York, NY, USA: Wiley, 1949. [Original-edition catalog record](https://wellcomecollection.org/works/g4sfzum4); [publisher's 2002 reissue](https://www.routledge.com/The-Organization-of-Behavior-A-Neuropsychological-Theory/Hebb/p/book/9780805843002).
 
 (hebb-ref-2)=
 
-[2] E. R. Kandel, J. H. Schwartz, T. M. Jessell, S. A. Siegelbaum, and A. J. Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013, chs. 65–67. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
+[2] Eric R. Kandel, James H. Schwartz, Thomas M. Jessell, Steven A. Siegelbaum, and A. James Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013, chs. 65–67. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
 
 (hebb-ref-3)=
 
-[3] T. V. P. Bliss and T. Lømo, “Long-lasting potentiation of synaptic transmission in the dentate area of the anaesthetized rabbit following stimulation of the perforant path,” *J. Physiol.*, vol. 232, no. 2, pp. 331–356, 1973, doi: [10.1113/jphysiol.1973.sp010273](https://pubmed.ncbi.nlm.nih.gov/4727084/).
+[3] Timothy V. P. Bliss and Terje Lømo, “Long-lasting potentiation of synaptic transmission in the dentate area of the anaesthetized rabbit following stimulation of the perforant path,” *The Journal of Physiology*, vol. 232, no. 2, pp. 331–356, 1973, doi: [10.1113/jphysiol.1973.sp010273](https://pubmed.ncbi.nlm.nih.gov/4727084/).
 
 (hebb-ref-4)=
 
-[4] E. Oja, “A simplified neuron model as a principal component analyzer,” *J. Math. Biol.*, vol. 15, no. 3, pp. 267–273, 1982, doi: [10.1007/BF00275687](https://pubmed.ncbi.nlm.nih.gov/7153672/).
+[4] Erkki Oja, “A simplified neuron model as a principal component analyzer,” *Journal of Mathematical Biology*, vol. 15, no. 3, pp. 267–273, 1982, doi: [10.1007/BF00275687](https://pubmed.ncbi.nlm.nih.gov/7153672/).
 
 (hebb-ref-5)=
 
-[5] G.-Q. Bi and M.-M. Poo, “Synaptic modifications in cultured hippocampal neurons: Dependence on spike timing, synaptic strength, and postsynaptic cell type,” *J. Neurosci.*, vol. 18, no. 24, pp. 10464–10472, 1998, doi: [10.1523/JNEUROSCI.18-24-10464.1998](https://pubmed.ncbi.nlm.nih.gov/9852584/).
+[5] Guo-qiang Bi and Mu-ming Poo, “Synaptic modifications in cultured hippocampal neurons: Dependence on spike timing, synaptic strength, and postsynaptic cell type,” *The Journal of Neuroscience*, vol. 18, no. 24, pp. 10464–10472, 1998, doi: [10.1523/JNEUROSCI.18-24-10464.1998](https://pubmed.ncbi.nlm.nih.gov/9852584/).
 
 (hebb-ref-6)=
 
-[6] W. Gerstner, M. Lehmann, V. Liakoni, D. Corneil, and J. Brea, “Eligibility traces and plasticity on behavioral time scales: Experimental support of neoHebbian three-factor learning rules,” *Front. Neural Circuits*, vol. 12, Art. no. 53, 2018, doi: [10.3389/fncir.2018.00053](https://pubmed.ncbi.nlm.nih.gov/30108488/).
+[6] Wulfram Gerstner, Marco Lehmann, Vasiliki Liakoni, Dane Corneil, and Johanni Brea, “Eligibility traces and plasticity on behavioral time scales: Experimental support of neoHebbian three-factor learning rules,” *Frontiers in Neural Circuits*, vol. 12, Art. no. 53, 2018, doi: [10.3389/fncir.2018.00053](https://pubmed.ncbi.nlm.nih.gov/30108488/).
 
 
 (hebb-ref-7)=
 
-[7] N. Zins, Y. Zhang, and H. An, “Implementation of Associative Memory Learning in Mobile Robots Using Neuromorphic Computing,” in *Neuromorphic Computing*, 2023, doi: [10.5772/intechopen.110364](https://www.intechopen.com/chapters/86265).
+[7] Noah Zins, Yan Zhang, and Hongyu An, “Implementation of Associative Memory Learning in Mobile Robots Using Neuromorphic Computing,” in *Neuromorphic Computing*, 2023, doi: [10.5772/intechopen.110364](https://www.intechopen.com/chapters/86265).
 
 ## Additional Reading Materials
 

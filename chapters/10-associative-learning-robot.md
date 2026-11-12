@@ -4,7 +4,12 @@ title: "Chapter 10 · Capstone: An Associative Learning Robot"
 
 ## 10.1 Learning objectives and experimental question
 
-Can pairing a visual cue with a vibration cue make the visual cue alone elicit a motor response? You will define this question as a controlled experiment, connect sensing to neural inputs, separate training from evaluation, and report which components were actually run.
+Can pairing a visual cue with a vibration cue make the visual cue alone elicit a motor response? By the end of this chapter, you should be able to:
+
+- Formulate visual-cue and vibration-cue association as a controlled experiment.
+- Connect visual and inertial sensing measurements to neural inputs.
+- Separate the training phase from independent evaluation.
+- Report clearly which simulation and robot components were actually implemented and tested.
 
 The course final project motivates a red visual CS, a vibration US, and a learned motion response. Related published work explores visual–vibration association with a mobile robot and neuromorphic computing [[1]](#capstone-ref-1). That publication's brightness cues, processing, network, and deployment differ from this red-cue teaching variant. Our compact NumPy/LIF experiment is executable; the Gazebo transfer is a guided extension requiring independent implementation and validation.
 

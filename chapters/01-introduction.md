@@ -6,7 +6,11 @@ title: "Overview · Neuromorphic Embodied AI"
 
 ## O.1 Learning objectives
 
-After this chapter, you should be able to (1) distinguish embodied intelligence from offline perception, (2) describe how sensory cues, self-motion, neural state and actions form a closed loop, and (3) identify the main classes of spatial cells and their computational roles.
+By the end of this chapter, you should be able to:
+
+- Distinguish embodied intelligence from offline perception.
+- Describe how sensory cues, self-motion, neural state, and actions form a closed sensorimotor loop.
+- Identify the main classes of spatial cells and their computational roles.
 
 ## O.2 Intelligence in a closed sensorimotor loop
 

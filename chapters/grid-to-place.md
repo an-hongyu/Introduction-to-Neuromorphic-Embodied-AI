@@ -40,10 +40,10 @@ Then define a nonnegative grid-rate proxy,
 $$
 g_j(\mathbf r)=r_G\left[\kappa_j\sum_{m=0}^{2}
 \cos\!\left(k_j\mathbf e_{jm}^{\top}(\mathbf r-\mathbf p_j)\right)
-+\zeta_j\right]_+,\qquad [a]_+=\max(0,a),\quad r_G=20\ \mathrm{Hz}.
++\zeta_j\right]_+.
 $$
 
-The 20 Hz multiplier is a declared teaching scale. $\kappa$ and $\zeta$ are dimensionless here. This is a spatial tuning function; it does not integrate velocity, generate action potentials, or learn a map from sensory measurements.
+Here $[a]_+=\max(0,a)$ and $r_G=20\ \mathrm{Hz}$. The 20 Hz multiplier is a declared teaching scale. $\kappa$ and $\zeta$ are dimensionless here. This is a spatial tuning function; it does not integrate velocity, generate action potentials, or learn a map from sensory measurements.
 
 ### 2.1 Why this frequency gives the requested spacing
 
@@ -90,19 +90,24 @@ Here $g$ is in Hz, weights are dimensionless, $z$ and $T$ are in Hz, and $b$ is 
 For the single output shown below, normalize each input by its theoretical maximum,
 
 $$
-g_{j,\max}=r_G\max(0,3\kappa_j+\zeta_j),\qquad
+g_{j,\max}=r_G\max(0,3\kappa_j+\zeta_j).
+$$
+
+$$
 h_j(\mathbf r)=\begin{cases}g_j(\mathbf r)/g_{j,\max},&g_{j,\max}>0,\\0,&g_{j,\max}=0.\end{cases}
 $$
 
 For nonnegative weights, compute the weighted mean and rate proxy,
 
 $$
-S(\mathbf r)=\frac{\sum_{j=1}^N w_jh_j(\mathbf r)}{\sum_{j=1}^N w_j},\qquad
-r_P(\mathbf r)=r_{P,\max}\left[\frac{S(\mathbf r)-\tau}{1-\tau}\right]_+,
-\quad 0\leq\tau<1,\quad r_{P,\max}=25\ \mathrm{Hz}.
+S(\mathbf r)=\frac{\sum_{j=1}^N w_jh_j(\mathbf r)}{\sum_{j=1}^N w_j}.
 $$
 
-If the total weight is zero, define $S=0$. Then $0\leq S\leq1$ and $0\leq r_P\leq25$ Hz. The associated binary activation is $\mathbf1[S>\tau]$. Both numerator and denominator of $S$ use the selected first $N$ inputs; excluded grids contribute nothing.
+$$
+r_P(\mathbf r)=r_{P,\max}\left[\frac{S(\mathbf r)-\tau}{1-\tau}\right]_+.
+$$
+
+Use $0\leq\tau<1$ and $r_{P,\max}=25\ \mathrm{Hz}$. If the total weight is zero, define $S=0$. Then $0\leq S\leq1$ and $0\leq r_P\leq25$ Hz. The associated binary activation is $\mathbf1[S>\tau]$. Both numerator and denominator of $S$ use the selected first $N$ inputs; excluded grids contribute nothing.
 
 This normalization deliberately removes pure multiplicative gain changes when $\zeta=0$. Increasing $\kappa$ changes the raw grid-rate panels but leaves this normalized readout unchanged. A model using the unnormalized sum $z$ would behave differently. The browser reports both kinds of quantities so that display normalization cannot be mistaken for a biological gain mechanism.
 

@@ -4,7 +4,12 @@ title: "Chapter 8 · LiDAR and Thirty-Six-Channel Spatial Encoding"
 
 ## 8.1 Learning objectives
 
-You will derive a time-of-flight range, compress rays into 36 ten-degree sectors, preserve unknown-data masks, and distinguish body-relative sensing from spatial-cell representations. The example follows the course's LiDAR sensing topic and provides a small input interface for later spatial models.
+By the end of this chapter, you should be able to:
+
+- Derive a range estimate from a LiDAR time-of-flight measurement.
+- Compress LiDAR rays into 36 sectors of 10 degrees each.
+- Preserve masks for unknown or invalid sensor measurements.
+- Distinguish robot-body-relative range sensing from spatial-cell representations. The example follows the course's LiDAR sensing topic and provides a small input interface for later spatial models.
 
 ## 8.2 Range and coordinate conventions
 

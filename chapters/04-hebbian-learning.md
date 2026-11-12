@@ -6,7 +6,12 @@ title: "Chapter 4 · Hebbian Learning"
 
 The previous chapters introduced signals, representations, and neuron dynamics. A network with fixed parameters can respond to input without learning. This chapter introduces rules that change connections according to activity, beginning with the organizing idea associated with Hebb [[1]](#hebb-ref-1).
 
-After this chapter, you should be able to write a local two-factor update, explain why unconstrained Hebbian growth is unstable, distinguish rate-based learning from spike-timing-dependent plasticity, and describe how a third factor can modulate a stored eligibility trace.
+By the end of this chapter, you should be able to:
+
+- Write a local two-factor Hebbian learning update.
+- Explain why unconstrained Hebbian weight growth can be unstable.
+- Distinguish rate-based Hebbian learning from spike-timing-dependent plasticity (STDP).
+- Explain how a third factor can modulate a stored eligibility trace.
 
 Hebb's proposal concerns strengthening a connection when presynaptic activity repeatedly contributes to postsynaptic activation. A simple correlation rule is one mathematical interpretation, not the complete original theory and not a universal rule for every synapse. Biological plasticity depends on cell type, signaling pathways, activity history, and experimental conditions [[2]](#hebb-ref-2).
 

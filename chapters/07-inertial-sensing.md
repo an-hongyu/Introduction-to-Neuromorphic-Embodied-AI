@@ -4,7 +4,12 @@ title: "Chapter 7 · Inertial Sensing and Vibration Encoding"
 
 ## 7.1 Learning objectives
 
-You will distinguish acceleration, angular velocity, and orientation; implement a causal vibration detector; calculate its window latency; and identify when gravity compensation is required. In the course project, a vibration cue provides the US. It must be detected from a sensor signal rather than substituted with a simulation's hidden stimulus flag.
+By the end of this chapter, you should be able to:
+
+- Distinguish acceleration, angular velocity, and orientation.
+- Implement a causal vibration detector.
+- Calculate the latency introduced by the detector's analysis window.
+- Identify when gravity compensation is required for inertial measurements. In the course project, a vibration cue provides the US. It must be detected from a sensor signal rather than substituted with a simulation's hidden stimulus flag.
 
 ## 7.2 What does an IMU measure?
 

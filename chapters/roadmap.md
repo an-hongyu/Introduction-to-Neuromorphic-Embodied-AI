@@ -48,7 +48,7 @@ See the [laboratory table](course-reading-map.md) for the complete sequence. The
 
 ## Writing and evidence conventions
 
-Use IEEE-style numbered references in order of first citation within each chapter. Put each reference in a separate paragraph; write full author names and full journal titles, retaining middle initials as published. Citation numbers link to reference entries, and entries link to DOI records, publisher pages, or authoritative online texts. Define variables and units at their first use and distinguish biological observations from chosen model assumptions.
+Define variables and units at their first use and distinguish biological observations from chosen model assumptions.
 
 The neuroscience foundation uses *Principles of Neural Science*, fifth edition, as a reference. Original teaching figures and examples are created for this book. A chapter should distinguish prior experimental evidence, established modeling precedents, pedagogical assumptions, and proposed research. Planned material is not evidence of a completed model or validated robot.
 

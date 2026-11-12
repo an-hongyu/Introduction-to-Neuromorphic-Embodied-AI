@@ -8,10 +8,10 @@ Ten numbered chapters, a detailed grid-to-place section, and eight computational
 
 ## Part I — Foundations: available
 
-1. [Neuroscience Background](01-neuroscience-background.md)
-2. [Spatial Cells](02-spatial-cells.md)
-3. [Computational Models of Neurons](03-computational-neuron-models.md): LIF, HH, reduced models, and model selection
-4. [Hebbian Learning](04-hebbian-learning.md): association, Oja, STDP, and eligibility traces
+1. [Neurons and Synapses](01-neuroscience-background.md)
+2. [Computational Models of Neurons](03-computational-neuron-models.md): LIF, HH, reduced models, and model selection
+3. [Hebbian Learning and Synaptic Plasticity](04-hebbian-learning.md): association, Oja, STDP, and eligibility traces
+4. [Spatial Cells](02-spatial-cells.md)
 
 ## Part II — Encoding and embodied learning: available
 

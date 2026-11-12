@@ -4,7 +4,12 @@ title: "Chapter 3 · Spatial Cells"
 
 ## 3.1 Learning objectives: from spikes to representations
 
-[Chapter 1](01-neuroscience-background.md) described how neurons signal. This chapter asks what a neuron's activity is related to while an animal moves. You will learn to distinguish place, grid, head-direction, and boundary-related responses; explain the roles of speed and temporal context; and interpret a firing-rate map without confusing correlation with a proven mechanism.
+[Chapter 1](01-neuroscience-background.md) described how neurons signal. This chapter asks what a neuron's activity is related to while an animal moves. By the end of this chapter, you should be able to:
+
+- Distinguish place-cell, grid-cell, head-direction-cell, and boundary-related firing patterns.
+- Explain how movement speed and temporal context relate to spatial neural activity.
+- Interpret a spatial firing-rate map.
+- Distinguish observed neural correlations from demonstrated causal mechanisms.
 
 The hippocampal formation and connected regions, including entorhinal cortex, are important for spatial and memory-related processing [[1]](#spatial-ref-1). We will use “spatial cells” as a teaching umbrella for experimentally characterized tuning patterns and their supporting signals. These labels do not imply that the brain contains independent, perfectly separated modules for every variable.
 

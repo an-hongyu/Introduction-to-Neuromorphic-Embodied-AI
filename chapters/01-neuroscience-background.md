@@ -343,6 +343,12 @@ Keep the following mappings explicit:
 
 This project's planned LiDAR example uses 36 angular sectors of $10^\circ$ each. Combining neighboring sectors could illustrate spatial input integration; accumulating evidence over successive samples could illustrate temporal integration. These are engineering representations. They do not establish that an animal uses 36 corresponding sensory neurons or implements the chosen equations. A robot example should state what is sensed, how it is encoded, what the neurons compute, and what actually changes during learning.
 
+## Additional Reading Materials
+
+The main biological reference is *Principles of Neural Science*, fifth edition [[1]](#neuro-ref-1). Use Chapter 2 for the functional organization of a neuron, Chapters 6–7 for membrane properties and action potentials, Chapters 8 and 10 for synapses and integration, Chapters 11–13 for receptors, release, and neurotransmitters, and Chapters 66–67 for plasticity and memory. The explanatory text, numerical examples, and figures identified as original were created for this book. Reproduced reference-book figures are credited separately in their captions. Parameter values in worked examples are stated assumptions, not measurements from a particular cell.
+
+For the computational treatment, use *Neuronal Dynamics* [[3]](#neuro-ref-3), Chapters 1–3 for single-neuron and synaptic models and Chapter 6 for spike trains and neuronal variability. See the [reference-book reading map](roadmap.md#reference-book-reading-map) for further selections across the textbook.
+
 ## 1.11 Exercises and checks for understanding
 
 1. Trace the input, integration, conduction, and output functions of a neuron. Explain why the soma is not a complete description of every neuron's computation.
@@ -375,10 +381,3 @@ This project's planned LiDAR example uses 36 angular sectors of $10^\circ$ each.
 (neuro-ref-3)=
 
 [3] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
-
-
-## Additional Reading Materials
-
-The main biological reference is *Principles of Neural Science*, fifth edition [[1]](#neuro-ref-1). Use Chapter 2 for the functional organization of a neuron, Chapters 6–7 for membrane properties and action potentials, Chapters 8 and 10 for synapses and integration, Chapters 11–13 for receptors, release, and neurotransmitters, and Chapters 66–67 for plasticity and memory. The explanatory text, numerical examples, and figures identified as original were created for this book. Reproduced reference-book figures are credited separately in their captions. Parameter values in worked examples are stated assumptions, not measurements from a particular cell.
-
-For the computational treatment, use *Neuronal Dynamics* [[3]](#neuro-ref-3), Chapters 1–3 for single-neuron and synaptic models and Chapter 6 for spike trains and neuronal variability. See the [reference-book reading map](roadmap.md#reference-book-reading-map) for further selections across the textbook.

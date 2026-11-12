@@ -14,8 +14,8 @@ assert (root / 'index.html').is_file(), 'Homepage was not generated'
 assert len(html_files) >= 22, f'Expected at least 22 book pages, found {len(html_files)}'
 all_html = '\n'.join(p.read_text() for p in html_files)
 for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
-             'Neuroscience Background', 'Spatial Cells', 'Computational Models of Neurons',
-             'Hebbian Learning', 'Place Cell', 'Neural Encoding', 'Visual Perception',
+             'Neurons and Synapses', 'Spatial Cells', 'Computational Models of Neurons',
+             'Hebbian Learning and Synaptic Plasticity', 'Place Cell', 'Neural Encoding', 'Visual Perception',
              'Inertial Sensing', 'LiDAR', 'Nengo', 'Associative Learning Robot',
              'Course-to-Book Reading Map', 'Curriculum and Development Roadmap', 'colab.research.google.com']:
     assert text in all_html, f'Missing published content: {text}'

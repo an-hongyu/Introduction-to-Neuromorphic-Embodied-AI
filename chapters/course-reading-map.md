@@ -46,4 +46,4 @@ Python figures and assertions test explicitly chosen teaching models on syntheti
 
 ## Additional Reading Materials
 
-Use the [reference-book reading map](roadmap.md#reference-book-reading-map) for biological and computational background. References in each chapter use linked IEEE-style entries. The explanations, code, and newly generated figures are original teaching material; source books and course slide PDFs are not redistributed.
+Use the [reference-book reading map](roadmap.md#reference-book-reading-map) for biological and computational background. The explanations, code, and newly generated figures are original teaching material; source books and course slide PDFs are not redistributed.

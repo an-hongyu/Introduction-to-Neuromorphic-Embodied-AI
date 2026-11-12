@@ -40,7 +40,7 @@ Use this contract for each sensor:
 | Neural mapping | $I=50+250z$ pA | Establishes gain, baseline, and saturation |
 | Output statistic | Events per 500 ms; first-event latency | Determines what the decoder can use |
 
-With the Chapter 3 parameters, $I=50+250z$ crosses the passive rheobase of 150 pA only when $z>0.4$. At $z=0.4$, voltage approaches threshold asymptotically; a finite window has no spike. At $z=1$, current is 300 pA and the analytical periodic rate is approximately 63.04 Hz. Check both first-event delay and long-run rate before selecting a motor-response threshold.
+With the Chapter 2 parameters, $I=50+250z$ crosses the passive rheobase of 150 pA only when $z>0.4$. At $z=0.4$, voltage approaches threshold asymptotically; a finite window has no spike. At $z=1$, current is 300 pA and the analytical periodic rate is approximately 63.04 Hz. Check both first-event delay and long-run rate before selecting a motor-response threshold.
 
 ## 5.4 ANN and SNN: a useful bridge
 
@@ -72,8 +72,8 @@ Keep the preprocessing fixed when comparing learning rules. Otherwise an apparen
 
 (encoding-ref-1)=
 
-[1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1, 5, and 7. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+[1] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1, 5, and 7. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
 
 ## Additional Reading Materials
 
-Read the rate and spike descriptions in [[1]](#encoding-ref-1), then compare [Chapter 2](02-spatial-cells.md)'s imposed spatial tuning with [Chapter 3](03-computational-neuron-models.md)'s dynamical membrane model. Use the [course reading map](course-reading-map.md) to connect the ANN lectures to these explicit modeling choices.
+Read the rate and spike descriptions in [[1]](#encoding-ref-1), then compare [Chapter 3](02-spatial-cells.md)'s imposed spatial tuning with [Chapter 2](03-computational-neuron-models.md)'s dynamical membrane model. Use the [course reading map](course-reading-map.md) to connect the ANN lectures to these explicit modeling choices.

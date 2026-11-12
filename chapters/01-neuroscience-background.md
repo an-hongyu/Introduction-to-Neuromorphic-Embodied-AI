@@ -1,5 +1,5 @@
 ---
-title: "Chapter 1 · Neuroscience Background"
+title: "Chapter 1 · Neurons and Synapses"
 ---
 
 ## 1.1 Learning Objectives

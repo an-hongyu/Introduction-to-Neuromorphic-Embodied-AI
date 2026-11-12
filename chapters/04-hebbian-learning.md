@@ -1,10 +1,10 @@
 ---
-title: "Chapter 4 · Hebbian Learning"
+title: "Chapter 3 · Hebbian Learning and Synaptic Plasticity"
 ---
 
-## 4.1 Learning objectives: changing connections through experience
+## 3.1 Learning objectives: changing connections through experience
 
-The previous chapters introduced signals, representations, and neuron dynamics. A network with fixed parameters can respond to input without learning. This chapter introduces rules that change connections according to activity, beginning with the organizing idea associated with Hebb [[1]](#hebb-ref-1).
+The previous chapters introduced biological signaling and computational neuron dynamics. A network with fixed parameters can respond to input without learning. This chapter introduces rules that change connections according to activity, beginning with the organizing idea associated with Hebb [[1]](#hebb-ref-1).
 
 By the end of this chapter, you should be able to:
 
@@ -15,7 +15,7 @@ By the end of this chapter, you should be able to:
 
 Hebb's proposal concerns strengthening a connection when presynaptic activity repeatedly contributes to postsynaptic activation. A simple correlation rule is one mathematical interpretation, not the complete original theory and not a universal rule for every synapse. Biological plasticity depends on cell type, signaling pathways, activity history, and experimental conditions [[2]](#hebb-ref-2).
 
-## 4.2 A two-factor Hebbian rule
+## 3.2 A two-factor Hebbian rule
 
 Let $x_i$ be presynaptic activity, $y_j$ postsynaptic activity, and $w_{ji}$ the weight **from input $i$ to output $j$**. For dimensionless activities sampled once per learning step, a simple rule is
 
@@ -37,13 +37,13 @@ $$
 
 If there are three inputs and two outputs, $\mathbf W$ has shape $2\times3$. Reversing this convention silently changes the interpretation of a connection matrix.
 
-## 4.3 Biological potentiation and a computational learning rule
+## 3.3 Biological potentiation and a computational learning rule
 
 Long-term potentiation (LTP) describes a persistent increase in synaptic efficacy under specified experimental protocols; long-term depression (LTD) describes a persistent decrease. A classic study demonstrated lasting potentiation in the rabbit dentate area following stimulation of the perforant path [[3]](#hebb-ref-3). These observations motivate plasticity models, but “LTP,” “Hebbian learning,” and “memory” are not interchangeable terms.
 
 For example, a positive numerical weight update is not by itself an LTP experiment. It specifies no transmitter, receptor, induction protocol, or persistence mechanism. Conversely, synaptic changes can involve mechanisms that a scalar weight does not distinguish. Our goal is to make a useful model with an explicit scope and connect it to relevant evidence, not assign every line of code a unique biological mechanism.
 
-## 4.4 Correlation, covariance, and uncontrolled growth
+## 3.4 Correlation, covariance, and uncontrolled growth
 
 With nonnegative $x_i$ and $y_j$, the basic rule only increases active weights. If $y_j$ is itself driven by those weights, positive feedback can make them grow without bound. Setting a smaller learning rate slows growth but does not provide a general stability guarantee.
 
@@ -57,7 +57,7 @@ This distinguishes above- and below-average activity in the model. It can produc
 
 Several constraints are possible: bounded weights, decay, normalization, competition, and homeostatic regulation. Each changes the learning dynamics. A model should name the constraint and test its effect rather than add it invisibly when weights become numerically inconvenient [[2]](#hebb-ref-2).
 
-## 4.5 Oja's rule: learning with a stabilizing term
+## 3.5 Oja's rule: learning with a stabilizing term
 
 For a single linear output $y=\mathbf w^\top\mathbf x$, Oja's rule adds activity-dependent normalization [[4]](#hebb-ref-4):
 
@@ -69,7 +69,7 @@ The first term is Hebbian; the second opposes growth along the current weight ve
 
 **Worked example.** Let $\mathbf x=(1,0)$ and $\mathbf w=(0.6,0.8)$. Then $y=0.6$. At $\eta=0.1$, $\Delta\mathbf w=(0.0384,-0.0288)$. The new weight vector is $(0.6384,0.7712)$. Its norm remains near one for this small step, but discrete updates do not enforce exact normalization at every iteration.
 
-## 4.6 Spike-timing-dependent plasticity
+## 3.6 Spike-timing-dependent plasticity
 
 Rate rules average activity over windows. **Spike-timing-dependent plasticity (STDP)** makes the update depend on relative spike timing. Bi and Poo demonstrated timing-dependent potentiation and depression in cultured hippocampal neurons, with effects also depending on initial synaptic strength and postsynaptic cell type [[5]](#hebb-ref-5).
 
@@ -94,7 +94,7 @@ Here $A_+$ and $A_-$ set update magnitudes; $\tau_+$ and $\tau_-$ set time scale
 
 For $A_+=0.01$ and $\tau_+=20$ ms, that pair produces $\Delta w\approx0.00607$. A postsynaptic spike occurring first gives a negative timing difference and uses the depression branch. A complete implementation must also state how pairs are selected, how repeated spikes are handled, and how weights are bounded. This exponential window is a phenomenological approximation, not a fit to every synapse.
 
-## 4.7 Eligibility traces and a third factor
+## 3.7 Eligibility traces and a third factor
 
 A reward may arrive after the neural events that should receive credit. A **three-factor** learning rule can retain a local eligibility state and modulate its effect with another signal [[6]](#hebb-ref-6):
 
@@ -108,7 +108,7 @@ $e_{ji}$ is an eligibility trace; $\tau_e$ is its decay time constant; $f$ forms
 
 If a trace is set to 1 and receives no further input, it decays to $e^{-\Delta/\tau_e}$ after delay $\Delta$. With $\tau_e=0.5$ s, a reward arriving 0.5 s later encounters a trace of approximately 0.368. A much later reward has less effect under this chosen decay law. This is a mechanism for retaining candidate credit, not a guarantee of correct causal attribution.
 
-## 4.8 Worked example: association, partial cues, and interference
+## 3.8 Worked example: association, partial cues, and interference
 
 Consider three input features and two output labels. During an explicitly supplied pairing phase, present
 
@@ -152,7 +152,7 @@ The output patterns are supplied during pairing. This is a controlled associativ
 A bounded-duration teaching experiment: paired-pattern outer-product learning, partial-cue recall, and a separately illustrated STDP rule. The STDP window does not train the matrix shown in the first panel.
 ```
 
-### 4.8.1 Course case — a visual cue acquires a motor response
+### 3.8.1 Course case — a visual cue acquires a motor response
 
 Use a red visual cue as the conditioned stimulus (CS) and vibration as the unconditioned stimulus (US). Before training, US alone drives the output; CS alone does not. Pair them, freeze learning, then probe CS alone. This course variant is motivated by associative robotic learning [[7]](#hebb-ref-7). The published system uses different visual processing, network details, and hardware; our small example is not its reproduction.
 
@@ -186,7 +186,7 @@ Original synthetic results. Both unpaired and frozen-learning controls retain th
 
 [Laboratory 5](../notebooks/conditioning.ipynb) contains the complete training function, physical-unit LIF readout, and controls. Change learning rate, trial count, or initial weight. A larger initial weight can make CS effective before pairing and change the unpaired control; state these conditions when interpreting results. [Chapter 10](10-associative-learning-robot.md) turns this example into a staged robot experiment with separate sensing, learning, and behavioral evaluation.
 
-## 4.9 Connecting spatial representations to behavior
+## 3.9 Connecting spatial representations to behavior
 
 A place-like population might provide context, an action population might describe a candidate movement, and a reward-related signal might modulate a local trace. This is a useful way to formulate a testable robot learning architecture. It still requires explicit action selection, weight constraints, exploration, and evaluation.
 
@@ -194,7 +194,7 @@ For example, test whether a robot can recall an association from a partial cue, 
 
 Later SFN material will build on these ideas as a proposed research framework. Its rules, capacity, and consolidation behavior should be identified as hypotheses until evaluated; they should not be presented as consequences of Hebb's original proposal.
 
-## 4.10 Exercises
+## 3.10 Exercises
 
 1. Starting at $w=0.4$, compute ten updates with $x=y=1$ and $\eta=0.02$. Why does this rule need a growth constraint?
 2. Derive the shape of $\mathbf y\mathbf x^\top$ for 36 inputs and 10 outputs.

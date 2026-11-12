@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+<title id="title">Communication from a presynaptic neuron to a postsynaptic neuron</title>
+<desc id="desc">Two neurons connected at a chemical synapse. The presynaptic neuron at left has teal dendrites, a soma and axon leading to a terminal; the postsynaptic neuron at right has lavender dendrites and soma. An enlarged inset shows vesicles, transmitter molecules, a synaptic cleft and receptors. Diagram is schematic and not to scale.</desc>
+<defs>
+<linearGradient id="pre" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#70BCAF"/><stop offset="1" stop-color="#277F79"/></linearGradient>
+<linearGradient id="post" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#C2A4D0"/><stop offset="1" stop-color="#8661A8"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FAFCFB"/><stop offset="1" stop-color="#EFF6F3"/></linearGradient>
+<marker id="signal-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 9 5 0 10" fill="none" stroke="#357E75" stroke-width="2"/></marker>
+</defs>
+<rect x="1" y="1" width="1198" height="638" rx="20" fill="#FFFFFF" stroke="#E0E8E7" stroke-width="2"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<text x="55" y="49" font-size="28" font-weight="700" fill="#233B40">Chemical synaptic communication</text>
+<text x="55" y="78" font-size="17" fill="#617678">A signal travels along one axon and influences a second neuron through a specialized contact.</text>
+<rect x="70" y="105" width="295" height="47" rx="23" fill="#E3F3EF"/>
+<text x="218" y="136" text-anchor="middle" font-size="21" font-weight="700" fill="#246F69">Presynaptic neuron</text>
+<rect x="835" y="105" width="295" height="47" rx="23" fill="#F0E8F6"/>
+<text x="983" y="136" text-anchor="middle" font-size="21" font-weight="700" fill="#6E4B91">Postsynaptic neuron</text>
+<!-- Presynaptic dendritic arbor -->
+<g fill="none" stroke="#3B9D92" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+<path d="M278 300 209 250 167 205 113 196 M167 205 148 152 M209 250 149 271 103 258 M149 271 120 303"/>
+<path d="M260 311 188 351 151 405 107 419 M151 405 166 460 M188 351 130 351 89 370"/>
+<path d="M285 283 274 230 299 190 293 158 M274 230 241 203 226 169"/>
+</g>
+<ellipse cx="293" cy="307" rx="69" ry="58" fill="url(#pre)" stroke="#227C73" stroke-width="3"/>
+<circle cx="295" cy="307" r="25" fill="#C1EEE3" stroke="#448F87" stroke-width="3"/>
+<circle cx="299" cy="306" r="12" fill="#6AABA0"/>
+<!-- Axon and terminal -->
+<path d="M356 305 C435 286 475 295 532 304 C575 311 606 324 635 322" stroke="#348C83" stroke-width="12" fill="none" stroke-linecap="round"/>
+<g fill="#B1DAD0" stroke="#4D9A8F" stroke-width="2">
+<rect x="397" y="284" width="48" height="31" rx="13" transform="rotate(-5 421 299)"/>
+<rect x="462" y="282" width="48" height="33" rx="13"/>
+<rect x="529" y="292" width="49" height="32" rx="13" transform="rotate(7 552 308)"/>
+</g>
+<path d="M628 321 Q657 290 683 285 M628 321 Q660 316 690 317 M628 321 Q656 350 681 365" stroke="#348C83" stroke-width="7" fill="none" stroke-linecap="round"/>
+<g fill="#D88393" stroke="#BD6378" stroke-width="2"><circle cx="688" cy="283" r="13"/><circle cx="694" cy="317" r="13"/><circle cx="685" cy="366" r="13"/></g>
+<!-- Postsynaptic soma and dendrite -->
+<g fill="none" stroke="#9C7DB7" stroke-width="9" stroke-linecap="round">
+<path d="M942 311 863 274 825 242 774 239 M825 242 808 207 M863 274 807 284 764 299"/>
+<path d="M934 323 869 365 817 396 784 441 M817 396 821 450 M869 365 839 339 799 337"/>
+<path d="M948 288 961 225 991 190 993 157 M961 225 934 196 924 169"/>
+</g>
+<ellipse cx="951" cy="306" rx="68" ry="57" fill="url(#post)" stroke="#82639D" stroke-width="3"/>
+<circle cx="953" cy="307" r="24" fill="#E7D9EF" stroke="#9475AD" stroke-width="3"/><circle cx="953" cy="305" r="11" fill="#AA8CC3"/>
+<path d="M1015 307 C1065 313 1087 320 1135 294" stroke="#9672AF" stroke-width="11" fill="none" stroke-linecap="round"/>
+<!-- synaptic connection marker -->
+<ellipse cx="721" cy="316" rx="35" ry="61" fill="#F6E7EB" fill-opacity=".7" stroke="#C5768A" stroke-width="2" stroke-dasharray="5 5"/>
+<text x="719" y="222" text-anchor="middle" fill="#A84F6A" font-size="22" font-weight="700">Synapse</text>
+<path d="M719 380V418" stroke="#A86A84" stroke-width="3" stroke-dasharray="5 5"/>
+<!-- Molecular inset -->
+<rect x="110" y="433" width="980" height="158" rx="15" fill="url(#panel)" stroke="#C8DCDA" stroke-width="2"/>
+<text x="135" y="463" font-size="20" fill="#25474B" font-weight="700">Enlarged chemical synapse</text>
+<rect x="385" y="477" width="182" height="33" rx="13" fill="#D8EEE7" stroke="#469184" stroke-width="2"/>
+<rect x="385" y="549" width="182" height="20" rx="9" fill="#E7DCEF" stroke="#997DB1" stroke-width="2"/>
+<g fill="#D1768A" stroke="#B45C75" stroke-width="1.5"><circle cx="416" cy="492" r="8"/><circle cx="454" cy="492" r="8"/><circle cx="490" cy="492" r="8"/><circle cx="526" cy="492" r="8"/></g>
+<g fill="#D1768A"><circle cx="430" cy="521" r="4"/><circle cx="459" cy="529" r="4"/><circle cx="481" cy="519" r="4"/><circle cx="512" cy="533" r="4"/></g>
+<g stroke="#8661A8" stroke-width="5" stroke-linecap="round"><path d="M429 547v25M460 547v25M491 547v25M520 547v25"/></g>
+<text x="135" y="507" font-size="17" fill="#315D58">Vesicles release</text><text x="135" y="529" font-size="17" fill="#315D58">neurotransmitter</text>
+<path d="M305 516H376" stroke="#357E75" stroke-width="2.5" marker-end="url(#signal-arrow)"/>
+<text x="605" y="499" font-size="17" fill="#5D5368">Presynaptic terminal</text>
+<text x="605" y="528" font-size="17" fill="#5D5368">Synaptic cleft</text>
+<text x="605" y="558" font-size="17" fill="#5D5368">Postsynaptic receptors</text>
+<path d="M586 489H574 M586 521H544 M586 554H535" fill="none" stroke="#A4B8B6" stroke-width="2"/>
+<text x="842" y="494" font-size="16" fill="#556A6F">Electrical activity</text>
+<text x="842" y="518" font-size="16" fill="#556A6F">→ chemical signal</text>
+<text x="842" y="542" font-size="16" fill="#556A6F">→ receptor response</text>
+<text x="842" y="566" font-size="15" fill="#718488">Schematic; not to scale</text>
+</g></svg>

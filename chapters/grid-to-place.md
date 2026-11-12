@@ -12,7 +12,7 @@ By the end of this section, you should be able to:
 - Distinguish lattice spacing from spatial frequency.
 - Predict how grid orientation and phase affect a firing pattern.
 - Construct an explicit grid-to-place readout.
-- Explain why summing periodic inputs does not automatically yield a single learned place field. Read [Chapter 3](02-spatial-cells.md) first; this section supplies its mathematical and interactive companion.
+- Explain why summing periodic inputs does not automatically yield a single learned place field. Read [Chapter 4](02-spatial-cells.md) first; this section supplies its mathematical and interactive companion.
 
 ## 1. Read the source models before choosing parameters
 
@@ -158,7 +158,7 @@ Compare current maps, rather than relying on the attractiveness of a hexagonal i
 
 ## 7. From a fixed readout to learned mapping
 
-This experiment evaluates a fixed feedforward function of supplied position. A learned mapping additionally needs an input trajectory, an output/competition mechanism, an explicit update rule, and held-out evaluation. A dimensionless discrete Oja example is $\Delta w_j=\eta y(x_j-yw_j)$; [Chapter 4](04-hebbian-learning.md) explains its stabilization and its difference from STDP. Choosing a rule does not demonstrate that a stable place field will emerge.
+This experiment evaluates a fixed feedforward function of supplied position. A learned mapping additionally needs an input trajectory, an output/competition mechanism, an explicit update rule, and held-out evaluation. A dimensionless discrete Oja example is $\Delta w_j=\eta y(x_j-yw_j)$; [Chapter 3](04-hebbian-learning.md) explains its stabilization and its difference from STDP. Choosing a rule does not demonstrate that a stable place field will emerge.
 
 Evaluate stability across independent exploration trajectories, remote responses, field position/width, cue changes, and frozen-weight recall. Avoid selecting a desired center and then presenting that imposed center as unsupervised discovery. Similarly, grid-to-place mapping is not synonymous with CA3-to-CA1 mapping: canonical grid activity is associated with entorhinal circuits, while multiple hippocampal regions can contain place-related responses. Biological spatial representations involve interacting pathways and sensory signals [[3]](#grid-ref-3).
 

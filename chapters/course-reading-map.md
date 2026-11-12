@@ -25,7 +25,7 @@ This map connects the supplied course lectures and final project to the textbook
 
 The book preserves its first four foundation chapters. Sensory and implementation material follows them rather than inserting an unexplained coding laboratory ahead of neuron models. Spatial-cell research remains central: sensory measurements are explicitly distinguished from place/grid/border representations.
 
-## Seven executable laboratories
+## Eight executable laboratories
 
 | Laboratory | Notebook | Main experiment |
 |---|---|---|
@@ -36,8 +36,9 @@ The book preserves its first four foundation chapters. Sensory and implementatio
 | 5 | [Conditioning](../notebooks/conditioning.ipynb) | Paired/unpaired/frozen schedules and separate LIF recall |
 | 6 | [Sensory encoding](../notebooks/sensory_encoding.ipynb) | Synthetic vision, causal vibration, and LiDAR masks |
 | 7 | [One neuron in Nengo](../notebooks/nengo_single_neuron.ipynb) | Normalized-current API example and analytical firing-rate check |
+| 8 | [Grid Cells to Place-Like Fields](../notebooks/grid_to_place.ipynb) | Cosine grid geometry, explicit weighted readout, and periodic-alias controls |
 
-Notebooks are self-contained and link to Colab; download them for local editing. Laboratory 7 additionally requires Nengo. Repository dependencies are pinned where needed for compatibility. Automated builds execute all seven laboratories before publishing.
+Notebooks are self-contained and link to Colab; download them for local editing. Laboratory 7 additionally requires Nengo. Repository dependencies are pinned where needed for compatibility. Automated builds execute all eight laboratories before publishing.
 
 ## What has and has not been demonstrated
 

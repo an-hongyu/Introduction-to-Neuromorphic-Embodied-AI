@@ -12,6 +12,7 @@ project:
   github: https://github.com/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI
   static_files:
   - assets/lif-interactive.html
+  - assets/grid-place-interactive.html
   toc:
   - file: index.md
   - title: Foundations
@@ -20,6 +21,9 @@ project:
     - file: chapters/02-spatial-cells.md
     - file: chapters/03-computational-neuron-models.md
     - file: chapters/04-hebbian-learning.md
+  - title: Spatial Cell Models
+    children:
+    - file: chapters/grid-to-place.md
   - title: Encoding, Sensing, and Embodied Learning
     children:
     - file: chapters/05-neural-encoding.md
@@ -39,6 +43,7 @@ project:
     - file: notebooks/conditioning.ipynb
     - file: notebooks/sensory_encoding.ipynb
     - file: notebooks/nengo_single_neuron.ipynb
+    - file: notebooks/grid_to_place.ipynb
   - title: Context and Roadmap
     children:
     - file: chapters/course-reading-map.md

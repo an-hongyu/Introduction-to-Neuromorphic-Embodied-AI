@@ -20,7 +20,7 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 
 References use IEEE-style numbered citations and hyperlinks. Original figures, defined units, worked examples, and exercises accompany the chapters. Existing introductory and Place Cell material remains available under supplementary reading and computational laboratories.
 
-The computational laboratories begin with a **Computational Models of Neurons** guide and follow this sequence: Laboratory 1, LIF neuron (`lif_neuron.ipynb`); Laboratory 2, Place Cells (`place_cells.ipynb`); Laboratory 3, Hebbian learning (`hebbian_learning.ipynb`); Laboratory 4, Hodgkin–Huxley; Laboratory 5, Conditioning; Laboratory 6, Sensory Encoding; Laboratory 7, One Neuron in Nengo. See `chapters/course-reading-map.md`.
+The computational laboratories begin with a **Computational Models of Neurons** guide and follow this sequence: Laboratory 1, LIF neuron (`lif_neuron.ipynb`); Laboratory 2, Place Cells (`place_cells.ipynb`); Laboratory 3, Hebbian learning (`hebbian_learning.ipynb`); Laboratory 4, Hodgkin–Huxley; Laboratory 5, Conditioning; Laboratory 6, Sensory Encoding; Laboratory 7, One Neuron in Nengo; Laboratory 8, Grid Cells to Place-Like Fields. See `chapters/course-reading-map.md`.
 
 ## Run the notebook
 
@@ -54,7 +54,7 @@ BASE_URL=/Introduction-to-Neuromorphic-Embodied-AI jupyter book build --html --s
 python tests/check_build.py
 ```
 
-The `.github/workflows/deploy.yml` workflow executes all seven notebooks, builds Jupyter Book,
+The `.github/workflows/deploy.yml` workflow executes all eight notebooks, builds Jupyter Book,
 checks generated pages and local links, and deploys to GitHub Pages on `main`.
 Repository Settings → Pages must use **GitHub Actions** as the source.
 Pull requests run the build and checks without deploying.
@@ -89,3 +89,7 @@ This regenerates the original neuron/synapse schematic, synthetic spatial tuning
 Run `python tools/build_course_assets.py` to regenerate the four course notebooks and eight original figures. The generator checks HH rest/gates/ablation/time-step refinement, association controls, sensory masks, and the Nengo analytical firing rate. It supplements existing generators. Python 3.12 with Nengo 4.0.0 and NumPy 1.26.4 is the tested publishing environment.
 
 The ROS 2 Jazzy / Gazebo Harmonic integration chapter is a guide. A complete Gazebo world, controller package, physical robot, or neuromorphic hardware experiment is not supplied or validated by these notebooks.
+
+## Interactive grid-to-place laboratory
+
+`chapters/grid-to-place.md` specifies Liu et al.'s source conventions, lattice spacing/frequency conversion, cosine fields, and a fixed normalized weighted readout. `assets/grid-place-interactive.html` runs the experiment without external dependencies. Laboratory 8 reproduces it in Python. Generate its notebook/reference fixtures with `python tools/build_grid_place_examples.py`; `node tests/test_grid_place_interactive.cjs` compares the embedded JavaScript to NumPy and checks grid geometry and alias controls. This teaching readout does not claim learned place-field formation.

@@ -14,3 +14,9 @@
 @media (max-width: 480px) {
   .lif-playground > div { height: 2150px; }
 }
+
+/* Grid/place experiment: MyST applies the class to its aspect-ratio wrapper. */
+.grid-place-playground > div {width:100% !important;padding-bottom:0 !important;height:3100px}
+.grid-place-playground iframe {width:100% !important;height:100% !important;border:1px solid #d9e4eb !important;border-radius:9px;background:white}
+@media(max-width:767px){.grid-place-playground > div{height:3500px}}
+@media(max-width:400px){.grid-place-playground > div{height:3900px}}

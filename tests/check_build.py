@@ -5,6 +5,7 @@ from urllib.parse import unquote, urlsplit
 import subprocess
 
 subprocess.run(['node', str(Path(__file__).with_name('test_lif_interactive.cjs'))], check=True)
+subprocess.run(['node', str(Path(__file__).with_name('test_grid_place_interactive.cjs'))], check=True)
 
 root = Path(__file__).resolve().parents[1] / '_build/html'
 base = '/Introduction-to-Neuromorphic-Embodied-AI'
@@ -19,10 +20,13 @@ for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
              'Course-to-Book Reading Map', 'Curriculum and Development Roadmap', 'colab.research.google.com']:
     assert text in all_html, f'Missing published content: {text}'
 assert 'katex' in all_html or 'MathJax' in all_html or '<math' in all_html, 'No rendered mathematics'
-assert len(list(root.rglob('*.ipynb'))) >= 7, 'Expected seven downloadable laboratories'
+assert len(list(root.rglob('*.ipynb'))) >= 8, 'Expected eight downloadable laboratories'
 assert len(list(root.rglob('*.png'))) >= 17, 'Expected at least seventeen notebook figure outputs'
 assert (root / 'lif-interactive.html').is_file(), 'Missing embedded LIF application'
 assert 'Interactive LIF neuron explorer' in all_html, 'Missing LIF iframe in chapter'
+assert (root / 'grid-place-interactive.html').is_file(), 'Missing grid/place interactive asset'
+assert 'Interactive grid cell to place cell mapping' in all_html, 'Missing grid/place chapter iframe'
+assert 'Grid Cells and Grid-to-Place Mapping' in all_html, 'Missing detailed grid/place chapter'
 
 class Links(HTMLParser):
     def __init__(self):

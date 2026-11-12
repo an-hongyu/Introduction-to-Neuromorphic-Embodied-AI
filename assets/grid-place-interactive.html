@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grid cells to place-like fields · Interactive textbook laboratory</title>
+<style>
+:root{color-scheme:light;--ink:#203746;--blue:#24628a;--muted:#5b6d7b;--line:#d9e4eb;--pale:#f2f7fa}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:white;font:14px/1.5 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:22px}h1{font-size:27px;line-height:1.2;margin:4px 0 12px}h2{font-size:18px;margin:0 0 9px}h3{font-size:14px;margin:0 0 5px}p{margin:0 0 12px}.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:750}.muted,.hint{color:var(--muted);font-size:12px}.presets,.cell-select{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}button{border:1px solid #b7ccd9;color:var(--blue);background:white;padding:8px 11px;border-radius:6px;font:inherit;font-size:12px;cursor:pointer}button:hover,button[aria-pressed=true]{background:#e1eff6}button:focus-visible,input:focus-visible{outline:3px solid #dd9a50;outline-offset:2px}button:disabled{opacity:.4;cursor:default}.controls{padding:16px;background:var(--pale);border:1px solid var(--line);border-radius:10px;margin-bottom:16px}.control-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px 23px}.control label{display:flex;justify-content:space-between;gap:5px;font-size:12px;font-weight:650}output{color:var(--blue);white-space:nowrap;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:var(--blue);margin:7px 0 0}hr{border:0;border-top:1px solid var(--line);margin:14px 0}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:13px 0}.metric{background:var(--pale);padding:10px;border-bottom:3px solid #bad2de}.metric span{font-size:11px;display:block;color:var(--muted)}.metric strong{font-size:21px;color:var(--blue)}.status{padding:10px 12px;border-left:3px solid var(--blue);background:#edf4f7;font-size:12px;margin-bottom:15px}.input-maps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.readouts{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:17px}.panel{padding:12px;border:1px solid var(--line);border-radius:9px;min-width:0}.panel.selected{border:2px solid var(--blue);padding:11px}.plot{position:relative;max-width:360px;margin:auto}.plot canvas{display:block;width:100%;aspect-ratio:1;cursor:crosshair;border:1px solid #d4dfe6}.x-axis{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.axis-caption{text-align:center;font-size:10px;color:var(--muted)}.scale{height:7px;background:linear-gradient(90deg,#f4f8fb,#b5d9e5,#5ca7b9,#246d88,#15374d);margin:6px 0 2px}.scale-label{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.equation{font-family:Georgia,serif;background:#f7f9fb;border:1px solid var(--line);padding:12px;margin:10px 0;overflow-x:auto;white-space:nowrap}.bar-row{display:grid;grid-template-columns:34px 1fr 115px;align-items:center;gap:8px;margin:6px 0;font-size:11px}.track{background:#edf3f6;height:12px}.bar{height:12px;background:#24628a}.notes{font-size:12px;color:var(--muted);line-height:1.65}.notes a{color:var(--blue)}.readout-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px}.lower{margin-top:18px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:680px){main{padding:14px}.control-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.input-maps{grid-template-columns:repeat(2,minmax(0,1fr))}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.readouts{gap:10px}.panel{padding:8px}.panel.selected{padding:7px}.readouts h3{font-size:12px}}
+@media(max-width:400px){.readouts{grid-template-columns:1fr}.control-grid{gap:12px}.control label{display:block;min-height:36px}.control output{display:block}.input-maps{gap:8px}}
+</style></head><body><main>
+<div class="eyebrow">Spatial cell models · browser experiment</div><h1>Grid cells → place-like fields</h1>
+<p class="muted">Change spacing, orientation, phase, gain, and offset; then inspect how multiple periodic inputs combine. This explicit feedforward teaching model follows Liu and colleagues' grid/interference and threshold-sum framework. It does not train synapses or simulate spikes.</p>
+<div class="presets" aria-label="Experiments"><button id="diverse">Diverse grids</button><button id="identical">Identical grids: repeated fields</button><button id="single">One grid only</button><button id="double">Double spacing, up to 1.8 m</button></div>
+<section class="controls" aria-label="Grid cell parameters"><h2>1 · Select an input grid</h2><div class="cell-select" id="cell-select"></div><p class="hint">Each grid has its own parameters and weight. The blue border identifies the selected grid. Angles describe a nearest-neighbor lattice axis; 0° and 60° give the same ideal lattice.</p>
+<div class="control-grid" id="grid-controls">
+<div class="control"><label for="spacing">Spacing λ <output id="spacing-value"></output></label><input id="spacing" aria-label="Selected grid spacing (m)" type="range" min=".2" max="1.8" step=".01" value=".38"></div>
+<div class="control"><label for="orientation">Orientation θ <output id="orientation-value"></output></label><input id="orientation" aria-label="Selected grid orientation (degrees)" type="range" min="0" max="60" step="1" value="0"></div>
+<div class="control"><label for="phaseX">Phase shift pₓ <output id="phaseX-value"></output></label><input id="phaseX" aria-label="Selected grid x phase shift (m)" type="range" min="-1" max="1" step=".02" value=".12"></div>
+<div class="control"><label for="phaseY">Phase shift pᵧ <output id="phaseY-value"></output></label><input id="phaseY" aria-label="Selected grid y phase shift (m)" type="range" min="-1" max="1" step=".02" value="-.08"></div>
+<div class="control"><label for="kappa">Gain κ <output id="kappa-value"></output></label><input id="kappa" aria-label="Selected grid gain kappa" type="range" min="0" max="1" step=".05" value=".5"></div>
+<div class="control"><label for="zeta">Offset ζ <output id="zeta-value"></output></label><input id="zeta" aria-label="Selected grid additive offset zeta" type="range" min="-1" max="1" step=".05" value="0"></div>
+<div class="control"><label for="weight">Readout weight w <output id="weight-value"></output></label><input id="weight" aria-label="Selected grid readout weight" type="range" min="0" max="2" step=".05" value="1"></div>
+</div><p class="hint" id="frequency"></p></section>
+<div class="input-maps" id="input-maps"></div><p class="hint">All six input maps use the same fixed 0–80 Hz color scale. Inputs outside the chosen population are shown but excluded from the readout. Click a map to move the probe; the x/y sliders below provide a keyboard alternative. Coordinates cover −1 to +1 m in both axes, with +y upward.</p>
+<section class="controls lower" aria-label="Grid to place mapping parameters"><h2>2 · Combine the inputs</h2><div class="readout-controls">
+<div class="control"><label for="count">Number of input grids N <output id="count-value"></output></label><input id="count" aria-label="Number of input grids" type="range" min="1" max="6" step="1" value="6"></div>
+<div class="control"><label for="threshold">Readout threshold τ <output id="threshold-value"></output></label><input id="threshold" aria-label="Place readout threshold" type="range" min="0" max=".98" step=".01" value=".78"></div>
+<div class="control"><label for="probeX">Probe x <output id="probeX-value"></output></label><input id="probeX" aria-label="Probe x position (m)" type="range" min="-1" max="1" step=".02" value=".12"></div>
+<div class="control"><label for="probeY">Probe y <output id="probeY-value"></output></label><input id="probeY" aria-label="Probe y position (m)" type="range" min="-1" max="1" step=".02" value="-.08"></div>
+</div><div class="equation">gⱼ(r) = 20 Hz · max[0, κⱼ Σₘ₌₀² cos(kⱼ eⱼₘ · (r − pⱼ)) + ζⱼ], &nbsp; kⱼ = 4π/(√3 λⱼ)</div>
+<div class="equation">hⱼ = gⱼ/gⱼ,max; &nbsp; S = Σ wⱼ hⱼ / Σ wⱼ; &nbsp; rₚ = 25 Hz · max[0, (S − τ)/(1 − τ)]</div>
+<p class="hint">Wave-vector axes eⱼₘ are θⱼ + 30° + m·60°. The extra 30° makes θ name a lattice axis. gⱼ,max = 20 Hz · max(0,3κⱼ + ζⱼ); hⱼ = 0 if this maximum is zero. Zero total weight gives S = 0. The normalization intentionally removes pure gain changes when ζ = 0; the raw grid-rate panels still show them.</p></section>
+<div class="metrics" aria-live="polite"><div class="metric"><span>Probe pooled drive S</span><strong id="drive-metric"></strong></div><div class="metric"><span>Probe place-like rate</span><strong id="rate-metric"></strong></div><div class="metric"><span>Half-peak patches (sampled)</span><strong id="patch-metric"></strong></div><div class="metric"><span>Peak place-like rate (sampled)</span><strong id="peak-metric"></strong></div></div><div class="status" id="status"></div>
+<div class="readouts"><section class="panel"><h3>Weighted normalized drive S</h3><div class="plot"><canvas id="drive-map" width="121" height="121" aria-label="Weighted grid population drive heatmap"></canvas><div class="x-axis"><span>−1</span><span>x (m)</span><span>+1</span></div></div><div class="scale"></div><div class="scale-label"><span>0</span><span>1</span></div></section><section class="panel"><h3>Thresholded place-like rate</h3><div class="plot"><canvas id="place-map" width="121" height="121" aria-label="Thresholded place-like firing rate heatmap"></canvas><div class="x-axis"><span>−1</span><span>x (m)</span><span>+1</span></div></div><div class="scale"></div><div class="scale-label"><span>0 Hz</span><span>25 Hz</span></div></section></div>
+<section class="panel lower"><h2>3 · Inspect the probe inputs</h2><div id="contributions"></div><p class="hint">Bars show wⱼhⱼ / Σwⱼ; labels also report the raw grid rate. The contribution sum equals the pooled drive S. Probe values are evaluated continuously; maps and patch counts use a 121×121 grid.</p></section>
+<section class="notes lower"><h2>Read the result</h2><p>Start with <strong>One grid only</strong>: repeated grid peaks remain repeated after thresholding. Compare <strong>Identical grids</strong>, then <strong>Diverse grids</strong>. Diversity can suppress extra peaks in this arena, but a single localized output is not guaranteed. Lower τ to merge regions; raise it to narrow or remove them. Shift one input's phase to disrupt a shared peak.</p><p>κ and ζ here are dimensionless gain and additive offset, with a declared 20 Hz scale. ζ names the additive b term of the cosine teaching model; it is not the same operation as ζ inside the 2025 paper's arctangent expression. Phase is a 2-D translation in metres; the equivalent wave phases are kⱼeⱼₘ·pⱼ radians. No per-map autoscaling hides changes in raw rates.</p><p>Peak phases are deliberately aligned in the presets. These are designed inputs and fixed weights, not learned place fields, path integration, animal recordings, or proof that the brain uses a unique one-way conversion. No Gaussian place field is inserted into this readout.</p><p>[1] T. Liu, K. J. Bai, and H. An, “Replicating associative learning of rodents with a neuromorphic robot in an open-field arena,” <em>Front. Neurosci.</em>, vol. 19, Art. 1565780, 2025, doi: <a href="https://doi.org/10.3389/fnins.2025.1565780" target="_blank" rel="noopener">10.3389/fnins.2025.1565780</a>, secs. 2.1.1–2.1.2. [2] T. Liu, Z. Jin, D. Song, and H. An, “A Neuromorphic Robot as a Digital Twin for Rodent Spatial Representation in Dynamic Environment Navigation,” <em>IEEE JETCAS</em>, 2026, doi: <a href="https://doi.org/10.1109/JETCAS.2026.3733540" target="_blank" rel="noopener">10.1109/JETCAS.2026.3733540</a>. Cosine form checked against the available author manuscript, sec. III-D, eq. (8).</p></section>
+</main><noscript>Enable JavaScript to run this local numerical experiment.</noscript>
+<script id="grid-place-model">
+'use strict';
+(function(){
+const scale=20, peakPlace=25;
+function gridRate(x,y,c){
+ if(!(c.spacing>0)||!Number.isFinite(x+y+c.spacing+c.orientation+c.phaseX+c.phaseY+c.kappa+c.zeta))throw Error('Use finite parameters and positive spacing.');
+ const k=4*Math.PI/(Math.sqrt(3)*c.spacing),theta=c.orientation*Math.PI/180;
+ let sum=0;for(let m=0;m<3;m++){const a=theta+Math.PI/6+m*Math.PI/3;sum+=Math.cos(k*(Math.cos(a)*(x-c.phaseX)+Math.sin(a)*(y-c.phaseY)));}
+ return scale*Math.max(0,c.kappa*sum+c.zeta);
+}
+function maximum(c){return scale*Math.max(0,3*c.kappa+c.zeta);}
+function normalized(x,y,c){const peak=maximum(c);return peak>0?Math.min(1,gridRate(x,y,c)/peak):0;}
+function readout(x,y,cells,count,threshold){
+ if(count<1||count>cells.length||threshold<0||threshold>=1)throw Error('Invalid population or threshold.');
+ const chosen=cells.slice(0,count),total=chosen.reduce((s,c)=>s+c.weight,0);
+ if(chosen.some(c=>c.weight<0))throw Error('This excitatory readout requires nonnegative weights.');
+ const rates=cells.map(c=>gridRate(x,y,c));
+ const contributions=chosen.map((c,j)=>total>0?c.weight*(maximum(c)>0?Math.min(1,rates[j]/maximum(c)):0)/total:0);
+ const drive=contributions.reduce((a,b)=>a+b,0);
+ return {drive,rate:peakPlace*Math.max(0,(drive-threshold)/(1-threshold)),rates,contributions};
+}
+function makeCells(mode='diverse'){
+ return [.38,.47,.59,.73,.89,1.09].map((spacing,j)=>({spacing:mode==='identical'?.38:spacing,orientation:mode==='identical'?0:j*7,phaseX:.12,phaseY:-.08,kappa:.5,zeta:0,weight:1}));
+}
+function sample(cells,count,threshold,n=121){
+ const fields=cells.map(()=>new Float64Array(n*n)),drive=new Float64Array(n*n),place=new Float64Array(n*n);
+ for(let row=0;row<n;row++)for(let col=0;col<n;col++){
+  const i=row*n+col,r=readout(-1+2*col/(n-1),1-2*row/(n-1),cells,count,threshold);
+  r.rates.forEach((v,j)=>fields[j][i]=v);drive[i]=r.drive;place[i]=r.rate;
+ }
+ return {fields,drive,place,n};
+}
+function patches(values,n){
+ const peak=Math.max(...values);if(peak<=1e-10)return 0;
+ const seen=new Uint8Array(values.length);let count=0;
+ for(let i=0;i<values.length;i++)if(!seen[i]&&values[i]>=peak/2){
+  count++;const todo=[i];seen[i]=1;
+  while(todo.length){const q=todo.pop(),r=Math.floor(q/n),c=q%n;
+   for(const [dr,dc] of [[-1,0],[1,0],[0,-1],[0,1]]){const rr=r+dr,cc=c+dc,t=rr*n+cc;if(rr>=0&&rr<n&&cc>=0&&cc<n&&!seen[t]&&values[t]>=peak/2){seen[t]=1;todo.push(t);}}
+  }
+ }
+ return count;
+}
+window.GridPlaceModel={gridRate,maximum,normalized,readout,makeCells,sample,patches,scale,peakPlace};
+})();
+</script>
+<script id="grid-place-interface">
+'use strict';
+(function(){
+const M=window.GridPlaceModel,$=id=>document.getElementById(id),keys=['spacing','orientation','phaseX','phaseY','kappa','zeta','weight'];
+let cells=M.makeCells(),selected=0,lastSample=null,scheduled=false;
+const maps=$('input-maps');
+for(let j=0;j<6;j++){
+ const button=document.createElement('button');button.textContent='Grid '+(j+1);button.id='select-'+j;button.setAttribute('aria-label','Select grid '+(j+1));button.addEventListener('click',()=>{selected=j;sync();draw();});$('cell-select').appendChild(button);
+ const p=document.createElement('section');p.className='panel';p.id='panel-'+j;
+ p.innerHTML='<h3 id="title-'+j+'"></h3><div class="plot"><canvas width="121" height="121" id="grid-map-'+j+'" aria-label="Grid '+(j+1)+' firing rate heatmap"></canvas><div class="x-axis"><span>−1</span><span>x (m)</span><span>+1</span></div></div><div class="scale"></div><div class="scale-label"><span>0 Hz</span><span>80 Hz</span></div>';maps.appendChild(p);
+}
+function fmt(key,v){return key==='spacing'||key==='phaseX'||key==='phaseY'?v.toFixed(2)+' m':key==='orientation'?v.toFixed(0)+'°':v.toFixed(2);}
+function sync(){keys.forEach(key=>{$(key).value=cells[selected][key];$(key+'-value').textContent=fmt(key,cells[selected][key]);});for(let j=0;j<6;j++)$('select-'+j).setAttribute('aria-pressed',String(j===selected));}
+const stops=[[244,248,251],[181,217,229],[92,167,185],[36,109,136],[21,55,77]];
+function paint(id,values,max){
+ const canvas=$(id),ctx=canvas.getContext('2d'),n=canvas.width,img=ctx.createImageData(n,n);
+ for(let i=0;i<values.length;i++){const t=Math.min(1,Math.max(0,values[i]/max))*4,k=Math.min(3,Math.floor(t)),f=t-k;for(let c=0;c<3;c++)img.data[4*i+c]=Math.round(stops[k][c]*(1-f)+stops[k+1][c]*f);img.data[4*i+3]=255;}
+ ctx.putImageData(img,0,0);const x=(Number($('probeX').value)+1)*(n-1)/2,y=(1-Number($('probeY').value))*(n-1)/2;
+ ctx.beginPath();ctx.moveTo(x-4,y);ctx.lineTo(x+4,y);ctx.moveTo(x,y-4);ctx.lineTo(x,y+4);ctx.strokeStyle='white';ctx.lineWidth=2.5;ctx.stroke();ctx.strokeStyle='#102f43';ctx.lineWidth=1;ctx.stroke();
+}
+function updateProbe(){
+ const x=Number($('probeX').value),y=Number($('probeY').value),count=Number($('count').value),threshold=Number($('threshold').value),r=M.readout(x,y,cells,count,threshold);
+ $('probeX-value').textContent=x.toFixed(2)+' m';$('probeY-value').textContent=y.toFixed(2)+' m';$('drive-metric').textContent=r.drive.toFixed(3);$('rate-metric').textContent=r.rate.toFixed(2)+' Hz';
+ const area=$('contributions');area.replaceChildren();
+ for(let j=0;j<count;j++){const row=document.createElement('div');row.className='bar-row';const label=document.createElement('span');label.textContent='G'+(j+1);const track=document.createElement('div');track.className='track';const bar=document.createElement('div');bar.className='bar';bar.style.width=(100*r.contributions[j])+'%';track.appendChild(bar);const number=document.createElement('span');number.textContent=r.contributions[j].toFixed(3)+' · '+r.rates[j].toFixed(1)+' Hz';row.append(label,track,number);area.appendChild(row);}
+ if(lastSample){lastSample.fields.forEach((v,j)=>paint('grid-map-'+j,v,80));paint('drive-map',lastSample.drive,1);paint('place-map',lastSample.place,25);}
+}
+function draw(){
+ scheduled=false;const count=Number($('count').value),threshold=Number($('threshold').value);
+ lastSample=M.sample(cells,count,threshold);const peak=Math.max(...lastSample.place),patchCount=M.patches(lastSample.place,lastSample.n);
+ $('count-value').textContent=count;$('threshold-value').textContent=threshold.toFixed(2);$('patch-metric').textContent=patchCount;$('peak-metric').textContent=peak.toFixed(2)+' Hz';
+ for(let j=0;j<6;j++){$('panel-'+j).classList.toggle('selected',j===selected);$('title-'+j).textContent='G'+(j+1)+' · '+cells[j].spacing.toFixed(2)+' m · '+cells[j].orientation+'°'+(j>=count?' · excluded':'');}
+ $('frequency').textContent='Selected grid: k = '+(4*Math.PI/(Math.sqrt(3)*cells[selected].spacing)).toFixed(3)+' rad/m; theoretical peak = '+M.maximum(cells[selected]).toFixed(1)+' Hz. Spacing moves peaks; gain does not move them.';
+ $('status').textContent=peak<1e-10?'No output in the sampled arena. Check threshold, input weights, and suppressed grids.':patchCount>1?'Multiple above-half-peak patches remain: periodic ambiguity is visible. This output is not a unique place field.':'One above-half-peak patch in this sampled arena. This does not prove uniqueness beyond the arena or learned spatial coding.';
+ updateProbe();
+}
+function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(draw);}}
+keys.forEach(key=>$(key).addEventListener('input',()=>{cells[selected][key]=Number($(key).value);$(key+'-value').textContent=fmt(key,cells[selected][key]);schedule();}));
+['count','threshold'].forEach(id=>$(id).addEventListener('input',schedule));['probeX','probeY'].forEach(id=>$(id).addEventListener('input',updateProbe));
+['diverse','identical','single'].forEach(mode=>$(mode).addEventListener('click',()=>{cells=M.makeCells(mode==='identical'?'identical':'diverse');selected=0;$('count').value=mode==='single'?1:6;$('threshold').value=.78;$('probeX').value=.12;$('probeY').value=-.08;sync();draw();}));
+$('double').addEventListener('click',()=>{cells[selected].spacing=Math.min(1.8,2*cells[selected].spacing);sync();draw();});
+for(const canvas of document.querySelectorAll('canvas'))canvas.addEventListener('click',event=>{const rect=canvas.getBoundingClientRect();$('probeX').value=Math.max(-1,Math.min(1,-1+2*(event.clientX-rect.left)/rect.width));$('probeY').value=Math.max(-1,Math.min(1,1-2*(event.clientY-rect.top)/rect.height));updateProbe();});
+sync();draw();
+})();
+</script></body></html>

@@ -47,6 +47,10 @@ The [course-to-book reading map](chapters/course-reading-map.md) connects lectur
 | [9. Nengo, ROS 2, and Gazebo](chapters/09-nengo-ros-gazebo.md) | One executable Nengo neuron and a staged simulator integration guide |
 | [10. An Associative Learning Robot](chapters/10-associative-learning-robot.md) | A controlled cue-pairing experiment and robot validation protocol |
 
+## Explore grid cells and their mapping
+
+The [Grid Cells and Grid-to-Place Mapping section](chapters/grid-to-place.md) follows Liu et al.'s model family with complete equations, parameter definitions, an embedded interactive page, and an editable notebook. Change grid spacing, orientation, phase, gain, offset, weights, and readout threshold. Compare repeated grid peaks with a designed place-like output and identify which assumptions are fixed rather than learned.
+
 ## Computational laboratories
 
 - [Computational Models of Neurons: laboratory guide](chapters/computational-neuron-models-lab.md): begin with model choice, units, simulation steps, and validation.
@@ -58,6 +62,8 @@ The [course-to-book reading map](chapters/course-reading-map.md) connects lectur
 - [Laboratory 5: Conditioning](notebooks/conditioning.ipynb): paired/unpaired/frozen controls and LIF recall.
 - [Laboratory 6: Sensory Encoding](notebooks/sensory_encoding.ipynb): synthetic RGB, vibration, and 36-channel LiDAR.
 - [Laboratory 7: One Neuron in Nengo](notebooks/nengo_single_neuron.ipynb): normalized-current simulation and rate validation.
+
+- [Laboratory 8: Grid Cells to Place-Like Fields](notebooks/grid_to_place.ipynb): grid geometry, periodic ambiguity, and explicit weighted threshold mapping.
 
 Read the [Neuromorphic Embodied AI overview](chapters/01-introduction.md) for the closed-loop robot context and the [development roadmap](chapters/roadmap.md) for later topics.
 
@@ -73,7 +79,7 @@ Read the [Neuromorphic Embodied AI overview](chapters/01-introduction.md) for th
 
 Prerequisites: introductory Python, linear algebra, elementary probability, and basic neuroscience vocabulary. The laboratories use NumPy and Matplotlib and run on a standard laptop or Google Colab. Laboratory 7 also uses Nengo; installation instructions and pinned dependencies are provided.
 
-> **Project status.** Ten chapters and seven executable laboratories are available. The ROS 2/Gazebo chapters provide integration and evaluation guides; a complete simulated robot has not been validated in this release. Advanced topics listed in the roadmap remain planned. The Spike Flow Networks material will be labeled as a research framework and separated from established neuroscience.
+> **Project status.** Ten numbered chapters, a detailed grid-to-place section, and eight executable laboratories are available. The ROS 2/Gazebo chapters provide integration and evaluation guides; a complete simulated robot has not been validated in this release. Advanced topics listed in the roadmap remain planned. The Spike Flow Networks material will be labeled as a research framework and separated from established neuroscience.
 
 ## Citation
 

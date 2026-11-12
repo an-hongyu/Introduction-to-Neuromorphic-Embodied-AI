@@ -51,6 +51,12 @@ Unlike a single localized place field, a grid pattern repeats. A single grid cel
 
 Grid activity motivates models of path integration, in which self-motion updates an internal location estimate. That interpretation is a hypothesis to implement and evaluate, not a consequence of drawing a hexagonal pattern.
 
+### 2.4.1 From grid spacing to a place-like readout
+
+The [Grid Cells and Grid-to-Place Mapping section](grid-to-place.md) now provides the complete cosine equations, spacing–frequency conversion, orientation/phase conventions, and weighted threshold readout. It follows Liu et al.'s published grid/threshold framework and an available later author manuscript, with all teaching extensions identified. An embedded interactive experiment lets you vary spacing, angle, phase, gain, baseline, weights, population size, and threshold. [Laboratory 8](../notebooks/grid_to_place.ipynb) reproduces the equations in editable Python.
+
+Start with one grid, compare six identical grids, then try six diverse inputs. Repeated fields survive the first two constructions. A designed common peak in the diverse example illustrates a possible readout, not a demonstrated learning mechanism.
+
 ## 2.5 Head-direction cells: orientation rather than travel direction
 
 Head-direction cells discharge preferentially when the animal's head points in a particular direction relative to a reference frame [[4]](#spatial-ref-4). Heading is different from location, and it is also different from the velocity direction: an animal can turn its head while stationary or move with its head oriented away from its travel direction.

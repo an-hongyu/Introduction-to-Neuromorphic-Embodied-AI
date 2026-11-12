@@ -4,7 +4,12 @@ title: "Chapter 5 · Neural Encoding and the ANN–SNN Bridge"
 
 ## 5.1 Learning objectives
 
-By the end of this chapter, you should be able to define a feature-to-current or feature-to-rate mapping, distinguish a spike event from a firing-rate estimate, compare ANN and SNN abstractions, and explain what information an encoder discards. This connects the course's neural-system-to-ANN material with the sensor experiments in Chapters 6–8.
+By the end of this chapter, you should be able to:
+
+- Define a feature-to-current or feature-to-firing-rate encoding map.
+- Distinguish an individual spike event from a firing-rate estimate.
+- Compare artificial neural network (ANN) and spiking neural network (SNN) abstractions.
+- Explain what information is discarded by a chosen neural encoder. This connects the course's neural-system-to-ANN material with the sensor experiments in Chapters 6–8.
 
 ## 5.2 What does a spike represent?
 

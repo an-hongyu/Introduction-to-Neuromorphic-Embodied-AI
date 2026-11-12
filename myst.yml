@@ -18,8 +18,8 @@ project:
   - title: Foundations
     children:
     - file: chapters/01-neuroscience-background.md
-    - file: chapters/02-spatial-cells.md
     - file: chapters/03-computational-neuron-models.md
+    - file: chapters/02-spatial-cells.md
     - file: chapters/04-hebbian-learning.md
   - title: Spatial Cell Models
     children:

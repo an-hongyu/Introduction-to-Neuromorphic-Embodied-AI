@@ -4,7 +4,7 @@ title: "Laboratory Guide · Place Cell Models"
 
 # Place Cell Laboratory Guide
 
-This guide accompanies [Chapter 2: Spatial Cells](02-spatial-cells.md), [Chapter 3: Computational Models of Neurons](03-computational-neuron-models.md), and Laboratory 2. Start with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and its LIF notebook before this spatial-rate experiment.
+This guide accompanies [Chapter 3: Spatial Cells](02-spatial-cells.md), [Chapter 2: Computational Models of Neurons](03-computational-neuron-models.md), and Laboratory 2. Start with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and its LIF notebook before this spatial-rate experiment.
 
 ## Objectives
 
@@ -60,6 +60,6 @@ Open [Place Cell Notebook](../notebooks/place_cells.ipynb). It simulates a repro
 
 ## References
 
-[1] J. O'Keefe and J. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Res.*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://pubmed.ncbi.nlm.nih.gov/5124915/).
+[1] John O'Keefe and Jonathan O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Research*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://pubmed.ncbi.nlm.nih.gov/5124915/).
 
-[2] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+[2] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014. [Online textbook](https://neuronaldynamics.epfl.ch/online/).

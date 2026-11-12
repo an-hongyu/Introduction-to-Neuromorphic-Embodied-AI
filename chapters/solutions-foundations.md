@@ -44,18 +44,7 @@ These solutions follow the models and assumptions of the corresponding chapters.
 
 ## Chapter 3 — 3.10 Exercises
 
-[Original exercises](02-spatial-cells.md#310-exercises)
-
-1. **Grid aliases.** A grid cell's periodic firing means multiple spatial positions can produce similar activity. Multiple phases/scales and non-grid cues may reduce aliasing; one cell is insufficient across several periods.
-2. **Heading versus travel.** A robot can face north while moving east sideways, or reverse while still facing north. Heading is orientation; travel direction follows the velocity vector.
-3. **Rates.** $12/0.6=20$ Hz and $30/3=10$ Hz. More spikes in the second bin do not imply greater firing rate.
-4. **Speed confound.** Match speed within the same positions or vary speed repeatedly along the same route; then fit location-plus-speed and location-only predictors on held-out observations. Keep heading and occupancy controlled.
-5. **Imposed versus learned field.** A Gaussian rate map directly computed from true position is a designer-specified encoder. Learning requires training-dependent parameter updates, held-out evaluation, and frozen/shuffled learning controls; supplying true pose does not demonstrate localization.
-6. **Coordinate transforms.** Validate range/beam angle; reconstruct sensor-frame endpoints; apply calibrated sensor-to-base transform and timestamped base-to-world pose; derive environment-relative boundary geometry. Handle invalid returns and pose/scan uncertainty.
-
-## Chapter 4 — 4.10 Exercises
-
-[Original exercises](04-hebbian-learning.md#410-exercises)
+[Original exercises](04-hebbian-learning.md#310-exercises)
 
 1. **Ten updates.** With additive Hebbian learning $\Delta w=\eta xy=0.02$, $w_{10}=0.4+10(0.02)=0.60$. Sustained coactivity grows weight without bound unless normalized, bounded, or opposed by decay/homeostasis.
 2. **Outer product.** For 36 inputs and 10 outputs, $\mathbf y\mathbf x^\top$ is a $10\times36$ matrix; entry $(j,i)$ updates the weight from input $i$ to output $j$.
@@ -63,3 +52,14 @@ These solutions follow the models and assumptions of the corresponding chapters.
 4. **Shared cue.** The shared feature yields equal scores $(0.8,0.8)$ for the two stored patterns. It contains no class-discriminating information in this example.
 5. **Recall controls.** Compare baseline weights, weights after correct pairings, and weights after label-pair shuffling with a frozen held-out probe set. Correctly paired learning should favor matching partial cues; shuffled pairings should disrupt that relation. Exact accuracies require notebook execution and should not be invented.
 6. **Delayed reward.** Pair inputs once, deliver reward after controlled delays, and measure weight change with otherwise fixed activity. An eligibility-trace model with passive decay predicts delayed effects proportional to $e^{-\Delta/\tau_e}$; a simultaneous-only two-factor rule does not. Include no-reward, no-pairing, and randomized-delay controls.
+
+## Chapter 4 — 4.10 Exercises
+
+[Original exercises](02-spatial-cells.md#410-exercises)
+
+1. **Grid aliases.** A grid cell's periodic firing means multiple spatial positions can produce similar activity. Multiple phases/scales and non-grid cues may reduce aliasing; one cell is insufficient across several periods.
+2. **Heading versus travel.** A robot can face north while moving east sideways, or reverse while still facing north. Heading is orientation; travel direction follows the velocity vector.
+3. **Rates.** $12/0.6=20$ Hz and $30/3=10$ Hz. More spikes in the second bin do not imply greater firing rate.
+4. **Speed confound.** Match speed within the same positions or vary speed repeatedly along the same route; then fit location-plus-speed and location-only predictors on held-out observations. Keep heading and occupancy controlled.
+5. **Imposed versus learned field.** A Gaussian rate map directly computed from true position is a designer-specified encoder. Learning requires training-dependent parameter updates, held-out evaluation, and frozen/shuffled learning controls; supplying true pose does not demonstrate localization.
+6. **Coordinate transforms.** Validate range/beam angle; reconstruct sensor-frame endpoints; apply calibrated sensor-to-base transform and timestamped base-to-world pose; derive environment-relative boundary geometry. Handle invalid returns and pose/scan uncertainty.

@@ -152,7 +152,7 @@ def run_checks(base: str) -> dict:
             readable.locator('details summary').first.click()
             assert readable.locator('details').first.get_attribute('open') is not None
             assert readable.locator('.katex-error').count() == 0
-            home = book.goto(base + '/exercises/index/')
+            home = book.goto(base + '/exercises/')
             assert home and home.status == 200
             assert book.locator('iframe[src*="exercise-practice.html"]').count() == 1
             book.screenshot(path=str(OUT / 'exercise-center-home.png'), full_page=False)

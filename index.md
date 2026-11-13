@@ -4,7 +4,7 @@ title: Introduction to Neuromorphic Embodied AI
 
 # Introduction to Neuromorphic Embodied AI
 
-**From Spatial Neural Circuits to Autonomous Learning Robots**
+**From Biological Neural Systems to Self-Learning Robots**
 
 *An open, computational textbook by Hongyu An*
 
@@ -27,8 +27,8 @@ Begin with [Chapter 1: Neurons and Synapses](chapters/01-neuroscience-background
 
 | Chapter | Central question | Worked material |
 |---|---|---|
-| [1. Neurons and Synapses](chapters/01-neuroscience-background.md) | What are neurons, spikes, and synapses? | Membrane time constant and synaptic-current examples |
-| [2. Computational Models of Neurons](chapters/03-computational-neuron-models.md) | How do equations produce neural activity? | Poisson counts, LIF interactive examples, HH gates, and sodium-ablation notebook |
+| [1. Neurons and Synapses](chapters/01-neuroscience-background.md) | What are neurons, spikes, and synapses? | Membrane potential constant and neurotransmitters|
+| [2. Computational Models of Neurons](chapters/03-computational-neuron-models.md) | How do equations produce neural activity? | Poisson counts, LIF, Hodgkin–Huxley Model, and Izhikevich model|
 | [3. Hebbian Learning and Synaptic Plasticity](chapters/04-hebbian-learning.md) | How can experience change connections? | Association, Oja, STDP, eligibility traces, and paired-cue controls |
 | [4. Spatial Cells](chapters/02-spatial-cells.md) | How is activity related to space, movement, and time? | Original tuning diagrams and occupancy calculations |
 

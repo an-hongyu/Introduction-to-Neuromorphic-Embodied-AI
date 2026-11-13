@@ -281,12 +281,12 @@ def post_build() -> None:
     payload=json.dumps(data,ensure_ascii=True,separators=(',',':')).replace('</','<\\/')
     s=re.sub(r'(<script id="question-data" type="application/json">).*?(</script>)',lambda m:m.group(1)+payload+m.group(2),s,flags=re.S)
     p.write_text(s)
-    # Install on all entry routes so client-side navigation can discover new frames.
+    # A filename in MyST's serialized static-file list is not a loaded script.
     script=f'<script defer src="{BASE}/exercise-resize.js"></script>'
     for page in root.rglob('*.html'):
         if page.name=='exercise-practice.html':continue
         h=page.read_text()
-        if 'exercise-resize.js' not in h and '</body>' in h:
+        if script not in h and '</body>' in h:
             page.write_text(h.replace('</body>',script+'</body>'))
     print('Resolved all 120 source-section anchors and installed same-origin iframe resizing.')
 
@@ -313,12 +313,14 @@ def check() -> None:
     for topic in data['topics']:
         tid=topic['id'];page=root/'exercises'/tid/'index.html'
         assert page.is_file(),str(page)
-        parser=Headings();parser.feed(page.read_text())
+        page_html=page.read_text()
+        assert f'<script defer src="{BASE}/exercise-resize.js"></script>' in page_html
+        parser=Headings();parser.feed(page_html)
         assert parser.details==topic['writtenCount'],(tid,parser.details,topic['writtenCount'])
         for gi,g in enumerate(groups[tid],1):
             for i in range(1,len(g['questions'])+1):
                 assert f'practice-{tid}-{gi}-written-{i}' in parser.ids
-        assert 'exercise-practice.html?topic='+tid in page.read_text()
+        assert 'exercise-practice.html?topic='+tid in page_html
     review=Headings();review.feed((root/'exercises/question-bank/index.html').read_text())
     assert review.details==120,review.details
     assert not (ROOT/'chapters/05-neural-encoding.md').exists()

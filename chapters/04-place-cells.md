@@ -1,55 +1,34 @@
 ---
-title: "Laboratory Guide · Place Cell Models"
+title: "Laboratory 2 - Place Cell Experiment Guide"
 ---
 
 # Place Cell Laboratory Guide
 
-This guide accompanies [Chapter 4: Spatial Cells](02-spatial-cells.md), [Chapter 2: Computational Models of Neurons](03-computational-neuron-models.md), and Laboratory 2. Start with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and its LIF notebook before this spatial-rate experiment.
+The biological explanation, Gaussian place-field model, spike-generation assumptions, and grid-to-place model are integrated into [Chapter 4: Spatial Cells and Their Models](02-spatial-cells.md#place-cell-models). This page provides the execution sequence for [Laboratory 2](../notebooks/place_cells.ipynb), not a separate model chapter. Begin with the [Computational Models of Neurons laboratory guide](computational-neuron-models-lab.md) and its LIF notebook.
 
 ## Objectives
 
-Build an idealized place field; convert a conditional rate into spikes; generate spatial rate maps that correct for occupancy; identify limitations of this baseline model.
+- Run the Gaussian place-field and Poisson-spike experiment with explicit units.
+- Reconstruct a spatial rate map using occupancy normalization.
+- Change one parameter at a time and distinguish imposed fields from learned representations.
 
-## L2.1 Biological motivation
+## L2.1 Prepare the experiment
 
-Place cells are neurons showing spatially modulated activity in particular contexts. Their fields can be influenced by sensory landmarks, movement, task demands, and environmental change. One Gaussian field is a **didactic approximation**, not a universal biological law.
+Read the [Gaussian place-field model](02-spatial-cells.md#place-gaussian-model) and [rate-to-spike construction](02-spatial-cells.md#place-spike-generation). Record the field center, width, baseline rate, peak rate, time step, and random seed before running the notebook. Spatial coordinates and widths use meters; rates use Hz; time steps use seconds.
 
-## L2.2 Gaussian firing-rate model
+## L2.2 Run and inspect
 
-Let $\mathbf{x}=(x,y)$ be position and $\boldsymbol{\mu}_i$ a preferred location of neuron $i$. We use
+Open [Place Cell Notebook](../notebooks/place_cells.ipynb). It simulates a reproducible trajectory, plots the imposed firing field, sampled spikes, and estimated rate, and reports occupancy coverage and reconstruction error. Run cells in order and inspect each plot together with its units.
 
-$$
-r_i(\mathbf{x})=r_{\min,i}+(r_{\max,i}-r_{\min,i})
-\exp\left[-\frac{\|\mathbf{x}-\boldsymbol{\mu}_i\|^2}{2\sigma_i^2}\right].
-$$
+[Run in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/place_cells.ipynb), or {download}`download the Jupyter notebook <../notebooks/place_cells.ipynb>` for JupyterLab.
 
-All spatial coordinates and $\sigma_i$ use meters; firing rates use spikes/s (Hz). Peak rate occurs at $\mathbf{x}=\boldsymbol{\mu}_i$. At distance $\sigma_i$, the excess rate over baseline is $e^{-1/2}\approx0.607$ times its peak excess value.
+## L2.3 Reconstruct and compare
 
-## L2.3 From expected rates to spikes
+Use the [occupancy-normalized estimator](02-spatial-cells.md#spatial-tuning-estimation). Mask unvisited bins, identify low-occupancy regions, and compare the estimate with the imposed rate field. Hold the trajectory fixed when comparing different spike-generation seeds. Report the smoothing and binning procedure rather than interpreting smoothness as biological evidence.
 
-For a simulation time step $\Delta t$ in seconds, assume conditionally independent, inhomogeneous Poisson firing. The number of spikes in a bin has distribution
+## L2.4 Extend the model
 
-$$N_i[t]\sim\operatorname{Poisson}(r_i(\mathbf{x}_t)\Delta t).$$
-
-For bins small enough that multiple events are rare, a binary event can be drawn with probability $1-\exp[-r_i(\mathbf{x}_t)\Delta t]$. In this notebook we sample Poisson counts, which remain valid even for larger bins.
-
-## L2.4 Occupancy normalization
-
-Divide the arena into bins indexed by $b$. Let $T_b$ be total time spent in bin $b$, and $K_b$ the total observed spikes. A naive estimate is $\hat r_b=K_b/T_b$ for $T_b>0$. Bins with no visits should be masked, **not set to zero**, and low-occupancy estimates are noisy. Smoothness must not be confused with empirical evidence of a broad field.
-
-## L2.5 Executable laboratory
-
-Open [Place Cell Notebook](../notebooks/place_cells.ipynb). It simulates a reproducible trajectory, plots true firing field, observed spikes and rate estimate, and reports occupancy coverage plus simple error metrics.
-
-[Run the notebook in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/place_cells.ipynb), or {download}`download the Jupyter notebook <../notebooks/place_cells.ipynb>` and run it locally with JupyterLab. The published notebook includes reproducible code, computed results, and figures.
-
-## L2.6 Research extensions
-
-- Replace circular Gaussian fields with elliptical or multimodal fields.
-- Compare Poisson spiking with refractory or LIF mechanisms.
-- Add boundary effects and landmark remapping.
-- Calibrate model statistics against experimental rodent recordings, while separating training and validation sessions.
-- Expand to a population and benchmark position decoding against a non-neural baseline.
+Try an elliptical or multimodal field, introduce landmark or boundary changes, compare Poisson events with a refractory or LIF mechanism, and evaluate a population decoder on held-out trajectories. These are extensions to test, not capabilities demonstrated by the baseline notebook. For a different place-field construction, continue to the [grid-to-place readout and interactive experiment](02-spatial-cells.md#grid-place-live-example) and [Laboratory 8](../notebooks/grid_to_place.ipynb).
 
 ## Exercises
 
@@ -57,9 +36,3 @@ Open [Place Cell Notebook](../notebooks/place_cells.ipynb). It simulates a repro
 2. Halve $\Delta t$ while keeping the trajectory duration fixed. What should happen to *expected total spike count*?
 3. Repeat with five random seeds. Estimate variation in the occupancy-normalized field.
 4. Explain why true simulated position used to compute the field is not proof of a robot's ability to localize itself.
-
-## References
-
-[1] John O'Keefe and Jonathan O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Research*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://pubmed.ncbi.nlm.nih.gov/5124915/).
-
-[2] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014. [Online textbook](https://neuronaldynamics.epfl.ch/online/).

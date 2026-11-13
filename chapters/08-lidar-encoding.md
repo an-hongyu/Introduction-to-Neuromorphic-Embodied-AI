@@ -126,30 +126,6 @@ A fixed-direction measurement reports distance along a particular line of sight.
 
 Do not confuse the illustrated **hardware channels** with the **36 neural channels** used later. A hardware channel may correspond to an elevation beam; our neural channel corresponds to one selected 10-degree planar sector. A single planar scanner can supply all 36 neural inputs.
 
-### 8.4.3 Solid-state examples and a useful architectural distinction
-
-Slides 20-21 introduce compact integrated LiDAR and optical phased arrays. Their chip micrographs and beam-steering diagrams are retained below [[1]](#lidar-ref-1).
-
-```{figure} ../assets/lidar-lecture/silicon-photonics-lidar.png
-:label: fig-lidar-silicon-photonics-lidar
-:alt: Silicon-photonic switching and beam steering; original media from the supplied LiDAR lecture
-:width: 100%
-
-**Silicon-photonic switching and beam steering.** Original chip and focal-plane steering illustrations; the text distinguishes MEMS switching from optical phased arrays. Source: lecture slide(s) 20, 21 [[1]](#lidar-ref-1). Xiaosheng Zhang et al., Nature 603, 253-258 (2022), doi:10.1038/s41586-022-04415-8; CC BY 4.0 for the cited paper material.
-```
-
-**Technical clarification beyond the slide summary.** The cited Zhang et al. paper uses a focal-plane switch array with **MEMS-actuated optical switches**. This is not the same mechanism as controlling the phases of an optical phased array. Thus the slide's blanket phrase "no moving parts" should not be read as a description of every component in every pictured architecture. The paper explicitly distinguishes the two approaches [[4]](#lidar-ref-4).
-
-```{figure} ../assets/lidar-lecture/phased-array-animation.gif
-:label: fig-lidar-phased-array-animation
-:alt: Phase relationships change the illustrated beam direction; original media from the supplied LiDAR lecture
-:width: 50%
-
-**Phase relationships change the illustrated beam direction.** Original animated GIF from the PowerPoint. This illustration is distinct from the preceding MEMS-switch-array device. Source: lecture slide(s) 21 [[1]](#lidar-ref-1).
-```
-
-The original phased-array animation illustrates how relative phase affects the direction of the combined wavefront. It is a conceptual visualization, not a measured performance record of the silicon chip in the preceding figure.
-
 ## 8.5 Survey applications, intensity, and multiple returns
 
 ### 8.5.1 Airborne, terrestrial, and mobile systems

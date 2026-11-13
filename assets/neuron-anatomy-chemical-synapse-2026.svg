@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1450 750" role="img" aria-labelledby="title desc">
+<title id="title">Neuron anatomy and chemical synapse</title>
+<desc id="desc">A pink neuron with labeled dendrites, nucleus, soma, axon initial segment, myelinated axon and axon terminals, with a circular inset showing a chemical synapse between presynaptic and postsynaptic membranes.</desc>
+<defs>
+<linearGradient id="pink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F9D8ED"/><stop offset=".52" stop-color="#E9A5CF"/><stop offset="1" stop-color="#C881B9"/></linearGradient>
+<radialGradient id="soma"><stop stop-color="#F6D8EA"/><stop offset=".72" stop-color="#D99CC7"/><stop offset="1" stop-color="#B775AB"/></radialGradient>
+<radialGradient id="nucleus"><stop stop-color="#A06B9E"/><stop offset="1" stop-color="#634368"/></radialGradient>
+<linearGradient id="myelin" x1="0" y1="0" x2=".2" y2="1"><stop stop-color="#49CFC4"/><stop offset=".6" stop-color="#009E9B"/><stop offset="1" stop-color="#087A80"/></linearGradient>
+<linearGradient id="post" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#A7D5E9"/><stop offset="1" stop-color="#5A9ABF"/></linearGradient>
+<clipPath id="inset"><circle cx="1100" cy="205" r="164"/></clipPath>
+</defs>
+<rect width="1450" height="750" fill="white"/>
+<g fill="none" stroke="#D895BF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+<path d="M430 367 C359 316 313 274 254 254 L202 215 M254 254 L223 197 L221 154 M313 274 L261 286 L218 325 M261 286 L247 347 L210 375"/>
+<path d="M426 345 C386 257 372 213 333 168 L317 122 M372 213 L407 163 L420 111 M407 163 L389 117"/>
+<path d="M446 325 C481 238 520 205 545 155 L542 113 M520 205 L579 181 L624 140 M579 181 L612 223"/>
+<path d="M411 403 C333 440 277 461 218 449 L176 475 M277 461 L271 530 L249 582 M333 440 L323 388 L275 377"/>
+<path d="M452 421 C420 499 399 555 366 590 L342 639 M399 555 L440 592 L454 650 M420 499 L469 514 L511 550"/>
+<path d="M498 402 C556 426 614 425 671 386 L716 391 M614 425 L630 490 L672 512"/>
+</g>
+<ellipse cx="457" cy="378" rx="120" ry="95" fill="url(#soma)" stroke="#C887B6" stroke-width="4"/>
+<path d="M430 303 C385 321 386 365 365 391 C360 414 385 451 420 466 C486 490 537 457 552 422 C562 384 548 347 513 321" fill="none" stroke="#EDB3D2" stroke-width="12" opacity=".6"/>
+<circle cx="452" cy="386" r="47" fill="url(#nucleus)" stroke="#83547D" stroke-width="5"/><circle cx="443" cy="370" r="16" fill="#D2A6CC" opacity=".38"/>
+<path d="M554 391 Q622 396 668 418 Q733 425 792 422 Q842 420 895 427 Q965 433 1020 462" stroke="#C988B4" stroke-width="16" fill="none" stroke-linecap="round"/>
+<path d="M600 401 Q616 392 632 405" stroke="#A85F96" stroke-width="5" fill="none"/>
+<g fill="url(#myelin)" stroke="#178C89" stroke-width="2">
+<rect x="657" y="405" width="62" height="44" rx="15" transform="rotate(4 688 427)"/>
+<rect x="735" y="403" width="62" height="45" rx="15" transform="rotate(-2 765 425)"/>
+<rect x="813" y="405" width="62" height="45" rx="15" transform="rotate(2 844 427)"/>
+<rect x="890" y="412" width="62" height="45" rx="15" transform="rotate(7 920 435)"/>
+</g>
+<g fill="none" stroke="#D392BB" stroke-width="11" stroke-linecap="round">
+<path d="M1011 455 Q1071 472 1093 432 L1123 394 M1093 432 L1142 445 L1211 413 M1093 432 L1142 510 L1219 525"/>
+<path d="M1033 456 Q1050 523 1082 565 L1060 619 M1082 565 L1144 607 L1158 661"/>
+<path d="M1092 433 Q1123 379 1165 372 L1188 342"/>
+<path d="M1142 510 Q1185 475 1230 483 L1284 456"/>
+</g>
+<g fill="#D993BE" stroke="#BB78A9" stroke-width="2">
+<ellipse cx="1189" cy="339" rx="15" ry="11"/><ellipse cx="1219" cy="410" rx="15" ry="11"/>
+<ellipse cx="1289" cy="454" rx="15" ry="11"/><ellipse cx="1225" cy="529" rx="15" ry="11"/>
+<ellipse cx="1060" cy="625" rx="13" ry="17"/><ellipse cx="1158" cy="665" rx="15" ry="11"/>
+</g>
+<g font-family="Arial,Helvetica,sans-serif" fill="#183B60" font-weight="600">
+<g font-size="31">
+<text x="54" y="335">Dendrites</text><text x="58" y="482">Nucleus</text>
+<text x="685" y="200">Soma</text><text x="667" y="342">Axon initial</text><text x="667" y="380">segment</text>
+<text x="809" y="536">Axon</text><text x="1217" y="427">Axon</text><text x="1217" y="464">terminal</text>
+</g>
+<g fill="none" stroke="#67757F" stroke-width="2.5">
+<path d="M219 326H310"/><path d="M189 473L412 390"/><path d="M678 208L505 347"/><path d="M667 385L587 407"/>
+<path d="M816 494V467 M817 494H957"/><path d="M1210 435L1159 434"/>
+</g>
+<circle cx="505" cy="347" r="6" fill="#5A6873"/><circle cx="587" cy="407" r="6" fill="#5A6873"/>
+</g>
+<!-- Circular magnification of the axon terminal and its target membrane -->
+<circle cx="1100" cy="205" r="164" fill="#F5FAFD" stroke="#6D7780" stroke-width="3"/>
+<g clip-path="url(#inset)">
+<path d="M927 142 C976 131 1018 154 1037 169 C1054 186 1070 176 1082 136 C1092 103 1152 89 1172 128 C1208 159 1206 215 1164 226 C1129 234 1120 218 1095 226 C1055 244 1008 194 927 210Z" fill="url(#pink)" stroke="#C584AE" stroke-width="5"/>
+<path d="M925 295 C984 260 1021 270 1051 283 C1088 295 1136 283 1187 274 C1220 267 1251 287 1270 301V367H925Z" fill="url(#post)" stroke="#7EB1CB" stroke-width="5"/>
+<g fill="#F8BA5C" stroke="#D99B49" stroke-width="2">
+<circle cx="1035" cy="163" r="8"/><circle cx="1076" cy="152" r="8"/><circle cx="1119" cy="163" r="8"/><circle cx="1152" cy="182" r="8"/><circle cx="1070" cy="198" r="8"/><circle cx="1110" cy="199" r="8"/><circle cx="1135" cy="215" r="8"/>
+</g>
+<g fill="#ED9D43">
+<circle cx="1088" cy="250" r="5"/><circle cx="1118" cy="254" r="5"/><circle cx="1145" cy="244" r="5"/><circle cx="1063" cy="259" r="5"/><circle cx="1110" cy="236" r="5"/>
+</g>
+<g stroke="#178A91" stroke-width="4" fill="#50B6AF">
+<rect x="1020" y="276" width="12" height="18" rx="3"/><rect x="1080" y="279" width="12" height="19" rx="3"/><rect x="1138" y="275" width="12" height="19" rx="3"/>
+</g>
+</g>
+<circle cx="1100" cy="205" r="164" fill="none" stroke="#697780" stroke-width="3"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#173C63">
+<text x="1100" y="73" font-size="28" text-anchor="middle" font-weight="700">Chemical synapse</text>
+<g font-size="19" font-weight="600">
+<text x="1285" y="126">Presynaptic</text><text x="1285" y="151">(axon terminal)</text>
+<text x="1285" y="212">Neurotransmitter</text>
+<text x="1285" y="272">Postsynaptic</text><text x="1285" y="297">membrane</text>
+</g>
+<g fill="none" stroke="#647079" stroke-width="2"><path d="M1280 136L1150 191"/><path d="M1280 206L1144 244"/><path d="M1280 283L1142 292"/></g>
+</g>
+<g fill="none" stroke="#808B92" stroke-width="2" stroke-dasharray="7 7"><path d="M1029 351L1154 451"/><path d="M1193 336L1158 425"/></g>
+</svg>

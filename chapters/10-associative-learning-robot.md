@@ -1,8 +1,8 @@
 ---
-title: "Chapter 10 · Capstone: An Associative Learning Robot"
+title: "Chapter 9 · Capstone: An Associative Learning Robot"
 ---
 
-## 10.1 Learning objectives and experimental question
+## 9.1 Learning objectives and experimental question
 
 Can pairing a visual cue with a vibration cue make the visual cue alone elicit a motor response? By the end of this chapter, you should be able to:
 
@@ -13,7 +13,7 @@ Can pairing a visual cue with a vibration cue make the visual cue alone elicit a
 
 The course final project motivates a red visual CS, a vibration US, and a learned motion response. Related published work explores visual–vibration association with a mobile robot and neuromorphic computing [[1]](#capstone-ref-1). That publication's brightness cues, processing, network, and deployment differ from this red-cue teaching variant. Our compact NumPy/LIF experiment is executable; the Gazebo transfer is a guided extension requiring independent implementation and validation.
 
-## 10.2 Four stages, one fixed response definition
+## 9.2 Four stages, one fixed response definition
 
 | Stage | Inputs | Learning | Expected teaching behavior |
 |---|---|---|---|
@@ -24,7 +24,7 @@ The course final project motivates a red visual CS, a vibration US, and a learne
 
 These are operational labels for the experiment, not claims about an animal's experience. Choose the response criterion before training. [Laboratory 5](../notebooks/conditioning.ipynb) uses at least three LIF events during a 500 ms observation window, followed by a hypothetical 0.1 m/s command lasting 2 s. It reports the ideal 0.2 m consequence of that command, not measured robot displacement.
 
-## 10.3 Connect the modules
+## 9.3 Connect the modules
 
 ```{mermaid}
 flowchart TD
@@ -43,7 +43,7 @@ $$
 
 The US connection remains fixed. Chapter 4 derives the closed-form paired weight and compares this bounded coactivity rule with Oja and STDP. The spiking readout is evaluated separately with $I=50+200(wx+u)$ pA. Do not call this trial rule spike-timing-dependent plasticity, and do not claim that a trial-based teaching variable is an experimentally measured postsynaptic signal.
 
-## 10.4 Worked experiment and parameter changes
+## 9.4 Worked experiment and parameter changes
 
 Run the [notebook in Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/conditioning.ipynb), or {download}`download Laboratory 5 <../notebooks/conditioning.ipynb>`. It includes the complete physical-unit LIF implementation, training schedules, frozen probes, and two figures.
 
@@ -69,15 +69,15 @@ Original frozen-probe outputs. Voltage and spike events occupy different panels.
 
 **Try three changes.** Reduce pairings to two; reduce learning rate to 0.02; increase the initial weight until CS already elicits a baseline response. For each, predict the weight, current, event count, and behavioral classification. The third change demonstrates why a successful final response is insufficient without a baseline.
 
-## 10.5 Controls and held-out evaluation
+## 9.5 Controls and held-out evaluation
 
 Use matched exposure counts for paired and nonoverlapping unpaired schedules. Include a frozen-learning condition. For continuous signals, add a shuffled-timing control that preserves exposure but disrupts pairing; the notebook's binary nonoverlapping schedule is a simpler control, not that full time-shuffle experiment.
 
 Hold preprocessing, neural parameters, observation window, and controller settings fixed across conditions. Freeze all weights during evaluation. Vary cue brightness, vibration amplitude, noise, and cue placement on held-out trials. Do not choose thresholds on those same tests. Reset state between trials, distinguish within-seed repeats from independent seeds, and report uncertainty for stochastic experiments. The default trial calculation is deterministic and does not require invented error bars.
 
-## 10.6 Transfer to Gazebo and report evidence
+## 9.6 Transfer to Gazebo and report evidence
 
-Follow [Chapter 9](09-nengo-ros-gazebo.md)'s milestones. Use actual image and IMU messages to compute cues; log simulator stimulus labels only as evaluation ground truth. A stimulus flag fed directly to the neuron bypasses the perception problem.
+Follow [Chapter 8](09-nengo-ros-gazebo.md)'s milestones. Use actual image and IMU messages to compute cues; log simulator stimulus labels only as evaluation ground truth. A stimulus flag fed directly to the neuron bypasses the perception problem.
 
 | Evidence | Minimum report |
 |---|---|
@@ -90,7 +90,9 @@ Follow [Chapter 9](09-nengo-ros-gazebo.md)'s milestones. Use actual image and IM
 
 Only call the Gazebo phase complete when those recordings exist. A physical robot and a neuromorphic-chip deployment require additional experiments; neither follows from a working NumPy association example. Likewise, this capstone does not yet establish navigation, place-cell learning, or a validated SFN architecture.
 
-## 10.7 Exercises
+(97-exercises)=
+
+## 9.7 Exercises
 
 1. Derive the minimum paired weight needed to exceed the passive LIF rheobase. Why does a three-event criterion add a finite-window requirement?
 2. Compare nonoverlapping and shuffled controls for a temporally filtered input.

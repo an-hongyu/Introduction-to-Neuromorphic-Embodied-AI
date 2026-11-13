@@ -4,7 +4,7 @@ title: Curriculum and Development Roadmap
 
 # Curriculum and Development Roadmap
 
-Ten numbered chapters with spatial-cell models integrated into Chapter 4, and eight computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
+Nine numbered chapters with spatial-cell models integrated into Chapter 4, and eight computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
 
 ## Part I — Foundations: available
 
@@ -13,14 +13,13 @@ Ten numbered chapters with spatial-cell models integrated into Chapter 4, and ei
 3. [Hebbian Learning and Synaptic Plasticity](04-hebbian-learning.md): association, Oja, STDP, and eligibility traces
 4. [Spatial Cells and Their Models](02-spatial-cells.md)
 
-## Part II — Encoding and embodied learning: available
+## Part II — Sensing and embodied learning: available
 
-5. [Neural Encoding and the ANN–SNN Bridge](05-neural-encoding.md)
-6. [Visual Perception and Cue Encoding](06-visual-perception.md)
-7. [Inertial Sensing and Vibration Encoding](07-inertial-sensing.md)
-8. [LiDAR and Thirty-Six-Channel Spatial Encoding](08-lidar-encoding.md)
-9. [Nengo, ROS 2, and Gazebo Integration](09-nengo-ros-gazebo.md)
-10. [Capstone: An Associative Learning Robot](10-associative-learning-robot.md)
+5. [Visual Perception and Cue Encoding](06-visual-perception.md)
+6. [Inertial Sensing and Vibration Encoding](07-inertial-sensing.md)
+7. [LiDAR and Thirty-Six-Channel Spatial Encoding](08-lidar-encoding.md)
+8. [Nengo, ROS 2, and Gazebo Integration](09-nengo-ros-gazebo.md)
+9. [Capstone: An Associative Learning Robot](10-associative-learning-robot.md)
 
 The HH, conditioning, sensory, and single-neuron Nengo examples execute in Python. The ROS 2/Gazebo material is a staged integration guide, not a supplied and validated robot deployment. No neuromorphic hardware result is claimed by these teaching examples.
 

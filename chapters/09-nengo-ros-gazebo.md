@@ -1,8 +1,8 @@
 ---
-title: "Chapter 9 · Nengo, ROS 2, and Gazebo Integration"
+title: "Chapter 8 · Nengo, ROS 2, and Gazebo Integration"
 ---
 
-## 9.1 Learning objectives and scope
+## 8.1 Learning objectives and scope
 
 By the end of this chapter, you should be able to:
 
@@ -11,7 +11,7 @@ By the end of this chapter, you should be able to:
 - Define a sensor-to-controller message contract.
 - Organize a staged validation plan for ROS 2 and Gazebo. The notebook experiment is executable and checked. **The ROS 2/Gazebo material below is an implementation and validation guide; a complete simulated robot is not supplied or claimed to have run in this release.**
 
-## 9.2 One LIF neuron in Nengo
+## 8.2 One LIF neuron in Nengo
 
 Nengo represents inputs with Nodes, neural populations with Ensembles, connections with Connection objects, and recorded values with Probes [[1]](#nengo-ref-1). Start with one neuron before introducing learned weights, sensor callbacks, or a robot.
 
@@ -50,13 +50,13 @@ Original Nengo 4.0.0 experiment. Change normalized current or either time consta
 
 The repository pins Nengo 4.0.0 with NumPy 1.26.4. For Colab, run `%pip install numpy==1.26.4 nengo==4.0.0 contourpy==1.3.3` before importing NumPy; restart the runtime if an incompatible NumPy version was already loaded, then run the notebook. The repository's Python 3.12 environment installs these dependencies together.
 
-## 9.3 A reproducible teaching profile
+## 8.3 A reproducible teaching profile
 
 Use Ubuntu 24.04, ROS 2 Jazzy, and Gazebo Harmonic for a documented long-term-support pairing [[2]](#nengo-ref-2). Record exact package versions in the experiment log. Existing Humble installations should follow their supported Gazebo pairing rather than mixing commands across distributions. This profile is a recommendation for the integration exercise, not evidence that this repository has installed or tested that simulator stack.
 
 Begin with a robot that can publish sensor messages and accept velocity commands without a neural model. Then test the encoder on recorded messages. Only afterward connect the neural output. This ordering lets a failed stage be diagnosed independently.
 
-## 9.4 Topic and timing contract
+## 8.4 Topic and timing contract
 
 The following names are proposed teaching interfaces; inspect the running robot because actual names and message types vary. ROS message definitions specify units and fields [[3]](#nengo-ref-3).
 
@@ -70,17 +70,19 @@ The following names are proposed teaching interfaces; inspect the running robot 
 
 Some controllers use stamped velocity commands. Match the controller's configured type before publishing. Use simulation time consistently; keep message age limits and the neural update interval explicit. Do not equate one asynchronous callback with one fixed neural step. Buffer or resample inputs onto a declared time grid and record the age of every value used.
 
-## 9.5 Validation milestones
+## 8.5 Validation milestones
 
 1. **Simulator baseline:** demonstrate camera, IMU, and range topics; record frames, rates, and a short bag. Confirm zero commands stop the robot.
 2. **Encoder replay:** feed the same recorded inputs into the sensory notebook functions; compare features with the synthetic tests.
 3. **Neural replay:** reproduce the single-neuron rate check and separate voltage/event plots; reset state between trials.
 4. **Controller connection:** gate a bounded velocity command using a declared event-window criterion. Stop on stale or invalid required inputs; log the reason.
-5. **Learning trials:** follow Chapter 10's pairing, frozen tests, and controls with identical preprocessing and controller settings.
+5. **Learning trials:** follow Chapter 9's pairing, frozen tests, and controls with identical preprocessing and controller settings.
 
 Save sensor features, model parameters, random seed, software versions, spikes, weights, commands, and measured pose. An ideal command of 0.1 m/s for 2 s predicts 0.2 m of straight travel; actual displacement needs odometry or ground-truth measurement and may differ because of acceleration limits, contact, or slip. The notebook does not measure that displacement.
 
-## 9.6 Exercises
+(86-exercises)=
+
+## 8.6 Exercises
 
 1. Remove gain compensation and explain the rate change before running.
 2. Choose neural and sensor update rates; specify how stale measurements are detected.

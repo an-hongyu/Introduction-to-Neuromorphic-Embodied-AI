@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1110" height="500" viewBox="0 0 1110 500" role="img" aria-labelledby="t d"><title id="t">Continuous rate-dependent Hebbian plasticity threshold</title><desc id="d">A model curve proportional to presynaptic firing rate times postsynaptic firing rate times postsynaptic rate minus the threshold. At positive presynaptic firing rate, the synaptic update is negative below 15 Hz and positive above 15 Hz.</desc>
+<rect width="1110" height="500" rx="20" fill="#f8fafc"/><g font-family="Arial,Helvetica,sans-serif">
+<text x="42" y="48" font-size="29" font-weight="700" fill="#152c47">A continuous rate-dependent potentiation / depression rule</text>
+<text x="42" y="77" font-size="16" fill="#65788b">For fixed positive presynaptic activity, the postsynaptic rate controls the sign</text>
+<rect x="130" y="105" width="528" height="287" fill="#fff1f0" rx="3"/><rect x="658" y="105" width="352.0000000000001" height="287" fill="#e5f8ee" rx="3"/>
+<g stroke="#d6dee8" stroke-width="1.3"><line x1="130" y1="145" x2="1010" y2="145"/><line x1="130" y1="225" x2="1010" y2="225"/><line x1="130" y1="355" x2="1010" y2="355"/></g>
+<line x1="130" y1="304" x2="1010" y2="304" stroke="#63758a" stroke-width="2"/>
+<line x1="130" y1="105" x2="130" y2="395" stroke="#63758a" stroke-width="2"/>
+<line x1="658" y1="105" x2="658" y2="393" stroke="#5f7189" stroke-width="2.5" stroke-dasharray="8 6"/>
+<path d="M130.00,304.00 L138.80,306.43 L147.60,308.79 L156.40,311.05 L165.20,313.24 L174.00,315.34 L182.80,317.37 L191.60,319.30 L200.40,321.16 L209.20,322.93 L218.00,324.63 L226.80,326.23 L235.60,327.76 L244.40,329.20 L253.20,330.56 L262.00,331.84 L270.80,333.04 L279.60,334.15 L288.40,335.19 L297.20,336.13 L306.00,337.00 L314.80,337.78 L323.60,338.49 L332.40,339.10 L341.20,339.64 L350.00,340.09 L358.80,340.47 L367.60,340.75 L376.40,340.96 L385.20,341.08 L394.00,341.13 L402.80,341.08 L411.60,340.96 L420.40,340.75 L429.20,340.47 L438.00,340.09 L446.80,339.64 L455.60,339.10 L464.40,338.49 L473.20,337.78 L482.00,337.00 L490.80,336.13 L499.60,335.19 L508.40,334.15 L517.20,333.04 L526.00,331.84 L534.80,330.56 L543.60,329.20 L552.40,327.76 L561.20,326.23 L570.00,324.63 L578.80,322.93 L587.60,321.16 L596.40,319.30 L605.20,317.37 L614.00,315.34 L622.80,313.24 L631.60,311.05 L640.40,308.79 L649.20,306.43 L658.00,304.00 L666.80,301.48 L675.60,298.88 L684.40,296.20 L693.20,293.44 L702.00,290.59 L710.80,287.67 L719.60,284.65 L728.40,281.56 L737.20,278.38 L746.00,275.13 L754.80,271.78 L763.60,268.36 L772.40,264.85 L781.20,261.26 L790.00,257.59 L798.80,253.84 L807.60,250.00 L816.40,246.08 L825.20,242.08 L834.00,238.00 L842.80,233.83 L851.60,229.58 L860.40,225.25 L869.20,220.84 L878.00,216.34 L886.80,211.76 L895.60,207.10 L904.40,202.36 L913.20,197.53 L922.00,192.63 L930.80,187.63 L939.60,182.56 L948.40,177.40 L957.20,172.16 L966.00,166.84 L974.80,161.44 L983.60,155.95 L992.40,150.38 L1001.20,144.73 L1010.00,139.00" fill="none" stroke="#213e68" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="658" cy="304" r="6" fill="#203c66" stroke="#ffffff" stroke-width="2"/>
+<g font-size="15" fill="#455e75" text-anchor="middle"><text x="130" y="419">0</text><text x="306" y="419">5</text><text x="482" y="419">10</text><text x="658" y="419">15</text><text x="834" y="419">20</text><text x="1010.0000000000001" y="419">25</text></g>
+<g font-size="14" fill="#51677d"><text x="70" y="308" text-anchor="end">0</text><text x="66" y="134">+</text><text x="66" y="346">−</text></g>
+<text x="570" y="452" font-size="18" font-weight="700" fill="#1c3855" text-anchor="middle">Postsynaptic firing rate (Hz)</text>
+<text x="34" y="240" font-size="16" fill="#1c3855" text-anchor="middle" transform="rotate(-90,34,240)">Scaled weight-update rate</text>
+<text x="327" y="149" font-size="22" font-weight="700" text-anchor="middle" fill="#a14342">LTD</text>
+<text x="328" y="174" font-size="16" text-anchor="middle" fill="#b45753">Post rate below threshold</text>
+<text x="837" y="249" font-size="22" font-weight="700" text-anchor="middle" fill="#17734d">LTP</text>
+<text x="837" y="273" font-size="16" text-anchor="middle" fill="#23845a">Post rate above threshold</text>
+<rect x="582" y="93" rx="8" width="152" height="33" fill="#e2ebf5" stroke="#a6bad0"/>
+<text x="658" y="115" font-size="16" font-weight="700" text-anchor="middle" fill="#214466">rₜ = 15 Hz</text>
+<text x="45" y="481" font-size="13.5" fill="#64748b">Adapted and redrawn from H. An, Hebbian’s Rule lecture, slide 29. Rate and plasticity scales are illustrative.</text>
+</g></svg>

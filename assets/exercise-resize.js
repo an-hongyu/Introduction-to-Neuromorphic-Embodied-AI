@@ -4,6 +4,9 @@
  const style=document.createElement('style');
  style.id='exercise-page-responsive';
  style.textContent=`
+ /* Confine theme decorations to the viewport. Wide equations and code retain
+    their own horizontal scroll containers; the page scrolls vertically. */
+ html.practice-book-page,body.practice-book-page{max-width:100%;overflow-x:clip}
  .practice-book-page main,.practice-book-page article{min-width:0}
  .practice-book-page article h1,.practice-book-page article h2,.practice-book-page article h3,.practice-book-page article h4,.practice-book-page article p,.practice-book-page article li{overflow-wrap:anywhere}
  .practice-book-page article .katex-display{max-width:100%;overflow-x:auto;overflow-y:hidden}
@@ -34,7 +37,9 @@
   frame.contentWindow?.postMessage({type:'neai-practice-measure'},location.origin);
  }
  function scan(){
-  document.body?.classList.toggle('practice-book-page',location.pathname.includes('/exercises/'));
+  const isExercise=location.pathname.includes('/exercises/');
+  document.documentElement.classList.toggle('practice-book-page',isExercise);
+  document.body?.classList.toggle('practice-book-page',isExercise);
   document.querySelectorAll(select).forEach(prepare);
  }
  window.addEventListener('message',event=>{

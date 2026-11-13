@@ -15,9 +15,9 @@ These solutions follow the models and assumptions of the corresponding chapters.
 3. **Occupancy bias.** More time spent in one location produces more spikes even at the same rate. Use an occupancy-normalized estimate $\hat r_b=K_b/T_b$ for $T_b>0$, flag low-occupancy bins, and use consistent smoothing.
 4. **Head-direction ablation.** Hold trajectories, train/test split, tuning, and random seeds fixed; compare a position decoder with heading inputs against an otherwise matched decoder without them. Report held-out position error and variability, separately for turns and straight segments. A performance difference is not, by itself, causal proof about biological circuitry.
 
-## Chapter 1 — 1.11 Exercises and Checks for Understanding
+## Chapter 1 — Exercises and Checks for Understanding
 
-[Original exercises](01-neuroscience-background.md#111-exercises-and-checks-for-understanding)
+[Original exercises](01-neuroscience-background.md#exercises-and-checks-for-understanding)
 
 1. **Input, integration, conduction, output.** Synaptic and dendritic regions receive signals; membrane and dendritic properties integrate them; axonal membrane propagates regenerative spikes; terminals transmit to targets. The soma alone omits dendritic location effects, axonal initiation, and synaptic terminal dynamics.
 2. **EPSP versus action potential.** An EPSP is a graded postsynaptic voltage response, whereas an action potential is regenerative. A presynaptic spike may fail to release transmitter, produce too small a drive, or encounter inhibition/refractoriness: it does not guarantee a postsynaptic spike.

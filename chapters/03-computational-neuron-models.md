@@ -4,28 +4,30 @@ title: "Chapter 2 · Computational Models of Neurons"
 
 ## 2.1 Learning objectives and the modeling question
 
-A computational neuron model is a set of mathematical equations that describe neuron's electrophysical activities [[1]](#models-ref-1).
+A computational neuron model uses mathematical equations, sometimes combined with explicit spike-and-reset rules, to describe a neuron's electrophysiological behavior. This chapter focuses on three models: the **leaky integrate-and-fire (LIF) model**, the **Hodgkin-Huxley (HH) model**, and the **Izhikevich model**. They provide different ways to describe membrane integration, action-potential generation, and neuronal firing patterns [[1]](#models-ref-1), [[2]](#models-ref-2), [[3]](#models-ref-4).
 
 By the end of this chapter, you should be able to:
 
-- Distinguish firing-rate models from spike-generation models.
-- Map the leaky integrate-and-fire (LIF) equation to an equivalent RC circuit.
-- Implement an LIF neuron with explicit physical units.
-- Vary model parameters to investigate temporal and multisource integration.
-- Explain what conductance-based neuron models add beyond LIF.
-- Select a neuron model for a clearly stated validation target.
+- Derive the LIF model from an equivalent RC circuit and explain leakage, integration, threshold, and reset.
+- Implement and test an LIF neuron using consistent physical units.
+- Explain how voltage-dependent sodium and potassium conductances generate action potentials in the HH model.
+- Write the Izhikevich equations and reset rules, and explain the roles of the voltage and recovery variables.
+- Analyze how input current and model parameters influence membrane voltage, spike timing, firing rate, and adaptation.
+- Compare LIF, HH, and Izhikevich models in biological detail, computational requirements, and suitability for neuromorphic applications.
 
 **Learn by changing a model.** Worked examples are part of the chapter, before the exercises. Follow **predict → run → change one parameter → explain**. The [self-contained LIF notebook](../notebooks/lif_neuron.ipynb) reproduces all four examples and plots. [Open it in Google Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/lif_neuron.ipynb) to edit code and rerun it, or {download}`download the notebook <../notebooks/lif_neuron.ipynb>` for JupyterLab. The embedded interactive example below runs directly in this page. To edit the Python implementation itself, use Colab or JupyterLab.
 
-## 2.2 Three levels of description
+## 2.2 Three models, three levels of detail
 
-| Description | Example output | What it does not establish by itself |
+The main sequence is **LIF -> HH -> Izhikevich**. LIF introduces membrane integration and event-based spiking; HH explains action potentials through ionic conductances; Izhikevich offers a compact description of varied firing patterns [[1]](#models-ref-1), [[2]](#models-ref-2), [[3]](#models-ref-4).
+
+| Main model | Description | What to learn |
 |---|---|---|
-| Tuning or rate model | Expected firing rate as a function of position or input | Membrane mechanism or individual spike times |
-| Point spiking-neuron model | Voltage-like state and emitted spike times | Full dendritic geometry or molecular mechanisms |
-| Conductance-based or compartmental model | Ionic currents, voltage dynamics, and possibly spatial compartments | Correctness for a cell type without parameter calibration |
+| **LIF** | Passive membrane dynamics with threshold and reset | How an RC-like membrane converts inputs into spike events |
+| **Hodgkin-Huxley** | Membrane voltage coupled to sodium and potassium gating variables | How voltage-dependent ionic currents generate the action-potential waveform |
+| **Izhikevich** | Nonlinear voltage and recovery dynamics with an after-spike reset | How a two-variable model produces different spiking and bursting patterns |
 
-The [Gaussian place field in Chapter 4](02-spatial-cells.md) belongs to the first category. A prescribed rate can drive a stochastic spike generator, or it can be mapped into an input current for a dynamical neuron. Those are different model constructions, with different assumptions and calibration requirements.
+The [Gaussian place field in Chapter 4](02-spatial-cells.md) is a tuning model: it prescribes an expected firing rate from position. The Poisson example below provides supporting background on converting such a rate into stochastic events; it is not a fourth core neuron-dynamics model. Adaptive exponential and FitzHugh-Nagumo models are retained only as optional comparisons.
 
 ## 2.3 A rate model with Poisson spike counts
 
@@ -439,9 +441,59 @@ Original controlled comparison with identical applied current. Events are detect
 [Open the complete HH experiment in Colab](https://colab.research.google.com/github/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI/blob/main/notebooks/hodgkin_huxley.ipynb), or {download}`download it <../notebooks/hodgkin_huxley.ipynb>`.
 
 
-## 2.7 Adaptive exponential and Izhikevich models
+## 2.7 The Izhikevich model
 
-The adaptive exponential integrate-and-fire model adds an exponential spike-initiation term and a recovery current [[3]](#models-ref-3):
+The Izhikevich model combines nonlinear voltage dynamics, a recovery variable, and an after-spike reset to reproduce diverse firing patterns [[3]](#models-ref-4).
+
+### 2.7.1 Equations and reset
+
+$$
+\frac{dv}{dt}=0.04v^2+5v+140-u+I(t),
+\qquad
+\frac{du}{dt}=a(bv-u).
+$$
+
+When the spike reaches its peak cutoff,
+
+$$
+v\geq30\quad\Longrightarrow\quad
+\text{record spike},\qquad v\leftarrow c,\qquad u\leftarrow u+d.
+$$
+
+Here $v$ represents membrane voltage, $u$ provides recovery feedback, and $I$ is input drive. The conventional coefficients give voltage and time mV and ms scales. This normalized formulation does **not** assign $I$ a universal pA calibration. The +30 mV cutoff marks the spike peak, not a fixed physiological spike-initiation threshold [[3]](#models-ref-4).
+
+### 2.7.2 Parameters and firing patterns
+
+| Parameter | Role |
+|---|---|
+| $a$ | Recovery rate; smaller values give slower recovery |
+| $b$ | Coupling of subthreshold voltage to recovery |
+| $c$ | Voltage reset after a spike |
+| $d$ | Increment of recovery after a spike |
+
+Example parameter sets from the original paper are [[3]](#models-ref-4):
+
+| Firing pattern | $a$ | $b$ | $c$ | $d$ |
+|---|---:|---:|---:|---:|
+| Regular spiking | 0.02 | 0.2 | -65 | 8 |
+| Fast spiking | 0.1 | 0.2 | -65 | 2 |
+| Intrinsically bursting | 0.02 | 0.2 | -55 | 4 |
+
+These are qualitative examples, not fitted parameters for a particular recorded cell. Unlike HH, this model does not explicitly track sodium and potassium gates.
+
+### 2.7.3 Comparing the three main models
+
+| Model | Continuous state variables | Spike treatment | Main limitation |
+|---|---|---|---|
+| **LIF** | Membrane voltage $V$ | Fixed threshold and reset; optional refractory timer | Does not generate an ionic action-potential waveform |
+| **HH** | $V,m,h,n$ in the classical single-compartment model | Waveform emerges from ionic currents; no imposed reset | Requires channel kinetics, parameter calibration, and appropriate numerical resolution |
+| **Izhikevich** | Voltage $v$ and recovery $u$ | Nonlinear upstroke followed by peak cutoff and reset | Firing-pattern similarity does not identify individual channel mechanisms |
+
+The number of state equations is only one part of implementation cost. Compare numerical accuracy, time step, event handling, and measured runtime or energy before choosing a model for a neuromorphic system.
+
+### Optional extension: adaptive exponential integrate-and-fire
+
+The adaptive exponential integrate-and-fire model adds an exponential spike-initiation term and a recovery current [[4]](#models-ref-3):
 
 $$
 C_m\dot V=-g_L(V-E_L)+g_L\Delta_Te^{(V-V_T)/\Delta_T}-w+I,
@@ -451,16 +503,6 @@ $$
 
 On a chosen spike event, voltage is reset and $w$ is increased by a specified amount. $w$ is an adaptation current, $a$ a conductance, $\tau_w$ an adaptation time constant, and $\Delta_T$ a voltage scale. These parameters allow richer responses than a passive LIF model, but must be calibrated for the intended application.
 
-The Izhikevich model uses two coupled state variables with a reset and can reproduce several qualitative spiking and bursting patterns with different parameter choices [[4]](#models-ref-4). Its compact form is useful for exploring population dynamics. Reproducing one firing pattern does not establish that its internal variables uniquely correspond to the biological mechanisms of a specific cell.
-
-| Model | Principal state | Useful first question |
-|---|---|---|
-| Poisson rate-to-count model | Prescribed rate | How does stochastic sampling affect a tuning map? |
-| LIF | Voltage plus reset/refractory state | How do integration and thresholding transform inputs into events? |
-| Adaptive exponential model | Voltage and adaptation current | Does adaptation alter responses to sustained input? |
-| Izhikevich model | Voltage-like and recovery variables | Which qualitative firing regimes affect the network? |
-| Hodgkin–Huxley-type model | Voltage and channel gates | Which ionic mechanisms shape the response? |
-
 ## 2.8 Synaptic input and model validation
 
 A current-based synapse prescribes a current waveform. A conductance-based synapse uses a term such as $g_{\mathrm{syn}}(t)(E_{\mathrm{syn}}-V)$ and therefore changes both current and effective membrane conductance. State which form you use, along with its time course, delay, units, and sign convention.
@@ -469,7 +511,7 @@ Before using a neuron model in a spatial network, test a zero-input baseline, a 
 
 For the running LIF example, verify $\tau_m=20$ ms and $t_{\mathrm{cross}}\approx27.73$ ms analytically. Then compare the simulated interspike interval at 0.1 ms and 0.05 ms resolution. Agreement under refinement is more informative than an attractive voltage plot alone.
 
-### Model reduction: a two-variable excitable system
+### Optional extension: a two-variable excitable system
 
 Mallot introduces the FitzHugh–Nagumo system as a reduced description for studying excitation and recovery [[5]](#models-ref-5). One dimensionless form is
 
@@ -502,14 +544,13 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 
 [2] Alan L. Hodgkin and Andrew F. Huxley, “A quantitative description of membrane current and its application to conduction and excitation in nerve,” *The Journal of Physiology*, vol. 117, no. 4, pp. 500–544, 1952, doi: [10.1113/jphysiol.1952.sp004764](https://pubmed.ncbi.nlm.nih.gov/12991237/).
 
-(models-ref-3)=
-
-[3] Romain Brette and Wulfram Gerstner, “Adaptive exponential integrate-and-fire model as an effective description of neuronal activity,” *Journal of Neurophysiology*, vol. 94, no. 5, pp. 3637–3642, 2005, doi: [10.1152/jn.00686.2005](https://pubmed.ncbi.nlm.nih.gov/16014787/).
-
 (models-ref-4)=
 
-[4] Eugene M. Izhikevich, “Simple model of spiking neurons,” *IEEE Transactions on Neural Networks*, vol. 14, no. 6, pp. 1569–1572, 2003, doi: [10.1109/TNN.2003.820440](https://pubmed.ncbi.nlm.nih.gov/18244602/).
+[3] Eugene M. Izhikevich, “Simple model of spiking neurons,” *IEEE Transactions on Neural Networks*, vol. 14, no. 6, pp. 1569–1572, 2003, doi: [10.1109/TNN.2003.820440](https://pubmed.ncbi.nlm.nih.gov/18244602/).
 
+(models-ref-3)=
+
+[4] Romain Brette and Wulfram Gerstner, “Adaptive exponential integrate-and-fire model as an effective description of neuronal activity,” *Journal of Neurophysiology*, vol. 94, no. 5, pp. 3637–3642, 2005, doi: [10.1152/jn.00686.2005](https://pubmed.ncbi.nlm.nih.gov/16014787/).
 
 (models-ref-5)=
 
@@ -518,4 +559,4 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 
 ## Additional Reading Materials
 
-Read *Neuronal Dynamics*, chs. 1–2 [[1]](#models-ref-1), for the transition from membrane circuit to ion-channel kinetics. Compare the original HH paper and the linked Brian implementation [[2]](#models-ref-2) with Laboratory 4, recording voltage origin, temperature, and density units before comparing curves. For reduced excitation–recovery models, read Mallot, sec. 1.3 [[5]](#models-ref-5).
+Read *Neuronal Dynamics*, chs. 1–2 [[1]](#models-ref-1), for the transition from membrane circuit to ion-channel kinetics. Compare the original HH paper and the linked Brian implementation [[2]](#models-ref-2) with Laboratory 4, recording voltage origin, temperature, and density units before comparing curves. Read Izhikevich's original paper [[3]](#models-ref-4), especially its model equations and firing-pattern examples, for the third core model. The adaptive exponential model [[4]](#models-ref-3) and Mallot's reduced excitation-recovery discussion, sec. 1.3 [[5]](#models-ref-5), are optional extensions.

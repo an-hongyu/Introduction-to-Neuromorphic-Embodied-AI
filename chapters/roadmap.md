@@ -4,14 +4,14 @@ title: Curriculum and Development Roadmap
 
 # Curriculum and Development Roadmap
 
-Ten numbered chapters, a detailed grid-to-place section, and eight computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
+Ten numbered chapters with spatial-cell models integrated into Chapter 4, and eight computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
 
 ## Part I — Foundations: available
 
 1. [Neurons and Synapses](01-neuroscience-background.md)
 2. [Computational Models of Neurons](03-computational-neuron-models.md): LIF, HH, reduced models, and model selection
 3. [Hebbian Learning and Synaptic Plasticity](04-hebbian-learning.md): association, Oja, STDP, and eligibility traces
-4. [Spatial Cells](02-spatial-cells.md)
+4. [Spatial Cells and Their Models](02-spatial-cells.md)
 
 ## Part II — Encoding and embodied learning: available
 
@@ -30,7 +30,7 @@ See the [laboratory table](course-reading-map.md) for the complete sequence. The
 
 ## Advanced spatial representations and networks: planned
 
-- Learned place-cell models, remapping, and grid-to-place connectivity (the [fixed readout and interactive grid example](grid-to-place.md) are now available)
+- Learned place-cell models, remapping, and grid-to-place connectivity (the [fixed readout and interactive grid example](02-spatial-cells.md#grid-place-live-example) are now available)
 - Grid, head-direction, border/boundary, speed, and time-cell implementations
 - Path integration and multimodal spatial representations
 - Learning spatial representations and population decoding

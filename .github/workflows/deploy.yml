@@ -35,9 +35,13 @@ jobs:
       - name: Build Jupyter Book
         env:
           BASE_URL: /${{ github.event.repository.name }}
-        run: jupyter book build --html --strict
+        run: |
+          jupyter book build --html --strict
+          python tools/publish_spatial_redirects.py
       - name: Check generated pages and links
-        run: python tests/check_build.py
+        run: |
+          python tests/check_build.py
+          python tests/check_spatial_merge.py
       - name: Include standalone T-maze simulator in published site
         run: |
           mkdir -p ./_build/html/simulator

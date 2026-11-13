@@ -9,7 +9,7 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 1. Neurons and Synapses: neurons, spikes, membrane potential, and synapses; informed by *Principles of Neural Science*, fifth edition.
 2. Computational Models of Neurons: rate/count models, LIF, Hodgkin–Huxley-type models, adaptive exponential models, and model selection.
 3. Hebbian Learning and Synaptic Plasticity: association, constraints, Oja's rule, STDP, and eligibility traces.
-4. Spatial Cells: place, grid, head-direction, border/boundary, speed, and time-related activity.
+4. Spatial Cells and Their Models: hippocampal context and place, grid, head-direction, border, speed, and time cells, with each model beside its biological explanation. Includes Gaussian place fields, grid-to-place readout, and the interactive grid/place experiment.
 
 5. Neural Encoding and the ANN–SNN Bridge.
 6. Visual Perception and Visual Cue Encoding.
@@ -18,7 +18,7 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 9. Nengo, ROS 2, and Gazebo Integration (single-cell notebook plus integration guide).
 10. Capstone: An Associative Learning Robot (synthetic learning experiment plus robot validation protocol).
 
-Original figures, defined units, worked examples, and exercises accompany the chapters. Existing introductory and Place Cell material remains available under supplementary reading and computational laboratories.
+Original figures, defined units, worked examples, and exercises accompany the chapters. Spatial-cell biology and model derivations share Chapter 4; runnable notebooks and execution guides remain under computational laboratories.
 
 The computational laboratories begin with a **Computational Models of Neurons** guide and follow this sequence: Laboratory 1, LIF neuron (`lif_neuron.ipynb`); Laboratory 2, Place Cells (`place_cells.ipynb`); Laboratory 3, Hebbian learning (`hebbian_learning.ipynb`); Laboratory 4, Hodgkin–Huxley; Laboratory 5, Conditioning; Laboratory 6, Sensory Encoding; Laboratory 7, One Neuron in Nengo; Laboratory 8, Grid Cells to Place-Like Fields. See `chapters/course-reading-map.md`.
 
@@ -35,6 +35,7 @@ Install Python 3.12 and Node.js 24 LTS, then run:
 
 ```bash
 python -m pip install -r requirements.txt
+python tools/fetch_spatial_figures.py
 jupyter book start
 ```
 
@@ -49,15 +50,18 @@ jupyter book start
 ## Validation and deployment
 
 ```bash
+python tools/fetch_spatial_figures.py
 python tests/execute_notebook.py
 BASE_URL=/Introduction-to-Neuromorphic-Embodied-AI jupyter book build --html --strict
+python tools/publish_spatial_redirects.py
 python tests/check_build.py
+python tests/check_spatial_merge.py
 ```
 
 The `.github/workflows/deploy.yml` workflow executes all eight notebooks, builds Jupyter Book,
 checks generated pages and local links, and deploys to GitHub Pages on `main`.
 Repository Settings → Pages must use **GitHub Actions** as the source.
-Pull requests run the build and checks without deploying.
+Pull requests run the build and checks without deploying. The former grid-to-place chapter URL redirects to the corresponding model or experiment within Chapter 4.
 
 ## Future updates with ChatGPT
 
@@ -92,4 +96,4 @@ The ROS 2 Jazzy / Gazebo Harmonic integration chapter is a guide. A complete Gaz
 
 ## Interactive grid-to-place laboratory
 
-`chapters/grid-to-place.md` specifies Liu et al.'s source conventions, lattice spacing/frequency conversion, cosine fields, and a fixed normalized weighted readout. `assets/grid-place-interactive.html` runs the experiment without external dependencies. Laboratory 8 reproduces it in Python. Generate its notebook/reference fixtures with `python tools/build_grid_place_examples.py`; `node tests/test_grid_place_interactive.cjs` compares the embedded JavaScript to NumPy and checks grid geometry and alias controls. This teaching readout does not claim learned place-field formation.
+`chapters/02-spatial-cells.md` now contains the complete model material: Section 4.3 covers Gaussian place fields, spike generation, grid-to-place readout, the interactive experiment, and learned mapping; Section 4.4 specifies Liu et al.'s source conventions, lattice spacing/frequency conversion, and cosine grid fields. `chapters/grid-to-place.md` is a compatibility entry, not a separate model chapter. `assets/grid-place-interactive.html` runs the experiment without external dependencies. Laboratory 8 reproduces it in Python. Generate its notebook/reference fixtures with `python tools/build_grid_place_examples.py`; `node tests/test_grid_place_interactive.cjs` compares the embedded JavaScript to NumPy and checks grid geometry and alias controls. This teaching readout does not claim learned place-field formation.

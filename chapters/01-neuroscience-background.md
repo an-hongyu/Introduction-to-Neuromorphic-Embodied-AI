@@ -42,7 +42,7 @@ Dendrites are not merely passive wires, and the soma is not a universal centrali
 
 A **neural circuit** consists of connected neurons whose activity influences one another. **Convergence** means that several neurons send input to a common target; **divergence** means that one neuron sends output to multiple targets. These patterns allow a circuit to combine information and distribute its consequences. Inhibition can coordinate competing actions as well as suppress activity. For example, activating a pathway that contracts one muscle while inhibiting its antagonist supports coordinated movement [[1]](#neuro-ref-1), ch. 2.
 
-```{figure} ../assets/neuron-synapse.svg
+```{figure} ../assets/neuron-anatomy-chemical-synapse-2026.svg
 :label: fig-neuron-synapse
 :alt: Labeled anatomy of a pink neuron showing dendrites, nucleus, soma, axon initial segment, myelinated axon, and axon terminals, with a circular inset of neurotransmitter release at a chemical synapse
 :width: 100%

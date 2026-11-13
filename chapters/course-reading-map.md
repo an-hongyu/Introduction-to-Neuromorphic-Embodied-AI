@@ -15,7 +15,7 @@ This map connects the supplied course lectures and final project to the textbook
 | Spatial representations | [Chapter 4](02-spatial-cells.md) | Primary evidence and each cell type's model, grid-to-place interaction, occupancy normalization, and spatial notebooks |
 | Hodgkin–Huxley model | [Chapter 2, HH section](03-computational-neuron-models.md#fig-hh-course-dynamics) | Complete gates/units, RK4 notebook, sodium ablation and convergence checks |
 | Leaky integrate-and-fire model | [Chapter 2](03-computational-neuron-models.md) | RC circuit, embedded interactive experiment, temporal and multisource integration |
-| Hebbian learning | [Chapter 3](04-hebbian-learning.md) | Outer-product memory and controlled visual–vibration association |
+| Hebbian's Rule (Topic 3-3) | [Chapter 3](04-hebbian-learning.md) | Lecture-based pairing/EPSP protocol, four potentiation/depression rate-threshold diagrams, smooth postsynaptic rate threshold, STDP spike-order figure; outer-product memory and visual–vibration association |
 | Visual Perception I/II | [Chapter 6](06-visual-perception.md) | Lecture-based light and imaging, CCD/CMOS/Bayer, tristimulus and color matching, image arrays, mean/Gaussian filters, chroma keying, and the existing RGB-to-LIF experiment |
 | IMU | [Chapter 7](07-inertial-sensing.md) | Units/frames, gravity limitations, causal RMS vibration detector |
 | LiDAR | [Chapter 8](08-lidar-encoding.md) | Lecture ranging, scanning, point clouds, original images/animations/videos, weather, motion distortion, and return ambiguities; 36-sector encoding with validity masks and coordinate transforms |

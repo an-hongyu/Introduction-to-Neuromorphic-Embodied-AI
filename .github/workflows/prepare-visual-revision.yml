@@ -1,0 +1,74 @@
+name: Prepare visual chapter revision
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/prepare-visual-revision.yml']
+permissions:
+  contents: write
+jobs:
+  prepare:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'book/visual-perception-from-course-slides'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: book/visual-perception-from-course-slides
+      - name: Apply narrowly scoped curriculum edits
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          def edit(name, transform):
+              p=Path(name); old=p.read_text(); new=transform(old)
+              p.write_text(new)
+              print(name, 'changed' if new != old else 'unchanged')
+          def remove_lines(text, token):
+              return ''.join(line for line in text.splitlines(keepends=True) if token not in line)
+          oldchapter=Path('chapters/05-neural-encoding.md')
+          if oldchapter.exists():
+              assert 'Neural Encoding and the ANN' in oldchapter.read_text()
+              oldchapter.unlink()
+          edit('myst.yml', lambda s: remove_lines(s,'file: chapters/05-neural-encoding.md'))
+          edit('index.md', lambda s: remove_lines(s,'chapters/05-neural-encoding.md').replace('Ten numbered chapters','Nine numbered chapters'))
+          edit('README.md', lambda s: remove_lines(s,'5. Neural Encoding and the ANN').replace('Ten numbered chapters','Nine numbered chapters'))
+          edit('chapters/roadmap.md', lambda s: remove_lines(s,'05-neural-encoding.md').replace('Ten numbered chapters','Nine numbered chapters'))
+          edit('chapters/course-reading-map.md', lambda s: remove_lines(s,'05-neural-encoding.md').replace('Imaging context, color feature, filtering discussion, synthetic RGB-to-LIF experiment','Lecture-based light and imaging, CCD/CMOS/Bayer, tristimulus and color matching, image arrays, mean/Gaussian filters, chroma keying, and the existing RGB-to-LIF experiment'))
+          p=Path('chapters/solutions-embodied.md'); text=p.read_text()
+          start=text.index('## Chapter 5'); stop=text.index('## Chapter 6', start)
+          text=text[:start]+text[stop:]
+          text=text.replace('Part II: Neural Encoding and Embodied Robotics','Part II: Sensors and Embodied Robotics')
+          text=text.replace('## Chapter 6 \u2014 6.6 Exercises','(vision-solutions)=\n## Chapter 6 \u2014 6.12 Exercises')
+          text=text.replace('06-visual-perception.md#66-exercises','06-visual-perception.md#vision-exercises')
+          extra=r'''
+          5. **Separate the roles.** A camera is the sensor; a measured cue or mask is a perception output; choosing a turn is a planning/control decision; the motors are actuators. An RGB array records measurements, not a motor command.
+          6. **Measurement units.** Radiant flux measures physical power in W; luminous flux measures visually weighted flux in lm. Irradiance is W/m² and illuminance is lx = lm/m². A pixel value is a digitized sample and needs a calibration and acquisition model before it can be interpreted as lux.
+          7. **Projection.** $x'=8(150)/600=2$ mm. At $Z=1200$ mm, $x'=1$ mm. With the physical image plane behind the pinhole and the same axis orientation, the coordinates are $-2$ mm and $-1$ mm, expressing inversion.
+          8. **Bayer and resolution.** The representative block has one R, two G, and one B site. $4912\times3684=18{,}095{,}808$ sites, approximately 18.1 MP. A filtered photosite is not a complete RGB triplet.
+          9. **Color matching.** Write $A\mathbf c=\mathbf t$, where columns of $A$ are the three response vectors to the primaries. If $A$ is invertible, $\mathbf c=A^{-1}\mathbf t$. A coefficient $R<0$ means moving $|R|\mathbf p_R$ to the test-light side; no source emits negative power.
+          10. **Normalized RGB.** The sum is 1.6 and the ratios are $(0.3125,0.125,0.5625)$. Their maximum is 0.5625, compared with 0.9 for the original values. The code on slide 66 converts the normalized values. Black gives a zero denominator and must be handled separately. These ratios alone do not establish CIE chromaticity coordinates.
+          11. **Threshold.** The binary result is $[0,0,1,1]$ under the stated greater-than-or-equal convention. On normalized inputs use $180/255\approx0.705882$.
+          12. **Mean filter.** The first selected block sums to 180, giving 20. The second displayed block sums to $50+10+37+20+30+72+10+20+11=260$, giving $260/9\approx28.8889$. The second printed list on the lecture slide uses different entries and does not support that displayed result; the chapter identifies which matrix is used.
+          13. **Gaussian kernel.** For $h=1$, $\sigma=1$, unnormalized center, side, and corner weights are $1$, $e^{-1/2}$, and $e^{-1}$. Divide by $1+4e^{-1/2}+4e^{-1}\approx4.8976404$. The normalized weights are approximately 0.20417996, 0.12384140, and 0.07511361, respectively. They sum to 1, so an edge-padded constant image remains constant. Window size and $\sigma$ are different parameters.
+          14. **Point versus neighborhood.** A point operation uses the corresponding pixel only; a neighborhood filter combines adjacent pixels. Smoothing can mix a small landmark with its background, reducing contrast and possibly preventing threshold crossing. This prediction should be tested at fixed cue size, kernel, and boundary convention.
+          15. **Masking.** With $M=1$, $Z=F$; with $M=0$, $Z=B$. For $F=(1,0,0)$ and $B=(0,0,1)$, these are red and blue. An incorrect mask selects the wrong source, even when the compositing arithmetic is correct.
+          16. **Failure localization.** Log frame, ROI, preprocessing, feature, current, spikes, weights, and action. A visible target with a missing feature indicates acquisition/perception trouble. A correct feature but unexpected current or neural response points to encoding or neuron-model implementation. Verified cue activity without the learned response points to association/readout. Keep parameters frozen in held-out trials and separate these outcomes from actuation failure.
+
+          '''
+          extra='\n'.join(line[10:] if line.startswith('          ') else line for line in extra.splitlines())
+          text=text.replace('\n## Chapter 7', '\n'+extra+'\n## Chapter 7', 1); p.write_text(text)
+          edit('chapters/06-visual-perception.md', lambda s: s.replace('assert convolve_gray(patch, np.ones((3, 3)) / 9)[1, 1] == 20','assert np.isclose(convolve_gray(patch, np.ones((3, 3)) / 9)[1, 1], 20)'))
+          edit('tests/check_build.py', lambda s: s.replace("'Place Cell', 'Neural Encoding', 'Visual Perception'", "'Place Cell', 'Visual Perception'").replace('import subprocess\n','import subprocess\nimport sys\n\nsubprocess.run([sys.executable, str(Path(__file__).with_name(\'check_visual_chapter.py\'))], check=True)\n',1))
+          with Path('AGENTS.md').open('a') as f:
+              f.write('\n- Chapter 5 (Neural Encoding and the ANN-SNN Bridge) was removed at the author\'s request. Do not restore it. Keep the remaining chapter numbers and URLs stable; Visual Perception remains Chapter 6.\n- Chapter 6 follows the supplied Visual Perception Part I (79 slides) and Part II (66 slides). Preserve source attribution, explicit notes on inconsistent slide examples, and the distinction between lecture material and the textbook\'s RGB-to-LIF experiment.\n')
+          print('Curriculum cleanup and 16 visual-perception solutions prepared.')
+          PY
+      - name: Commit only the prepared changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add myst.yml index.md README.md AGENTS.md chapters/05-neural-encoding.md chapters/06-visual-perception.md chapters/solutions-embodied.md chapters/course-reading-map.md chapters/roadmap.md tests/check_build.py
+          if ! git diff --cached --quiet; then
+            git commit -m "Remove the requested encoding chapter and synchronize visual-perception exercises and navigation"
+            git push origin HEAD:book/visual-perception-from-course-slides
+          fi

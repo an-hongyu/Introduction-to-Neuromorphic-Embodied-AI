@@ -1,5 +1,5 @@
 ---
-title: "Chapter 6 · Visual Perception and Visual Cue Encoding"
+title: "Chapter 6 · Visual Perception and Encoding"
 ---
 
 ## 6.1 Learning objectives

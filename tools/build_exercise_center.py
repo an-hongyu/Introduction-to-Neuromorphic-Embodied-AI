@@ -116,7 +116,7 @@ def iframe(topic_id: str) -> str:
 :width: 100%
 ```
 
-[Open practice in a full page]({BASE}/exercise-practice.html?topic={topic_id}) | [Readable question bank](question-bank.md)
+[Open practice in a full page](/exercise-practice.html?topic={topic_id}) | [Readable question bank](question-bank.md)
 '''
 
 
@@ -157,7 +157,7 @@ def data_and_groups() -> tuple[dict, dict]:
                                       sourceHref=chapter_url(stem), sourceLabel=f'Review section {section}', sig=sig))
     assert len(all_questions) == 120
     assert len({q['id'] for q in all_questions}) == 120
-    return dict(version=1, base=BASE, topics=metadata, questions=all_questions), all_groups
+    return dict(version=1, base=BASE, home=BASE+'/exercises/', topics=metadata, questions=all_questions), all_groups
 
 
 def generate() -> None:
@@ -170,8 +170,6 @@ def generate() -> None:
     index = f'''---
 title: "Exercises & Interactive Questions"
 ---
-
-# Exercises & Interactive Questions
 
 Practice the concepts, calculations, and experimental decisions in this book. This section brings together **120 interactive multiple-choice questions** and **{count} original written exercises**, organized by chapter and laboratory.
 
@@ -191,8 +189,6 @@ Select an option for immediate feedback and an explanation. Use **Try again**, *
 title: "Question Bank and Explanations"
 ---
 
-# Question Bank and Explanations
-
 This readable version contains the same 120 questions and answer explanations as the interactive player. Each answer is initially collapsed. These are new self-checks adapted from the book's stated concepts and model assumptions, not additional empirical findings.
 
 [Return to the exercise center](index.md)
@@ -202,8 +198,6 @@ This readable version contains the same 120 questions and answer explanations as
         doc = f'''---
 title: "{t['title']} - Exercises"
 ---
-
-# {t['title']}: Exercises
 
 [Exercise center](index.md) | [Readable choice questions](question-bank.md#practice-bank-{tid})
 

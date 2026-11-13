@@ -44,10 +44,10 @@ A **neural circuit** consists of connected neurons whose activity influences one
 
 ```{figure} ../assets/neuron-synapse.svg
 :label: fig-neuron-synapse
-:alt: Original schematic showing dendrites, soma, axon initial segment, axon, terminals, and a chemical synapse
+:alt: Labeled anatomy of a pink neuron showing dendrites, nucleus, soma, axon initial segment, myelinated axon, and axon terminals, with a circular inset of neurotransmitter release at a chemical synapse
 :width: 100%
 
-The same neuron performs different signaling functions in different regions. The synapse inset distinguishes electrical conduction within a neuron from chemical communication between cells. This conceptual schematic is not to scale.
+**Neuron anatomy and chemical synaptic transmission.** Dendrites receive synaptic inputs, the soma and dendrites integrate electrical signals, and action potentials typically initiate near the axon initial segment and propagate along the axon toward its terminals. The enlarged inset illustrates presynaptic transmitter release and receptors on the postsynaptic membrane. Original teaching illustration; schematic and not to scale.
 ```
 
 **Glial cells** support this system. Their roles include maintaining the extracellular environment, supporting metabolism, forming myelin, and participating in transmitter handling and interactions at synapses. A simulation that omits glia is choosing a scope of explanation; it is not showing that glia are biologically unimportant.

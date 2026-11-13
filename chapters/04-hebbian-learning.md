@@ -184,7 +184,7 @@ A separate LIF readout receives $I=50+200(wx+u)$ pA. CS alone therefore supplies
 Original synthetic results. Both unpaired and frozen-learning controls retain the initial weight. A larger learned weight alone is insufficient: compare the held-out response conditions too.
 ```
 
-[Laboratory 5](../notebooks/conditioning.ipynb) contains the complete training function, physical-unit LIF readout, and controls. Change learning rate, trial count, or initial weight. A larger initial weight can make CS effective before pairing and change the unpaired control; state these conditions when interpreting results. [Chapter 10](10-associative-learning-robot.md) turns this example into a staged robot experiment with separate sensing, learning, and behavioral evaluation.
+[Laboratory 5](../notebooks/conditioning.ipynb) contains the complete training function, physical-unit LIF readout, and controls. Change learning rate, trial count, or initial weight. A larger initial weight can make CS effective before pairing and change the unpaired control; state these conditions when interpreting results. [Chapter 9](10-associative-learning-robot.md) turns this example into a staged robot experiment with separate sensing, learning, and behavioral evaluation.
 
 ## 3.9 Connecting spatial representations to behavior
 

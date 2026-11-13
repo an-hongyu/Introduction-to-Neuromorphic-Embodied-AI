@@ -40,12 +40,11 @@ The [course-to-book reading map](chapters/course-reading-map.md) connects lectur
 
 | Chapter | What you build or evaluate |
 |---|---|
-| [5. Neural Encoding and the ANN–SNN Bridge](chapters/05-neural-encoding.md) | Explicit feature, current, rate, and latency contracts |
-| [6. Visual Perception](chapters/06-visual-perception.md) | RGB cue features and LIF responses |
-| [7. Inertial Sensing](chapters/07-inertial-sensing.md) | A causal vibration detector with units and timing |
-| [8. LiDAR Encoding](chapters/08-lidar-encoding.md) | Thirty-six sectors, missing-data masks, and coordinate frames |
-| [9. Nengo, ROS 2, and Gazebo](chapters/09-nengo-ros-gazebo.md) | One executable Nengo neuron and a staged simulator integration guide |
-| [10. An Associative Learning Robot](chapters/10-associative-learning-robot.md) | A controlled cue-pairing experiment and robot validation protocol |
+| [5. Visual Perception](chapters/06-visual-perception.md) | RGB cue features and LIF responses |
+| [6. Inertial Sensing](chapters/07-inertial-sensing.md) | A causal vibration detector with units and timing |
+| [7. LiDAR Encoding](chapters/08-lidar-encoding.md) | Thirty-six sectors, missing-data masks, and coordinate frames |
+| [8. Nengo, ROS 2, and Gazebo](chapters/09-nengo-ros-gazebo.md) | One executable Nengo neuron and a staged simulator integration guide |
+| [9. An Associative Learning Robot](chapters/10-associative-learning-robot.md) | A controlled cue-pairing experiment and robot validation protocol |
 
 ## Explore models within Chapter 4
 
@@ -79,7 +78,7 @@ Read the [Neuromorphic Embodied AI overview](chapters/01-introduction.md) for th
 
 Prerequisites: introductory Python, linear algebra, elementary probability, and basic neuroscience vocabulary. The laboratories use NumPy and Matplotlib and run on a standard laptop or Google Colab. Laboratory 7 also uses Nengo; installation instructions and pinned dependencies are provided.
 
-> **Project status.** Ten numbered chapters with spatial-cell models integrated into Chapter 4, and eight executable laboratories are available. The ROS 2/Gazebo chapters provide integration and evaluation guides; a complete simulated robot has not been validated in this release. Advanced topics listed in the roadmap remain planned. The Spike Flow Networks material will be labeled as a research framework and separated from established neuroscience.
+> **Project status.** Nine numbered chapters with spatial-cell models integrated into Chapter 4, and eight executable laboratories are available. The ROS 2/Gazebo chapters provide integration and evaluation guides; a complete simulated robot has not been validated in this release. Advanced topics listed in the roadmap remain planned. The Spike Flow Networks material will be labeled as a research framework and separated from established neuroscience.
 
 ## Citation
 

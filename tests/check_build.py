@@ -15,7 +15,7 @@ assert len(html_files) >= 22, f'Expected at least 22 book pages, found {len(html
 all_html = '\n'.join(p.read_text() for p in html_files)
 for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
              'Neurons and Synapses', 'Spatial Cells', 'Computational Models of Neurons',
-             'Hebbian Learning and Synaptic Plasticity', 'Place Cell', 'Neural Encoding', 'Visual Perception',
+             'Hebbian Learning and Synaptic Plasticity', 'Place Cell', 'Visual Perception',
              'Inertial Sensing', 'LiDAR', 'Nengo', 'Associative Learning Robot',
              'Course-to-Book Reading Map', 'Curriculum and Development Roadmap', 'colab.research.google.com']:
     assert text in all_html, f'Missing published content: {text}'
@@ -56,3 +56,12 @@ for page in html_files:
             assert f'id="{anchor}"' in text or f"id='{anchor}'" in text, f'Missing anchor in {page}: {url}'
         checked.add(url)
 print(f'Verified {len(html_files)} HTML pages, equations, notebook, figures, and {len(checked)} local URLs.')
+
+# Regression checks for the author-requested removal of the ANN-SNN bridge.
+assert not (root.parent.parent / 'chapters/05-neural-encoding.md').exists()
+assert not (root / 'chapters/neural-encoding/index.html').exists()
+assert 'Neural Encoding and the ANN' not in all_html
+for number, title in [(5, 'Visual Perception'), (6, 'Inertial Sensing'),
+                      (7, 'LiDAR'), (8, 'Nengo'), (9, 'Capstone')]:
+    assert f'Chapter {number} \u00b7 {title}' in all_html
+print('Removed chapter regression passed; retained chapters are numbered 1 through 9.')

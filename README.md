@@ -11,12 +11,11 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 3. Hebbian Learning and Synaptic Plasticity: association, constraints, Oja's rule, STDP, and eligibility traces.
 4. Spatial Cells and Their Models: hippocampal context and place, grid, head-direction, border, speed, and time cells, with each model beside its biological explanation. Includes Gaussian place fields, grid-to-place readout, and the interactive grid/place experiment.
 
-5. Neural Encoding and the ANN–SNN Bridge.
-6. Visual Perception and Visual Cue Encoding.
-7. Inertial Sensing and Vibration Encoding.
-8. LiDAR and Thirty-Six-Channel Spatial Encoding.
-9. Nengo, ROS 2, and Gazebo Integration (single-cell notebook plus integration guide).
-10. Capstone: An Associative Learning Robot (synthetic learning experiment plus robot validation protocol).
+5. Visual Perception and Visual Cue Encoding.
+6. Inertial Sensing and Vibration Encoding.
+7. LiDAR and Thirty-Six-Channel Spatial Encoding.
+8. Nengo, ROS 2, and Gazebo Integration (single-cell notebook plus integration guide).
+9. Capstone: An Associative Learning Robot (synthetic learning experiment plus robot validation protocol).
 
 Original figures, defined units, worked examples, and exercises accompany the chapters. Spatial-cell biology and model derivations share Chapter 4; runnable notebooks and execution guides remain under computational laboratories.
 

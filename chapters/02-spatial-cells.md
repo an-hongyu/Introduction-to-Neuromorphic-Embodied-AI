@@ -482,7 +482,7 @@ For the computational models, read Liu et al. [[20]](#spatial-ref-20), secs. 2.1
 
 For biological context, read *Principles of Neural Science* [[1]](#spatial-ref-1) alongside the hippocampal anatomy and memory discussion in *Computational Cognitive Neuroscience* [[2]](#spatial-ref-2). O'Keefe and Nadel's *The Hippocampus as a Cognitive Map* [[3]](#spatial-ref-3) provides the historical theoretical foundation; the authors have made a readable copy available through UCL.
 
-For primary discoveries, begin with place cells [[4]](#spatial-ref-4), grid cells [[7]](#spatial-ref-7), head-direction cells [[10]](#spatial-ref-10), border cells [[12]](#spatial-ref-12), speed cells [[14]](#spatial-ref-14), and time cells [[16]](#spatial-ref-16). Use the illustrated studies in this chapter to connect those definitions to real experimental measurements. The [grid-to-place model in Section 4.3.5](#grid-place-readout) and [Chapter 8 LiDAR encoder](08-lidar-encoding.md) supply the computational bridge.
+For primary discoveries, begin with place cells [[4]](#spatial-ref-4), grid cells [[7]](#spatial-ref-7), head-direction cells [[10]](#spatial-ref-10), border cells [[12]](#spatial-ref-12), speed cells [[14]](#spatial-ref-14), and time cells [[16]](#spatial-ref-16). Use the illustrated studies in this chapter to connect those definitions to real experimental measurements. The [grid-to-place model in Section 4.3.5](#grid-place-readout) and [Chapter 7 LiDAR encoder](08-lidar-encoding.md) supply the computational bridge.
 
 (spatial-exercises)=
 

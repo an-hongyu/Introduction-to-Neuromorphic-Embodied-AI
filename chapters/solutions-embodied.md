@@ -40,7 +40,7 @@ Worked answers use the chapter's specified units and model conventions. Suggeste
 4. **Synthetic tilt control.** Add a slow time-varying gravity projection to the original signal, preserve the known vibration interval, and count detections outside it with the unmodified algorithm. Compare raw and detrended filters on the same noise seed. A numerical false-positive count requires running the altered experiment.
 
 (lidar-solutions)=
-## Chapter 8 - 8.13 Exercises
+## Chapter 8 - 8.12 Exercises
 
 [Original exercises](08-lidar-encoding.md#85-exercises)
 
@@ -59,7 +59,7 @@ Worked answers use the chapter's specified units and model conventions. Suggeste
 13. **Poisson interpretation.** The expected count is $42.8(0.5)=21.4$. The 1 ms probability is $1-\exp(-42.8\times0.001)\approx0.041897$, about 4.19%. A count expectation averages over hypothetical repetitions and need not be an integer; each realized count is integer-valued. The code samples counts, permitting more than one event per bin.
 14. **Motion during a scan.** Translation is $1(0.1)=0.1$ m and heading change is $90(0.1)=9^\circ$. First-ray time, per-ray time increment, frame identity, mounting transform, and a time-dependent pose estimate are needed to associate each measurement with the correct acquisition geometry. Scan time alone is not a substitute for all of these.
 15. **World endpoint.** For the stated pose, $x_w=1+\cos90^\circ=1$ m and $y_w=2+\sin90^\circ=3$ m. With a mounting offset, apply $T_{bs}$ before the time-dependent body-to-world transform. Translation can change bearing and distance relative to the body origin, so adding only a yaw offset is not generally enough.
-16. **Winter replay protocol.** Freeze preprocessing, validity policy, sector aggregation, and neural parameters before testing held-out sequences. Log raw measurements, timestamps, masks, sector minima, prescribed rates, event counts, and control decisions. Evaluate missing-sector frequency separately from unexpected near returns; check the numerical encoder on known synthetic inputs. Ground-truth annotations are used for evaluation, not supplied as hidden inputs. Compare matched replay conditions before attributing a difference to learning. No benchmark score follows without actually running the selected data.
+16. **Simulated-scan replay protocol.** Freeze preprocessing, validity policy, sector aggregation, and neural parameters before replaying a fixed sequence of simulated scans. Log range measurements, timestamps, validity masks, sector minima, prescribed rates, spike counts, and decisions. Evaluate missing-sector frequency separately from unexpected near returns; check the encoder against known synthetic inputs. The simulator's true obstacle positions can be used to evaluate performance, but are not supplied as hidden encoder inputs. Quantitative results require running the replay under stated conditions.
 
 ## Chapter 9 — 9.6 Exercises
 

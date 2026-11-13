@@ -13,18 +13,35 @@ manifest=json.loads((root/'assets/lidar-lecture/manifest.json').read_text())
 assert len(manifest['images'])==24
 assert sum(r['frames']>1 for r in manifest['images'])==2
 assert len(manifest['videos'])==3
+# Five late-lecture dataset/mission demonstration images remain archived as source
+# assets, but are intentionally not displayed in the textbook chapter.
+excluded_figures = {
+    'wads-winter-point-cloud.png',
+    'cadc-driving-example.png',
+    'waymo-lidar-labels.png',
+    'sydney-urban-objects.png',
+    'lidar-detection-example.png',
+}
+assert len(excluded_figures) == 5
 for r in manifest['images']:
     path=root/'assets/lidar-lecture'/r['file']
     assert hashlib.sha256(path.read_bytes()).hexdigest()==r['sha256'],path
     with Image.open(path) as im:
         assert list(im.size)==r['size']
         assert getattr(im,'n_frames',1)==r['frames']
-    assert '../assets/lidar-lecture/'+r['file'] in s
-    assert 'fig-lidar-'+Path(r['file']).stem in s
+    src = '../assets/lidar-lecture/' + r['file']
+    label = 'fig-lidar-' + Path(r['file']).stem
+    if r['file'] in excluded_figures:
+        assert src not in s and label not in s
+    else:
+        assert src in s and label in s
 assert 'sensor-course-lidar.png' in s and ':label: fig-sensor-lidar' in s
 assert '(85-exercises)=' in s
-assert '## 8.12 Additional Reading Materials' in s
-questions=s.split('## 8.13 Exercises',1)[1].split('## References',1)[0]
+assert '## 8.9 Worked neural encoder: 36 angular sectors' in s
+assert '## 8.10 Connect the encoder to spatial representations' in s
+assert '## 8.11 Additional Reading Materials' in s
+assert not re.search(r'\bdatasets?\b', s, re.I)
+questions=s.split('## 8.12 Exercises',1)[1].split('## References',1)[0]
 assert len(re.findall(r'^\d+\. ',questions,re.M))==16
 solutions=(root/'chapters/solutions-embodied.md').read_text()
 answers=solutions.split('## Chapter 8',1)[1].split('## Chapter 9',1)[0]
@@ -74,6 +91,9 @@ assert 'fig-sensor-lidar' in p.ids
 base='/Introduction-to-Neuromorphic-Embodied-AI'
 for rec in manifest['images']:
     key=Path(rec['file']).stem
+    if rec['file'] in excluded_figures:
+        assert 'fig-lidar-'+key not in p.ids
+        continue
     assert 'fig-lidar-'+key in p.ids
     # MyST may truncate filenames; compare the actual published bytes instead.
     found=False
@@ -85,8 +105,12 @@ for rec in manifest['images']:
         if q.is_file() and hashlib.sha256(q.read_bytes()).hexdigest()==rec['sha256']:found=True;break
     assert found,'Image missing from rendered page: '+key
 for video in manifest['videos']:
-    assert any('lidar-lecture-media.html?v='+video['id'] in u for u in p.frames)
-    assert any(video['watch_url'] in u for u in p.links)
+    embedded = any('lidar-lecture-media.html?v='+video['id'] in u for u in p.frames)
+    linked = any(video['watch_url'] in u for u in p.links)
+    if video['id'] == 'NZKvf1cXe8s':
+        assert embedded and linked, 'The LiDAR 101 teaching video must remain accessible'
+    else:
+        assert not embedded and not linked, 'Dataset/campus demo video must not appear in Chapter 8'
 player=htmlroot/'lidar-lecture-media.html'
 assert player.is_file()
 player_text=player.read_text()
@@ -100,4 +124,4 @@ assert 'lidar-solutions' in q.ids
 exercise_links = [x for x in q.links if 'lidar-encoding' in x and 'exercises' in x]
 assert exercise_links
 assert all(unquote(urlsplit(x).fragment) in p.ids for x in exercise_links)
-print('Chapter 8 verified: 22 original static figure groups, two intact GIFs, three source video links/players, 16 exercises/answers, encoder examples, and published asset bytes.')
+print('Chapter 8 verified: 17 source static figure groups, two GIFs, one teaching video, 16 exercises/answers, neural encoder examples, and no dataset figures in the published chapter.')

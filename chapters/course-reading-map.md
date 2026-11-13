@@ -18,7 +18,7 @@ This map connects the supplied course lectures and final project to the textbook
 | Hebbian learning | [Chapter 3](04-hebbian-learning.md) | Outer-product memory and controlled visual–vibration association |
 | Visual Perception I/II | [Chapter 6](06-visual-perception.md) | Lecture-based light and imaging, CCD/CMOS/Bayer, tristimulus and color matching, image arrays, mean/Gaussian filters, chroma keying, and the existing RGB-to-LIF experiment |
 | IMU | [Chapter 7](07-inertial-sensing.md) | Units/frames, gravity limitations, causal RMS vibration detector |
-| LiDAR | [Chapter 8](08-lidar-encoding.md) | Lecture ranging, scanning, point clouds, original images/animations/videos, weather and dataset examples; 36-sector encoding with validity masks and coordinate transforms |
+| LiDAR | [Chapter 8](08-lidar-encoding.md) | Lecture ranging, scanning, point clouds, original images/animations/videos, weather, motion distortion, and return ambiguities; 36-sector encoding with validity masks and coordinate transforms |
 | ROS, Nengo, Gazebo project preparation | [Chapter 9](09-nengo-ros-gazebo.md) | Executed single-cell Nengo notebook; simulator integration milestones and message contract |
 | Final associative robot project | [Chapter 10](10-associative-learning-robot.md) | CS/US protocol, executed NumPy/LIF example, controls, frozen evaluation, Gazebo extension guide |
 

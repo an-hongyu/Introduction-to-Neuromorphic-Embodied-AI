@@ -6,7 +6,7 @@ title: "Chapter 8 \u00b7 Neural Encoding for LiDAR Sensing"
 
 A LiDAR does not directly report an obstacle-avoidance decision or a place-cell response. It measures light returned from the environment. Those measurements must be associated with directions and acquisition times, interpreted in a coordinate frame, and transformed into the inputs consumed by a neural model.
 
-This chapter follows the supplied **Introduction to LiDAR** lecture: ranging principles, scanning hardware, survey applications, return signals, sensor parameters, point clouds, limitations, and driving datasets [[1]](#lidar-ref-1). The original lecture images, two animations, and three video links accompany the discussion. Sections 8.10-8.11 extend that material into the book's existing **36-channel neural encoder**; its parameters are teaching choices, not sensor specifications or experimental results reported in the lecture.
+This chapter follows the supplied **Introduction to LiDAR** lecture: ranging principles, scanning hardware, survey applications, return signals, sensor parameters, point clouds, and sensing limitations [[1]](#lidar-ref-1). The original lecture images, two animations, and three video links accompany the discussion. Sections 8.9-8.10 extend that material into the book's existing **36-channel neural encoder**; its parameters are teaching choices, not sensor specifications or experimental results reported in the lecture.
 
 By the end of this chapter, you should be able to:
 
@@ -122,6 +122,24 @@ A fixed-direction measurement reports distance along a particular line of sight.
 :width: 100%
 
 **Mechanical scanning and multiple elevation channels.** The rotating mechanism and the separate elevation channels sample different directions. Source: lecture slide(s) 15, 18 [[1]](#lidar-ref-1). The multichannel illustration identifies a Hesai device.
+```
+
+The lecture also introduces two **chip-scale beam-steering approaches**. The silicon-photonic system illustrated below uses MEMS-actuated optical switches to select emission directions; the phased-array animation instead illustrates steering by changing the relative phase across emitters. These approaches differ in their physical mechanisms, even though both aim to direct light without a conventional spinning scanner [[1]](#lidar-ref-1), slides 20–21; [[4]](#lidar-ref-4).
+
+```{figure} ../assets/lidar-lecture/silicon-photonics-lidar.png
+:label: fig-lidar-silicon-photonics-lidar
+:alt: Schematic and hardware illustration of a MEMS optical-switch-based silicon-photonic LiDAR
+:width: 100%
+
+**Silicon-photonic optical switching.** The illustrated MEMS optical-switch array selects beam directions. Source: lecture slides 20–21; Zhang *et al.*, *Nature*, 2022 [[4]](#lidar-ref-4).
+```
+
+```{figure} ../assets/lidar-lecture/phased-array-animation.gif
+:label: fig-lidar-phased-array-animation
+:alt: Animated optical phased-array illustration in which changing relative phases steers the beam
+:width: 50%
+
+**Phased-array beam steering.** The original lecture animation shows how phase relationships can change an emitted beam's direction. Source: lecture slide 21 [[1]](#lidar-ref-1).
 ```
 
 Do not confuse the illustrated **hardware channels** with the **36 neural channels** used later. A hardware channel may correspond to an elevation beam; our neural channel corresponds to one selected 10-degree planar sector. A single planar scanner can supply all 36 neural inputs.
@@ -357,12 +375,9 @@ The lecture calls the within-scan timing problem a **rolling shutter effect**: e
 
 **Worked example.** At a constant 1 m/s, a platform translates 0.1 m during a 100 ms sweep. At a constant 90 degrees/s, it rotates 9 degrees during that interval. These are kinematic calculations, not values measured in the video. Assigning a single pose to every ray can therefore change reconstructed boundaries. Retain ray times and pose estimates when evaluating spatial representations.
 
+## 8.9 Worked neural encoder: 36 angular sectors
 
-```
-
-## 8.10 Worked neural encoder: 36 angular sectors
-
-### 8.10.1 State exactly what each channel represents
+### 8.9.1 State exactly what each channel represents
 
 Retain the book's compact planar interface: **36 angular channels, each covering 10 degrees**. The number is a design choice for the robot model, not a claim about the number of biological border cells or the number of lasers in the instrument.
 
@@ -375,7 +390,7 @@ $$
 
 Sector $k$ covers $[-\pi+k\Delta\theta,-\pi+(k+1)\Delta\theta)$ with $\Delta\theta=2\pi/36$. Under this convention, sector 18 covers $[0,10^\circ)$; forward is a sector boundary, not a sector center. A centered-forward convention is also possible, but must be implemented consistently rather than silently shifting channel labels.
 
-### 8.10.2 Aggregate valid measurements before encoding them
+### 8.9.2 Aggregate valid measurements before encoding them
 
 For each sector, select the minimum finite range within the configured limits:
 
@@ -387,7 +402,7 @@ The minimum preserves the nearest observed return but discards the sector's rema
 
 A sector with no accepted return has $m_k=0$ and an unknown distance. Keep that validity mask separate from its neural activity. In the conservative implementation below, `NaN`, infinity, out-of-limit values, and nonfinite angles are excluded; a particular driver may justify a more specific interpretation of infinity, but that requires its documented contract.
 
-### 8.10.3 The existing distance-to-rate map
+### 8.9.3 The existing distance-to-rate map
 
 For valid sectors, the teaching map remains
 
@@ -443,10 +458,10 @@ This function assumes angles already refer to the intended body frame. A sensor 
 :alt: Existing synthetic scan compressed into 36 body-relative sectors, prescribed firing rates, and an explicit missing-data mask
 :width: 100%
 
-**The existing 36-sector teaching experiment.** A nearer frontal obstacle, farther background, and missing angular sector illustrate the chosen distance-to-rate mapping. This is a synthetic textbook experiment, not a recording from the lecture datasets. Run [Laboratory 6](../notebooks/sensory_encoding.ipynb) to vary obstacle direction, sector count, and invalid samples.
+**The existing 36-sector teaching experiment.** A nearer frontal obstacle, farther background, and missing angular sector illustrate the chosen distance-to-rate mapping. This is a synthetic textbook example, not a recording from the sensor hardware. Run [Laboratory 6](../notebooks/sensory_encoding.ipynb) to vary obstacle direction, sector count, and invalid samples.
 ```
 
-### 8.10.4 From a prescribed rate to spike events
+### 8.9.4 From a prescribed rate to spike events
 
 One possible implementation is a Poisson event generator. Under that explicit assumption, a rate $r_k$ over a window $T$ seconds gives an expected count $\mathbb E[N_k]=r_kT$. The count is not guaranteed on any one trial. For 42.8 Hz over 0.5 s, the expectation is 21.4 events; an observed count must be an integer.
 
@@ -485,7 +500,7 @@ assert np.all(counts[~preserved_mask] == 0)
 
 A physical-unit LIF implementation instead requires a chosen current mapping and the membrane, threshold, reset, and refractory parameters from [Chapter 2](03-computational-neuron-models.md). Setting a numerical rate to 40 Hz does not imply that an arbitrary current of 40 pA produces 40 Hz. Compare count, first-spike latency, and steady firing rate before selecting a motor threshold.
 
-## 8.11 Connect the encoder to spatial representations
+## 8.10 Connect the encoder to spatial representations
 
 For planar robot pose $(x_r,y_r,\psi)$ and a sensor aligned at the robot origin, a valid ray endpoint is
 
@@ -509,16 +524,16 @@ A **36-channel sensory encoder is not itself a place-cell, grid-cell, or border-
 
 For a reproducible experiment, retain the raw scan and timestamps, mounting transform, validity mask, sector aggregation rule, prescribed activity, emitted events, and motor command. First test the sensor-to-neural mapping in replay; only then judge learning or navigation. A controller receiving simulator ground-truth object labels instead of the scan is solving a different problem.
 
-## 8.12 Additional Reading Materials
+## 8.11 Additional Reading Materials
 
-Read lecture slides 2-9 for ranging and scanning; 12-21 for wavelength and hardware; 22-29 for survey applications and returns; 30-35 for parameters and data; 36-44 for strengths and failure modes; and 45-54 for datasets and demonstrations [[1]](#lidar-ref-1). The embedded videos preserve the source lecture links, while their adjacent questions are teaching prompts rather than transcripts.
+Read lecture slides 2-9 for ranging and scanning; 12-21 for wavelength and hardware; 22-29 for survey applications and returns; 30-35 for parameters and point clouds; and 36-44 for strengths and failure modes [[1]](#lidar-ref-1). The embedded videos preserve the source lecture links, while their adjacent questions are teaching prompts rather than transcripts.
 
 For implementation, read the complete `LaserScan` definition [[2]](#lidar-ref-2). For the specific clarifications used here, consult the MathWorks overview, the cited silicon-photonic LiDAR paper, NEON's waveform tutorial, and FDA laser guidance [[3]](#lidar-ref-3)-[[6]](#lidar-ref-6). The source PDF and PPTX share 56 slide positions; the filename says Topic 6 while the title slide says Topic 5. Citations in this chapter use **1-based slide order**, not the offset printed footer.
 
-Dataset links retained from the lecture: [WADS](https://digitalcommons.mtu.edu/wads/), [Canadian Adverse Driving Conditions Dataset](http://cadcd.uwaterloo.ca/), [Waymo Open Dataset](https://waymo.com/open/), and [Sydney Urban Objects](https://www.acfr.usyd.edu.au/papers/SydneyUrbanObjectsDataset.shtml). Historical screenshots are not statements about current dataset sizes or challenge rankings. Continue to [Chapter 9](09-nengo-ros-gazebo.md) for simulator integration.
+Continue to [Chapter 9](09-nengo-ros-gazebo.md) for simulator integration.
 
 (85-exercises)=
-## 8.13 Exercises
+## 8.12 Exercises
 
 1. Compute the prescribed rate at 1.5 m and compare it with 4 m.
 2. Compare minimum range with median range when one ray is an outlier.
@@ -534,8 +549,8 @@ Dataset links retained from the lecture: [WADS](https://digitalcommons.mtu.edu/w
 12. Feed ranges $[0.8,3.0,\mathrm{NaN},5.0]$ at angles $[0^\circ,90^\circ,0^\circ,179^\circ]$ into the encoder. Report the valid sectors and rates.
 13. Compute the expected count in 500 ms at 42.8 Hz and the probability of at least one event in a 1 ms bin. Explain why an expected count need not be an integer.
 14. A robot moves at 1 m/s and rotates at 90 degrees/s during a 100 ms scan. Calculate the translation and heading change; identify the metadata needed to account for acquisition time.
-15. Transform the 1 m forward ray for the pose given in Section 8.11. Explain what changes when the LiDAR is mounted away from the body origin.
-16. Design a replay test using a winter driving sequence that separates missing returns, spurious close returns, and neural-encoding errors. State which information is available to the encoder and which labels are reserved for evaluation.
+15. Transform the 1 m forward ray for the pose given in Section 8.10. Explain what changes when the LiDAR is mounted away from the body origin.
+16. Design a replay test using a sequence of simulated LiDAR scans that separates missing returns, spurious close returns, and neural-encoding errors. State which information is available to the encoder and which simulator variables are used only for evaluation.
 
 [Worked solutions](solutions-embodied.md#lidar-solutions) are provided at the end of the book.
 
@@ -565,6 +580,3 @@ Dataset links retained from the lecture: [WADS](https://digitalcommons.mtu.edu/w
 
 [6] U.S. Food and Drug Administration, "Frequently Asked Questions About Lasers." [Official safety guidance](https://www.fda.gov/radiation-emitting-products/laser-products-and-instruments/frequently-asked-questions-about-lasers). Accessed Nov. 13, 2026.
 
-(lidar-ref-7)=
-
-[7] Akhil Kurup and Jeremy Bos, *The Winter Adverse Driving dataSet (WADS)*, Michigan Technological University, 2021. [Dataset repository](https://digitalcommons.mtu.edu/wads/).

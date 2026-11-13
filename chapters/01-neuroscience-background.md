@@ -4,7 +4,7 @@ title: "Chapter 1 · Neurons and Synapses"
 
 ## 1.1 Learning Objectives
 
-A neuron does more than receive a number and apply an activation function. It receives signals at particular places and times, combines them with its ongoing electrical and biochemical state, and influences other cells through specialized connections. Understanding that sequence is essential before building computational neurons, spatial representations, or learning robots.
+A neuron is a special cell in the nervous that receive signals from other neurons. It receives signals at particular places and times, combines them with its ongoing electrical and biochemical state, and influences other cells through synaptic connections. 
 
 By the end of this chapter, you should be able to:
 

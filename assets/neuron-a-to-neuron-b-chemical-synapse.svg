@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 682" role="img" aria-labelledby="nTitle nDesc">
+<title id="nTitle">Chemical signaling from neuron A to neuron B</title>
+<desc id="nDesc">Two distinct neurons connected by an axon terminal and dendrite. A magnified synapse shows calcium influx, synaptic vesicle fusion, transmitter diffusion across the cleft, and postsynaptic receptor activation. Six steps lead to an optional postsynaptic spike, not automatic copying.</desc>
+<defs>
+<linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8AD8C5"/><stop offset="1" stop-color="#158278"/></linearGradient>
+<linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#D1B5E6"/><stop offset="1" stop-color="#8360AB"/></linearGradient>
+<marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1L8 5L1 9" stroke="#447D89" stroke-width="2" fill="none"/></marker>
+</defs>
+<rect width="1280" height="682" rx="20" fill="white" stroke="#DCE7E9" stroke-width="2"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<text x="35" y="52" font-size="30" font-weight="700" fill="#173C51">How one neuron influences another</text>
+<text x="35" y="83" font-size="18" fill="#647C89">Electrical signal in A → chemical messenger at the synapse → graded response in B</text>
+<rect x="33" y="107" width="342" height="43" rx="21" fill="#E3F5F0"/><text x="204" y="135" text-anchor="middle" font-size="21" fill="#176B64" font-weight="700">Presynaptic neuron A</text>
+<rect x="890" y="107" width="344" height="43" rx="21" fill="#F0E8F6"/><text x="1060" y="135" text-anchor="middle" font-size="21" fill="#67498B" font-weight="700">Postsynaptic neuron B</text>
+<!-- A dendrites and cell -->
+<g stroke="#1F938D" stroke-width="8" stroke-linecap="round" fill="none">
+<path d="M201 285L139 235L90 217M139 235L139 197M201 285L135 300L94 328"/>
+<path d="M193 291L142 349L97 370M142 349L164 388"/>
+<path d="M206 272L212 218L248 188M212 218L187 190"/>
+</g>
+<ellipse cx="236" cy="298" rx="65" ry="54" fill="url(#a)" stroke="#267E78" stroke-width="3"/>
+<circle cx="237" cy="295" r="22" fill="#CBF0E9" stroke="#4F9B92" stroke-width="3"/>
+<path d="M299 294Q410 289 540 298L575 301" stroke="#1F938D" stroke-width="12" stroke-linecap="round" fill="none"/>
+<g fill="#BCE3DD" stroke="#378F87" stroke-width="2">
+<rect x="352" y="278" width="49" height="36" rx="14"/><rect x="420" y="277" width="49" height="36" rx="14"/><rect x="488" y="279" width="49" height="36" rx="14"/></g>
+<path d="M570 301q28 -27 56 -17v42q-30 13 -56 -14Z" fill="#A0D8CD" stroke="#1F938D" stroke-width="4"/>
+<!-- B -->
+<g stroke="#906FB6" stroke-width="8" stroke-linecap="round" fill="none">
+<path d="M1066 290L996 249L947 211M996 249L946 263L904 253"/>
+<path d="M1048 312L989 344L958 385M989 344L937 335L912 357"/>
+<path d="M1090 279L1104 223L1154 198M1104 223L1078 194"/>
+</g>
+<path d="M1037 305Q972 309 909 305L826 302" stroke="#906FB6" stroke-width="13" fill="none" stroke-linecap="round"/>
+<ellipse cx="1095" cy="305" rx="70" ry="58" fill="url(#b)" stroke="#7E5C9F" stroke-width="3"/>
+<circle cx="1097" cy="306" r="25" fill="#E9DAF1" stroke="#9C7ABB" stroke-width="3"/>
+<path d="M1160 309Q1194 311 1233 290" stroke="#906FB6" stroke-width="11" stroke-linecap="round" fill="none"/>
+<!-- Expanded synapse and Ca entry at central cleft -->
+<rect x="558" y="171" width="339" height="264" rx="19" fill="#FBFCFF" stroke="#B6CCDA" stroke-width="2"/>
+<text x="575" y="202" font-size="19" fill="#173C51" font-weight="700">Chemical synapse (magnified)</text>
+<rect x="571" y="221" width="79" height="159" rx="20" fill="#D9F0EA" stroke="#1F938D" stroke-width="3"/>
+<rect x="799" y="228" width="77" height="151" rx="20" fill="#E8DCF2" stroke="#906FB6" stroke-width="3"/>
+<path d="M650 231v145M798 231v145" stroke="#647C89" stroke-width="2" stroke-dasharray="7 6" opacity=".6"/>
+<circle cx="594" cy="245" r="12" fill="#F5CFD8" stroke="#D86F89" stroke-width="2"/><circle cx="594" cy="245" r="4" fill="#D86F89"/><circle cx="620" cy="245" r="12" fill="#F5CFD8" stroke="#D86F89" stroke-width="2"/><circle cx="620" cy="245" r="4" fill="#D86F89"/><circle cx="594" cy="279" r="12" fill="#F5CFD8" stroke="#D86F89" stroke-width="2"/><circle cx="594" cy="279" r="4" fill="#D86F89"/><circle cx="620" cy="279" r="12" fill="#F5CFD8" stroke="#D86F89" stroke-width="2"/><circle cx="620" cy="279" r="4" fill="#D86F89"/><circle cx="594" cy="313" r="12" fill="#F5CFD8" stroke="#D86F89" stroke-width="2"/><circle cx="594" cy="313" r="4" fill="#D86F89"/><circle cx="657" cy="277" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="679" cy="277" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="697" cy="277" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="719" cy="277" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="737" cy="277" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="759" cy="277" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="657" cy="296" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="679" cy="296" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="697" cy="296" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="719" cy="296" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="737" cy="296" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="759" cy="296" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="657" cy="315" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="679" cy="315" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="697" cy="315" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="719" cy="315" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="737" cy="315" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><circle cx="759" cy="315" r="4.2" fill="#D86F89" stroke="#B7536A" stroke-width="1"/><path d="M802 255h9v17h-9" stroke="#906FB6" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M802 284h9v17h-9" stroke="#906FB6" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M802 313h9v17h-9" stroke="#906FB6" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M576 247h-23v-12" stroke="#1F938D" stroke-width="3" fill="none"/><text x="576" y="398" font-size="15" fill="#1F938D" font-weight="700">Ca²⁺ influx</text>
+<path d="M605 375v13h-28" stroke="#1F938D" stroke-width="2" fill="none"/>
+<g fill="#D4A043" stroke="#B5883D" stroke-width="1.3"><circle cx="573" cy="268" r="5"/><circle cx="587" cy="284" r="5"/><circle cx="571" cy="305" r="5"/></g>
+<text x="659" y="398" font-size="15" fill="#D86F89" font-weight="700">Transmitter</text>
+<text x="805" y="398" font-size="15" fill="#906FB6" font-weight="700">Receptors</text>
+<text x="691" y="426" font-size="14" fill="#647C89">Synaptic cleft</text>
+<path d="M735 378v30" stroke="#647C89" stroke-width="2"/>
+<g font-size="17" font-weight="600" fill="#173C51"><text x="58" y="451">A generates an action potential</text><text x="924" y="451">B receives a synaptic potential</text></g>
+<path d="M361 468h882" stroke="#8AA9AF" stroke-width="2.5" marker-end="url(#arr)" fill="none"/>
+<g><rect x="29" y="513" width="195" height="126" rx="13" fill="#F1F8F8" stroke="#DCE7E9" stroke-width="2"/>
+<circle cx="57" cy="544" r="17" fill="#1F938D"/><text x="57" y="550" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">1</text>
+<text x="44" y="584" font-size="17" font-weight="700" fill="#173C51">Spike arrives</text>
+<text x="44" y="609" font-size="13.7" fill="#647C89">Axon of neuron A</text><rect x="237" y="513" width="195" height="126" rx="13" fill="#F7F2F9" stroke="#DCE7E9" stroke-width="2"/>
+<circle cx="265" cy="544" r="17" fill="#1F938D"/><text x="265" y="550" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">2</text>
+<text x="252" y="584" font-size="17" font-weight="700" fill="#173C51">Ca²⁺ enters</text>
+<text x="252" y="609" font-size="13.7" fill="#647C89">Voltage-gated channels</text><rect x="445" y="513" width="195" height="126" rx="13" fill="#F1F8F8" stroke="#DCE7E9" stroke-width="2"/>
+<circle cx="473" cy="544" r="17" fill="#1F938D"/><text x="473" y="550" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">3</text>
+<text x="460" y="584" font-size="17" font-weight="700" fill="#173C51">Vesicle fusion</text>
+<text x="460" y="609" font-size="13.7" fill="#647C89">Transmitter is released</text><rect x="653" y="513" width="195" height="126" rx="13" fill="#F7F2F9" stroke="#DCE7E9" stroke-width="2"/>
+<circle cx="681" cy="544" r="17" fill="#906FB6"/><text x="681" y="550" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">4</text>
+<text x="668" y="584" font-size="17" font-weight="700" fill="#173C51">Across the cleft</text>
+<text x="668" y="609" font-size="13.7" fill="#647C89">Transmitter diffuses</text><rect x="861" y="513" width="195" height="126" rx="13" fill="#F1F8F8" stroke="#DCE7E9" stroke-width="2"/>
+<circle cx="889" cy="544" r="17" fill="#906FB6"/><text x="889" y="550" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">5</text>
+<text x="876" y="584" font-size="17" font-weight="700" fill="#173C51">Receptors activate</text>
+<text x="876" y="609" font-size="13.7" fill="#647C89">Postsynaptic current</text><rect x="1069" y="513" width="195" height="126" rx="13" fill="#F7F2F9" stroke="#DCE7E9" stroke-width="2"/>
+<circle cx="1097" cy="544" r="17" fill="#906FB6"/><text x="1097" y="550" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">6</text>
+<text x="1084" y="584" font-size="17" font-weight="700" fill="#173C51">Neuron B integrates</text>
+<text x="1084" y="609" font-size="13.7" fill="#647C89">Spike is not guaranteed</text></g>
+<text x="37" y="663" font-size="15" fill="#647C89">Original teaching schematic, not to scale. Excitation or inhibition depends on the postsynaptic receptors and ionic driving forces.</text>
+</g></svg>

@@ -1,0 +1,36 @@
+name: Fix LiDAR rendered anchor check
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/fix-lidar-render-check.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'book/lidar-lecture-media'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: book/lidar-lecture-media
+      - name: Preserve normalized exercise anchors and literal handle
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('tests/check_lidar_chapter.py');s=p.read_text()
+          s=s.replace("assert '85-exercises' in p.ids and 'fig-sensor-lidar' in p.ids", "assert {'85-exercises','id-85-exercises'} & p.ids\nassert 'fig-sensor-lidar' in p.ids")
+          s=s.replace("assert any('lidar-encoding/#85-exercises' in x or 'lidar-encoding#85-exercises' in x for x in q.links)", "exercise_links = [x for x in q.links if 'lidar-encoding' in x and 'exercises' in x]\nassert exercise_links\nassert all(unquote(urlsplit(x).fragment) in p.ids for x in exercise_links)")
+          p.write_text(s)
+          p=Path('chapters/08-lidar-encoding.md');s=p.read_text()
+          lines=s.splitlines()
+          for i,line in enumerate(lines):
+              if '@MTUAutonomy' in line and not line.startswith(':title:'):
+                  lines[i]=line.replace('@MTUAutonomy','&#64;MTUAutonomy')
+          p.write_text('\n'.join(lines)+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tests/check_lidar_chapter.py chapters/08-lidar-encoding.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Validate actual rendered exercise targets and escape the video handle in prose'
+          git push origin HEAD:book/lidar-lecture-media

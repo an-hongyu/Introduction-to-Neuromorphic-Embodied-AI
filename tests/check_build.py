@@ -3,6 +3,9 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 import subprocess
+import sys
+
+subprocess.run([sys.executable, str(Path(__file__).with_name('check_visual_chapter.py'))], check=True)
 
 subprocess.run(['node', str(Path(__file__).with_name('test_lif_interactive.cjs'))], check=True)
 subprocess.run(['node', str(Path(__file__).with_name('test_grid_place_interactive.cjs'))], check=True)
@@ -15,7 +18,7 @@ assert len(html_files) >= 22, f'Expected at least 22 book pages, found {len(html
 all_html = '\n'.join(p.read_text() for p in html_files)
 for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
              'Neurons and Synapses', 'Spatial Cells', 'Computational Models of Neurons',
-             'Hebbian Learning and Synaptic Plasticity', 'Place Cell', 'Neural Encoding', 'Visual Perception',
+             'Hebbian Learning and Synaptic Plasticity', 'Place Cell', 'Visual Perception',
              'Inertial Sensing', 'LiDAR', 'Nengo', 'Associative Learning Robot',
              'Course-to-Book Reading Map', 'Curriculum and Development Roadmap', 'colab.research.google.com']:
     assert text in all_html, f'Missing published content: {text}'

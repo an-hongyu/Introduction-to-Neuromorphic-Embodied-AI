@@ -4,7 +4,7 @@ title: Curriculum and Development Roadmap
 
 # Curriculum and Development Roadmap
 
-Ten numbered chapters with spatial-cell models integrated into Chapter 4, and eight computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
+Nine numbered chapters with spatial-cell models integrated into Chapter 4, and eight computational laboratories are available. The [course-to-book map](course-reading-map.md) identifies the corresponding lecture topics. Available text and executed synthetic models are distinguished from simulator and hardware validation.
 
 ## Part I — Foundations: available
 
@@ -15,7 +15,6 @@ Ten numbered chapters with spatial-cell models integrated into Chapter 4, and ei
 
 ## Part II — Encoding and embodied learning: available
 
-5. [Neural Encoding and the ANN–SNN Bridge](05-neural-encoding.md)
 6. [Visual Perception and Cue Encoding](06-visual-perception.md)
 7. [Inertial Sensing and Vibration Encoding](07-inertial-sensing.md)
 8. [LiDAR and Thirty-Six-Channel Spatial Encoding](08-lidar-encoding.md)

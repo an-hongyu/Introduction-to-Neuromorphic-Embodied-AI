@@ -105,8 +105,12 @@ for rec in manifest['images']:
         if q.is_file() and hashlib.sha256(q.read_bytes()).hexdigest()==rec['sha256']:found=True;break
     assert found,'Image missing from rendered page: '+key
 for video in manifest['videos']:
-    assert any('lidar-lecture-media.html?v='+video['id'] in u for u in p.frames)
-    assert any(video['watch_url'] in u for u in p.links)
+    embedded = any('lidar-lecture-media.html?v='+video['id'] in u for u in p.frames)
+    linked = any(video['watch_url'] in u for u in p.links)
+    if video['id'] == 'NZKvf1cXe8s':
+        assert embedded and linked, 'The LiDAR 101 teaching video must remain accessible'
+    else:
+        assert not embedded and not linked, 'Dataset/campus demo video must not appear in Chapter 8'
 player=htmlroot/'lidar-lecture-media.html'
 assert player.is_file()
 player_text=player.read_text()
@@ -120,4 +124,4 @@ assert 'lidar-solutions' in q.ids
 exercise_links = [x for x in q.links if 'lidar-encoding' in x and 'exercises' in x]
 assert exercise_links
 assert all(unquote(urlsplit(x).fragment) in p.ids for x in exercise_links)
-print('Chapter 8 verified: 17 source static figure groups, two GIFs, three source videos, 16 exercises/answers, neural encoder examples, and no dataset figures in the published chapter.')
+print('Chapter 8 verified: 17 source static figure groups, two GIFs, one teaching video, 16 exercises/answers, neural encoder examples, and no dataset figures in the published chapter.')

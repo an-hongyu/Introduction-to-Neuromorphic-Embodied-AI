@@ -147,38 +147,36 @@ Here $t_i^{(k)}$ is spike $k$ of neuron $i$, $\delta$ is the Dirac delta, $N_i$ 
 
 ## 1.5 Synapses: the connections between cells
 
-A **synapse** is a specialized communication site between cells. The sending side is **presynaptic**; the receiving side is **postsynaptic**. These terms name roles at a connection. The postsynaptic neuron at one synapse may be the presynaptic neuron at another [[1]](#neuro-ref-1), ch. 8.
+A **synapse** is a specialized contact through which a neuron communicates with another cell. At a chemical synapse, **presynaptic** identifies the releasing side and **postsynaptic** identifies the receiving side. These are roles at a particular connection: a neuron can be postsynaptic to one cell and presynaptic to another [[1]](#neuro-ref-1), ch. 8.
 
 ### 1.5.1 What structures make up a chemical synapse?
 
-At a typical chemical synapse, the presynaptic terminal contains **synaptic vesicles** holding transmitter, release machinery concentrated at **active zones**, and voltage-gated calcium channels. The **synaptic cleft** is the extracellular gap between the cells. The postsynaptic membrane contains receptors and associated proteins that determine how it responds to the released chemical signal.
+A chemical synapse has three principal components:
 
-Many excitatory contacts onto cortical pyramidal neurons occur on dendritic spines; other contacts occur on dendritic shafts, the soma, or axonal regions. Location affects function. A connection near a particular dendritic input can control that local interaction, while a connection near an output-triggering region can have strong influence over spike initiation. The biological synapse is therefore richer than a scalar weight attached to an abstract edge.
+| Component | Main structures and role |
+|---|---|
+| **Presynaptic terminal** | Synaptic vesicles store transmitter; active zones contain release machinery and nearby voltage-gated calcium channels. |
+| **Synaptic cleft** | A narrow extracellular gap separates the two cell membranes. |
+| **Postsynaptic membrane** | Receptors and associated proteins determine how the target responds to transmitter. |
 
 ```{figure} ../assets/synapse-modern.svg
 :label: fig-ccn-synapse
-:alt: Original diagram of a presynaptic neuron and a postsynaptic neuron, showing axonal communication and an enlarged chemical synapse with vesicles, neurotransmitter, synaptic cleft, and postsynaptic receptors
+:alt: Overview of presynaptic and postsynaptic neurons with an inset identifying vesicles, the synaptic cleft, and postsynaptic receptors
 :width: 100%
 
-**Chemical communication between neurons.** A presynaptic action potential reaches an axon terminal and may trigger neurotransmitter release. The transmitter activates postsynaptic receptors, changing the receiving neuron's state. The inset illustrates the principal components of a chemical synapse; the drawing is schematic and not to scale.
+**Anatomy of a chemical synapse.** The terminal of one neuron faces a receptor-bearing membrane of another. The inset identifies the components of this contact. Original schematic; not to scale.
 ```
 
-**Read the diagram.** Neuron A is presynaptic at this contact: its axon terminal releases transmitter into the cleft. Receptors on neuron B convert the chemical signal into a postsynaptic response. A presynaptic spike is therefore an input to B, **not a copy of B's next spike**.
+Contacts can occur on dendritic spines, dendritic shafts, the soma, or axonal regions. Their location affects how an input interacts with nearby signals and influences spike initiation. A synapse therefore has a physical location and molecular organization, not merely a numerical weight [[1]](#neuro-ref-1), chs. 8 and 10.
 
 ### 1.5.2 Chemical versus electrical synapses
 
-| Type | How a signal crosses between cells | Important consequence |
+| Type | Connection between cells | Functional consequence |
 |---|---|---|
-| Chemical | A released transmitter activates receptors on a target cell | Receptor identity, release probability, delay, and response kinetics matter |
-| Electrical | Gap-junction channels provide a direct pathway for intercellular current | Coupling can rapidly convey voltage changes and help coordinate activity |
+| **Chemical** | Transmitter acts across a cleft on target-cell receptors. | Transmission depends on release, receptor properties, and response kinetics. |
+| **Electrical** | Gap-junction channels provide a direct pathway for intercellular current. | Voltage changes can influence the coupled cell rapidly; many connections permit bidirectional signaling. |
 
-For a simple electrical coupling, current into cell B can be modeled as $I_{A\to B}=g_{\mathrm{gap}}(V_A-V_B)$. Real junctions can have more complex properties, including rectification. Many electrical synapses permit bidirectional influence; chemical synapses usually have a structurally defined release side and receptor side. This chapter focuses on chemical transmission because transmitter release, receptors, and plasticity are central to the later learning models.
-
-### 1.5.3 A postsynaptic potential is a response, not another action potential
-
-A **postsynaptic current** is the ionic current associated with receptor activation. A **postsynaptic potential** is the resulting voltage response, which also depends on capacitance, other conductances, and the location of the input. They are related but are not the same measurement.
-
-One presynaptic spike can produce a small postsynaptic potential without causing a postsynaptic spike. It can also fail to produce detectable release at a particular synapse. The receiving cell integrates this input with other signals and its own state. That is why a connection should not be pictured as automatically copying spikes from one neuron to another.
+For a simple electrical synapse, inward current into B is $I_{A\to B}=g_{\mathrm{gap}}(V_A-V_B)$, where $g_{\mathrm{gap}}$ is the coupling conductance. Real junctions may show rectification or other departures from this approximation. Chemical transmission instead has distinct release and receptor sides; its sequence is developed in Section 1.7 [[1]](#neuro-ref-1), ch. 8.
 
 ## 1.6 What is a neurotransmitter?
 
@@ -207,24 +205,39 @@ A **metabotropic receptor** influences the cell through intracellular signaling,
 
 ## 1.7 How does one neuron influence another?
 
-Follow a **chemical synapse from neuron A to neuron B**. Within A, the signal is electrical; between the cells, transmitter carries the message; at B, receptor activation produces a new, graded response [[1]](#neuro-ref-1), chs. 8 and 12–13.
+At a chemical synapse, a spike in neuron A can influence neuron B through a sequence of electrical and chemical events. The figure below follows this sequence through an excitatory synapse [[1]](#neuro-ref-1), ch. 8, Fig. 8–8.
 
-```{figure} ../assets/neuron-a-to-neuron-b-chemical-synapse.svg
+```{figure} https://uw.pressbooks.pub/app/uploads/sites/692/2023/05/synaptictransmission.jpg
 :label: fig-chemical-transmission
-:alt: Original two-neuron chemical synapse diagram showing a presynaptic action potential, calcium entry, vesicle fusion, transmitter diffusion, postsynaptic receptor activation, and a conditional downstream spike
+:alt: Panels A-C show presynaptic calcium entry, vesicle fusion and transmitter release, and postsynaptic receptor-channel opening; the left traces show a presynaptic action potential followed by a delayed, subthreshold EPSP
 :width: 100%
 
-**From one neuron to the next.** Neuron A delivers spikes to its terminal; calcium-dependent transmitter release influences neuron B through receptors. The receiving neuron sums this response with other inputs, and may—or may not—produce its own action potential. Original schematic; not to scale.
+**From a presynaptic spike to a postsynaptic potential.** Panels A–C show calcium entry, transmitter release, and receptor activation. The lower-left trace is a graded EPSP, not a second action potential. Source: *Principles of Neural Science*, 5th ed., Fig. 8–8 [[1]](#neuro-ref-1), as displayed in the [University of Washington teaching chapter](https://uw.pressbooks.pub/physiology/chapter/synapses-and-neurotransmitter-receptors/). © McGraw-Hill.
 ```
 
-1. **An action potential reaches A's terminal.** Terminal depolarization opens voltage-gated $\mathrm{Ca}^{2+}$ channels.
-2. **Calcium triggers release.** Calcium-sensitive proteins promote synaptic-vesicle fusion, releasing neurotransmitter into the synaptic cleft. Release is probabilistic.
-3. **The transmitter activates receptors on B.** Binding alters ion-channel conductance directly or engages intracellular signaling, producing a postsynaptic current and often a graded potential.
-4. **Neuron B integrates the input.** The response can be excitatory or inhibitory depending on receptors and ionic conditions. B fires an action potential only when its own spike-generation dynamics reach the required conditions.
-5. **The synapse resets.** Diffusion, uptake, and sometimes enzymatic breakdown terminate transmitter action; vesicles and release machinery recover.
+### 1.7.1 Panels A–C: converting a spike into a synaptic response
 
-**Key distinction:** A's action potential does not physically cross the cleft and become B's action potential. Electrical signaling in A is converted to chemical transmission, then to a **new electrical response in B**. This explains why spike-to-spike copying is not a general model of a biological chemical synapse [[1]](#neuro-ref-1), ch. 8.
-**Example: why B does not necessarily fire.** Suppose one spike in A produces a 2 mV EPSP at B's observation site. With B near $-65$ mV and an illustrative threshold at $-55$ mV, that input alone is insufficient. Several appropriately timed excitatory inputs may combine to make firing possible. An inhibitory conductance, a recent spike in B, or a weaker-than-usual release event may prevent it. A synapse communicates an influence; the downstream neuron determines its response.
+**A — Calcium entry.** An action potential depolarizes the presynaptic terminal, opening voltage-gated $\mathrm{Ca}^{2+}$ channels near the active zone. Calcium enters the terminal and acts as an intracellular release signal; it is not the neurotransmitter that carries the message across the cleft.
+
+**B — Vesicle fusion and release.** The local calcium increase activates release machinery, allowing transmitter-filled vesicles to fuse with the presynaptic membrane. Their contents enter the cleft by **exocytosis**. Release is probabilistic and depends on the condition of the terminal.
+
+**C — Receptor activation.** Transmitter diffuses across the cleft and binds postsynaptic receptors. In the illustrated fast excitatory connection, receptor channels open and net inward current depolarizes the receiving cell. The $\mathrm{Na}^{+}$ arrows illustrate this inward contribution; they do not imply that every excitatory receptor is sodium-selective. Other receptor types produce different effects, as introduced in Section 1.6 [[1]](#neuro-ref-1), chs. 8 and 12.
+
+### 1.7.2 When does the receiving neuron generate a new spike?
+
+The **postsynaptic current** is ion flow associated with receptor activation; the **postsynaptic potential** is the resulting change in membrane voltage. Voltage depends on that current, membrane capacitance, other conductances, and input location. In this excitatory example the response is an **excitatory postsynaptic potential (EPSP)** [[1]](#neuro-ref-1), ch. 10.
+
+Notice the two traces at the left of the figure: the upper trace is a presynaptic action potential, whereas the lower trace rises after a delay and remains below the marked threshold. **The figure does not show a postsynaptic spike.** A new spike requires sufficient depolarization at B's spike-initiation region, after integration with other inputs and its ongoing state. Spatial and temporal summation are described in Sections 1.2.4–1.2.5; inhibition and refractoriness can prevent firing.
+
+**Worked example.** With an illustrative baseline of $-65$ mV and threshold of $-55$ mV, a 2 mV EPSP at the observation site reaches only $-63$ mV. It does not trigger the specified threshold rule. Additional appropriately timed excitation may permit firing, but adding a fixed number of inputs is not a universal biological rule.
+
+Thus, **presynaptic spike → chemical transmission → graded postsynaptic response → possible new spike**. The last step is conditional: neuron B generates its own action potential rather than receiving a copied spike from neuron A.
+
+### 1.7.3 Synaptic delay and recovery
+
+Release and receptor activation take time, producing a **synaptic delay** between the arriving presynaptic spike and the onset of the postsynaptic response. The figure's 1 ms scale bar is a time reference, not a universal delay for all synapses; this delay is also distinct from the time required for B to reach firing threshold [[1]](#neuro-ref-1), ch. 8.
+
+Transmitter action is limited by diffusion, uptake, and, for some transmitters, enzymatic breakdown. Vesicle recycling and recovery of release machinery influence later responses. These processes complete the transmission cycle; changes in the connection's efficacy are considered separately under synaptic plasticity in Section 1.9 [[1]](#neuro-ref-1), chs. 12–13.
 
 ## 1.8 Excitatory and inhibitory synaptic actions
 

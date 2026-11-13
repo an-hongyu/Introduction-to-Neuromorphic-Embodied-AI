@@ -1,0 +1,616 @@
+{
+  "source_pptx": "Neuromorphic Robotic Systems-Topic 6 Introduction to LIDAR.pptx",
+  "source_pdf": "Neuromorphic Robotic Systems-Topic 6 Introduction to LIDAR.pdf",
+  "slide_count": 56,
+  "numbering": "1-based slide order; printed slide footer is generally one lower",
+  "images": [
+    {
+      "file": "lidar-applications.png",
+      "slides": [
+        3
+      ],
+      "title": "LiDAR on vehicles, consumer devices, and airborne platforms",
+      "credit": "Slide credit: Uber, Apple, Xiaomi, DJI.",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side",
+      "sources": [
+        {
+          "file": "s03-p00.jpg",
+          "sha256": "a8c54e5839d99b25d7cb18c73adc47af6dc10a7d2a029358caec185da6000bd2"
+        },
+        {
+          "file": "s03-p03.jpg",
+          "sha256": "4f36bba243e554c8bbc123e5c9cf4e2d349f8258fc37146bcf22f6459952f0c7"
+        },
+        {
+          "file": "s03-p01.jpg",
+          "sha256": "02d3b9df9eb6706a70bffebd75e410ce3ddf6e82f7353084faeaf4658f8c38dd"
+        }
+      ],
+      "sha256": "90a2837230ebfd65eadd2eff11d64a550de1ba6dd0a23b40bf7f8b52cd1dcc51",
+      "size": [
+        1914,
+        360
+      ],
+      "frames": 1
+    },
+    {
+      "file": "time-of-flight.png",
+      "slides": [
+        6
+      ],
+      "title": "From a transmitted pulse to a delayed return",
+      "credit": "",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side; removed 15 top pixels of the geometry bitmap containing a stray clipped header; diagram labels unchanged",
+      "sources": [
+        {
+          "file": "s06-p03.png",
+          "sha256": "16e88d7363a9efb87717a65af5e402a2f849377c13800c4c142f70db4cbdfcc5"
+        },
+        {
+          "file": "s06-p04.png",
+          "sha256": "e059975dd2054627579eb639aba983ce42411faf2cbffd37379428c5dc9b7960"
+        }
+      ],
+      "sha256": "0a28c6a38f9b47b97e0fef2f5074980233db572f4dd03038de269a54e802fc80",
+      "size": [
+        1553,
+        430
+      ],
+      "frames": 1
+    },
+    {
+      "file": "lidar-components.png",
+      "slides": [
+        15,
+        16,
+        17
+      ],
+      "title": "Transmitter, receiver, timing, and processing paths",
+      "credit": "",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s15-p03.png",
+          "sha256": "553d92a63a4a615c2cd0ca70ac6c869f85e3b8e664082761f15f214898ada365"
+        }
+      ],
+      "sha256": "37f7827c645231a2018c17521d4971f3bf4a01d143a898bba1ccc48702e1f370",
+      "size": [
+        1499,
+        629
+      ],
+      "frames": 1
+    },
+    {
+      "file": "mechanical-and-multibeam.png",
+      "slides": [
+        15,
+        18
+      ],
+      "title": "Mechanical scanning and multiple elevation channels",
+      "credit": "The multichannel illustration identifies a Hesai device.",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side",
+      "sources": [
+        {
+          "file": "s15-p04.jpg",
+          "sha256": "1853c8a6834e1a413bf3f740312c674df77d07f8da4a2941c19ef59bc888fac3"
+        },
+        {
+          "file": "s09-p04.png",
+          "sha256": "aea73c5559352308e2882db4c2c3049b09dde364bca65c85ebf91d04b30d8deb"
+        }
+      ],
+      "sha256": "8b83ec7909ccaefb8b08deafaeba9600f25f22d9aa5e98e8add3345315b92f95",
+      "size": [
+        1806,
+        430
+      ],
+      "frames": 1
+    },
+    {
+      "file": "planar-scan-animation.gif",
+      "slides": [
+        8,
+        18
+      ],
+      "title": "A planar scanner builds up angular range samples",
+      "credit": "Original source attribution is not fully specified in the lecture.",
+      "width": "50%",
+      "method": "Original animated GIF, copied byte for byte",
+      "sources": [
+        {
+          "file": "s08-p04.gif",
+          "sha256": "7c9c03c03487727ac76a492caef51fc079bb7da32820036e2c325809fbea138a"
+        }
+      ],
+      "sha256": "7c9c03c03487727ac76a492caef51fc079bb7da32820036e2c325809fbea138a",
+      "size": [
+        220,
+        477
+      ],
+      "frames": 101
+    },
+    {
+      "file": "silicon-photonics-lidar.png",
+      "slides": [
+        20,
+        21
+      ],
+      "title": "Silicon-photonic switching and beam steering",
+      "credit": "Xiaosheng Zhang et al., Nature 603, 253-258 (2022), doi:10.1038/s41586-022-04415-8; CC BY 4.0 for the cited paper material.",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side",
+      "sources": [
+        {
+          "file": "s20-p05.png",
+          "sha256": "9285d0cfa8c9970e6de8d2c9736494dc92f2619ca01479df973fe39805da19e3"
+        },
+        {
+          "file": "s20-p04.png",
+          "sha256": "262fd31d48a75490928d4f72f6fe89742f6bb18929dbd5382fb1969f4c19d7a0"
+        }
+      ],
+      "sha256": "d4b58e8c13761603e126d272ca2daab58ea86ea152ebc48cedb0ad2f65ab3cef",
+      "size": [
+        1280,
+        430
+      ],
+      "frames": 1
+    },
+    {
+      "file": "phased-array-animation.gif",
+      "slides": [
+        21
+      ],
+      "title": "Phase relationships change the illustrated beam direction",
+      "credit": "Original source attribution is not fully specified in the lecture.",
+      "width": "50%",
+      "method": "Original animated GIF, copied byte for byte",
+      "sources": [
+        {
+          "file": "s21-p04.gif",
+          "sha256": "56efce7d8defb7ca3ee9c3b3f542398f7fb8ed529af504f46e9fca216e8f645b"
+        }
+      ],
+      "sha256": "56efce7d8defb7ca3ee9c3b3f542398f7fb8ed529af504f46e9fca216e8f645b",
+      "size": [
+        280,
+        302
+      ],
+      "frames": 10
+    },
+    {
+      "file": "aerial-data-collection.png",
+      "slides": [
+        23
+      ],
+      "title": "Airborne scanning combines range, platform position, and attitude",
+      "credit": "From the supplied lecture PDF.",
+      "width": "100%",
+      "method": "Crop of the supplied PDF rendering; original slide geometry and annotations retained",
+      "crop_fraction": [
+        0.43,
+        0.085,
+        0.885,
+        0.998
+      ],
+      "sources": [],
+      "sha256": "9aceafece507fe4c893158b6a921a6964c25697529700bef9b9a39f5843c1a09",
+      "size": [
+        875,
+        987
+      ],
+      "frames": 1
+    },
+    {
+      "file": "multiple-return-waveforms.png",
+      "slides": [
+        26
+      ],
+      "title": "A pulse can produce several return peaks",
+      "credit": "Lecture source: NEON LiDAR basics tutorial.",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side",
+      "sources": [
+        {
+          "file": "s26-p02.png",
+          "sha256": "88d59264c90635fab23ccf2a41559a051a1a54f140d488fa2b11fb91c39b0be1"
+        },
+        {
+          "file": "s26-p06.png",
+          "sha256": "eaa52012bb3cb703ee6812b04facbe2ef6f5424c46435865a40a7f12ee923a38"
+        }
+      ],
+      "sha256": "2806c3c3233d9ee2b079d534cfd7c247d4cd405c2eb4f7a8cb22184b5372f51b",
+      "size": [
+        1247,
+        430
+      ],
+      "frames": 1
+    },
+    {
+      "file": "tree-return-classes.png",
+      "slides": [
+        27
+      ],
+      "title": "Tree points colored by return order",
+      "credit": "",
+      "width": "100%",
+      "method": "Original PPTX point-cloud and tree-photo panels, arranged side by side",
+      "sources": [
+        {
+          "package_member": "ppt/media/image45.png",
+          "sha256": "dcc0bdd5ac688ed244cff4aeaba63726cb5ed6c80bdefb40651e837d73128b67"
+        },
+        {
+          "file": "s27-p00.jpg",
+          "sha256": "2d48c31c02defe4849b6f34ce6f41dec1d54cdd1a8203ad98cbd0c07a58fd1f3"
+        }
+      ],
+      "sha256": "fcc31af272d3c2278e48c2591c5148d2f813142ed1e5bd70b725efca87703f8f",
+      "size": [
+        975,
+        650
+      ],
+      "frames": 1
+    },
+    {
+      "file": "bathymetric-lidar.png",
+      "slides": [
+        28
+      ],
+      "title": "Water-surface and bottom returns in bathymetric surveying",
+      "credit": "",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side",
+      "sources": [
+        {
+          "file": "s28-p00.jpg",
+          "sha256": "2827c9745e9ed69f246506ef262b604285a00a9268c8f6ff54a0d63a3acc4d10"
+        },
+        {
+          "file": "s28-p04.jpg",
+          "sha256": "69c7d7e7ead01a817be997a7e552b098a51b373dd4e4319117c6dde4a501d9e6"
+        }
+      ],
+      "sha256": "ab164ead67e20745050422bd95272731f025944af87abd040bba6ca5aea7c571",
+      "size": [
+        1352,
+        430
+      ],
+      "frames": 1
+    },
+    {
+      "file": "field-of-view.png",
+      "slides": [
+        30,
+        32
+      ],
+      "title": "Field of view, angular spacing, and range are different quantities",
+      "credit": "",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s30-p03.png",
+          "sha256": "1101abe7b4302e9f9ea0164123d34513f98a059cc5b64bb154c500b58e0ccf9e"
+        }
+      ],
+      "sha256": "ad50a8b8c749ad76ea84a86f375de154437d8a924f0610da7fad2ff960f20052",
+      "size": [
+        1052,
+        392
+      ],
+      "frames": 1
+    },
+    {
+      "file": "angular-resolution.png",
+      "slides": [
+        31
+      ],
+      "title": "Angular sampling changes the detail captured on a distant object",
+      "credit": "Slide credit: LIDAR for Autonomous System Design: Object Classification or Object Detection?",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s31-p03.png",
+          "sha256": "73a87850692d5b6b2b6750317ea0b624533f79602e751720407de80254b19680"
+        }
+      ],
+      "sha256": "38ab2fadff5d78494b68cdf96152ac671e3a60973c57cc50b1fd283fcea7cf5d",
+      "size": [
+        933,
+        596
+      ],
+      "frames": 1
+    },
+    {
+      "file": "blind-spots.png",
+      "slides": [
+        33
+      ],
+      "title": "Coverage and mounting geometry leave blind spots",
+      "credit": "",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s33-p04.png",
+          "sha256": "17d14cf4a61ea64ceb480868152bbd871498cf523a7cc66d85ddd0ff919b59d8"
+        }
+      ],
+      "sha256": "2a90b240bb899fb210b2aeace47c29fd5aeea07ec950b3cd484c001eca007490",
+      "size": [
+        1270,
+        611
+      ],
+      "frames": 1
+    },
+    {
+      "file": "point-cloud-data.png",
+      "slides": [
+        35
+      ],
+      "title": "Planar mapping and a three-dimensional road point cloud",
+      "credit": "",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side",
+      "sources": [
+        {
+          "file": "s35-p03.png",
+          "sha256": "3a20cc80a03c05949e3773da7245687905d3909ab28a7272d4bdbbc8fa095738"
+        },
+        {
+          "file": "s35-p04.jpg",
+          "sha256": "b7096d83f2a2fd4d29d207624f6d2ea5e63dc3d124220aafafca71bd7e41f83a"
+        }
+      ],
+      "sha256": "0d0069a2f95a3e13fe9b83aa8d97db79cd8c7d5c64f39c7e94665f1c4b9e5f68",
+      "size": [
+        1371,
+        430
+      ],
+      "frames": 1
+    },
+    {
+      "file": "camera-and-lidar.png",
+      "slides": [
+        36,
+        37
+      ],
+      "title": "Image appearance and metric range geometry",
+      "credit": "Lecture image credits include KITTI, Apple, Cartographer, and NASA.",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side",
+      "sources": [
+        {
+          "file": "s36-p02.jpg",
+          "sha256": "01f4a972875f8d044f2f79d35b27a584dd0d1c9b0f2fff6b8b8a1ac1bb35f1fc"
+        },
+        {
+          "file": "s36-p03.jpg",
+          "sha256": "a4b697073a05cf411c2b64f2dbc2de5436417784240e87ae91cbd2d7e57a6a1b"
+        }
+      ],
+      "sha256": "a0205b647026fe98105a2817dcfa5cc3d49f739a55fee312064d374c5039128c",
+      "size": [
+        1545,
+        430
+      ],
+      "frames": 1
+    },
+    {
+      "file": "reflection-effects.png",
+      "slides": [
+        39
+      ],
+      "title": "Glass can create transmitted, reflected, and misleading returns",
+      "credit": "Slide source label: Mapping with Reflection-Detection and Utilization of Reflection in 3D Lidar Scans.",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s39-p03.png",
+          "sha256": "e5583ba39d9fc6849e633539936b4199e5f10c4ae68ebef353379e6a71f319e4"
+        }
+      ],
+      "sha256": "eb6b35b1fb8f34a2061f89f5e415f66adb4e8ce73d48b2e66f00ff525075a7f8",
+      "size": [
+        880,
+        595
+      ],
+      "frames": 1
+    },
+    {
+      "file": "weather-returns.png",
+      "slides": [
+        40
+      ],
+      "title": "Atmospheric particles can compete with the target return",
+      "credit": "Slide credit: Velodyne.",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s40-p03.jpg",
+          "sha256": "4bb57af9e0eac4645e22b2b81ba399252bf47a7fa41f6ba79279ab23848a4ffc"
+        }
+      ],
+      "sha256": "30dc5a20e13943a836b92ba7abac1d8e48f712461906ad85bd84bc0b4b721164",
+      "size": [
+        1348,
+        606
+      ],
+      "frames": 1
+    },
+    {
+      "file": "scan-motion-distortion.png",
+      "slides": [
+        43
+      ],
+      "title": "The scene changes while a sequential scan is acquired",
+      "credit": "From the supplied lecture PDF.",
+      "width": "100%",
+      "method": "Crop of the supplied PDF rendering; original slide geometry and annotations retained",
+      "crop_fraction": [
+        0.03,
+        0.36,
+        0.58,
+        0.8
+      ],
+      "sources": [],
+      "sha256": "0af7f86322ef1780b22d1329988360fe5cf8cc38ca8c04caf19e1dca80d30f21",
+      "size": [
+        1057,
+        476
+      ],
+      "frames": 1
+    },
+    {
+      "file": "wads-winter-point-cloud.png",
+      "slides": [
+        45
+      ],
+      "title": "A winter driving point cloud from the lecture",
+      "credit": "Akhil Kurup and Jeremy Bos, WADS, Michigan Technological University, 2021.",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s45-p03.png",
+          "sha256": "345d963e513cdd77e155ebad775b7022576a5be8f19072541db94dc4d848af6c"
+        }
+      ],
+      "sha256": "aa4f737007824022bbf889001b1dc83d1755387cd7c1db941bcf82a76b8b352d",
+      "size": [
+        1365,
+        387
+      ],
+      "frames": 1
+    },
+    {
+      "file": "cadc-driving-example.png",
+      "slides": [
+        48
+      ],
+      "title": "Adverse-weather driving and the corresponding LiDAR view",
+      "credit": "Canadian Adverse Driving Conditions Dataset; source link retained from the lecture.",
+      "width": "100%",
+      "method": "Original PPTX image extraction; panels arranged side by side",
+      "sources": [
+        {
+          "file": "s48-p02.png",
+          "sha256": "d138f77d08f79eb44d7f298888da6e7a5395232d687dadd51e2f78ffe58cc04c"
+        },
+        {
+          "file": "s48-p04.png",
+          "sha256": "7d289f6d127f2a0eb03b2d5844b44dfa2649ad6d6e38c899db72ba357d2c5bc3"
+        }
+      ],
+      "sha256": "79cf299c8ba9ed2c215779f66d882e277a4209839deb7c11a967749972d2eb75",
+      "size": [
+        1543,
+        430
+      ],
+      "frames": 1
+    },
+    {
+      "file": "waymo-lidar-labels.png",
+      "slides": [
+        51
+      ],
+      "title": "Point clouds with object annotations",
+      "credit": "Waymo Open Dataset; screenshot in supplied lecture, not a current leaderboard.",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s51-p02.png",
+          "sha256": "f837dd4cf3b054e35bf6e67eef1fe6c51021d47ed8fe0283b123fed9ace94b65"
+        }
+      ],
+      "sha256": "a142d4dcc54f095c0c8cd05892687628ef07c2d743857e557228294df012eca2",
+      "size": [
+        1279,
+        858
+      ],
+      "frames": 1
+    },
+    {
+      "file": "sydney-urban-objects.png",
+      "slides": [
+        53
+      ],
+      "title": "Different object shapes represented as point sets",
+      "credit": "Sydney Urban Objects Dataset; source link retained from the lecture.",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s53-p02.png",
+          "sha256": "10a005bb93a09614511e0d1925d35d3b579afbffc6a6a2fb36e5bae16c4b8167"
+        }
+      ],
+      "sha256": "0e8258130730d2ebba0910952612b9f5bddd2a203238bf928aa09475c4bb3ffc",
+      "size": [
+        581,
+        265
+      ],
+      "frames": 1
+    },
+    {
+      "file": "lidar-detection-example.png",
+      "slides": [
+        54
+      ],
+      "title": "Object-detection output shown on a point cloud",
+      "credit": "MathWorks: Lidar Object Detection Using Complex-YOLO v4.",
+      "width": "100%",
+      "method": "Original PPTX image extraction",
+      "sources": [
+        {
+          "file": "s54-p02.png",
+          "sha256": "57ed5399108a558d211e0d945c86553d86c453bfb65d5cd6bf263f7dac0e89cb"
+        }
+      ],
+      "sha256": "afa5e4de4f582e8f194f472adca4bdfc667bd73d68b2192e978072dece97b023",
+      "size": [
+        560,
+        420
+      ],
+      "frames": 1
+    }
+  ],
+  "videos": [
+    {
+      "id": "NZKvf1cXe8s",
+      "slide": 2,
+      "title": "Lidar 101 from Velodyne Lidar",
+      "watch_url": "https://www.youtube.com/watch?v=NZKvf1cXe8s",
+      "poster": "video-NZKvf1cXe8s-poster.jpg",
+      "poster_source_sha256": "26101ae1cfa062e51d2b341734134012e665601cc9122ef7f72b8c73e1ae19a9"
+    },
+    {
+      "id": "HlqfcOqgSnA",
+      "slide": 46,
+      "title": "3D LIDAR SLAM on Michigan Tech's campus",
+      "watch_url": "https://www.youtube.com/watch?v=HlqfcOqgSnA",
+      "poster": "video-HlqfcOqgSnA-poster.jpg",
+      "poster_source_sha256": "e262d515ce60bd87dcbb02e35899ba01e6deeca01709fd0fbea105899bab2f4c"
+    },
+    {
+      "id": "NyP6KU3dM8w",
+      "slide": 47,
+      "title": "@MTUAutonomy winter driving data set test 1",
+      "watch_url": "https://www.youtube.com/watch?v=NyP6KU3dM8w",
+      "poster": "video-NyP6KU3dM8w-poster.jpg",
+      "poster_source_sha256": "7084d87147a45abfe3726503a788e51baeb8030c872993cc04f7981ea96db59d"
+    }
+  ],
+  "rights": "Original slide illustrations retain their original rights. User-supplied assets are not relicensed by this repository. Video files are not redistributed; original YouTube IDs and lecture posters are retained."
+}

@@ -13,6 +13,7 @@ project:
   - spatial navigation
   github: https://github.com/an-hongyu/Introduction-to-Neuromorphic-Embodied-AI
   static_files:
+  - assets/lidar-lecture-media.html
   - assets/lif-interactive.html
   - assets/grid-place-interactive.html
   toc:

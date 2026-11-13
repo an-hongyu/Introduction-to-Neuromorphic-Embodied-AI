@@ -60,3 +60,5 @@ for page in html_files:
             assert f'id="{anchor}"' in text or f"id='{anchor}'" in text, f'Missing anchor in {page}: {url}'
         checked.add(url)
 print(f'Verified {len(html_files)} HTML pages, equations, notebook, figures, and {len(checked)} local URLs.')
+
+subprocess.run([sys.executable, str(Path(__file__).with_name("check_lidar_chapter.py"))], check=True)

@@ -11,7 +11,6 @@ An open, computational textbook on biological spatial cells, spiking models, ass
 3. Hebbian Learning and Synaptic Plasticity: association, constraints, Oja's rule, STDP, and eligibility traces.
 4. Spatial Cells and Their Models: hippocampal context and place, grid, head-direction, border, speed, and time cells, with each model beside its biological explanation. Includes Gaussian place fields, grid-to-place readout, and the interactive grid/place experiment.
 
-5. Neural Encoding and the ANN–SNN Bridge.
 6. Visual Perception and Visual Cue Encoding.
 7. Inertial Sensing and Vibration Encoding.
 8. LiDAR and Thirty-Six-Channel Spatial Encoding.

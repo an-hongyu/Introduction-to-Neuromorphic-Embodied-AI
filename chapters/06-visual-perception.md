@@ -305,7 +305,7 @@ def convolve_gray(image, kernel):
 
 
 patch = np.array([[20, 40, 10], [10, 20, 30], [20, 10, 20]])
-assert convolve_gray(patch, np.ones((3, 3)) / 9)[1, 1] == 20
+assert np.isclose(convolve_gray(patch, np.ones((3, 3)) / 9)[1, 1], 20)
 kernel = gaussian_kernel(3, 1.0)
 assert np.isclose(kernel.sum(), 1.0)
 assert np.allclose(convolve_gray(np.ones((5, 5)), kernel), 1.0)

@@ -42,14 +42,6 @@ Dendrites are not merely passive wires, and the soma is not a universal centrali
 
 A **neural circuit** consists of connected neurons whose activity influences one another. **Convergence** means that several neurons send input to a common target; **divergence** means that one neuron sends output to multiple targets. These patterns allow a circuit to combine information and distribute its consequences. Inhibition can coordinate competing actions as well as suppress activity. For example, activating a pathway that contracts one muscle while inhibiting its antagonist supports coordinated movement [[1]](#neuro-ref-1), ch. 2.
 
-```{figure} ../assets/neuron-anatomy-chemical-synapse-2026.svg
-:label: fig-neuron-synapse
-:alt: Labeled anatomy of a pink neuron showing dendrites, nucleus, soma, axon initial segment, myelinated axon, and axon terminals, with a circular inset of neurotransmitter release at a chemical synapse
-:width: 100%
-
-**Neuron anatomy and chemical synaptic transmission.** Dendrites receive synaptic inputs, the soma and dendrites integrate electrical signals, and action potentials typically initiate near the axon initial segment and propagate along the axon toward its terminals. The enlarged inset illustrates presynaptic transmitter release and receptors on the postsynaptic membrane. Original teaching illustration; schematic and not to scale.
-```
-
 **Glial cells** support this system. Their roles include maintaining the extracellular environment, supporting metabolism, forming myelin, and participating in transmitter handling and interactions at synapses. A simulation that omits glia is choosing a scope of explanation; it is not showing that glia are biologically unimportant.
 
 ### 1.2.2 Graded input signals and spike output signals

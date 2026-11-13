@@ -8,9 +8,11 @@ The previous chapters introduced biological signaling and computational neuron d
 
 By the end of this chapter, you should be able to:
 
-- Write a local two-factor Hebbian learning update.
-- Explain why unconstrained Hebbian weight growth can be unstable.
-- Distinguish rate-based Hebbian learning from spike-timing-dependent plasticity (STDP).
+- Explain how paired neural activity can increase the response to the same presynaptic stimulus.
+- Write a local two-factor Hebbian update and compare potentiation and depression in four rate-threshold rules.
+- Explain why unconstrained Hebbian growth can be unstable and how Oja's rule addresses it.
+- Interpret a continuous rate-dependent learning threshold.
+- Distinguish firing-rate plasticity from spike-timing-dependent plasticity (STDP), using a stated spike-time sign convention.
 - Explain how a third factor can modulate a stored eligibility trace.
 
 Hebb's proposal concerns strengthening a connection when presynaptic activity repeatedly contributes to postsynaptic activation. A simple correlation rule is one mathematical interpretation, not the complete original theory and not a universal rule for every synapse. Biological plasticity depends on cell type, signaling pathways, activity history, and experimental conditions [[2]](#hebb-ref-2).
@@ -43,6 +45,53 @@ Long-term potentiation (LTP) describes a persistent increase in synaptic efficac
 
 For example, a positive numerical weight update is not by itself an LTP experiment. It specifies no transmitter, receptor, induction protocol, or persistence mechanism. Conversely, synaptic changes can involve mechanisms that a scalar weight does not distinguish. Our goal is to make a useful model with an explicit scope and connect it to relevant evidence, not assign every line of code a unique biological mechanism.
 
+### 3.3.1 What changes after a Hebbian pairing protocol?
+
+The lecture builds a three-stage experiment [[8]](#hebb-ref-8), slides 18–21. **Before pairing**, a presynaptic test spike evokes a small excitatory postsynaptic potential (EPSP), but the postsynaptic cell does not fire. **During pairing**, presynaptic and postsynaptic activity occur together. **After pairing**, the same presynaptic test stimulus can evoke a larger EPSP, indicating increased effective synaptic transmission under the conditions of the experiment.
+
+```{figure} ../assets/hebb-course/hebbian-pairing-protocol.svg
+:label: fig-hebbian-pairing-protocol
+:alt: Three stages: a presynaptic test spike evokes a small subthreshold EPSP, paired pre- and postsynaptic spikes form the training episode, and the same test input later evokes a larger EPSP.
+:width: 100%
+
+**An illustrative pairing protocol.** A controlled comparison of the same input before and after coactivity is more informative than observing firing during training alone. Redrawn from the course lecture, slides 19–21 [[8]](#hebb-ref-8). The pictured change is a teaching schematic, not a numerical outcome measured in this book.
+
+```
+
+To interpret a larger test response as a lasting synaptic change, the induction and test conditions, recording site, baseline stability, and duration of persistence must be specified. A larger EPSP by itself does not identify the underlying receptor or release mechanism; simultaneous voltage summation and altered intrinsic excitability also need suitable controls.
+
+### 3.3.2 Four rate-threshold variants of Hebbian plasticity
+
+The lecture compares **four alternative rules** [[8]](#hebb-ref-8), slides 24–28. Classify presynaptic and postsynaptic activities as *high* if their rates exceed a chosen threshold $r_T$, and *low* otherwise. Each rule strengthens a connection when both rates are high, but they differ in which mismatched states produce long-term depression (LTD).
+
+```{figure} ../assets/hebb-course/four-hebbian-threshold-rules.svg
+:label: fig-hebbian-threshold-rules
+:alt: Four quadrant diagrams compare LTP and LTD for high and low presynaptic and postsynaptic firing rates under four alternative threshold-based learning rules.
+:width: 100%
+
+**Four possible update maps.** Green indicates potentiation, red indicates depression, and white indicates no modeled update. Adapted from lecture slides 24–28 [[8]](#hebb-ref-8). These maps are modeling alternatives, not four mandatory steps of one biological learning process.
+
+```
+
+| Presynaptic / postsynaptic activity | Rule 1 | Rule 2 | Rule 3 | Rule 4 |
+|---|---|---|---|---|
+| High / high | LTP | LTP | LTP | LTP |
+| High / low | No update | LTD | LTD | No update |
+| Low / high | No update | LTD | No update | LTD |
+| Low / low | No update | No update | No update | No update |
+
+For **Rule 1**, a continuous-time illustrative gate is
+
+$
+\tau_w\frac{dw_{ji}}{dt}=
+H(r_{\mathrm{pre}}-r_T)\,
+H(r_{\mathrm{post}}-r_T),
+$
+
+where $H(z)=1$ for $z>0$ and $H(z)=0$ for $z\leq0$. Here $w_{ji}$ is a dimensionless weight and $\tau_w$ sets an update time scale. The choice at exactly $r_T$ is a modeling convention. The rule ignores spike ordering and gives no depression. Rules 2–4 instead prescribe depression for different mismatched activity states.
+
+These rate-threshold diagrams are simple phenomenological descriptions of activity-dependent strengthening and weakening. They should not be interpreted as universally applicable biological induction protocols.
+
 ## 3.4 Correlation, covariance, and uncontrolled growth
 
 With nonnegative $x_i$ and $y_j$, the basic rule only increases active weights. If $y_j$ is itself driven by those weights, positive feedback can make them grow without bound. Setting a smaller learning rate slows growth but does not provide a general stability guarantee.
@@ -56,6 +105,29 @@ $$
 This distinguishes above- and below-average activity in the model. It can produce positive or negative updates; it also requires a definition of how means are estimated and on what time scale. A negative update to an excitatory weight means weakening that weight, not automatically converting it into a biologically inhibitory synapse.
 
 Several constraints are possible: bounded weights, decay, normalization, competition, and homeostatic regulation. Each changes the learning dynamics. A model should name the constraint and test its effect rather than add it invisibly when weights become numerically inconvenient [[2]](#hebb-ref-2).
+
+### 3.4.1 A continuous rule with a postsynaptic rate threshold
+
+The lecture also replaces binary gates with a smooth rule [[8]](#hebb-ref-8), slide 29. For clarity about units, normalize firing rates using a declared reference $r_0>0$: $\rho_{\mathrm{pre}}=r_{\mathrm{pre}}/r_0$, $\rho_{\mathrm{post}}=r_{\mathrm{post}}/r_0$, and $\rho_T=r_T/r_0$. A dimensionally consistent version of the slide's functional form is
+
+$
+\tau_w\frac{dw_{ji}}{dt} =
+\rho_{\mathrm{pre}}\,\rho_{\mathrm{post}}
+(\rho_{\mathrm{post}}-\rho_T).
+$
+
+With positive presynaptic activity, the **postsynaptic rate determines the sign**: activity below threshold depresses the weight, activity above threshold potentiates it, and equality gives zero update. Presynaptic activity scales the magnitude. The shape of this curve is not an experimentally fitted law and does not guarantee bounded learning.
+
+```{figure} ../assets/hebb-course/rate-threshold-plasticity.svg
+:label: fig-hebbian-continuous-threshold
+:alt: The continuous rate-learning update crosses zero at 15 Hz postsynaptic firing rate, with depression below the threshold and potentiation above it.
+:width: 92%
+
+**Continuous rate-threshold plasticity.** An illustrative threshold $r_T=15$ Hz separates negative and positive updates for fixed positive presynaptic activity. Redrawn from lecture slide 29 [[8]](#hebb-ref-8). The vertical magnitude is a scaled model quantity.
+
+```
+
+**Worked comparison.** Set $r_0=10$ Hz, $r_{\mathrm{pre}}=10$ Hz, $r_T=15$ Hz, and $\tau_w=10$ s. At $r_{\mathrm{post}}=5$ Hz, the right-hand side is $(1)(0.5)(0.5-1.5)=-0.5$, giving $dw/dt=-0.05\,\mathrm{s}^{-1}$. At $r_{\mathrm{post}}=20$ Hz, it is $(1)(2)(2-1.5)=1$, giving $dw/dt=+0.10\,\mathrm{s}^{-1}$. These are chosen normalized teaching values, not measured plasticity rates.
 
 ## 3.5 Oja's rule: learning with a stabilizing term
 
@@ -93,6 +165,18 @@ $$
 Here $A_+$ and $A_-$ set update magnitudes; $\tau_+$ and $\tau_-$ set time scales. The zero-lag value is an explicit convention in this teaching model. The sign convention matters: a presynaptic spike followed 10 ms later by a postsynaptic spike has $\Delta t=+10$ ms.
 
 For $A_+=0.01$ and $\tau_+=20$ ms, that pair produces $\Delta w\approx0.00607$. A postsynaptic spike occurring first gives a negative timing difference and uses the depression branch. A complete implementation must also state how pairs are selected, how repeated spikes are handled, and how weights are bounded. This exponential window is a phenomenological approximation, not a fit to every synapse.
+
+
+```{figure} ../assets/hebb-course/stdp-spike-ordering.svg
+:label: fig-hebbian-stdp-ordering
+:alt: Spike timing shows pre-before-post associated with positive delta t and potentiation, and post-before-pre with negative delta t and depression, plus an exponential learning window.
+:width: 100%
+
+**Spiking order matters.** When the presynaptic spike precedes the postsynaptic spike, $\Delta t>0$ in this chapter and the illustrative window potentiates the connection; reversing the order gives $\Delta t<0$ and depression. Adapted from lecture slides 30–34 [[8]](#hebb-ref-8). The source slides plot the *opposite* horizontal sign convention; the figure has been redrawn to agree with the equation above.
+
+```
+
+A rate rule can give identical updates to spike trains with the same average rates even when individual spike order is reversed. STDP distinguishes those cases by construction. Biological STDP windows may differ in shape, polarity, and cell-type dependence; the sign convention and model parameters must be specified independently of the diagram.
 
 ## 3.7 Eligibility traces and a third factor
 
@@ -234,6 +318,14 @@ Later SFN material will build on these ideas as a proposed research framework. I
 
 [7] Noah Zins, Yan Zhang, and Hongyu An, “Implementation of Associative Memory Learning in Mobile Robots Using Neuromorphic Computing,” in *Neuromorphic Computing*, 2023, doi: [10.5772/intechopen.110364](https://www.intechopen.com/chapters/86265).
 
+(hebb-ref-8)=
+
+[8] H. An, *Neuromorphic Robotic Systems: Computational Models of Neural Systems—Hebbian's Rule*, lecture slides, Department of Electrical and Computer Engineering, Michigan Technological University, n.d., slides 18–34. Author-supplied PowerPoint.
+
+(hebb-ref-9)=
+
+[9] P. Miller, *An Introductory Course in Computational Neuroscience*. Cambridge, MA, USA: MIT Press, 2018. Listed as additional background reading in the supplied lecture, slide 35.
+
 ## Additional Reading Materials
 
-Read Hebb's original proposal [[1]](#hebb-ref-1), then compare the explicit stabilization in Oja [[4]](#hebb-ref-4), the experimental timing dependence in Bi and Poo [[5]](#hebb-ref-5), and the delayed modulation discussed in Gerstner et al. [[6]](#hebb-ref-6). Read the robot chapter [[7]](#hebb-ref-7) alongside our course variant and list the differences in cues, learning rule, and deployment.
+Read Hebb's original proposal [[1]](#hebb-ref-1) alongside the course lecture's pairing and threshold-rule illustrations [[8]](#hebb-ref-8). For further background on rate-based modeling, see Miller [[9]](#hebb-ref-9). Then compare the explicit stabilization in Oja [[4]](#hebb-ref-4), the experimental timing dependence in Bi and Poo [[5]](#hebb-ref-5), and the delayed modulation discussed in Gerstner et al. [[6]](#hebb-ref-6). Read the robot chapter [[7]](#hebb-ref-7) alongside our course variant and list the differences in cues, learning rule, and deployment.

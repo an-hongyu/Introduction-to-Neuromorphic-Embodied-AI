@@ -124,6 +124,24 @@ A fixed-direction measurement reports distance along a particular line of sight.
 **Mechanical scanning and multiple elevation channels.** The rotating mechanism and the separate elevation channels sample different directions. Source: lecture slide(s) 15, 18 [[1]](#lidar-ref-1). The multichannel illustration identifies a Hesai device.
 ```
 
+The lecture also introduces two **chip-scale beam-steering approaches**. The silicon-photonic system illustrated below uses MEMS-actuated optical switches to select emission directions; the phased-array animation instead illustrates steering by changing the relative phase across emitters. These approaches differ in their physical mechanisms, even though both aim to direct light without a conventional spinning scanner [[1]](#lidar-ref-1), slides 20–21; [[4]](#lidar-ref-4).
+
+```{figure} ../assets/lidar-lecture/silicon-photonics-lidar.png
+:label: fig-lidar-silicon-photonics-lidar
+:alt: Schematic and hardware illustration of a MEMS optical-switch-based silicon-photonic LiDAR
+:width: 100%
+
+**Silicon-photonic optical switching.** The illustrated MEMS optical-switch array selects beam directions. Source: lecture slides 20–21; Zhang *et al.*, *Nature*, 2022 [[4]](#lidar-ref-4).
+```
+
+```{figure} ../assets/lidar-lecture/phased-array-animation.gif
+:label: fig-lidar-phased-array-animation
+:alt: Animated optical phased-array illustration in which changing relative phases steers the beam
+:width: 50%
+
+**Phased-array beam steering.** The original lecture animation shows how phase relationships can change an emitted beam's direction. Source: lecture slide 21 [[1]](#lidar-ref-1).
+```
+
 Do not confuse the illustrated **hardware channels** with the **36 neural channels** used later. A hardware channel may correspond to an elevation beam; our neural channel corresponds to one selected 10-degree planar sector. A single planar scanner can supply all 36 neural inputs.
 
 ## 8.5 Survey applications, intensity, and multiple returns

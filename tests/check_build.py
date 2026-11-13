@@ -6,6 +6,7 @@ import subprocess
 import sys
 
 subprocess.run([sys.executable, str(Path(__file__).with_name('check_visual_chapter.py'))], check=True)
+subprocess.run([sys.executable, str(Path(__file__).with_name('check_visual_slide_figures.py'))], check=True)
 
 subprocess.run(['node', str(Path(__file__).with_name('test_lif_interactive.cjs'))], check=True)
 subprocess.run(['node', str(Path(__file__).with_name('test_grid_place_interactive.cjs'))], check=True)

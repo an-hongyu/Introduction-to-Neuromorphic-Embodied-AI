@@ -29,11 +29,35 @@ For a mobile robot with a camera, the camera supplies an image, an image-process
 
 **Reading the lecture examples.** Image classification assigns an image-level category; object detection identifies objects and their locations; segmentation assigns labels to image regions or pixels; image retrieval finds similar images. These tasks produce different outputs. Detecting a colored landmark for navigation is a narrower problem than recognizing all objects in a scene [[1]](#vision-ref-1), slides 18–26.
 
+```{figure} ../assets/visual-perception-slides/detection-and-segmentation.png
+:label: fig-vision-slide-detection-and-segmentation
+:alt: Different outputs from visual perception; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Different outputs from visual perception.** Left: object detections are shown as labeled boxes. Right: the lecture contrasts a photographed scene with region-level semantic labels. Compare what information each output preserves. Source: Part I, slide 26 [[1]](#vision-ref-1).
+```
+
 ### 6.2.2 Biological motivation and computational vision
 
 The biological introduction follows light into the retina and then through the visual pathway toward the lateral geniculate nucleus and primary visual cortex. Its orientation-selectivity example illustrates a useful principle: a neuron's response can depend on a feature of a stimulus, not simply on total light intensity. The subsequent slides connect feature extraction with edge-based recognition, part-based representations, backpropagation, and convolutional networks [[1]](#vision-ref-1), slides 14–26.
 
+```{figure} ../assets/visual-perception-slides/visual-pathway.png
+:label: fig-vision-slide-visual-pathway
+:alt: From the eyes to visual cortex; original illustration from the supplied Visual Perception lectures
+:width: 85%
+
+**From the eyes to visual cortex.** Follow the colored pathways from the two visual fields through the optic nerves and optic chiasm toward the lateral geniculate nucleus and primary visual cortex. Source: Part I, slide 16 [[1]](#vision-ref-1).
+```
+
 This is a conceptual progression, not an assertion that a camera reproduces the retina or that a convolutional network is a complete model of visual cortex. In the experiment at the end of this chapter, the chosen feature is red contrast. Its simplicity makes the measurement-to-neural-response chain inspectable.
+
+```{figure} ../assets/visual-perception-slides/orientation-selectivity.png
+:label: fig-vision-slide-orientation-selectivity
+:alt: Orientation-selective visual responses; original illustration from the supplied Visual Perception lectures
+:width: 80%
+
+**Orientation-selective visual responses.** The lecture figure combines a light-bar stimulus, recorded spike trains, and a tuning curve. The visual response varies with bar orientation, illustrating feature selectivity. Source: Part I, slide 17 [[1]](#vision-ref-1).
+```
 
 ## 6.3 Light, surfaces, and image formation
 
@@ -41,9 +65,25 @@ This is a conceptual progression, not an assertion that a camera reproduces the 
 
 The lectures' image-formation sequence is **object → lens → sensor → data**. More explicitly, light leaves a source, interacts with a surface, and a portion enters the camera. Illumination has both intensity and a spectrum. Surface reflection changes the light reaching the observer; the camera's optics and sensor then determine the recorded values [[1]](#vision-ref-1), slides 28–35 and 57–70; [[2]](#vision-ref-2), slides 2–4 and 12–13.
 
+```{figure} ../assets/visual-perception-slides/light-surface-camera.png
+:label: fig-vision-slide-light-surface-camera
+:alt: Illumination, surface reflection, and camera geometry; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Illumination, surface reflection, and camera geometry.** Trace the path from the light source to the surface, through the optics, and onto the sensor plane. The diagram connects scene illumination to the image-formation discussion. Source: Part II, slide 3 [[2]](#vision-ref-2).
+```
+
 Consequently, an RGB triplet is not a property of the object alone. A colored cue observed under one light source can produce different values under another. The course repeatedly returns to this interaction between illumination, surface reflectance, and measurement. It is the reason a robot should not interpret an arbitrary pixel threshold as an illumination-independent object label.
 
 The spectrum diagrams place visible light within the much wider electromagnetic spectrum. Part I gives approximate visible ranges of 400–700 nm and 380–750 nm in different introductory slides, and a broader range in the photometry discussion. These are presented as the lecture's approximate conventions, not as one sharply defined universal visibility boundary [[1]](#vision-ref-1), slides 29–34.
+
+```{figure} ../assets/visual-perception-slides/electromagnetic-spectrum.png
+:label: fig-vision-slide-electromagnetic-spectrum
+:alt: Visible light within the electromagnetic spectrum; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Visible light within the electromagnetic spectrum.** The expanded color band shows the visible region within a much wider range of wavelengths. Read the wavelength labels as the approximate convention used in the lecture. Source: Part I, slide 33 [[1]](#vision-ref-1).
+```
 
 ### 6.3.2 Radiometry versus photometry
 
@@ -64,6 +104,14 @@ This selection follows the units table in Part I, slide 76. A **steradian (sr)**
 
 The lecture first shows an unstructured collection of rays reaching a sensor: multiple scene points contribute to the same locations, so the image is blurred. Introducing a barrier with a small opening constrains the rays. Rays from the top of an object pass through the opening and reach the lower part of the image plane, and vice versa. This explains the inverted image in the pinhole demonstration [[1]](#vision-ref-1), slides 35–43.
 
+```{figure} ../assets/visual-perception-slides/pinhole-image-inversion.png
+:label: fig-vision-slide-pinhole-image-inversion
+:alt: Why the pinhole image is inverted; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Why the pinhole image is inverted.** The original lecture diagram retains the object, the inverted image, and the crossing rays. Trace a ray from the top of the tree to the lower part of the image. Source: Part I, slide 41 [[1]](#vision-ref-1).
+```
+
 The existing textbook's ideal projection equations provide a mathematical companion to that ray diagram:
 
 $$
@@ -78,17 +126,41 @@ Here $(X,Y,Z)$ is a point in the camera frame, $Z>0$ is depth, and $f$, $x'$, an
 
 A small opening blocks much of the available light, so exposure can become long. Making the opening larger admits more light but also broadens the set of rays reaching each image location. Making it extremely small introduces diffraction. The lecture compares apertures from 2 mm down to 0.07 mm to illustrate why “smaller is always sharper” is not a sufficient design rule [[1]](#vision-ref-1), slides 44–49.
 
+```{figure} ../assets/visual-perception-slides/pinhole-aperture-comparison.png
+:label: fig-vision-slide-pinhole-aperture-comparison
+:alt: Aperture size and image sharpness; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Aperture size and image sharpness.** The six source images compare the labeled apertures from 2 mm to 0.07 mm. The lecture highlights 0.35 mm in this example and marks diffraction at the smallest openings; this is not a universal optimum. Source: Part I, slide 49 [[1]](#vision-ref-1).
+```
+
 A lens provides a way to collect more light while forming an image. The lecture then contrasts photographic film with reusable silicon sensors. For this chapter, the important transition is from an optical image to a spatial array of electrical measurements, not the historical details of individual camera products [[1]](#vision-ref-1), slides 50–57.
 
 ### 6.4.3 CCD and CMOS readout
 
 The slides describe a **charge-coupled device (CCD)** as an array in which accumulated charge is transferred between neighboring elements and eventually reaches sense amplifiers and an analog-to-digital converter. The **CMOS** discussion emphasizes local amplification and multiplexed readout. The later photodiode slide makes the light-to-electrical conversion explicit: absorbed light produces a photodetector response, and microlenses help direct light toward the sensitive region [[1]](#vision-ref-1), slides 58–68.
 
+```{figure} ../assets/visual-perception-slides/ccd-cmos-readout.png
+:label: fig-vision-slide-ccd-cmos-readout
+:alt: CCD and CMOS image-sensor readout; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**CCD and CMOS image-sensor readout.** The source illustration contrasts charge transfer in a CCD with charge-to-voltage conversion and active-pixel structure in CMOS. Keep the readout architecture separate from the later color-filter pattern. Source: Part I, slide 58 [[1]](#vision-ref-1).
+```
+
 These are architectural distinctions, not color encodings. A sensor technology and a color-filter arrangement answer different questions: the first concerns how a signal is acquired and read, whereas the second concerns which spectral components contribute to each sample.
 
 ### 6.4.4 Bayer sampling and RGB channels
 
 The Bayer-filter slides show an array of photosites covered by red, green, or blue filters, with twice as many green-filtered sites as red or blue sites. A single filtered photosite measures its selected spectral band; it is not already a complete three-channel pixel. The lectures then contrast the color image we see with its separate RGB channels [[1]](#vision-ref-1), slides 63–67.
+
+```{figure} ../assets/visual-perception-slides/bayer-filter-system.png
+:label: fig-vision-slide-bayer-filter-system
+:alt: Bayer color sampling; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Bayer color sampling.** The original diagram connects incoming light, the filter layer, the sensor array, and the resulting Bayer sequence. The colored photosites are samples used to form a color image, not complete RGB triplets. Source: Part I, slide 64 [[1]](#vision-ref-1).
+```
 
 A representative 2 × 2 Bayer arrangement is
 
@@ -106,6 +178,14 @@ The sensor-resolution example contains $4912\times3684=18{,}095{,}808$ photosite
 
 Part II distinguishes rods, emphasized for sensitivity under low illumination, from cones, emphasized for color-sensitive daylight vision. It introduces three cone classes with long-, medium-, and short-wavelength sensitivity. The plotted curves overlap: the “red,” “green,” and “blue” labels used in the slides should be read together with these broad spectral responses, not as three nonoverlapping wavelength bins [[2]](#vision-ref-2), slides 5–9.
 
+```{figure} ../assets/visual-perception-slides/cone-spectral-responses.png
+:label: fig-vision-slide-cone-spectral-responses
+:alt: Overlapping cone sensitivities; original illustration from the supplied Visual Perception lectures
+:width: 85%
+
+**Overlapping cone sensitivities.** The long-, medium-, and short-wavelength response curves overlap. Use the plotted wavelength axis rather than interpreting the color names as three disjoint spectral bands. Source: Part II, slide 9 [[2]](#vision-ref-2).
+```
+
 The lecture also distinguishes light's spectrum from an observer's representation of color. Three primary channels are useful because of the observer and the chosen representation; the physical spectrum itself need not contain only three wavelengths. The primary wavelengths quoted in the lecture are examples in its color-matching discussion, not the peak sensitivities of every cone or the filters of every camera.
 
 ### 6.5.2 The three response integrals
@@ -119,6 +199,14 @@ $$
 $$
 
 The response vector $(\rho,\gamma,\beta)^\top$ is the lecture's **tristimulus** description [[2]](#vision-ref-2), slides 12–13. Each integral combines the same incoming spectrum with a different sensitivity function. These response coordinates are not automatically the 8-bit RGB values stored by a particular camera.
+
+```{figure} ../assets/visual-perception-slides/tristimulus-light-path.png
+:label: fig-vision-slide-tristimulus-light-path
+:alt: From a reflected spectrum to three responses; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**From a reflected spectrum to three responses.** The source figure places the illuminant, surface, and observer beside spectral plots and the three cone-response areas. It provides the visual counterpart to the response integrals above. Source: Part II, slide 12 [[2]](#vision-ref-2).
+```
 
 For sampled wavelengths, a numerical interpretation is $\rho\approx\sum_k L(\lambda_k)M_r(\lambda_k)\Delta\lambda$, with analogous sums for the other channels. The wavelength increment must be included; doubling the number of samples should not by itself double the predicted response. This discrete expression is a mathematical implementation of the slide's integral, not additional experimental data.
 
@@ -152,9 +240,25 @@ $$
 
 If $A$ is invertible, solving this system gives the primary amounts. The lecture calls the wavelength-dependent results **color-matching functions** [[2]](#vision-ref-2), slides 15–20. Matching the three responses does not mean the mixture and the test light have identical physical spectra.
 
+```{figure} ../assets/visual-perception-slides/color-matching-functions.png
+:label: fig-vision-slide-color-matching-functions
+:alt: Color-matching functions; original illustration from the supplied Visual Perception lectures
+:width: 90%
+
+**Color-matching functions.** The original plot shows the three wavelength-dependent matching coefficients, including a negative portion of the red coefficient. This leads to the experimental interpretation in the next subsection. Source: Part II, slide 20 [[2]](#vision-ref-2).
+```
+
 ### 6.5.4 Why a color-matching coefficient can be negative
 
 The experimental diagram compares a test-light field with a mixture of primary lights. Some matches require a primary to be added to the **test-light side**. Moving that term to the other side of the matching equation produces a negative coefficient. It does not describe a source emitting negative optical power [[2]](#vision-ref-2), slides 21–24.
+
+```{figure} ../assets/visual-perception-slides/color-matching-experiment.png
+:label: fig-vision-slide-color-matching-experiment
+:alt: The color-matching experiment; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**The color-matching experiment.** An observer compares the test-light field with the primary-light mixture. Relate the two fields in this diagram to moving a primary-light contribution from one side of the matching equation to the other. Source: Part II, slide 22 [[2]](#vision-ref-2).
+```
 
 For example, a formal match $\mathbf t=-0.2\mathbf p_R+0.6\mathbf p_G+0.3\mathbf p_B$ can be rewritten as $\mathbf t+0.2\mathbf p_R=0.6\mathbf p_G+0.3\mathbf p_B$. The coefficients here are a chosen algebraic example; the rearrangement explains the lecture's negative-value interpretation.
 
@@ -172,13 +276,37 @@ The lectures move from a photographed scene to the values stored at pixel locati
 
 For the lecture's 8-bit RGB example, each channel is an integer from 0 to 255. Three 8-bit channels give $256^3=16{,}777{,}216$ possible triplets. An 800 × 600 × 3 uncompressed array contains 1,440,000 one-byte channel samples, before file headers or compression.
 
+```{figure} ../assets/visual-perception-slides/rgb-pixels-and-values.png
+:label: fig-vision-slide-rgb-pixels-and-values
+:alt: A color image is an array of numbers; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**A color image is an array of numbers.** The enlarged sample region connects a familiar color image with channel values stored at individual pixel locations. The numerical array and the displayed image are two representations of the same input. Source: Part II, slide 36 [[2]](#vision-ref-2).
+```
+
 **Reading note.** The caption on Part II, slide 35, describes all nonzero grayscale values as white. That statement conflicts with the same slide's description of intensity levels and its grayscale image. Here, zero denotes black and intermediate grayscale values remain intermediate; the two-valued foreground/background interpretation belongs to the binary example on slide 34.
+
+```{figure} ../assets/visual-perception-slides/rgb-channel-decomposition.png
+:label: fig-vision-slide-rgb-channel-decomposition
+:alt: The image and its separate RGB channels; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**The image and its separate RGB channels.** The full-color source image appears beside the lecture's red-, green-, and blue-channel views. Inspect how the same facial features contribute differently to the three channels. Source: Part I, slide 66 [[1]](#vision-ref-1).
+```
 
 JPEG, TIFF, PNG, and GIF are introduced as file formats. The lecture emphasizes that JPEG compression is lossy and trades stored size against image fidelity. The decoded pixel array and the file's compressed byte count are therefore different objects [[2]](#vision-ref-2), slides 37–38.
 
 ### 6.6.2 RGB, chromaticity, and HSV
 
 RGB is an additive representation: varying its three components produces a range of colors. Part II also introduces normalized coordinates and HSV/HSL as alternative descriptions. Its chromaticity figures show mixtures along lines between two primaries and within the region bounded by several primaries [[2]](#vision-ref-2), slides 25–30 and 64–66.
+
+```{figure} ../assets/visual-perception-slides/color-space-image-channels.png
+:label: fig-vision-slide-color-space-image-channels
+:alt: Alternative channel representations; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Alternative channel representations.** The source figure shows a color scene and several channel views, including the hue, saturation, and value views identified in its original caption. Compare the structures retained by each representation. Source: Part II, slide 30 [[2]](#vision-ref-2).
+```
 
 For a nonzero RGB triplet, define the normalized ratios
 
@@ -210,6 +338,14 @@ $$
 
 Convert to a signed or floating type before performing this calculation; clipping is part of the implementation specified here. With $b=30$, channel values $(240,100,20)$ become $(255,130,50)$.
 
+```{figure} ../assets/visual-perception-slides/pixel-brightness-operations.png
+:label: fig-vision-slide-pixel-brightness-operations
+:alt: Point-wise changes in appearance; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Point-wise changes in appearance.** The embedded source image compares the original with darkening, lightening, and inversion. The lecture displays the darkening and lightening panels; the full extracted illustration also retains its labeled inversion panel. Source: Part II, slide 42 [[2]](#vision-ref-2).
+```
+
 The lecture's threshold example becomes
 
 $$
@@ -217,6 +353,14 @@ B[v,u]=\begin{cases}1,&X[v,u]\geq180,\\0,&X[v,u]<180.\end{cases}
 $$
 
 For $X=[100,179,180,220]$, the output is $[0,0,1,1]$. The threshold has to use the same value convention as the image. On a normalized image, the equivalent threshold is $180/255$, not 180.
+
+```{figure} ../assets/visual-perception-slides/threshold-and-intensity-transforms.png
+:label: fig-vision-slide-threshold-and-intensity-transforms
+:alt: Thresholding and intensity transformations; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Thresholding and intensity transformations.** The upper-right panel shows the binary thresholded image. Compare it with the original at upper left; the other panels and their transfer curves show additional intensity transformations included in the source illustration. Source: Part II, slide 43 [[2]](#vision-ref-2).
+```
 
 ## 6.8 Neighborhood operations: mean and Gaussian filters
 
@@ -229,6 +373,14 @@ Y[v,u]=\sum_{j=-h}^{h}\sum_{i=-h}^{h}K[j,i]X[v-j,u-i].
 $$
 
 Here the kernel has size $(2h+1)\times(2h+1)$. The indices and boundary handling are implementation choices that must be declared. With a symmetric mean or Gaussian kernel, the flipped-kernel distinction does not change the result, but it matters for a general asymmetric kernel.
+
+```{figure} ../assets/visual-perception-slides/convolution-neighborhood.png
+:label: fig-vision-slide-convolution-neighborhood
+:alt: A neighborhood contributes to one output pixel; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**A neighborhood contributes to one output pixel.** The highlighted input window contributes to the highlighted output location. This is the original lecture illustration of the mask, kernel, or filter operation. Source: Part II, slide 44 [[2]](#vision-ref-2).
+```
 
 ### 6.8.2 Reproduce the lecture's mean-filter arithmetic
 
@@ -250,6 +402,14 @@ The printed `Mean(...)` list beneath that right-hand matrix contains different n
 
 A normalized mean filter preserves a constant interior region. At an edge between regions, it combines values from both sides. The lecture's 21 × 21 averaging example makes the resulting loss of detail visible [[2]](#vision-ref-2), slide 50.
 
+```{figure} ../assets/visual-perception-slides/mean-filter-comparison.png
+:label: fig-vision-slide-mean-filter-comparison
+:alt: The visual effect of averaging; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**The visual effect of averaging.** The original and smoothed portraits illustrate the loss of fine detail. The lecture identifies the example as smoothing with a 21 by 21 averaging kernel. Source: Part II, slide 50 [[2]](#vision-ref-2).
+```
+
 ### 6.8.3 Gaussian weighting
 
 A Gaussian kernel assigns larger weights near its center. The two-dimensional expression on the lecture slide is
@@ -258,6 +418,14 @@ $$
 G_\sigma(x,y)=\frac{1}{2\pi\sigma^2}
 \exp\!\left[-\frac{x^2+y^2}{2\sigma^2}\right].
 $$
+
+```{figure} ../assets/visual-perception-slides/gaussian-kernel-views.png
+:label: fig-vision-slide-gaussian-kernel-views
+:alt: Three views of a Gaussian kernel; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Three views of a Gaussian kernel.** The source image shows the one-dimensional profile, the two-dimensional weighting surface, and an intensity view of the kernel. These are complementary views of the weighting discussed in this section. Source: Part II, slide 51 [[2]](#vision-ref-2).
+```
 
 For image filtering, $x,y$, and $\sigma$ are measured in pixel units. A finite discrete kernel should be normalized after sampling:
 
@@ -269,6 +437,14 @@ $$
 Thus $\sum K=1$. For $h=1$ and $\sigma=1$, the center coefficient is approximately 0.2042; its four side neighbors are approximately 0.1238 each and the four corners approximately 0.0751 each. These are computed examples of the normalized kernel, not measured biological responses.
 
 The lecture shows increased blurring with broader Gaussian smoothing and emphasizes that applying the same kernel everywhere also blurs across edges [[2]](#vision-ref-2), slides 51–57. **Parameter distinction:** increasing $\sigma$ broadens the weighting; enlarging an already sufficient window at fixed $\sigma$ mainly changes truncation. Kernel width and $\sigma$ should therefore be reported separately rather than treated as identical controls.
+
+```{figure} ../assets/visual-perception-slides/gaussian-blur-progression.png
+:label: fig-vision-slide-gaussian-blur-progression
+:alt: Increasing the Gaussian scale; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Increasing the Gaussian scale.** The lecture pairs broader weighting curves with progressively smoother images, labeled with sigma values of 4, 8, 16, and 32. Observe the loss of edge detail rather than treating smoothing as uniformly beneficial. Source: Part II, slide 57 [[2]](#vision-ref-2).
+```
 
 ### 6.8.4 A minimal executable implementation
 
@@ -319,6 +495,14 @@ $$
 Z[v,u]=f\!\left(X[v,u],Y[v,u]\right).
 $$
 
+```{figure} ../assets/visual-perception-slides/dyadic-image-operation.png
+:label: fig-vision-slide-dyadic-image-operation
+:alt: Combining two corresponding pixels; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**Combining two corresponding pixels.** Two input images contribute to one output image. The highlighted rows and columns identify the corresponding pixel locations used in the dyadic operation. Source: Part II, slide 58 [[2]](#vision-ref-2).
+```
+
 The lectures list addition, subtraction, element-wise multiplication, minimum, and maximum. Chroma keying provides a concrete example: use pixel values to distinguish a subject from a blue or green background and combine that subject with another image [[2]](#vision-ref-2), slides 58–59.
 
 If $M[v,u]=1$ denotes the retained foreground, the compositing calculation is
@@ -328,6 +512,14 @@ Z[v,u,c]=M[v,u]F[v,u,c]+(1-M[v,u])B[v,u,c].
 $$
 
 $F$ and $B$ are the foreground and replacement-background images. The formula makes the lecture's selection operation explicit. A reliable result requires a useful mask; compositing does not repair errors in the color-based classification used to create that mask. A robot's colored-cue detector faces the same separation between measuring a feature and deciding what it means.
+
+```{figure} ../assets/visual-perception-slides/chroma-keying-example.png
+:label: fig-vision-slide-chroma-keying-example
+:alt: From a green-screen image to a composite; original illustration from the supplied Visual Perception lectures
+:width: 100%
+
+**From a green-screen image to a composite.** The four original panels show the subject, a channel histogram, a mask, and the composite. Connect the white foreground region of the mask to the selection equation above. Source: Part II, slide 59 [[2]](#vision-ref-2).
+```
 
 (vision-pipeline)=
 ## 6.10 From visual pixels to a neural cue

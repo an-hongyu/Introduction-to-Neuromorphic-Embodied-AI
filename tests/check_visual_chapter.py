@@ -58,18 +58,25 @@ assert page.is_file(), 'Revised chapter was not built'
 html = page.read_text()
 class Content(HTMLParser):
     def __init__(self):
-        super().__init__(); self.ids=set(); self.parts=[]; self.images=[]
+        super().__init__(); self.ids=set(); self.parts=[]; self.images=[]; self.links=[]
     def handle_starttag(self, tag, attrs):
         a=dict(attrs)
         if 'id' in a: self.ids.add(a['id'])
         if tag=='img': self.images.append(a.get('src',''))
+        if tag=='a': self.links.append(a.get('href',''))
     def handle_data(self, data): self.parts.append(data)
 p=Content(); p.feed(html)
 text=' '.join(p.parts).lower()
 for term in ['radiometry', 'bayer', 'color-matching', 'monadic', 'dyadic', 'gaussian', 'chroma', '6.12 exercises']:
     assert term in text, f'Not rendered: {term}'
-assert {'vision-pipeline','66-exercises'}.issubset(p.ids)
+# MyST prefixes explicit labels beginning with a digit with "id-" in HTML.
+assert {'vision-pipeline','id-66-exercises'}.issubset(p.ids)
+solution_page=Content()
+solution_page.feed((htmlroot/'chapters/solutions-embodied/index.html').read_text())
+assert 'vision-solutions' in solution_page.ids
+assert any('solutions-embodied' in href and href.endswith('#vision-solutions') for href in p.links), 'Rendered solution link is missing'
+assert any('visual-perception' in href and href.endswith('#id-66-exercises') for href in solution_page.links), 'Rendered return-to-exercises link is missing'
 assert any('sensor-course-vision' in s for s in p.images), 'Existing vision figure was lost'
 assert 'Neural Encoding and the ANN' not in html, 'Deleted chapter remains in navigation'
 assert 'Neural Encoding and the ANN' not in (htmlroot/'index.html').read_text()
-print('Visual chapter: lecture coverage, 16 questions/answers, exact code snippets, numerical examples, image, anchors, and removed chapter all verified.')
+print('Visual chapter: lecture coverage, 16 questions/answers, exact code snippets, numerical examples, image, round-trip links, and removed chapter all verified.')

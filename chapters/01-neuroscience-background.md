@@ -126,6 +126,15 @@ Following a spike, sodium-channel availability and other currents change. During
 
 “All-or-none” describes the regenerative character of an action potential under specified conditions. It does not mean that neurons encode only a single bit about the world. Stronger input can change the number, rate, timing, or pattern of spikes and the activity of a population; it generally does not communicate input strength by making each spike arbitrarily taller.
 
+**How a sensory stimulus becomes a spike train.** In the muscle-spindle example, increasing stretch generally increases the graded receptor potential; this can increase the **frequency** of spikes generated at the trigger zone. A longer stimulus can extend the spike train. The axon conducts these events to the terminal, where spike frequency and count help regulate transmitter release. This is a conceptual encoding example, not a universal linear relationship for every receptor [[4]](#neuro-ref-4).
+
+```{figure} ../assets/stimulus-to-spike-train-and-transmitter-release.svg
+:label: fig-stimulus-spike-transmitter
+:alt: Original schematic showing weaker, stronger, and longer muscle stretch responses across five columns: stimulus, graded receptor potential, trigger-zone spike trains, axonal spikes, and synaptic transmitter release
+:width: 100%
+
+**From graded sensory input to neural output.** The stimulus changes the receptor potential, whereas individual action potentials remain regenerative events of roughly stereotyped amplitude. Information is reflected in spike timing, frequency, and number, and transmitter release also depends on presynaptic state. Original educational redraw informed by *Principles of Neural Science*, 4th ed., ch. 2, Fig. 2-10 [[4]](#neuro-ref-4); curves and release dots are schematic.
+```
 A mathematical spike train records event times:
 
 $$
@@ -153,7 +162,7 @@ Many excitatory contacts onto cortical pyramidal neurons occur on dendritic spin
 **Chemical communication between neurons.** A presynaptic action potential reaches an axon terminal and may trigger neurotransmitter release. The transmitter activates postsynaptic receptors, changing the receiving neuron's state. The inset illustrates the principal components of a chemical synapse; the drawing is schematic and not to scale.
 ```
 
-**Read the picture from bottom to top.** The lower terminal is presynaptic; its vesicles contain transmitter. The cleft separates it from the upper postsynaptic spine. Red transmitter molecules and the labeled ions are different entities: transmitter binds receptors, whereas ions carry current through suitable channels. AMPA and NMDA are ionotropic glutamate receptors; mGlu denotes a metabotropic glutamate receptor. VGCC denotes a voltage-gated calcium channel. This is an example glutamatergic synapse, not a diagram of every synapse type. The source uses `Ca++` for $\mathrm{Ca}^{2+}$ and `Na+` for $\mathrm{Na}^{+}$.
+**Read the diagram.** Neuron A is presynaptic at this contact: its axon terminal releases transmitter into the cleft. Receptors on neuron B convert the chemical signal into a postsynaptic response. A presynaptic spike is therefore an input to B, **not a copy of B's next spike**.
 
 ### 1.5.2 Chemical versus electrical synapses
 
@@ -197,26 +206,23 @@ A **metabotropic receptor** influences the cell through intracellular signaling,
 
 ## 1.7 How does one neuron influence another?
 
-Follow a typical chemical connection from neuron A to neuron B. Each step is a distinct physical process [[1]](#neuro-ref-1), chs. 8 and 12–13.
+Follow a **chemical synapse from neuron A to neuron B**. Within A, the signal is electrical; between the cells, transmitter carries the message; at B, receptor activation produces a new, graded response [[1]](#neuro-ref-1), chs. 8 and 12–13.
 
-1. **Neuron A generates and conducts an action potential.** Its own inputs and membrane dynamics determine whether it fires. The action potential propagates along its axon toward a terminal contacting B.
-2. **The terminal depolarizes and calcium channels open.** Voltage-gated calcium channels allow calcium to enter the presynaptic terminal down its electrochemical gradient.
-3. **Calcium promotes vesicle fusion.** Calcium-sensitive release machinery couples the local calcium rise to fusion of release-ready vesicles with the presynaptic membrane. Fusion proteins and their regulation are essential; calcium does not simply push the transmitter across the cleft.
-4. **Transmitter is released and diffuses.** Vesicle contents enter the extracellular cleft by exocytosis. Release occurs in vesicular packets and is probabilistic. A presynaptic spike need not release an identical number of packets on every trial.
-5. **Receptors on B are activated.** Binding changes channel conductance directly or initiates intracellular signaling. Ionic current and other receptor-dependent processes alter B's state.
-6. **B integrates the response.** Its resulting voltage and conductances interact with other inputs, ongoing activity, and refractoriness. B produces its own action potential only if its spike-generating dynamics support it.
-7. **The chemical signal is terminated and the machinery recovers.** Transporters take some transmitters into neurons or glia; enzymes inactivate some; diffusion also removes molecules from the immediate site. Vesicle membrane is recycled. These processes differ across transmitters and synapses.
-
-For acetylcholine, enzymatic breakdown in the cleft is an important termination route. For glutamate, uptake by transporters in nearby cells is central to clearance. The transmitter is not normally left in the cleft indefinitely. Signal duration depends on release, clearance, receptor kinetics, and intracellular processes, rather than just on the duration of A's spike.
-
-```{figure} ../assets/chemical-synapse-transmission.svg
+```{figure} ../assets/neuron-a-to-neuron-b-chemical-synapse.svg
 :label: fig-chemical-transmission
-:alt: Original six-step diagram from a presynaptic action potential through calcium entry, vesicle release, transmitter diffusion, receptor response, and postsynaptic integration
+:alt: Original two-neuron chemical synapse diagram showing a presynaptic action potential, calcium entry, vesicle fusion, transmitter diffusion, postsynaptic receptor activation, and a conditional downstream spike
 :width: 100%
 
-Electrical activity in A is converted into chemical signaling and then into a response in B. The two cells generate their own electrical events. The lower strip highlights clearance and recovery, which help determine when and how the connection can respond again.
+**From one neuron to the next.** Neuron A delivers spikes to its terminal; calcium-dependent transmitter release influences neuron B through receptors. The receiving neuron sums this response with other inputs, and may—or may not—produce its own action potential. Original schematic; not to scale.
 ```
 
+1. **An action potential reaches A's terminal.** Terminal depolarization opens voltage-gated $\mathrm{Ca}^{2+}$ channels.
+2. **Calcium triggers release.** Calcium-sensitive proteins promote synaptic-vesicle fusion, releasing neurotransmitter into the synaptic cleft. Release is probabilistic.
+3. **The transmitter activates receptors on B.** Binding alters ion-channel conductance directly or engages intracellular signaling, producing a postsynaptic current and often a graded potential.
+4. **Neuron B integrates the input.** The response can be excitatory or inhibitory depending on receptors and ionic conditions. B fires an action potential only when its own spike-generation dynamics reach the required conditions.
+5. **The synapse resets.** Diffusion, uptake, and sometimes enzymatic breakdown terminate transmitter action; vesicles and release machinery recover.
+
+**Key distinction:** A's action potential does not physically cross the cleft and become B's action potential. Electrical signaling in A is converted to chemical transmission, then to a **new electrical response in B**. This explains why spike-to-spike copying is not a general model of a biological chemical synapse [[1]](#neuro-ref-1), ch. 8.
 **Example: why B does not necessarily fire.** Suppose one spike in A produces a 2 mV EPSP at B's observation site. With B near $-65$ mV and an illustrative threshold at $-55$ mV, that input alone is insufficient. Several appropriately timed excitatory inputs may combine to make firing possible. An inhibitory conductance, a recent spike in B, or a weaker-than-usual release event may prevent it. A synapse communicates an influence; the downstream neuron determines its response.
 
 ## 1.8 Excitatory and inhibitory synaptic actions
@@ -327,7 +333,7 @@ This project's planned LiDAR example uses 36 angular sectors of $10^\circ$ each.
 
 ## Additional Reading Materials
 
-The main biological reference is *Principles of Neural Science*, fifth edition [[1]](#neuro-ref-1). Use Chapter 2 for the functional organization of a neuron, Chapters 6–7 for membrane properties and action potentials, Chapters 8 and 10 for synapses and integration, Chapters 11–13 for receptors, release, and neurotransmitters, and Chapters 66–67 for plasticity and memory. The explanatory text, numerical examples, and figures identified as original were created for this book. Reproduced reference-book figures are credited separately in their captions. Parameter values in worked examples are stated assumptions, not measurements from a particular cell.
+The main biological reference is *Principles of Neural Science*, fifth edition [[1]](#neuro-ref-1). Use Chapter 2 for the functional organization of a neuron, Chapters 6–7 for membrane properties and action potentials, Chapters 8 and 10 for synapses and integration, Chapters 11–13 for receptors, release, and neurotransmitters, and Chapters 66–67 for plasticity and memory. The explanatory text, numerical examples, and original schematic figures were prepared for this book. The sensory-coding diagram is an independent educational redraw of concepts discussed in the fourth edition [[4]](#neuro-ref-4), not a reproduced textbook figure. Parameter values in worked examples are stated assumptions, not measurements from a particular cell.
 
 For the computational treatment, use *Neuronal Dynamics* [[3]](#neuro-ref-3), Chapters 1–3 for single-neuron and synaptic models and Chapter 6 for spike trains and neuronal variability. See the [reference-book reading map](roadmap.md#reference-book-reading-map) for further selections across the textbook.
 
@@ -359,3 +365,7 @@ For the computational treatment, use *Neuronal Dynamics* [[3]](#neuro-ref-3), Ch
 (neuro-ref-3)=
 
 [3] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6. [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+
+(neuro-ref-4)=
+
+[4] Eric R. Kandel, James H. Schwartz, and Thomas M. Jessell, Eds., *Principles of Neural Science*, 4th ed. New York, NY, USA: McGraw-Hill, 2000, ch. 2, Fig. 2-10. [Chapter 2 source](https://neurodatasharing.bme.gatech.edu/cloud/Fong%20et%20al/Additional%20Data/Images/Imaging%20resources/KSJ_Ch2.pdf).

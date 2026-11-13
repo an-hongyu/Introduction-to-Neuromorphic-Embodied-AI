@@ -1,5 +1,5 @@
 ---
-title: "Chapter 8 · LiDAR and Thirty-Six-Channel Spatial Encoding"
+title: "Chapter 8 · Neural Encoding for LiDAR Sensing"
 ---
 
 ## 8.1 Learning objectives

@@ -237,7 +237,7 @@
         }
       ],
       "transform": "Embedded image exported without changing its content.",
-      "credit_on_slide_or_image": "Embedded Figure 2.24 includes credit text for Litwiller 2001, Photonics Spectra, and an active-pixel illustration URL. Those embedded credits are retained.",
+      "credit_on_slide_or_image": "Embedded Figure 2.24 and its original credit text are retained. The source metadata is not independently expanded.",
       "sha256": "f2ac4ccce2eb7daa0d21c9e0682958bc921cbc464d3d52f60b8d5ad1440674f9",
       "size": [
         1274,
@@ -464,7 +464,7 @@
       "section": "6.6.2",
       "before": "For a nonzero RGB triplet",
       "title": "Alternative channel representations",
-      "caption": "The source figure shows a color scene and several channel views, including the hue, saturation, and value views identified in its original caption. Compare the structures retained by each representation. Source: Part II, slide 30 [[2]](#vision-ref-2).",
+      "caption": "The source figure shows a color scene alongside hue, saturation, monochrome intensity, and two additional chromatic-channel views labeled in the original caption. Compare the structures retained by each representation. Source: Part II, slide 30 [[2]](#vision-ref-2).",
       "width": "100%",
       "sources": [
         {

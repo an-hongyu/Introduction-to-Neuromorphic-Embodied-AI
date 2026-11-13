@@ -305,7 +305,7 @@ RGB is an additive representation: varying its three components produces a range
 :alt: Alternative channel representations; original illustration from the supplied Visual Perception lectures
 :width: 100%
 
-**Alternative channel representations.** The source figure shows a color scene and several channel views, including the hue, saturation, and value views identified in its original caption. Compare the structures retained by each representation. Source: Part II, slide 30 [[2]](#vision-ref-2).
+**Alternative channel representations.** The source figure shows a color scene alongside hue, saturation, monochrome intensity, and two additional chromatic-channel views labeled in the original caption. Compare the structures retained by each representation. Source: Part II, slide 30 [[2]](#vision-ref-2).
 ```
 
 For a nonzero RGB triplet, define the normalized ratios

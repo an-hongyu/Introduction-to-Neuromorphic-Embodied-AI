@@ -44,7 +44,8 @@ FIGURES = [
         "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41467-022-29583-z/MediaObjects/41467_2022_29583_Fig2_HTML.png",
         "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41467-022-29583-z/MediaObjects/41467_2022_29583_Fig2_HTML.png",
     ]),
-    ("time-distance-cells.jpg", elife("83930", "fig2", 1)),
+    # Published revisions of the same Figure 2; never substitute another panel.
+    ("time-distance-cells.jpg", elife("83930", "fig2", 2) + elife("83930", "fig2", 3) + elife("83930", "fig2", 4)),
 ]
 
 

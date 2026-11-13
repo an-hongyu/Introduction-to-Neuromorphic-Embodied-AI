@@ -1,0 +1,43 @@
+name: Import original visual lecture figures
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/import-visual-slide-figures.yml']
+permissions:
+  contents: write
+jobs:
+  import:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'book/visual-perception-original-slide-figures'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: book/visual-perception-original-slide-figures
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow
+      - name: Import reviewed image bundle with integrity checks
+        shell: bash
+        env:
+          TRANSFER_URL: 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-c7d8-81f5-b41d-7a58eb64f357/raw?se=2026-11-13T17%3A02%3A03Z&sp=r&sv=2026-06-06&sr=b&scid=9d779160-0af7-5429-aecd-7ca529728c46&skoid=2757bbe4-5137-4324-975b-acedc0bad279&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-13T11%3A25%3A36Z&ske=2026-11-14T11%3A25%3A36Z&sks=b&skv=2026-06-06&sig=9w2sEmVxsObkGRV/RGlWyd6kmIwssdyxbCJV3e%2BphUk%3D'
+        run: |
+          python - <<'PY'
+          import hashlib, io, os, pathlib, subprocess, sys, tempfile, urllib.request, zipfile
+          raw = urllib.request.urlopen(os.environ['TRANSFER_URL'], timeout=90).read()
+          assert hashlib.sha256(raw).hexdigest() == '456f7fff49f7560135876f64f3251f0e91f7915cd4d71e98ce2fa4e692107456'
+          with tempfile.TemporaryDirectory() as d:
+              with zipfile.ZipFile(io.BytesIO(raw)) as z:
+                  assert len(z.infolist()) == 29
+                  for item in z.infolist():
+                      p = pathlib.PurePosixPath(item.filename)
+                      assert not p.is_absolute() and '..' not in p.parts
+                  z.extractall(d)
+              subprocess.run([sys.executable, str(pathlib.Path(d)/'apply_bundle.py'), d], check=True)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/visual-perception-slides chapters/06-visual-perception.md tests/check_visual_slide_figures.py tests/check_build.py
+          git diff --cached --stat
+          git commit -m "Add 24 original course-slide figure groups to Chapter 6 with source captions and regression checks"
+          git push origin HEAD:book/visual-perception-original-slide-figures

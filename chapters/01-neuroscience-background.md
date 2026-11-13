@@ -30,16 +30,6 @@ A **neuron** is an electrically excitable cell specialized for receiving, transf
 
 Dendrites are not merely passive wires, and the soma is not a universal centralized calculator. Voltage-dependent channels and local dendritic events can change how signals combine. Likewise, not every neuron follows one rigid input-to-axon sequence: some cells communicate mainly through graded potentials, some fire spontaneously, and initiation sites vary with cell type. The table is a functional guide, not a universal wiring rule.
 
-```{figure} ../assets/ccn-neuron-detector.png
-:label: fig-ccn-neuron-detector
-:alt: Reference-textbook diagram comparing a detector with a neuron, labeling inputs, integration, output, dendrites, synapses, soma, and axon
-:width: 85%
-
-**Reference-book figure: input, integration, and output.** Reproduced unchanged from Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., ch. 2, “Neuron as a detector” [[2]](#neuro-ref-2). © 2024 the authors and contributors; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Original figure](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/figures/fig_neuron_as_detect.png).
-```
-
-**Read the picture.** Follow the separate inputs toward the integration region and then the output axon. The diagram is a functional abstraction: integration can occur throughout dendrites as well as the soma, and the axon initial segment is an important spike-initiation site in many neurons. The purple cell body should not be interpreted as the only place where computation occurs.
-
 A **neural circuit** consists of connected neurons whose activity influences one another. **Convergence** means that several neurons send input to a common target; **divergence** means that one neuron sends output to multiple targets. These patterns allow a circuit to combine information and distribute its consequences. Inhibition can coordinate competing actions as well as suppress activity. For example, activating a pathway that contracts one muscle while inhibiting its antagonist supports coordinated movement [[1]](#neuro-ref-1), ch. 2.
 
 **Glial cells** support this system. Their roles include maintaining the extracellular environment, supporting metabolism, forming myelin, and participating in transmitter handling and interactions at synapses. A simulation that omits glia is choosing a scope of explanation; it is not showing that glia are biologically unimportant.
@@ -356,10 +346,7 @@ For the computational treatment, use *Neuronal Dynamics* [[3]](#neuro-ref-3), Ch
 11. Distinguish synaptic transmission, short-term plasticity, LTP/LTD, and intrinsic excitability changes. Which of these does a fixed-weight LIF network necessarily include?
 12. Design a robot example that separately identifies a measured input, a dynamic state, a connection efficacy, and an observable output. State what evidence would be needed to claim learning.
 
-
 ## References
-
-
 
 (neuro-ref-1)=
 

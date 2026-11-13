@@ -406,7 +406,7 @@ The lecture introduces **WADS**, collected in Michigan's Upper Peninsula, with f
 
 [Watch the original video on YouTube](https://www.youtube.com/watch?v=HlqfcOqgSnA) | Lecture slide 46 [[1]](#lidar-ref-1).
 
-**Lecture video: winter driving.** Slide 47 links **@MTUAutonomy winter driving data set test 1**. Inspect the relation between the driving scene and its sensor representation. Consider how snow, missing returns, and vehicle motion would affect the 36-channel encoder.
+**Lecture video: winter driving.** Slide 47 links **&#64;MTUAutonomy winter driving data set test 1**. Inspect the relation between the driving scene and its sensor representation. Consider how snow, missing returns, and vehicle motion would affect the 36-channel encoder.
 
 ```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/lidar-lecture-media.html?v=NyP6KU3dM8w
 :label: lidar-video-nyp6ku3dm8w

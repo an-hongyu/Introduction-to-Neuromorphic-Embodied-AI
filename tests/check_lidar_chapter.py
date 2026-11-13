@@ -69,7 +69,8 @@ class Page(HTMLParser):
 htmlroot=root/'_build/html';page=htmlroot/'chapters/lidar-encoding/index.html'
 assert page.is_file()
 p=Page();p.feed(page.read_text())
-assert '85-exercises' in p.ids and 'fig-sensor-lidar' in p.ids
+assert {'85-exercises','id-85-exercises'} & p.ids
+assert 'fig-sensor-lidar' in p.ids
 base='/Introduction-to-Neuromorphic-Embodied-AI'
 for rec in manifest['images']:
     key=Path(rec['file']).stem
@@ -96,5 +97,7 @@ assert 'Neural Encoding and the ANN' not in page.read_text()
 solution_html=htmlroot/'chapters/solutions-embodied/index.html'
 q=Page();q.feed(solution_html.read_text())
 assert 'lidar-solutions' in q.ids
-assert any('lidar-encoding/#85-exercises' in x or 'lidar-encoding#85-exercises' in x for x in q.links)
+exercise_links = [x for x in q.links if 'lidar-encoding' in x and 'exercises' in x]
+assert exercise_links
+assert all(unquote(urlsplit(x).fragment) in p.ids for x in exercise_links)
 print('Chapter 8 verified: 22 original static figure groups, two intact GIFs, three source video links/players, 16 exercises/answers, encoder examples, and published asset bytes.')

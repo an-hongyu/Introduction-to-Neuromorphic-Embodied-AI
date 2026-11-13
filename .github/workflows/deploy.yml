@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -48,7 +48,7 @@ jobs:
       - name: Test interactive questions in Chromium
         run: |
           python -m pip install playwright==1.56.0
-          python -m playwright install chromium
+          python -m playwright install --with-deps chromium
           python tests/check_exercise_browser.py
       - name: Preserve exercise browser checks
         if: always()

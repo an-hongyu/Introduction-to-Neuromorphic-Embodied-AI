@@ -128,13 +128,14 @@ Following a spike, sodium-channel availability and other currents change. During
 
 **How a sensory stimulus becomes a spike train.** In the muscle-spindle example, increasing stretch generally increases the graded receptor potential; this can increase the **frequency** of spikes generated at the trigger zone. A longer stimulus can extend the spike train. The axon conducts these events to the terminal, where spike frequency and count help regulate transmitter release. This is a conceptual encoding example, not a universal linear relationship for every receptor [[4]](#neuro-ref-4).
 
-```{figure} ../assets/stimulus-to-spike-train-and-transmitter-release.svg
+```{figure} ../assets/stimulus-to-spike-reference-layout.webp
 :label: fig-stimulus-spike-transmitter
-:alt: Original schematic showing weaker, stronger, and longer muscle stretch responses across five columns: stimulus, graded receptor potential, trigger-zone spike trains, axonal spikes, and synaptic transmitter release
+:alt: Muscle-spindle sensory neuron above three aligned rows of weaker, stronger, and longer stretch stimuli; columns A-D show receptor potentials, trigger-zone spikes with threshold lines, axonal action potentials, and transmitter release
 :width: 100%
 
 **From graded sensory input to neural output.** The stimulus changes the receptor potential, whereas individual action potentials remain regenerative events of roughly stereotyped amplitude. Information is reflected in spike timing, frequency, and number, and transmitter release also depends on presynaptic state. Original educational redraw informed by *Principles of Neural Science*, 4th ed., ch. 2, Fig. 2-10 [[4]](#neuro-ref-4); curves and release dots are schematic.
 ```
+
 A mathematical spike train records event times:
 
 $$
@@ -360,7 +361,7 @@ For the computational treatment, use *Neuronal Dynamics* [[3]](#neuro-ref-3), Ch
 
 (neuro-ref-2)=
 
-[2] Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 2. [Open textbook source](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-02.md); [edition and copyright](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md); [CC BY 4.0 license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/LICENSE).
+[2] Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 2. [Open textbook source](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-02.md); [edition and copyright](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md); [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
 
 (neuro-ref-3)=
 

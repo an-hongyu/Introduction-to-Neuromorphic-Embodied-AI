@@ -7,8 +7,13 @@
  .practice-book-page main,.practice-book-page article{min-width:0}
  .practice-book-page article h1,.practice-book-page article h2,.practice-book-page article h3,.practice-book-page article h4,.practice-book-page article p,.practice-book-page article li{overflow-wrap:anywhere}
  .practice-book-page article .katex-display{max-width:100%;overflow-x:auto;overflow-y:hidden}
- .practice-book-page article .katex{max-width:100%}
- .practice-book-page article p>.katex,.practice-book-page article li>.katex{display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}
+ /* MyST wraps inline KaTeX in an extra span, so direct-child selectors miss it.
+    Make each formula a wrapping unit and scroll only formulas wider than it. */
+ .practice-book-page article .katex{position:relative;display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}
+ .practice-book-page article .katex-display>.katex{display:block}
+ /* Preserve the accessible MathML, but prevent its hidden text from expanding
+    the document if the external KaTeX stylesheet loads late or is unavailable. */
+ .practice-book-page article .katex .katex-mathml{position:absolute!important;clip:rect(1px,1px,1px,1px)!important;clip-path:inset(50%)!important;width:1px!important;height:1px!important;padding:0!important;border:0!important;overflow:hidden!important;white-space:nowrap!important}
  .practice-book-page article pre{max-width:100%;overflow-x:auto}
  .practice-book-page .exercise-playground{min-width:0;max-width:100%}
  `;

@@ -2,121 +2,302 @@
 title: "Chapter 4 · Spatial Cells"
 ---
 
-## 4.1 Learning objectives: from spikes to representations
+## 4.1 Learning Objectives
 
-[Chapter 1](01-neuroscience-background.md) described how neurons signal. This chapter asks what a neuron's activity is related to while an animal moves. By the end of this chapter, you should be able to:
+A navigation system must represent more than its current coordinates. It needs to distinguish location, orientation, movement, environmental boundaries, and the order of events. This chapter introduces the **hippocampal–entorhinal system** and six experimentally identified response classes: **place cells, grid cells, head-direction cells, border cells, speed cells, and time cells**. The last two supply movement and temporal information rather than location alone.
 
-- Distinguish place-cell, grid-cell, head-direction-cell, and boundary-related firing patterns.
-- Explain how movement speed and temporal context relate to spatial neural activity.
-- Interpret a spatial firing-rate map.
-- Distinguish observed neural correlations from demonstrated causal mechanisms.
+By the end of this chapter, you should be able to:
 
-The hippocampal formation and connected regions, including entorhinal cortex, are important for spatial and memory-related processing [[1]](#spatial-ref-1). We will use “spatial cells” as a teaching umbrella for experimentally characterized tuning patterns and their supporting signals. These labels do not imply that the brain contains independent, perfectly separated modules for every variable.
+- Identify the hippocampus, dentate gyrus, CA3, CA1, subiculum, and medial and lateral entorhinal cortex, and trace their principal connections.
+- Distinguish the experimental signatures of place, grid, head-direction, border, speed, and time cells.
+- Read spatial rate maps, polar tuning curves, speed-response curves, and trial-aligned temporal activity plots.
+- Construct simple tuning functions with explicit variables and units, while distinguishing them from learned circuits and spiking-neuron dynamics.
+- Explain how self-motion and environmental cues can jointly support navigation, and design controls for competing explanations of neural tuning.
+- Relate these representations to neuromorphic robots without treating sensor measurements or simulator ground truth as evidence of biological equivalence.
 
-## 4.2 What does “a cell represents position” mean?
+## 4.2 The hippocampal–entorhinal system
 
-Suppose we record spikes while tracking an animal's position $\mathbf{x}(t)$, heading $\theta(t)$, and speed $v(t)$. Saying that a cell has spatial tuning means that its discharge statistics depend on spatial variables in the measured conditions. A useful descriptive object is a conditional rate,
+### 4.2.1 A circuit for spatial experience and memory
+
+The **hippocampus** is a medial temporal-lobe structure involved in memory and spatial processing. It is not an isolated position sensor. Its interactions with the **entorhinal cortex (EC)** connect ongoing sensory and contextual information with memory. In rodent navigation experiments, recordings from this wider system reveal neural responses related to location, heading, boundaries, motion, and elapsed time [[1]](#spatial-ref-1).
+
+The hippocampus proper contains the CA fields, including **CA1, CA2, and CA3**. The **dentate gyrus (DG)** and **subiculum** are closely associated components of the hippocampal formation. CA2 is a distinct region even when a simplified teaching diagram omits it. EC is commonly divided into **medial entorhinal cortex (MEC)** and **lateral entorhinal cortex (LEC)**; their contributions differ, but a rigid division into an exclusively spatial MEC and exclusively nonspatial LEC is too strong [[1]](#spatial-ref-1).
+
+A useful first route through the circuit is
 
 $$
-r_i(\mathbf{x},\theta,v,c)=\mathbb{E}\!\left[\frac{N_i(t,t+\Delta t)}{\Delta t}\;\middle|\;\mathbf{x},\theta,v,c\right],
+\mathrm{EC}\ \longrightarrow\ \mathrm{DG}\ \longrightarrow\ \mathrm{CA3}\ \longrightarrow\ \mathrm{CA1}.
 $$
 
-where $N_i(t,t+\Delta t)$ is a spike count, $\Delta t$ is a short observation interval, and $c$ summarizes context. This expression defines what is being estimated; it does not prescribe the circuit that produces it.
+This **trisynaptic pathway** includes entorhinal input to DG, DG mossy-fiber projections to CA3, and CA3 Schaffer-collateral projections to CA1. It is not the whole circuit: EC also projects directly to CA3 and CA1, CA3 contains recurrent connections, and hippocampal output interacts with subiculum and EC. Consequently, a one-way pipeline from grid cells to place cells is not a complete anatomical description [[1]](#spatial-ref-1), [[2]](#spatial-ref-2).
 
-A **tuning model** predicts activity from a behavioral variable. A **neuron dynamics model**, developed in [Chapter 2](03-computational-neuron-models.md), predicts how internal state evolves and generates spikes. A Gaussian place field is a tuning model; a leaky integrate-and-fire neuron is a dynamics model. The two can be combined, but one is not evidence for the other.
+```{figure} ../assets/spatial-literature/hippocampal-circuit.jpg
+:label: fig-spatial-hippocampal-circuit
+:alt: Open-textbook diagram of cortical pathways converging on entorhinal cortex and hippocampal dentate gyrus, CA3, and CA1
+:width: 85%
+
+**The hippocampus in a wider cortical memory system.** Follow cortical inputs toward EC, then compare the indirect route through DG and CA3 with the route to CA1. This is a simplified circuit diagram, not an exhaustive connectivity atlas or a map of mutually exclusive cell classes. Reproduced from O'Reilly and colleagues, *Computational Cognitive Neuroscience*, ch. 7, “Hippocampal Anatomy” [[2]](#spatial-ref-2), under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized and converted to JPEG, with no changes to labels or panels.
+```
+
+| Region or pathway | Anatomical point to recognize | Modeling question it motivates |
+|---|---|---|
+| DG | Receives entorhinal input and projects to CA3 | Can similar experiences acquire more distinct representations? |
+| CA3 | Receives DG/EC inputs and has recurrent connectivity | Can a partial cue reactivate an associated pattern? |
+| CA1 | Receives CA3 and direct entorhinal inputs | How are different information streams combined? |
+| Subiculum | Participates in hippocampal output and wider loops | How does spatial activity influence downstream systems? |
+| MEC and LEC | Interconnected cortical interfaces with hippocampus | How are motion, landmarks, objects, and context incorporated? |
+
+The questions in the last column are computational interpretations, not a claim that each region performs only one operation. The historical **cognitive-map** account connects hippocampal activity to relations among places, rather than just a chain of learned motor commands [[3]](#spatial-ref-3).
+
+### 4.2.2 A response class is not a complete cell identity
+
+“Place cell” and “grid cell” describe measured firing patterns. They do not by themselves specify a unique molecular identity, a particular neuron equation, or an immutable role. A neuron can show mixed selectivity, and its apparent tuning depends on the environment, behavioral sampling, and analysis.
+
+Let $\mathbf{x}(t)=[x(t),y(t)]^\top$ denote position, $\theta(t)$ heading, $v(t)$ speed, $\tau$ elapsed time from a defined event, and $c$ context. A general descriptive rate is
+
+$$
+r_i(\mathbf{x},\theta,v,\tau,c)
+=\frac{\mathbb{E}[N_i(t,t+\Delta t)\mid\mathbf{x},\theta,v,\tau,c]}{\Delta t}.
+$$
+
+Here $N_i$ is a spike count, $\Delta t$ is in seconds, and $r_i$ is in Hz. Estimating this relationship is different from explaining how a circuit creates it. The LIF, HH, and Izhikevich models in [Chapter 2](03-computational-neuron-models.md) describe neuronal dynamics; the tuning functions below describe relationships between activity and selected variables.
 
 ## 4.3 Place cells: location-selective activity
 
-O'Keefe and Dostrovsky reported hippocampal units with activity related to the animal's location [[2]](#spatial-ref-2). A region in which a cell fires more strongly is called a **place field**. The field is defined in the conditions of a recording session, not as a permanent GPS coordinate stored in the neuron.
+### 4.3.1 Biological signature and experimental discovery
 
-Place-cell activity can depend on context and experience. A field can change when the environment or task changes; such changes are often discussed under **remapping** [[1]](#spatial-ref-1). Neither one Gaussian per neuron nor a fixed field center across all environments is a biological requirement.
+O'Keefe and Dostrovsky reported hippocampal neurons whose discharge depended on where a freely moving rat was located [[4]](#spatial-ref-4). A region associated with elevated firing is a **place field**. Place cells are especially well studied among CA1 and CA3 pyramidal neurons. A population with different preferred locations can provide information about position, although an individual neuron's activity is usually ambiguous and variable.
 
-For a transparent teaching example, set
+A place field is not a permanent GPS coordinate. Rotating a salient cue, changing the enclosure, or changing contextual conditions can alter the spatial activity pattern. Such changes are described as **remapping**; a change in preferred location and a change in firing rate within an otherwise similar field are not the same observation [[5]](#spatial-ref-5). Some cells have more than one field, particularly in larger or structured environments.
+
+### 4.3.2 How to read a place-cell figure
+
+Start with the animal's trajectory, then locate activity events along it, and finally examine the occupancy-corrected spatial map. A dense cluster of events can reflect either elevated activity or simply more time spent at that location. Also identify the recording modality: **calcium events are not identical to directly recorded spikes**.
+
+```{figure} ../assets/spatial-literature/place-fields.jpg
+:label: fig-spatial-place-recordings
+:alt: Published open-field trajectories with activity-event locations and normalized CA1 place-field maps, with population field distributions and between-session changes
+:width: 100%
+
+**Place-selective activity in an open environment.** In panel A, compare the event locations above each normalized spatial map; the other panels describe field positions, sizes, information, and session-to-session shifts. These are calcium-imaging results from head-fixed mice navigating an air-floating real-world platform, not extracellular spike recordings from freely moving rats. Reproduced from Go et al., Fig. 6 [[6]](#spatial-ref-6), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized and format-converted only.
+```
+
+### 4.3.3 A transparent place-field model
+
+A convenient teaching approximation is a circular Gaussian:
 
 $$
-r(\mathbf{x})=r_0+(r_{\mathrm{peak}}-r_0)
-\exp\!\left[-\frac{\|\mathbf{x}-\boldsymbol{\mu}\|^2}{2\sigma^2}\right].
+r_i(\mathbf{x})=r_0+(r_{\mathrm{peak}}-r_0)
+\exp\!\left[-\frac{\|\mathbf{x}-\boldsymbol\mu_i\|^2}{2\sigma_i^2}\right].
 $$
 
-Here $r_0$ and $r_{\mathrm{peak}}$ are baseline and peak rates in Hz; $\boldsymbol{\mu}$ is a preferred location in meters; and $\sigma$ sets field width in meters. This is a deliberately imposed, circular field, not a model of how a place field develops.
+$\boldsymbol\mu_i$ is the preferred location, $\sigma_i$ is field width, and both use meters; $r_0$ and $r_{\mathrm{peak}}$ are rates in Hz. With $r_0=0.2$ Hz, $r_{\mathrm{peak}}=25$ Hz, and $\sigma_i=0.14$ m, the center rate is 25 Hz and the rate one $\sigma_i$ away is $0.2+24.8e^{-1/2}\approx15.24$ Hz.
 
-**Worked example.** If $r_0=0.2$ Hz, $r_{\mathrm{peak}}=25$ Hz, and $\sigma=0.14$ m, the rate at the field center is 25 Hz. At a distance of one $\sigma$, it is $0.2+24.8e^{-1/2}\approx15.24$ Hz. A short stochastic spike count can still be zero at either position.
+This equation **imposes** a field. It does not explain learning, remapping, or the origin of its inputs. A model claiming place-field formation must specify plasticity, experience, and held-out tests. A robot whose true simulator position drives this equation is demonstrating an encoder, not autonomous localization.
 
 ## 4.4 Grid cells: repeated spatial firing fields
 
-Grid cells in medial entorhinal cortex can exhibit multiple firing fields arranged in an approximately hexagonal spatial pattern [[3]](#spatial-ref-3). Three descriptive properties are particularly useful:
+### 4.4.1 The hexagonal firing pattern
 
-| Property | Meaning |
-|---|---|
-| Spacing | Distance scale between neighboring firing fields |
-| Orientation | Rotation of the spatial pattern relative to an external reference |
-| Phase | Translation of the pattern within the environment |
+Hafting and colleagues described MEC neurons with multiple firing fields arranged in an approximately triangular lattice, giving a hexagonal pattern of neighbors around a field [[7]](#spatial-ref-7). Three properties characterize an idealized grid: **spacing** is the distance between neighboring peaks, **orientation** is the lattice rotation, and **phase** is its translation in space. Spatial phase here is not the phase of a theta oscillation.
 
-Unlike a single localized place field, a grid pattern repeats. A single grid cell is therefore ambiguous about absolute position: several separated positions can produce similar activity. Population patterns, other spatial signals, and context help resolve such ambiguity.
+A grid pattern is normally visible only after combining activity over a trajectory. An animal does not activate every field of one cell simultaneously. Nor does a repeated pattern uniquely determine absolute position: several locations share a similar phase within a single grid. Different phases, spatial scales, and additional cues can help distinguish them.
 
-Grid activity motivates models of path integration, in which self-motion updates an internal location estimate. That interpretation is a hypothesis to implement and evaluate, not a consequence of drawing a hexagonal pattern.
+```{figure} ../assets/spatial-literature/grid-fields.jpg
+:label: fig-spatial-grid-recordings
+:alt: Published grid-cell rate maps in light and darkness, together with spatial periodicity, information, and stability analyses
+:width: 100%
 
-### 4.4.1 From grid spacing to a place-like readout
+**Grid patterns are regular but depend on experimental conditions.** Begin with panel A: repeated hotspots are clearer in the illuminated trials than in the dark trials of this experiment. Other panels quantify periodicity, information, and stability. This does not imply that every grid cell immediately loses all spatial information in every dark environment. Reproduced from Pérez-Escobar et al., Fig. 2 [[8]](#spatial-ref-8), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized and format-converted only.
+```
 
-The [Grid Cells and Grid-to-Place Mapping section](grid-to-place.md) now provides the complete cosine equations, spacing–frequency conversion, orientation/phase conventions, and weighted threshold readout. It follows Liu et al.'s published grid/threshold framework and an available later author manuscript, with all teaching extensions identified. An embedded interactive experiment lets you vary spacing, angle, phase, gain, baseline, weights, population size, and threshold. [Laboratory 8](../notebooks/grid_to_place.ipynb) reproduces the equations in editable Python.
+A spatial autocorrelogram asks how well a map resembles a shifted copy of itself. An ideal grid produces six surrounding peaks. **Gridness** compares rotational symmetry, but a sixfold-looking plot alone is insufficient: field sampling, occupancy, smoothing, arena shape, and shuffled controls matter. Spatial autocorrelation is not the same as spike-time autocorrelation.
 
-Start with one grid, compare six identical grids, then try six diverse inputs. Repeated fields survive the first two constructions. A designed common peak in the diverse example illustrates a possible readout, not a demonstrated learning mechanism.
+### 4.4.2 From a tuning pattern to a navigation model
 
-## 4.5 Head-direction cells: orientation rather than travel direction
-
-Head-direction cells discharge preferentially when the animal's head points in a particular direction relative to a reference frame [[4]](#spatial-ref-4). Heading is different from location, and it is also different from the velocity direction: an animal can turn its head while stationary or move with its head oriented away from its travel direction.
-
-A computational compass might use a circular tuning curve,
+For a simple periodic field, define three unit vectors $\mathbf e_m$ separated by $60^\circ$ and write
 
 $$
-r(\theta)=r_0+A\exp\!\left[\kappa\bigl(\cos(\theta-\theta_0)-1\bigr)\right],
+g(\mathbf{x})=r_G\left[\zeta+\kappa\sum_{m=0}^{2}
+\cos\!\left(k\mathbf e_m^\top(\mathbf{x}-\boldsymbol\phi)\right)\right]_+,
+\qquad k=\frac{4\pi}{\sqrt3\lambda}.
 $$
 
-where $\theta$ and $\theta_0$ are angles in radians, $A$ is the peak rate above baseline, and $\kappa$ controls angular concentration. This chosen curve respects angular wraparound: $1^\circ$ and $359^\circ$ are close, despite a naive subtraction giving $358^\circ$.
+Here $[z]_+=\max(z,0)$, $\lambda$ is lattice spacing in meters, $\boldsymbol\phi$ is a spatial translation in meters, and $k$ has units of inverse meters. $\zeta$ and $\kappa$ are dimensionless shape parameters, and $r_G$ scales the output into Hz. This is a designed tuning function, not a biological discovery or proof of an attractor mechanism.
 
-For a robot, distinguish body yaw, sensor orientation, and motion direction explicitly before choosing which variable drives a head-direction-like population.
+A **path-integration model** must instead update internal state using self-motion over time. Continuous-attractor grid models are one explicit approach [[9]](#spatial-ref-9). Noise can accumulate, so landmark corrections and boundary information become important. The mathematical ability to integrate velocity is distinct from evidence that a particular biological population implements one proposed algorithm.
 
-## 4.6 Border and boundary-related cells: geometry as a reference
+### 4.4.3 Continue to the interactive grid-to-place model
 
-Entorhinal border cells can show elevated firing near environmental boundaries [[5]](#spatial-ref-5). Broader boundary-related modeling also considers distance and direction to a boundary. These descriptions should not be collapsed into the statement that every boundary-related cell is simply a distance-to-the-nearest-wall sensor.
+The [Grid Cells and Grid-to-Place Mapping section](grid-to-place.md) develops the spacing–frequency conversion, orientation and phase conventions, and weighted threshold readout in detail. Its embedded experiment and [Laboratory 8](../notebooks/grid_to_place.ipynb) let you compare one grid, six identical inputs, and a diverse population. Identical periodic inputs retain their aliases; diversity and a threshold may create localized conjunctions, but choosing a common anchor is not the same as learning one.
 
-A robot's LiDAR beam reports range along a sensor-relative direction. A wall-related response defined in an environment-fixed frame requires additional geometry and an orientation estimate. Thus, one LiDAR sector is not automatically one biological border cell. The proposed 36-sector encoder is a sensor representation that could supply inputs to a later spatial network.
+## 4.5 Head-direction cells: an angular reference
 
-## 4.7 Speed cells and time cells: complementary variables
+### 4.5.1 Heading is not position or movement direction
 
-Speed-related entorhinal activity provides evidence for a movement-related signal that can support navigation models [[6]](#spatial-ref-6). A simple teaching rate might increase with nonnegative speed, but any such relationship must be tested over the speeds and behavioral states actually sampled. Speed measures movement magnitude; heading provides an angular reference.
+Head-direction cells fire preferentially when the animal faces a particular direction relative to an environmental reference. Classical recordings characterized this tuning in the rat postsubiculum, also called the dorsal presubiculum [[10]](#spatial-ref-10). Directional signals also occur in a wider network, including thalamic and parahippocampal regions; they are not confined to the hippocampus.
 
-Hippocampal **time cells** can show sequential activity related to elapsed time within a task interval [[7]](#spatial-ref-7). They are included here because navigation and memory unfold in time, not because time tuning is itself spatial location tuning. A sequence tied to time may also be influenced by position, movement, and task structure; an experiment needs to separate these possibilities.
+A cell can retain a preferred heading while the animal occupies different locations. Conversely, an animal at one location can face many directions. Head orientation must also be separated from travel direction: a rat can move backward or turn its head independently of its trajectory.
 
-Grid-to-place interactions also cannot be reduced to a universally established one-way conversion [[8]](#spatial-ref-8).
+```{figure} ../assets/spatial-literature/head-direction.jpg
+:label: fig-spatial-head-direction
+:alt: Anatomically identified presubicular neurons with head-angle traces, spike locations, and polar head-direction tuning curves
+:width: 100%
+
+**Directional tuning and identified neurons.** Compare the spike marks on the heading traces with the polar curves: high firing is concentrated around a preferred angle. Panels C/G summarize tuning; D/H compare recording halves. These recordings used passive rotation of awake rats, so the figure is not a free-navigation trajectory experiment. Reproduced from Preston-Ferrer et al., Fig. 3 [[11]](#spatial-ref-11), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized and format-converted only.
+```
+
+### 4.5.2 Circular tuning and robot coordinates
+
+A smooth circular approximation is
+
+$$
+r_i(\theta)=r_0+A_i\exp\!\left[\kappa_i\bigl(\cos(\theta-\theta_i)-1\bigr)\right].
+$$
+
+$\theta$ and preferred angle $\theta_i$ are in radians, $A_i$ is the peak increment in Hz, and $\kappa_i\geq0$ controls concentration. The maximum is $r_0+A_i$. Angular differences must wrap around: $359^\circ$ is only $2^\circ$ from $1^\circ$, not $358^\circ$ away. A polar curve plots angle around the circle and activity along the radius; it is **not a map of where spikes occurred**.
+
+For a robot, define body yaw, camera/LiDAR mounting angle, and velocity direction separately. A ring-attractor implementation adds recurrent dynamics that maintain and update an angular population state; the tuning curve alone does not create that memory.
+
+## 4.6 Border cells and boundary-related representations
+
+### 4.6.1 Firing near environmental limits
+
+Entorhinal **border cells** show activity concentrated near particular environmental boundaries [[12]](#spatial-ref-12). A cell may respond along one side of an enclosure rather than near every wall. Boundaries can be physical walls or other limits, depending on the task and preparation.
+
+Related **boundary-vector cells** were reported in the subiculum [[13]](#spatial-ref-13). Boundary-vector accounts describe sensitivity to a boundary at a preferred distance and allocentric direction. These concepts overlap, but “border cell,” “boundary-vector cell,” and “nearest-obstacle sensor” are not interchangeable labels.
+
+```{figure} ../assets/spatial-literature/border-fields.jpg
+:label: fig-spatial-border-recordings
+:alt: Five recorded border-cell spatial maps compared between illuminated and dark trials, with summary measures of boundary confinement and polarity
+:width: 100%
+
+**Boundary-related firing in recorded neurons.** In panel A, identify the active arc near the arena perimeter and compare light/dark conditions for the same cell. The plots quantify how strongly firing remains boundary-associated. Reproduced from Pérez-Escobar et al., Fig. 5 [[8]](#spatial-ref-8), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized and format-converted only.
+```
+
+### 4.6.2 A geometry-dependent teaching function
+
+For an arena with a selected wall $w$, a simple near-wall rate is
+
+$$
+r_w(\mathbf{x})=r_0+A\exp[-d_w(\mathbf{x})^2/(2\sigma_b^2)].
+$$
+
+$d_w$ is distance to that wall and $\sigma_b$ is a distance scale, both in meters. This produces a band near one chosen boundary. Replacing $d_w$ by distance to the nearest wall changes the represented variable and makes the cell respond around the whole enclosure. Neither construction is a complete boundary-vector model.
+
+For a two-dimensional robot, a beam of range $d$ and bearing $\alpha$ gives a sensor-frame endpoint $[d\cos\alpha,d\sin\alpha]^\top$. To express it in a world frame, use calibrated mounting and timestamped pose transforms. A 36-sector LiDAR encoder is therefore **egocentric sensory input**; an allocentric boundary representation requires additional computation. Test boundary sensitivity by changing enclosure geometry while controlling occupancy, orientation, and sensory visibility.
+
+## 4.7 Speed cells and time cells
+
+### 4.7.1 Speed cells: how fast is the animal moving?
+
+**Speed cells** show systematic modulation of activity with running speed. Kropff and colleagues characterized a population of speed-modulated neurons in MEC [[14]](#spatial-ref-14). A speed signal can supply the magnitude needed for self-motion updating, but a firing-rate correlation is not by itself proof that the neuron causally integrates distance.
+
+Linear speed $v=\|\dot{\mathbf{x}}\|$ is nonnegative and has units such as m/s. Angular velocity $\omega=\dot\theta$ has units such as rad/s and can distinguish clockwise from counterclockwise motion. These are separate quantities. Recordings across MEC, presubiculum, and parasubiculum reveal linear and angular speed modulation, including mixed selectivity [[15]](#spatial-ref-15).
+
+```{figure} ../assets/spatial-literature/speed-cells.jpg
+:label: fig-spatial-speed-recordings
+:alt: Published linear-speed coding figure with speed schematics, rate-versus-speed tuning, shuffled controls, and firing-rate and running-speed time courses
+:width: 100%
+
+**Reading a speed code.** The tuning curves relate firing rate to linear speed; the time-series comparison shows whether activity covaries with movement over a session. Shuffled distributions help assess whether the association exceeds chance. A speed curve is neither a place field nor a head-direction polar plot. Reproduced from Spalla, Treves, and Boccara, Fig. 2 [[15]](#spatial-ref-15), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized and format-converted only.
+```
+
+An elementary rate approximation is $r(v)=[b+kv]_+$. With $v$ in m/s, $b$ is in Hz and $k$ in Hz/(m/s). For the teaching values $b=3$ Hz and $k=40$ Hz/(m/s), $v=0.25$ m/s gives 13 Hz. This linear response is an assumption over a chosen range, not a law obeyed by all speed-sensitive neurons.
+
+To test speed coding, compare different speeds at matched locations and headings. Control for occupancy, acceleration, reward approach, and behavioral state, and evaluate on held-out runs. In a model, velocity integration can use
+
+$$
+\widehat{\mathbf{x}}_{n+1}=\widehat{\mathbf{x}}_n+
+\widehat v_n\Delta t
+\begin{bmatrix}\cos\widehat\psi_n\\\sin\widehat\psi_n\end{bmatrix},
+$$
+
+where $\psi$ is **travel direction**, not necessarily head direction. For a nonholonomic robot moving forward, body yaw may approximate it; that relationship must be stated rather than silently assumed.
+
+### 4.7.2 Time cells: when within an experience?
+
+**Time cells** show activity concentrated around particular moments relative to a defined event or task interval. MacDonald and colleagues demonstrated hippocampal temporal sequences that bridge separated events [[16]](#spatial-ref-16); internally generated hippocampal sequences during a delay also motivated this research [[17]](#spatial-ref-17). These responses help describe temporal organization, but are not evidence for a neuron reading an absolute wall clock.
+
+The reference event matters. The same number of seconds after entering a maze, receiving a cue, or starting a treadmill are different variables. Position, traveled distance, speed, and task expectation may covary with elapsed time. A sequence of peak times is therefore not enough to identify pure time coding.
+
+```{figure} ../assets/spatial-literature/time-distance-cells.jpg
+:label: fig-spatial-time-recordings
+:alt: Published examples comparing time-coding and distance-coding hippocampal neurons across different treadmill velocities and analysis coordinates
+:width: 100%
+
+**Distinguishing elapsed time from traveled distance.** Compare the first two example columns with the next two, then inspect whether response timing or traveled distance remains more consistent when speed changes. These are experimental-data analyses, not a synthetic sequence of Gaussian fields. Reproduced from Abramson et al., Fig. 2 [[18]](#spatial-ref-18), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized and format-converted only. The separately restricted apparatus panel in that paper's Fig. 1 is not reproduced.
+```
+
+A teaching temporal field can be written
+
+$$
+r_i(\tau)=r_0+A_i\exp[-(\tau-\tau_i)^2/(2\sigma_{t,i}^2)],
+\qquad \tau=t-t_{\mathrm{event}}.
+$$
+
+$\tau_i$ and $\sigma_{t,i}$ are preferred elapsed time and temporal width in seconds. This is an imposed timing profile, not a learned sequence or a complete time-cell mechanism. To display a population sequence, sort cells by peak time using training trials, and test that ordering on separate trials; sorting the same noisy data used for display can manufacture an apparent sequence.
+
+A practical control varies treadmill speed. Under idealized time coding, a cell fires near the same elapsed time; under idealized distance coding, its response time changes approximately as $d/v$. Actual neurons can mix both variables, and task requirements affect their expression [[18]](#spatial-ref-18). Time cells belong in this chapter because spatial experience unfolds in time, not because temporal selectivity is itself spatial tuning.
+
+## 4.8 Estimating and comparing neural tuning
+
+### 4.8.1 Correct for occupancy before interpreting a map
+
+For spatial bin $b$, let $K_b$ be its spike count and $T_b$ its occupancy time. Then
+
+$$
+\widehat r_b=K_b/T_b,\qquad T_b>0.
+$$
+
+Twenty spikes during 2 s give 10 Hz; ten spikes during 0.5 s give 20 Hz. Raw counts would rank these locations in the opposite order. An unvisited bin is **unknown**, not biologically silent. The same principle applies to angle bins and speed bins: normalize by the time for which the corresponding state was sampled.
+
+Synchronize behavior and neural recordings; report bin sizes, smoothing, and minimum occupancy; inspect raw data alongside processed maps. Preserve track geometry and masks instead of smoothing across walls or unvisited gaps. For a decoder, use independent trials, sessions, or temporally separated blocks rather than treating adjacent samples as independent tests.
+
+### 4.8.2 Different plots answer different questions
+
+| Response class | Horizontal or spatial variable | Characteristic visualization | Important control |
+|---|---|---|---|
+| Place | Position $\mathbf{x}$ | Trajectory/events and occupancy-normalized map | Location sampling and contextual remapping |
+| Grid | Position $\mathbf{x}$ | Repeated fields and spatial autocorrelation | Arena geometry, sampling, shuffled grid scores |
+| Head direction | Heading $\theta$ | Circular or polar rate curve | Directional occupancy and cue rotation |
+| Border | Boundary geometry | Boundary-associated firing map | Move or insert boundaries; separate heading effects |
+| Speed | Linear speed $v$ or angular velocity $\omega$ | Rate–speed relation and temporal covariation | Position, heading, behavioral-state covariates |
+| Time | Elapsed time $\tau$ | Trial rasters, temporal tuning, ordered population activity | Speed, distance, event identity, held-out ordering |
+
+The following compact comparison uses synthetic functions, unlike the published experimental figures above.
 
 ```{figure} ../assets/spatial-cell-tuning.png
 :label: fig-spatial-tuning
-:alt: Six synthetic panels showing place, grid, heading, boundary, speed, and elapsed-time tuning
+:alt: Six synthetic teaching panels illustrating place, grid, heading, boundary, speed, and elapsed-time tuning
 :width: 100%
 
-Synthetic tuning examples. All fields and curves are generated from explicit teaching functions; none are recordings or evidence that a circuit learned these representations. Spatial axes are in meters, angular axes in degrees, rates in Hz, and elapsed time in seconds.
+**Idealized response signatures for comparison.** These are generated teaching curves, not neural recordings and not evidence that a circuit learned the representations. Interpret the axes separately: meters for space, degrees for orientation, Hz for rate, and seconds for elapsed time.
 ```
 
-## 4.8 How to estimate a spatial firing-rate map
+## 4.9 From distributed representations to embodied AI
 
-For spatial bin $b$, let $K_b$ be the number of recorded spikes and $T_b$ the time spent in the bin. An occupancy-normalized estimate is
+### 4.9.1 Different signals describe the same experience
 
-$$
-\widehat r_b=\frac{K_b}{T_b},\qquad T_b>0.
-$$
+Consider a robot at $(0.5,0.4)$ m, facing north near an eastern wall, initially stationary. Place-like activity can specify location, head-direction-like activity orientation, and boundary-related activity environmental geometry. Speed-dependent activity can change when it starts moving, whereas a temporal sequence may track time since a cue even before movement begins. No single population needs to carry the entire state.
 
-Consider two bins: one has 20 spikes in 2 s, and another has 10 spikes in 0.5 s. Raw spike counts rank the first bin higher, but the estimated rates are 10 Hz and 20 Hz, respectively. Unvisited bins have no rate estimate; they should be masked rather than assigned a biological rate of zero.
+This is a useful engineering decomposition, **not a settled biological wiring diagram**. The hippocampal–entorhinal network has parallel pathways, recurrent interactions, and mixed selectivity. Grid-to-place conversion is one family of models, not an established universal one-way transformation; the literature also examines contributions in the reverse direction and from non-grid inputs [[19]](#spatial-ref-19).
 
-For a defensible analysis, record position and spikes on an aligned time base, report occupancy and bin size, impose a stated minimum occupancy, and assess reproducibility across sessions or trials. If you smooth a map, report the procedure and do not treat smooth appearance as independent evidence of tuning. For a learned decoder, separate fitting from evaluation and avoid randomly splitting highly adjacent trajectory samples without considering temporal dependence.
+For a biologically inspired robot, keep three levels distinct: measured inputs such as LiDAR and odometry; estimated internal variables such as pose or event-relative time; and neural dynamics that encode, retain, or learn from those variables. A tuning function evaluated at the true simulator pose bypasses the estimation problem. A place representation also does not itself specify an action: navigation requires a policy or readout, a goal definition, and an experimentally testable learning mechanism.
 
-## 4.9 A robot example and the first laboratory
+### 4.9.2 Laboratories and a research bridge
 
-Imagine a robot at $(0.5,0.4)$ m facing north near the east wall. A place-like population can depend on its location; a heading population can depend on its orientation; boundary-related inputs can depend on the east wall; and speed-related signals can remain low if it is stationary. These signals describe different aspects of the same state.
+Continue with the [Place Cell laboratory guide](04-place-cells.md) and [Place Cell notebook](../notebooks/place_cells.ipynb), which use a one-meter-square arena, a 300 s synthetic trajectory, and Poisson spike counts. They measure occupancy coverage and error relative to an imposed field. Then use the [Grid-to-Place laboratory](../notebooks/grid_to_place.ipynb) to explore combinations of periodic inputs.
 
-A successful localization system must estimate state from available observations and motion. Supplying the true simulated position to a tuning function demonstrates encoding only. It does not show that the robot can infer its position, learn a map, or navigate to a goal.
+Liu, Bai, and An provide a published example linking spatial-cell-inspired modeling to associative learning in an open-field neuromorphic robot [[20]](#spatial-ref-20). It is an engineering case study rather than proof that its modeled units are biologically identical to the cell classes reviewed here. Keep learning, frozen post-learning evaluation, and sensory-control conditions separate.
 
-Continue with the [Place Cell laboratory guide](04-place-cells.md) and [executable Place Cell notebook](../notebooks/place_cells.ipynb). The notebook uses a one-meter-square arena, a 300 s synthetic trajectory, and Poisson spike counts. It reports occupancy coverage and errors relative to the imposed rate field.
+## Additional Reading Materials
+
+For biological context, read *Principles of Neural Science* [[1]](#spatial-ref-1) alongside the hippocampal anatomy and memory discussion in *Computational Cognitive Neuroscience* [[2]](#spatial-ref-2). O'Keefe and Nadel's *The Hippocampus as a Cognitive Map* [[3]](#spatial-ref-3) provides the historical theoretical foundation; the authors have made a readable copy available through UCL.
+
+For primary discoveries, begin with place cells [[4]](#spatial-ref-4), grid cells [[7]](#spatial-ref-7), head-direction cells [[10]](#spatial-ref-10), border cells [[12]](#spatial-ref-12), speed cells [[14]](#spatial-ref-14), and time cells [[16]](#spatial-ref-16). Use the illustrated studies in this chapter to connect those definitions to real experimental measurements. The [Grid-to-Place section](grid-to-place.md) and [Chapter 8 LiDAR encoder](08-lidar-encoding.md) supply the computational bridge.
+
+(spatial-exercises)=
 
 ## 4.10 Exercises
 
@@ -126,42 +307,91 @@ Continue with the [Place Cell laboratory guide](04-place-cells.md) and [executab
 4. Design a control that helps distinguish speed-related firing from firing caused by repeated visits to one location.
 5. Explain why an imposed Gaussian place field and a learned place field require different evidence.
 6. List the transformations needed to convert a body-relative LiDAR observation into an environment-relative boundary measurement.
+7. Trace the hippocampal trisynaptic pathway and name a route that bypasses DG or CA3. Why is a strictly feedforward grid-to-place diagram incomplete?
+8. An ideal time cell fires 3 s after treadmill onset. An ideal distance cell fires after 0.6 m of travel. Predict their firing times at 0.2 and 0.3 m/s, and explain how the test separates the hypotheses.
+9. What additional interpretation is required when a place-field map comes from calcium imaging rather than extracellular spike recordings? Why is a normalized color scale not an absolute firing-rate scale?
+10. Explain how to assess temporal sequence reliability without sorting and evaluating the same trials. State what such reliability would and would not demonstrate.
+
+See the [worked solutions at the end of the book](solutions-foundations.md#spatial-solutions).
 
 ## References
 
 (spatial-ref-1)=
 
-[1] Eric R. Kandel, James H. Schwartz, Thomas M. Jessell, Steven A. Siegelbaum, and Albert James Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013, chs. 17 and 67. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
+[1] Eric R. Kandel, James H. Schwartz, Thomas M. Jessell, Steven A. Siegelbaum, and Albert James Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
 
 (spatial-ref-2)=
 
-[2] John O'Keefe and Jonathan O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Research*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://pubmed.ncbi.nlm.nih.gov/5124915/).
+[2] Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 7. [Open textbook chapter](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-07.md); [edition and license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md).
 
 (spatial-ref-3)=
 
-[3] Torkel Hafting, Marianne Fyhn, Sturla Molden, May-Britt Moser, and Edvard I. Moser, “Microstructure of a spatial map in the entorhinal cortex,” *Nature*, vol. 436, pp. 801–806, 2005, doi: [10.1038/nature03721](https://pubmed.ncbi.nlm.nih.gov/15965463/).
+[3] John O'Keefe and Lynn Nadel, *The Hippocampus as a Cognitive Map*. Oxford, U.K.: Clarendon Press, 1978. [Author-authorized full text and bibliographic record](https://discovery.ucl.ac.uk/id/eprint/10103569/).
 
 (spatial-ref-4)=
 
-[4] Jeffrey S. Taube, Robert U. Muller, and James B. Ranck, Jr., “Head-direction cells recorded from the postsubiculum in freely moving rats. I. Description and quantitative analysis,” *The Journal of Neuroscience*, vol. 10, no. 2, pp. 420–435, 1990, doi: [10.1523/JNEUROSCI.10-02-00420.1990](https://pubmed.ncbi.nlm.nih.gov/2303851/).
+[4] John O'Keefe and Jonathan O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Research*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://doi.org/10.1016/0006-8993(71)90358-1).
 
 (spatial-ref-5)=
 
-[5] Trygve Solstad, Charlotte N. Boccara, Emilio Kropff, May-Britt Moser, and Edvard I. Moser, “Representation of geometric borders in the entorhinal cortex,” *Science*, vol. 322, no. 5909, pp. 1865–1868, 2008, doi: [10.1126/science.1166466](https://pubmed.ncbi.nlm.nih.gov/19095945/).
+[5] Robert U. Muller and John L. Kubie, “The effects of changes in the environment on the spatial firing of hippocampal complex-spike cells,” *The Journal of Neuroscience*, vol. 7, no. 7, pp. 1951–1968, 1987, doi: [10.1523/JNEUROSCI.07-07-01951.1987](https://doi.org/10.1523/JNEUROSCI.07-07-01951.1987).
 
 (spatial-ref-6)=
 
-[6] Emilio Kropff, James E. Carmichael, May-Britt Moser, and Edvard I. Moser, “Speed cells in the medial entorhinal cortex,” *Nature*, vol. 523, pp. 419–424, 2015, doi: [10.1038/nature14622](https://pubmed.ncbi.nlm.nih.gov/26176924/).
+[6] Mary Ann Go, Jake Rogers, Giuseppe P. Gava, Catherine E. Davey, Seigfred Prado, Yu Liu, and Simon R. Schultz, “Place cells in head-fixed mice navigating a floating real-world environment,” *Frontiers in Cellular Neuroscience*, vol. 15, Art. 618658, 2021, doi: [10.3389/fncel.2021.618658](https://doi.org/10.3389/fncel.2021.618658).
 
 (spatial-ref-7)=
 
-[7] Christopher J. MacDonald, Kyle Q. Lepage, Uri T. Eden, and Howard Eichenbaum, “Hippocampal ‘time cells’ bridge the gap in memory for discontiguous events,” *Neuron*, vol. 71, no. 4, pp. 737–749, 2011, doi: [10.1016/j.neuron.2011.07.012](https://pubmed.ncbi.nlm.nih.gov/21867888/).
+[7] Torkel Hafting, Marianne Fyhn, Sturla Molden, May-Britt Moser, and Edvard I. Moser, “Microstructure of a spatial map in the entorhinal cortex,” *Nature*, vol. 436, pp. 801–806, 2005, doi: [10.1038/nature03721](https://doi.org/10.1038/nature03721).
 
 (spatial-ref-8)=
 
-[8] Daniel Bush, Caswell Barry, and Neil Burgess, “What do grid cells contribute to place cell firing?,” *Trends in Neurosciences*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://pubmed.ncbi.nlm.nih.gov/24485517/).
+[8] José Antonio Pérez-Escobar, Olga Kornienko, Patrick Latuske, Laura Kohler, and Kevin Allen, “Visual landmarks sharpen grid cell metric and confer context specificity to neurons of the medial entorhinal cortex,” *eLife*, vol. 5, Art. e16937, 2016, doi: [10.7554/eLife.16937](https://doi.org/10.7554/eLife.16937).
 
+(spatial-ref-9)=
 
-## Additional Reading Materials
+[9] Yoram Burak and Ila R. Fiete, “Accurate path integration in continuous attractor network models of grid cells,” *PLOS Computational Biology*, vol. 5, no. 2, Art. e1000291, 2009, doi: [10.1371/journal.pcbi.1000291](https://doi.org/10.1371/journal.pcbi.1000291).
 
-Start with the original place-cell [[2]](#spatial-ref-2) and grid-cell [[3]](#spatial-ref-3) studies, then read the grid-to-place review [[8]](#spatial-ref-8). For an engineering bridge, compare the body-relative measurements in [Chapter 8](08-lidar-encoding.md) with the environment-relative spatial representations here. A 36-channel range encoder is a sensory input, not evidence that it implements 36 biological border cells.
+(spatial-ref-10)=
+
+[10] Jeffrey S. Taube, Robert U. Muller, and James B. Ranck, Jr., “Head-direction cells recorded from the postsubiculum in freely moving rats. I. Description and quantitative analysis,” *The Journal of Neuroscience*, vol. 10, no. 2, pp. 420–435, 1990, doi: [10.1523/JNEUROSCI.10-02-00420.1990](https://doi.org/10.1523/JNEUROSCI.10-02-00420.1990).
+
+(spatial-ref-11)=
+
+[11] Patricia Preston-Ferrer, Stefano Coletta, Markus Frey, and Andrea Burgalossi, “Anatomical organization of presubicular head-direction circuits,” *eLife*, vol. 5, Art. e14592, 2016, doi: [10.7554/eLife.14592](https://doi.org/10.7554/eLife.14592).
+
+(spatial-ref-12)=
+
+[12] Trygve Solstad, Charlotte N. Boccara, Emilio Kropff, May-Britt Moser, and Edvard I. Moser, “Representation of geometric borders in the entorhinal cortex,” *Science*, vol. 322, no. 5909, pp. 1865–1868, 2008, doi: [10.1126/science.1166466](https://doi.org/10.1126/science.1166466).
+
+(spatial-ref-13)=
+
+[13] Colin Lever, Stephen Burton, Ali Jeewajee, John O'Keefe, and Neil Burgess, “Boundary vector cells in the subiculum of the hippocampal formation,” *The Journal of Neuroscience*, vol. 29, no. 31, pp. 9771–9777, 2009, doi: [10.1523/JNEUROSCI.1319-09.2009](https://doi.org/10.1523/JNEUROSCI.1319-09.2009).
+
+(spatial-ref-14)=
+
+[14] Emilio Kropff, James E. Carmichael, May-Britt Moser, and Edvard I. Moser, “Speed cells in the medial entorhinal cortex,” *Nature*, vol. 523, pp. 419–424, 2015, doi: [10.1038/nature14622](https://doi.org/10.1038/nature14622).
+
+(spatial-ref-15)=
+
+[15] Davide Spalla, Alessandro Treves, and Charlotte N. Boccara, “Angular and linear speed cells in the parahippocampal circuits,” *Nature Communications*, vol. 13, Art. 1907, 2022, doi: [10.1038/s41467-022-29583-z](https://doi.org/10.1038/s41467-022-29583-z).
+
+(spatial-ref-16)=
+
+[16] Christopher J. MacDonald, Kyle Q. Lepage, Uri T. Eden, and Howard Eichenbaum, “Hippocampal ‘time cells’ bridge the gap in memory for discontiguous events,” *Neuron*, vol. 71, no. 4, pp. 737–749, 2011, doi: [10.1016/j.neuron.2011.07.012](https://doi.org/10.1016/j.neuron.2011.07.012).
+
+(spatial-ref-17)=
+
+[17] Eva Pastalkova, Vladimir Itskov, Asohan Amarasingham, and György Buzsáki, “Internally generated cell assembly sequences in the rat hippocampus,” *Science*, vol. 321, no. 5894, pp. 1322–1327, 2008, doi: [10.1126/science.1159775](https://doi.org/10.1126/science.1159775).
+
+(spatial-ref-18)=
+
+[18] Shai Abramson, Benjamin J. Kraus, John A. White, Michael E. Hasselmo, Dori Derdikman, and Genela Morris, “Flexible coding of time or distance in hippocampal cells,” *eLife*, vol. 12, Art. e83930, 2023, doi: [10.7554/eLife.83930](https://doi.org/10.7554/eLife.83930).
+
+(spatial-ref-19)=
+
+[19] Daniel Bush, Caswell Barry, and Neil Burgess, “What do grid cells contribute to place cell firing?,” *Trends in Neurosciences*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://doi.org/10.1016/j.tins.2013.12.003).
+
+(spatial-ref-20)=
+
+[20] Tianze Liu, Kang Jun Bai, and Hongyu An, “Replicating associative learning of rodents with a neuromorphic robot in an open-field arena,” *Frontiers in Neuroscience*, vol. 19, Art. 1565780, 2025, doi: [10.3389/fnins.2025.1565780](https://doi.org/10.3389/fnins.2025.1565780).

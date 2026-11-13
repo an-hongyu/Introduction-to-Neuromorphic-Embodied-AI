@@ -126,7 +126,10 @@ def run_checks(base: str) -> dict:
                 book.set_viewport_size({'width': width, 'height': 844})
                 book.wait_for_timeout(600)
                 frame_element.scroll_into_view_if_needed()
-                assert book.evaluate('document.documentElement.scrollWidth <= innerWidth+1'), width
+                metrics = book.evaluate("""()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].map(e=>({e,r:e.getBoundingClientRect()})).filter(({e,r})=>r.right>innerWidth+1&&r.width>0).slice(0,25).map(({e,r})=>({tag:e.tagName,cls:String(e.className),text:e.innerText?.slice(0,80),left:r.left,right:r.right,width:r.width}))})""")
+                (OUT / f'layout-{width}.json').write_text(json.dumps(metrics, indent=2))
+                book.screenshot(path=str(OUT / f'book-{width}.png'), full_page=False)
+                assert metrics['scroll'] <= width + 1, json.dumps(metrics)
                 child = next(f for f in book.frames if 'exercise-practice.html' in f.url)
                 assert child.evaluate('document.documentElement.scrollWidth <= innerWidth+1'), width
                 assert child.evaluate('document.querySelector("main").getBoundingClientRect().height <= innerHeight+3'), width

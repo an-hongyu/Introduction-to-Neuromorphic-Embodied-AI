@@ -9,7 +9,7 @@ Worked answers use the chapter's specified units and model conventions. Suggeste
 (vision-solutions)=
 ## Chapter 6 — 6.12 Exercises
 
-[Original exercises](06-visual-perception.md#vision-exercises)
+[Original exercises](06-visual-perception.md#66-exercises)
 
 1. **Red cue.** For $(R,G,B)=(0.8,0.2,0.2)$, contrast is $z_R=\operatorname{clip}(0.8-(0.2+0.2)/2,0,1)=0.6$; $I=50+250z_R=200$ pA.
 2. **Smaller red target.** With per-pixel red contrast $c$ and target coverage fraction $q$ on a zero-contrast background, the ROI-averaged feature is approximately $qc$. A smaller cue therefore reduces feature and encoded drive even if its hue remains unchanged.

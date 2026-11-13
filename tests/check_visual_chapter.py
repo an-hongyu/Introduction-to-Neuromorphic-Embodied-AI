@@ -11,12 +11,14 @@ toc = (root / 'myst.yml').read_text()
 assert not (root / 'chapters/05-neural-encoding.md').exists(), 'Removed chapter was restored'
 assert '05-neural-encoding.md' not in toc
 assert 'Chapter 5' not in solutions
+assert '06-visual-perception.md#66-exercises' in solutions
+assert 'solutions-embodied.md#vision-solutions' in chapter
 assert 'Chapter 6' in chapter and 'vision-solutions' in solutions
 assert 'Neural Encoding and the ANN' not in (root / 'index.md').read_text()
 for word in ['Radiometry', 'Photometry', 'Bayer', 'CCD', 'CMOS', 'tristimulus',
              'color-matching', 'monadic', 'dyadic', 'Gaussian', 'chroma',
              '4-1 Visual Perception.pptx', '4-2 Visual Perception.pptx',
-             'sensor-course-vision.png', 'vision-exercises', '66-exercises']:
+             'sensor-course-vision.png', '66-exercises']:
     assert word.lower() in chapter.lower(), f'Missing lecture material or retained anchor: {word}'
 questions = chapter.split('## 6.12 Exercises', 1)[1].split('## References', 1)[0]
 assert len(re.findall(r'^\d+\. ', questions, re.M)) == 16
@@ -66,7 +68,7 @@ p=Content(); p.feed(html)
 text=' '.join(p.parts).lower()
 for term in ['radiometry', 'bayer', 'color-matching', 'monadic', 'dyadic', 'gaussian', 'chroma', '6.12 exercises']:
     assert term in text, f'Not rendered: {term}'
-assert {'vision-pipeline','vision-exercises','66-exercises'}.issubset(p.ids)
+assert {'vision-pipeline','66-exercises'}.issubset(p.ids)
 assert any('sensor-course-vision' in s for s in p.images), 'Existing vision figure was lost'
 assert 'Neural Encoding and the ANN' not in html, 'Deleted chapter remains in navigation'
 assert 'Neural Encoding and the ANN' not in (htmlroot/'index.html').read_text()

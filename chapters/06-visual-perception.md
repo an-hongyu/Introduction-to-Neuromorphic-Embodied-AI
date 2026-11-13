@@ -393,7 +393,6 @@ Review Part I slides 3–26 for the perception context, 28–51 for light and im
 The course decks are the basis of this revision. *Robotics, Vision and Control* remains the book's supplementary camera and image-processing reference [[3]](#vision-ref-3); its presence here does not mean every slide caption was independently verified against that book. Continue to [Chapter 7](07-inertial-sensing.md) for the second sensor input used in the association experiment.
 
 (66-exercises)=
-(vision-exercises)=
 ## 6.12 Exercises
 
 1. Calculate $z_R$ for $(0.8,0.2,0.2)$ and the resulting input current.

@@ -6,16 +6,9 @@ title: "Solutions III — Spatial Models and Laboratories"
 
 Laboratory tasks that change parameters require running the supplied notebooks to obtain empirical plots and measured error statistics. The following provides analytical expectations and reproducible procedures; it does not invent experimental measurements.
 
-## Grid Cells and Grid-to-Place Mapping — Exercises
+## Grid-to-place model exercises
 
-[Original exercises](grid-to-place.md#exercises)
-
-1. **Lattice translations.** With $k=4\pi/(\sqrt3\lambda)$ and wave vectors angled at $30^\circ$, $90^\circ$, and $150^\circ$, translation $(\lambda,0)$ changes the three cosine phases by $(2\pi,0,-2\pi)$; translation $(\lambda/2,\sqrt3\lambda/2)$ changes them by $(2\pi,2\pi,0)$. Since cosine is $2\pi$ periodic, all three terms remain unchanged. Both vectors have length $\lambda$ and are 60° apart.
-2. **Six identical inputs.** Under the chapter's normalized, equally weighted readout, an average of six identical normalized grid functions equals one such function. All periodic aliases remain; neither averaging nor thresholding alone creates unique spatial information.
-3. **Double $\kappa$.** For $\zeta=0$ and positive gain, doubling $\kappa$ doubles the raw rectified grid rate wherever nonzero and doubles the declared theoretical maximum $g_{\max}=3r_G\kappa$. Their ratio, normalized drive $S$, and resulting place output remain invariant, up to numerical error. This result depends on the normalization.
-4. **One versus all phases.** Translating one grid changes its peaks relative to the remaining inputs and alters spatial conjunctions. Applying the same spatial translation to all inputs preserves their relative alignment and translates the combined pattern, subject to cropping by the arena.
-5. **Lower threshold $\tau$.** Lowering threshold enlarges the regions where $S>\tau$, potentially revealing secondary patches or joining distinct components. Count connected regions with a fixed 4-/8-neighbor criterion, grid resolution, and intensity threshold; repeat on a larger arena and finer mesh. No universal patch count follows without executing the changed configuration.
-6. **Learning rather than imposed anchor.** Initialize grid phases without a shared preferred target and permit only a specified learning rule to update readout weights during exploration. Compare against a fixed shared-phase-anchor construction, a frozen random network, and shuffled spatial experience. Evaluate held-out localization of firing, stability, and independence from hand-specified target coordinates. Showing an emergent field requires training-dependent change and these controls.
+The former separate model exercises are now **Chapter 4, Exercises 11-16**. Their [worked solutions](solutions-foundations.md#spatial-solutions) are alongside the other spatial-cell solutions at the end of the book.
 
 ## Laboratory 1 — Computational Neuron Models, L1.5 Exercises
 

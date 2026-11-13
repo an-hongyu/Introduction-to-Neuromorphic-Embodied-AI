@@ -23,9 +23,6 @@ project:
     - file: chapters/03-computational-neuron-models.md
     - file: chapters/04-hebbian-learning.md
     - file: chapters/02-spatial-cells.md
-  - title: Spatial Cell Models
-    children:
-    - file: chapters/grid-to-place.md
   - title: Encoding, Sensing, and Embodied Learning
     children:
     - file: chapters/05-neural-encoding.md

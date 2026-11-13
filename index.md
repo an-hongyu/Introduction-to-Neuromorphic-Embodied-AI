@@ -20,7 +20,7 @@ How can a robot form a spatial representation, remember where it has been, and l
 Each computational chapter links **biological evidence**, **explicit assumptions**, **mathematical models**, **executable Python**, and **experiments**. No biological claim should be inferred solely from the behavior of a simulation.
 
 :::{card} Start here
-Begin with [Chapter 1: Neurons and Synapses](chapters/01-neuroscience-background.md), then study [Chapter 2: Computational Models of Neurons](chapters/03-computational-neuron-models.md), [Chapter 3: Hebbian Learning and Synaptic Plasticity](chapters/04-hebbian-learning.md), and [Chapter 4: Spatial Cells](chapters/02-spatial-cells.md).
+Begin with [Chapter 1: Neurons and Synapses](chapters/01-neuroscience-background.md), then study [Chapter 2: Computational Models of Neurons](chapters/03-computational-neuron-models.md), [Chapter 3: Hebbian Learning and Synaptic Plasticity](chapters/04-hebbian-learning.md), and [Chapter 4: Spatial Cells and Their Models](chapters/02-spatial-cells.md).
 :::
 
 ## A four-chapter foundation
@@ -30,7 +30,7 @@ Begin with [Chapter 1: Neurons and Synapses](chapters/01-neuroscience-background
 | [1. Neurons and Synapses](chapters/01-neuroscience-background.md) | What are neurons, spikes, and synapses? | Membrane potential constant and neurotransmitters|
 | [2. Computational Models of Neurons](chapters/03-computational-neuron-models.md) | How do equations produce neural activity? | Poisson counts, LIF, Hodgkin–Huxley Model, and Izhikevich model|
 | [3. Hebbian Learning and Synaptic Plasticity](chapters/04-hebbian-learning.md) | How can experience change connections? | Association, Oja, STDP, eligibility traces, and paired-cue controls |
-| [4. Spatial Cells](chapters/02-spatial-cells.md) | How is activity related to space, movement, and time? | Original tuning diagrams and occupancy calculations |
+| [4. Spatial Cells and Their Models](chapters/02-spatial-cells.md) | How is activity related to space, movement, and time? | Biological recordings, per-cell models, grid-to-place interaction, and occupancy calculations |
 
 The neuroscience background draws on *Principles of Neural Science*, fifth edition. Equations, figures, and worked examples connect biological concepts to reproducible computational assumptions.
 
@@ -47,9 +47,9 @@ The [course-to-book reading map](chapters/course-reading-map.md) connects lectur
 | [9. Nengo, ROS 2, and Gazebo](chapters/09-nengo-ros-gazebo.md) | One executable Nengo neuron and a staged simulator integration guide |
 | [10. An Associative Learning Robot](chapters/10-associative-learning-robot.md) | A controlled cue-pairing experiment and robot validation protocol |
 
-## Explore grid cells and their mapping
+## Explore models within Chapter 4
 
-The [Grid Cells and Grid-to-Place Mapping section](chapters/grid-to-place.md) follows Liu et al.'s model family with complete equations, parameter definitions, an embedded interactive page, and an editable notebook. Change grid spacing, orientation, phase, gain, offset, weights, and readout threshold. Compare repeated grid peaks with a designed place-like output and identify which assumptions are fixed rather than learned.
+The [grid-to-place model and interactive experiment in Chapter 4](chapters/02-spatial-cells.md#grid-place-live-example) follows Liu et al.'s model family with complete equations, parameter definitions, an embedded interactive page, and an editable notebook. Change grid spacing, orientation, phase, gain, offset, weights, and readout threshold. Compare repeated grid peaks with a designed place-like output and identify which assumptions are fixed rather than learned.
 
 ## Computational laboratories
 
@@ -59,9 +59,9 @@ The [Grid Cells and Grid-to-Place Mapping section](chapters/grid-to-place.md) fo
 - [Laboratory 3: Hebbian Learning](notebooks/hebbian_learning.ipynb): paired-pattern association, ambiguous cues, and an illustrative STDP window.
 
 - [Laboratory 4: Hodgkin–Huxley](notebooks/hodgkin_huxley.ipynb): gates, ionic currents, sodium ablation, and numerical checks.
-- [Laboratory 5: Conditioning](notebooks/conditioning.ipynb): paired/unpaired/frozen controls and LIF recall.
+- [Laboratory 5: Conditioning](notebooks/conditioning.ipynb): paired/unpaired/frozen schedules and separate LIF recall.
 - [Laboratory 6: Sensory Encoding](notebooks/sensory_encoding.ipynb): synthetic RGB, vibration, and 36-channel LiDAR.
-- [Laboratory 7: One Neuron in Nengo](notebooks/nengo_single_neuron.ipynb): normalized-current simulation and rate validation.
+- [Laboratory 7: One Neuron in Nengo](notebooks/nengo_single_neuron.ipynb): normalized-current API example and analytical firing-rate check.
 
 - [Laboratory 8: Grid Cells to Place-Like Fields](notebooks/grid_to_place.ipynb): grid geometry, periodic ambiguity, and explicit weighted threshold mapping.
 
@@ -79,7 +79,7 @@ Read the [Neuromorphic Embodied AI overview](chapters/01-introduction.md) for th
 
 Prerequisites: introductory Python, linear algebra, elementary probability, and basic neuroscience vocabulary. The laboratories use NumPy and Matplotlib and run on a standard laptop or Google Colab. Laboratory 7 also uses Nengo; installation instructions and pinned dependencies are provided.
 
-> **Project status.** Ten numbered chapters, a detailed grid-to-place section, and eight executable laboratories are available. The ROS 2/Gazebo chapters provide integration and evaluation guides; a complete simulated robot has not been validated in this release. Advanced topics listed in the roadmap remain planned. The Spike Flow Networks material will be labeled as a research framework and separated from established neuroscience.
+> **Project status.** Ten numbered chapters with spatial-cell models integrated into Chapter 4, and eight executable laboratories are available. The ROS 2/Gazebo chapters provide integration and evaluation guides; a complete simulated robot has not been validated in this release. Advanced topics listed in the roadmap remain planned. The Spike Flow Networks material will be labeled as a research framework and separated from established neuroscience.
 
 ## Citation
 

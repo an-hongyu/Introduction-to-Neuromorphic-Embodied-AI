@@ -1,5 +1,5 @@
 ---
-title: "Chapter 1 · Neurons and Synapses"
+title: "Chapter 1 · Introduction to Neural Systems, Neurons, and Synapses"
 ---
 
 ## 1.1 Learning Objectives

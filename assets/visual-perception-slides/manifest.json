@@ -1,0 +1,723 @@
+{
+  "description": "Original slide figures imported at the author's request.",
+  "figures": [
+    {
+      "name": "detection-and-segmentation",
+      "path": "assets/visual-perception-slides/detection-and-segmentation.png",
+      "section": "6.2.1",
+      "before": "### 6.2.2 Biological motivation",
+      "title": "Different outputs from visual perception",
+      "caption": "Left: object detections are shown as labeled boxes. Right: the lecture contrasts a photographed scene with region-level semantic labels. Compare what information each output preserves. Source: Part I, slide 26 [[1]](#vision-ref-1).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 26,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "9110ea0def2c925cfee160593e803ad135b3540db96281918a4af0ca7274848d",
+          "embedded_size": [
+            1312,
+            978
+          ]
+        },
+        {
+          "part": 1,
+          "slide": 26,
+          "embedded_image": 2,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "eb806ded609aca2804b5dab8feb8f68c38f4076ca14c1d7f92e1d92e1febbfdf",
+          "embedded_size": [
+            1475,
+            978
+          ]
+        }
+      ],
+      "transform": "Original image panels arranged side by side; aspect ratios retained, no redrawing.",
+      "credit_on_slide_or_image": "Slide credits: Ren, He, Girshick, and Sun, 2015; Fabaret et al., 2012 (spelling retained from the slide).",
+      "sha256": "2794aadbe870bbd9c24559305fe8de717440ee1fd8e1adf8f8a78ffd994ba0c0",
+      "size": [
+        2743,
+        950
+      ]
+    },
+    {
+      "name": "visual-pathway",
+      "path": "assets/visual-perception-slides/visual-pathway.png",
+      "section": "6.2.2",
+      "before": "This is a conceptual progression",
+      "title": "From the eyes to visual cortex",
+      "caption": "Follow the colored pathways from the two visual fields through the optic nerves and optic chiasm toward the lateral geniculate nucleus and primary visual cortex. Source: Part I, slide 16 [[1]](#vision-ref-1).",
+      "width": "85%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 16,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "362e25ee24fa2ead75e775c745bbc562db4b2b73f93ed7c3847201b7ae0a4b37",
+          "embedded_size": [
+            1200,
+            911
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content. Transparency flattened onto the original slide's white background.",
+      "credit_on_slide_or_image": "Slide lists https://en.wikipedia.org/wiki/Visual_system and Principles of Neural Science. The deck does not identify this individual illustration more precisely.",
+      "sha256": "00d3a9a2dc15d7973a17e3189d5647949b62dfaf62cb4a37e4268825e49a766c",
+      "size": [
+        1200,
+        911
+      ]
+    },
+    {
+      "name": "orientation-selectivity",
+      "path": "assets/visual-perception-slides/orientation-selectivity.png",
+      "section": "6.2.2",
+      "before": "## 6.3 Light, surfaces",
+      "title": "Orientation-selective visual responses",
+      "caption": "The lecture figure combines a light-bar stimulus, recorded spike trains, and a tuning curve. The visual response varies with bar orientation, illustrating feature selectivity. Source: Part I, slide 17 [[1]](#vision-ref-1).",
+      "width": "80%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 17,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "ca22a05d70d78e2d29d3e62cc4b8d610212d3ae546f50e02112f611ce26b56e5",
+          "embedded_size": [
+            2523,
+            2675
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Slide credits Hubel and Wiesel, 1959 and links https://www.mdpi.com/2076-3425/12/4/470; this is the supplied schematic, not a newly generated recording.",
+      "sha256": "ca22a05d70d78e2d29d3e62cc4b8d610212d3ae546f50e02112f611ce26b56e5",
+      "size": [
+        2523,
+        2675
+      ]
+    },
+    {
+      "name": "light-surface-camera",
+      "path": "assets/visual-perception-slides/light-surface-camera.png",
+      "section": "6.3.1",
+      "before": "Consequently, an RGB triplet",
+      "title": "Illumination, surface reflection, and camera geometry",
+      "caption": "Trace the path from the light source to the surface, through the optics, and onto the sensor plane. The diagram connects scene illumination to the image-formation discussion. Source: Part II, slide 3 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 3,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "7bd8eccfbcc7be57706c7c6a62e2d4a5bcdc5bc36753d3cfe3acb345b3fc738f",
+          "embedded_size": [
+            888,
+            499
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "7bd8eccfbcc7be57706c7c6a62e2d4a5bcdc5bc36753d3cfe3acb345b3fc738f",
+      "size": [
+        888,
+        499
+      ]
+    },
+    {
+      "name": "electromagnetic-spectrum",
+      "path": "assets/visual-perception-slides/electromagnetic-spectrum.png",
+      "section": "6.3.1",
+      "before": "### 6.3.2 Radiometry",
+      "title": "Visible light within the electromagnetic spectrum",
+      "caption": "The expanded color band shows the visible region within a much wider range of wavelengths. Read the wavelength labels as the approximate convention used in the lecture. Source: Part I, slide 33 [[1]](#vision-ref-1).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 33,
+          "embedded_image": 2,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "ca92b752c3004f99d64ee5162aa7fb45194bcd760d3f1d5b2c7d57b2c89a76c7",
+          "embedded_size": [
+            1000,
+            477
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "c0202275ed4c6becded6be0e5b983acc3ad1cabe0d7fabaf8144d226545657bf",
+      "size": [
+        1000,
+        477
+      ]
+    },
+    {
+      "name": "pinhole-image-inversion",
+      "path": "assets/visual-perception-slides/pinhole-image-inversion.png",
+      "section": "6.4.1",
+      "before": "The existing textbook's ideal projection",
+      "title": "Why the pinhole image is inverted",
+      "caption": "The original lecture diagram retains the object, the inverted image, and the crossing rays. Trace a ray from the top of the tree to the lower part of the image. Source: Part I, slide 41 [[1]](#vision-ref-1).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 41,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx"
+        }
+      ],
+      "transform": "Original slide diagram rendered and cropped; all diagram labels, arrows, and panels retained. Slide title/footer and surrounding prose omitted.",
+      "crop_normalized": [
+        0.065,
+        0.13,
+        0.955,
+        0.86
+      ],
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide.",
+      "sha256": "4b93cb316e524a6f579fdc705ee0d65506c57a34cc8be6a2aa0a6b8da30412c7",
+      "size": [
+        2137,
+        985
+      ]
+    },
+    {
+      "name": "pinhole-aperture-comparison",
+      "path": "assets/visual-perception-slides/pinhole-aperture-comparison.png",
+      "section": "6.4.2",
+      "before": "A lens provides a way",
+      "title": "Aperture size and image sharpness",
+      "caption": "The six source images compare the labeled apertures from 2 mm to 0.07 mm. The lecture highlights 0.35 mm in this example and marks diffraction at the smallest openings; this is not a universal optimum. Source: Part I, slide 49 [[1]](#vision-ref-1).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 49,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx"
+        }
+      ],
+      "transform": "Original slide diagram rendered and cropped; all diagram labels, arrows, and panels retained. Slide title/footer and surrounding prose omitted.",
+      "crop_normalized": [
+        0.05,
+        0.16,
+        0.84,
+        0.59
+      ],
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide.",
+      "sha256": "41936f1b4ab21d1b6dc28ac2e2c715a207f8193651edef1167664cd0923e6865",
+      "size": [
+        1897,
+        580
+      ]
+    },
+    {
+      "name": "ccd-cmos-readout",
+      "path": "assets/visual-perception-slides/ccd-cmos-readout.png",
+      "section": "6.4.3",
+      "before": "These are architectural distinctions",
+      "title": "CCD and CMOS image-sensor readout",
+      "caption": "The source illustration contrasts charge transfer in a CCD with charge-to-voltage conversion and active-pixel structure in CMOS. Keep the readout architecture separate from the later color-filter pattern. Source: Part I, slide 58 [[1]](#vision-ref-1).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 58,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "f2ac4ccce2eb7daa0d21c9e0682958bc921cbc464d3d52f60b8d5ad1440674f9",
+          "embedded_size": [
+            1274,
+            740
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Embedded Figure 2.24 and its original credit text are retained. The source metadata is not independently expanded.",
+      "sha256": "f2ac4ccce2eb7daa0d21c9e0682958bc921cbc464d3d52f60b8d5ad1440674f9",
+      "size": [
+        1274,
+        740
+      ]
+    },
+    {
+      "name": "bayer-filter-system",
+      "path": "assets/visual-perception-slides/bayer-filter-system.png",
+      "section": "6.4.4",
+      "before": "A representative 2",
+      "title": "Bayer color sampling",
+      "caption": "The original diagram connects incoming light, the filter layer, the sensor array, and the resulting Bayer sequence. The colored photosites are samples used to form a color image, not complete RGB triplets. Source: Part I, slide 64 [[1]](#vision-ref-1).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 64,
+          "embedded_image": 3,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "e6b839541c644017ecb36fee5a69cc13b673d312eb90840cf9128a5bf4f9576b",
+          "embedded_size": [
+            1024,
+            512
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "OPT logo and source branding embedded in the slide image are retained.",
+      "sha256": "e6b839541c644017ecb36fee5a69cc13b673d312eb90840cf9128a5bf4f9576b",
+      "size": [
+        1024,
+        512
+      ]
+    },
+    {
+      "name": "cone-spectral-responses",
+      "path": "assets/visual-perception-slides/cone-spectral-responses.png",
+      "section": "6.5.1",
+      "before": "The lecture also distinguishes",
+      "title": "Overlapping cone sensitivities",
+      "caption": "The long-, medium-, and short-wavelength response curves overlap. Use the plotted wavelength axis rather than interpreting the color names as three disjoint spectral bands. Source: Part II, slide 9 [[2]](#vision-ref-2).",
+      "width": "85%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 9,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "1eb8e0b4fd3827cf2699902723043261393b5cc2e3ac84d1a66aa2cd2847a4f1",
+          "embedded_size": [
+            754,
+            584
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "1eb8e0b4fd3827cf2699902723043261393b5cc2e3ac84d1a66aa2cd2847a4f1",
+      "size": [
+        754,
+        584
+      ]
+    },
+    {
+      "name": "tristimulus-light-path",
+      "path": "assets/visual-perception-slides/tristimulus-light-path.png",
+      "section": "6.5.2",
+      "before": "For sampled wavelengths",
+      "title": "From a reflected spectrum to three responses",
+      "caption": "The source figure places the illuminant, surface, and observer beside spectral plots and the three cone-response areas. It provides the visual counterpart to the response integrals above. Source: Part II, slide 12 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 12,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "1b9165ec3f2446921b35954056e5bcdc74e43e536cf5325dd3bdf5123c1c9ffb",
+          "embedded_size": [
+            1526,
+            908
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Embedded caption: Fig. 10.9, The tristimulus response of the human eye. The lecture reference list includes Peter Corke; no exact edition is assigned to this image.",
+      "sha256": "1b9165ec3f2446921b35954056e5bcdc74e43e536cf5325dd3bdf5123c1c9ffb",
+      "size": [
+        1526,
+        908
+      ]
+    },
+    {
+      "name": "color-matching-functions",
+      "path": "assets/visual-perception-slides/color-matching-functions.png",
+      "section": "6.5.3",
+      "before": "### 6.5.4 Why",
+      "title": "Color-matching functions",
+      "caption": "The original plot shows the three wavelength-dependent matching coefficients, including a negative portion of the red coefficient. This leads to the experimental interpretation in the next subsection. Source: Part II, slide 20 [[2]](#vision-ref-2).",
+      "width": "90%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 20,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "fbbb5e4fd4a4fe2968d516993f5866ed094224832b3c17e1025e3dc857a402cd",
+          "embedded_size": [
+            791,
+            512
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Embedded caption Fig. 10.10 retained as supplied; it contains the historical terminology used by the source figure.",
+      "sha256": "fbbb5e4fd4a4fe2968d516993f5866ed094224832b3c17e1025e3dc857a402cd",
+      "size": [
+        791,
+        512
+      ]
+    },
+    {
+      "name": "color-matching-experiment",
+      "path": "assets/visual-perception-slides/color-matching-experiment.png",
+      "section": "6.5.4",
+      "before": "For example, a formal match",
+      "title": "The color-matching experiment",
+      "caption": "An observer compares the test-light field with the primary-light mixture. Relate the two fields in this diagram to moving a primary-light contribution from one side of the matching equation to the other. Source: Part II, slide 22 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 22,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "34d775c1181e87a52aa8674eb2e072c3b83d82a0259c559071c4d003d79874cc",
+          "embedded_size": [
+            720,
+            540
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Slide credits Monaci, Menegaz, Susstrunk, and Knoblauch (2002), Color contrast detection in spatial chromatic noise; the bibliographic wording is not independently expanded.",
+      "sha256": "1411238ee8e2a002164cd9db14765fd6fe5210395d35f7c3b33d4693a3466167",
+      "size": [
+        720,
+        540
+      ]
+    },
+    {
+      "name": "rgb-pixels-and-values",
+      "path": "assets/visual-perception-slides/rgb-pixels-and-values.png",
+      "section": "6.6.1",
+      "before": "**Reading note.**",
+      "title": "A color image is an array of numbers",
+      "caption": "The enlarged sample region connects a familiar color image with channel values stored at individual pixel locations. The numerical array and the displayed image are two representations of the same input. Source: Part II, slide 36 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 36,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "182a5c040c69c24a663ce74170d386401416b0e782b5227c516a27aa409a267a",
+          "embedded_size": [
+            934,
+            310
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "182a5c040c69c24a663ce74170d386401416b0e782b5227c516a27aa409a267a",
+      "size": [
+        934,
+        310
+      ]
+    },
+    {
+      "name": "rgb-channel-decomposition",
+      "path": "assets/visual-perception-slides/rgb-channel-decomposition.png",
+      "section": "6.6.1",
+      "before": "JPEG, TIFF, PNG",
+      "title": "The image and its separate RGB channels",
+      "caption": "The full-color source image appears beside the lecture's red-, green-, and blue-channel views. Inspect how the same facial features contribute differently to the three channels. Source: Part I, slide 66 [[1]](#vision-ref-1).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 1,
+          "slide": 66,
+          "embedded_image": 2,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "222fe8a37a8c9712ad2f5b71a28afec98b9250383d853ef84d69f4313db37962",
+          "embedded_size": [
+            400,
+            400
+          ]
+        },
+        {
+          "part": 1,
+          "slide": 66,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx",
+          "embedded_sha256": "588dc0fb4d57b2623f50239a3e9f89d1e29fd9687eff935338a9133aba6e8cc9",
+          "embedded_size": [
+            1022,
+            418
+          ]
+        }
+      ],
+      "transform": "Original color image and original three-channel panel combined with white spacing; no recoloring.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "2df5bd1b5d0be005f1da5b7125301999050afd775cbf8e0af50c8b67536db0ba",
+      "size": [
+        1470,
+        418
+      ]
+    },
+    {
+      "name": "color-space-image-channels",
+      "path": "assets/visual-perception-slides/color-space-image-channels.png",
+      "section": "6.6.2",
+      "before": "For a nonzero RGB triplet",
+      "title": "Alternative channel representations",
+      "caption": "The source figure shows a color scene alongside hue, saturation, monochrome intensity, and two additional chromatic-channel views labeled in the original caption. Compare the structures retained by each representation. Source: Part II, slide 30 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 30,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "3066de93eb2cacd252481464cb1dca955f86178e2fcc1fc51bca006e4b579716",
+          "embedded_size": [
+            1176,
+            594
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Embedded caption Fig. 10.15 retained. The supplied slide connects this figure with color-space conversion.",
+      "sha256": "3066de93eb2cacd252481464cb1dca955f86178e2fcc1fc51bca006e4b579716",
+      "size": [
+        1176,
+        594
+      ]
+    },
+    {
+      "name": "pixel-brightness-operations",
+      "path": "assets/visual-perception-slides/pixel-brightness-operations.png",
+      "section": "6.7",
+      "before": "The lecture's threshold example",
+      "title": "Point-wise changes in appearance",
+      "caption": "The embedded source image compares the original with darkening, lightening, and inversion. The lecture displays the darkening and lightening panels; the full extracted illustration also retains its labeled inversion panel. Source: Part II, slide 42 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 42,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "2b0ef0f7c3dcb1fb496ec2d13961b31bff0fdf6faed0699056bbc1743a8b60f9",
+          "embedded_size": [
+            664,
+            451
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "2b0ef0f7c3dcb1fb496ec2d13961b31bff0fdf6faed0699056bbc1743a8b60f9",
+      "size": [
+        664,
+        451
+      ]
+    },
+    {
+      "name": "threshold-and-intensity-transforms",
+      "path": "assets/visual-perception-slides/threshold-and-intensity-transforms.png",
+      "section": "6.7",
+      "before": "## 6.8 Neighborhood",
+      "title": "Thresholding and intensity transformations",
+      "caption": "The upper-right panel shows the binary thresholded image. Compare it with the original at upper left; the other panels and their transfer curves show additional intensity transformations included in the source illustration. Source: Part II, slide 43 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 43,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "78ba0e4faa2b2d808614d7d53134657ef1d0367893f8aba04e5709deeffc8507",
+          "embedded_size": [
+            957,
+            1091
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Embedded figure and transfer curves retained; the lecture threshold is 180.",
+      "sha256": "78ba0e4faa2b2d808614d7d53134657ef1d0367893f8aba04e5709deeffc8507",
+      "size": [
+        957,
+        1091
+      ]
+    },
+    {
+      "name": "convolution-neighborhood",
+      "path": "assets/visual-perception-slides/convolution-neighborhood.png",
+      "section": "6.8.1",
+      "before": "### 6.8.2 Reproduce",
+      "title": "A neighborhood contributes to one output pixel",
+      "caption": "The highlighted input window contributes to the highlighted output location. This is the original lecture illustration of the mask, kernel, or filter operation. Source: Part II, slide 44 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 44,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "a36f2c034dbe37990434018d845234903bb3dc93a04ab4a75b48d9f05324e310",
+          "embedded_size": [
+            836,
+            416
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "a36f2c034dbe37990434018d845234903bb3dc93a04ab4a75b48d9f05324e310",
+      "size": [
+        836,
+        416
+      ]
+    },
+    {
+      "name": "mean-filter-comparison",
+      "path": "assets/visual-perception-slides/mean-filter-comparison.png",
+      "section": "6.8.2",
+      "before": "### 6.8.3 Gaussian",
+      "title": "The visual effect of averaging",
+      "caption": "The original and smoothed portraits illustrate the loss of fine detail. The lecture identifies the example as smoothing with a 21 by 21 averaging kernel. Source: Part II, slide 50 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 50,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "5e0699c5bbf4d2911f622a6eea58cd8a2e8a23394ba3c28993c20f9a56872fb0",
+          "embedded_size": [
+            766,
+            399
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Original embedded two-panel illustration; the full panel image is retained.",
+      "sha256": "5e0699c5bbf4d2911f622a6eea58cd8a2e8a23394ba3c28993c20f9a56872fb0",
+      "size": [
+        766,
+        399
+      ]
+    },
+    {
+      "name": "gaussian-kernel-views",
+      "path": "assets/visual-perception-slides/gaussian-kernel-views.png",
+      "section": "6.8.3",
+      "before": "For image filtering",
+      "title": "Three views of a Gaussian kernel",
+      "caption": "The source image shows the one-dimensional profile, the two-dimensional weighting surface, and an intensity view of the kernel. These are complementary views of the weighting discussed in this section. Source: Part II, slide 51 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 51,
+          "embedded_image": 2,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "a10a0a683678587abe15e8ae8843be6fe71cc5653fc93bef703d762415f08ac4",
+          "embedded_size": [
+            3554,
+            960
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "a10a0a683678587abe15e8ae8843be6fe71cc5653fc93bef703d762415f08ac4",
+      "size": [
+        3554,
+        960
+      ]
+    },
+    {
+      "name": "gaussian-blur-progression",
+      "path": "assets/visual-perception-slides/gaussian-blur-progression.png",
+      "section": "6.8.3",
+      "before": "### 6.8.4 A minimal",
+      "title": "Increasing the Gaussian scale",
+      "caption": "The lecture pairs broader weighting curves with progressively smoother images, labeled with sigma values of 4, 8, 16, and 32. Observe the loss of edge detail rather than treating smoothing as uniformly beneficial. Source: Part II, slide 57 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 57,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "096136ff004ca7e2656ce8a50f2d27f73ccd38ad375bc9dbab1766baff5199a7",
+          "embedded_size": [
+            798,
+            377
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "No separate original-source attribution was established from the selected slide/image.",
+      "sha256": "096136ff004ca7e2656ce8a50f2d27f73ccd38ad375bc9dbab1766baff5199a7",
+      "size": [
+        798,
+        377
+      ]
+    },
+    {
+      "name": "dyadic-image-operation",
+      "path": "assets/visual-perception-slides/dyadic-image-operation.png",
+      "section": "6.9",
+      "before": "The lectures list addition",
+      "title": "Combining two corresponding pixels",
+      "caption": "Two input images contribute to one output image. The highlighted rows and columns identify the corresponding pixel locations used in the dyadic operation. Source: Part II, slide 58 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 58,
+          "embedded_image": 1,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "16863ba2fbc7f3fc8d5d8f882affe34227e75382e6287f43be633756be9b9e1a",
+          "embedded_size": [
+            923,
+            329
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Embedded caption Fig. 11.8 retained.",
+      "sha256": "16863ba2fbc7f3fc8d5d8f882affe34227e75382e6287f43be633756be9b9e1a",
+      "size": [
+        923,
+        329
+      ]
+    },
+    {
+      "name": "chroma-keying-example",
+      "path": "assets/visual-perception-slides/chroma-keying-example.png",
+      "section": "6.9",
+      "before": "(vision-pipeline)=",
+      "title": "From a green-screen image to a composite",
+      "caption": "The four original panels show the subject, a channel histogram, a mask, and the composite. Connect the white foreground region of the mask to the selection equation above. Source: Part II, slide 59 [[2]](#vision-ref-2).",
+      "width": "100%",
+      "sources": [
+        {
+          "part": 2,
+          "slide": 59,
+          "embedded_image": 2,
+          "source_file": "Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx",
+          "embedded_sha256": "410598b641f3641fc825449e8b625ebfac65c0dea663d5a1f5f4c1152769468b",
+          "embedded_size": [
+            1569,
+            1236
+          ]
+        }
+      ],
+      "transform": "Embedded image exported without changing its content.",
+      "credit_on_slide_or_image": "Embedded caption Fig. 11.9 and image credit to Reto Corke retained.",
+      "sha256": "410598b641f3641fc825449e8b625ebfac65c0dea663d5a1f5f4c1152769468b",
+      "size": [
+        1569,
+        1236
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+name: Import reviewed LiDAR lecture chapter
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/import-lidar-lecture.yml']
+permissions:
+  contents: write
+jobs:
+  import:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'book/lidar-lecture-media'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: book/lidar-lecture-media
+      - name: Import reviewed payload once
+        env:
+          PAYLOAD_URL: 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-1540-81f5-92eb-ecbd67ac3213/raw?se=2026-11-13T18%3A27%3A04Z&sp=r&sv=2026-06-06&sr=b&scid=a34737b7-7527-51da-8f0c-c76c826ec809&skoid=2757bbe4-5137-4324-975b-acedc0bad279&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-13T16%3A10%3A09Z&ske=2026-11-14T16%3A10%3A09Z&sks=b&skv=2026-06-06&sig=DnF4rOIhFvsIlfrSkQM0BdBexBWud1xOP0GnKQkPEak%3D'
+        run: |
+          if test -f assets/lidar-lecture/manifest.json; then
+            echo 'Reviewed payload already present.'
+            exit 0
+          fi
+          python - <<'PY'
+          import hashlib, io, os, pathlib, subprocess, tempfile, urllib.request, zipfile
+          data = urllib.request.urlopen(os.environ['PAYLOAD_URL'], timeout=60).read()
+          assert len(data) == 9226356
+          assert hashlib.sha256(data).hexdigest() == '6de616e3061a31ffe1ed431cc5a707417c7109e05c0d253524cca9364973f4c5'
+          directory = pathlib.Path(tempfile.mkdtemp(prefix='reviewed-lidar-'))
+          with zipfile.ZipFile(io.BytesIO(data)) as archive:
+              for entry in archive.infolist():
+                  path = pathlib.PurePosixPath(entry.filename)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert entry.filename.startswith('payload/') or entry.filename in ('apply_revision.py', 'lidar-solutions.md')
+              archive.extractall(directory)
+          subprocess.run(['python', str(directory / 'apply_revision.py')], check=True)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/lidar-lecture assets/lidar-lecture-media.html assets/lif-embed.css chapters/08-lidar-encoding.md chapters/solutions-embodied.md chapters/course-reading-map.md myst.yml tests/check_lidar_chapter.py tests/check_build.py
+          git commit -m 'Expand Chapter 8 with original LiDAR figures, animations, videos, and worked exercises'
+          git push origin HEAD:book/lidar-lecture-media

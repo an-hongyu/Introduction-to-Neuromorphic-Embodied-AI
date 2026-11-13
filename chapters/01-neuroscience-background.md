@@ -156,8 +156,6 @@ With $A=6$ mV and $\tau=20$ ms, a second identical event arriving 5 ms later pro
 
 The resulting computational view is straightforward: **sensory signals alter membrane and synaptic state; neurons integrate those signals; output spikes influence downstream neurons; and plasticity can change future responses**. The following chapters turn this biological picture into equations, neural codes, and robotic controllers.
 
-<a id="111-exercises-and-checks-for-understanding"></a>
-
 ## Exercises and checks for understanding
 
 <!-- exercise-center:ch1 -->

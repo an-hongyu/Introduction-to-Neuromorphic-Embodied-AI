@@ -39,3 +39,14 @@ h2#references ~ h3 ~ p {
   padding-left: 0;
   text-indent: 0;
 }
+
+/* Scoped player sizing for the Chapter 8 lecture videos. */
+.lidar-video-player > div {width:100% !important;padding-bottom:0 !important;height:550px}
+.lidar-video-player iframe {width:100% !important;height:100% !important;border:1px solid #dbe4e9 !important;border-radius:10px;background:white}
+@media(max-width:767px){.lidar-video-player > div{height:440px}}
+@media(max-width:480px){.lidar-video-player > div{height:360px}}
+
+/* The theme's translated zero-width heading permalink can exceed a narrow viewport. */
+@media(max-width:480px){
+  :is(h2,h3,h4)[id^="id-8-"] > a[aria-label="Link to this Section"] {display:none}
+}

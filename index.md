@@ -8,8 +8,8 @@ title: Introduction to Neuromorphic Embodied AI
 
 *An open, computational textbook by Hongyu An*
 
-```{image} assets/cover.svg
-:alt: Stylized cover showing a mobile robot, spatial firing fields, and a neural navigation circuit
+```{image} assets/cover-brain-approved.png
+:alt: Introduction to Neuromorphic Embodied AI by Hongyu An, 2026, with the author-approved glowing neural-network brain on a dark teal grid background
 :width: 100%
 ```
 

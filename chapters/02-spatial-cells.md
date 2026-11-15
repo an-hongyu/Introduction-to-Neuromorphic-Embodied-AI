@@ -366,6 +366,23 @@ $d_w$ is distance to that wall and $\sigma_b$ is a distance scale, both in meter
 
 For a two-dimensional robot, a beam of range $d$ and bearing $\alpha$ gives a sensor-frame endpoint $[d\cos\alpha,d\sin\alpha]^\top$. To express it in a world frame, use calibrated mounting and timestamped pose transforms. A 36-sector LiDAR encoder is therefore **egocentric sensory input**; an allocentric boundary representation requires additional computation. Test boundary sensitivity by changing enclosure geometry while controlling occupancy, orientation, and sensory visibility.
 
+### 4.6.3 Turning LiDAR-driven LIF spikes into a border-cell-like model
+
+A useful first experiment is to connect the **distance encoder** of [Chapter 8, Section 8.9.5](08-lidar-encoding.md#lidar-lif-border) to the LIF membrane model of Chapter 2. When a valid LiDAR return is closer, the model injects a larger current into the corresponding 10-degree sector neuron, producing more spikes. This demonstrates **obstacle proximity coding**, not automatically a biological border cell.
+
+To model firing associated with a **particular environmental wall**, first project accepted LiDAR endpoints from sensor coordinates into world coordinates using the calibrated sensor-to-body transform and the robot's timestamped pose. Associate the reconstructed boundary with a selected wall $w$ and estimate the robot's distance $d_w(\mathbf{x})$ to that wall. As a teaching model, drive a LIF neuron using
+
+$
+I_w(\mathbf{x})=I_{\mathrm{base}}+
+G_b\exp\left[-\frac{d_w(\mathbf{x})^2}{2\sigma_b^2}\right].
+$
+
+Use the same LIF equation, threshold, reset, and refractory period as in Chapter 8, replacing its sector current $I_k$ with $I_w$. Here $G_b$ and $I_{\mathrm{base}}$ are currents, and $d_w$ and $\sigma_b$ are distances in meters. **Only use this rule when the selected wall is actually known or supported by observations**: loss of LiDAR returns is not evidence of open space.
+
+**Example: wall at $x=0$.** Let a robot move on the positive-$x$ side of the wall. With $d_w(x)=x$, $\sigma_b=0.5$ m, $I_{\mathrm{base}}=100$ pA, and $G_b=180$ pA, the input currents at $x=0.2$, $0.5$, and $1.0$ m are about $266.2$, $209.2$, and $124.4$ pA. With the Chapter 8 LIF parameters, the first two distances produce sustained firing, whereas the last current is below the 150 pA threshold. These are synthetic predictions rather than measured neural responses.
+
+A decisive **frame-invariance test** is to hold the robot in the same world position but rotate it by $180^\circ$. The wall moves to a different body-relative LiDAR sector, whereas the *world-wall distance* and the correctly transformed border-cell-like response should remain approximately unchanged. Additional controls should test changes of wall identity, boundary geometry, occupancy, and sensor visibility. Such tests establish which variables the model represents; they do not by themselves establish equivalence to recorded entorhinal border cells [[12]](#spatial-ref-12).
+
 ## 4.7 Speed cells, time cells, and their models
 
 (speed-cell-models)=

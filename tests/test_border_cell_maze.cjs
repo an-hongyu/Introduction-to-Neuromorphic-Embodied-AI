@@ -58,4 +58,38 @@ const silent=M.newLIF();assert.equal(M.stepLIF(silent,M.wallCurrent(2),1),0);
 assert.equal(M.wallCurrent(NaN),0);
 assert.equal(M.sensorCurrent(NaN,false),0);
 assert.throws(()=>M.stepLIF(n,-1),/Invalid/);
+
+// Seeded random trajectories must be repeatable, different across seeds,
+// collision-free, and cover substantially more than a simple line.
+for(const shape of ['square','circle']){
+  const a=M.createExplorer(shape,23),b=M.createExplorer(shape,23),c=M.createExplorer(shape,24);
+  const bins=new Set();let closeBoundary=0,different=false,largeTurns=0;
+  for(let i=0;i<1400;i++){
+    const prev={x:a.x,y:a.y,heading:a.heading};
+    const x=M.exploreStep(a),y=M.exploreStep(b),z=M.exploreStep(c);
+    near(x.x,y.x,1e-12);near(x.y,y.y,1e-12);near(x.heading,y.heading,1e-12);
+    assert.ok(M.inside(x.x,x.y,shape,.15),'explorer must keep a modeled .15 m clearance');
+    near(Math.hypot(x.x-prev.x,x.y-prev.y),.107,1e-10);
+    if(Math.hypot(x.x-z.x,x.y-z.y)>1e-4)different=true;
+    const ix=Math.floor((x.x+2)/4*25),iy=Math.floor((x.y+2)/4*25);
+    bins.add(iy*25+ix);
+    if(shape==='circle'?Math.hypot(x.x,x.y)>1.5:Math.max(Math.abs(x.x),Math.abs(x.y))>1.5)closeBoundary++;
+    if(Math.abs(M.wrap(x.heading-prev.heading))>.02)largeTurns++;
+  }
+  assert.ok(different,'different seeds should generate different paths');
+  assert.ok(bins.size>290,shape+' stochastic coverage too narrow: '+bins.size);
+  assert.ok(closeBoundary>120,shape+' random path does not sample near walls');
+  assert.ok(largeTurns>150,shape+' path did not turn and explore');
+}
+assert.throws(()=>M.createExplorer('square',0),/Seed/);
+const sigma=.55,cutoff=sigma*Math.sqrt(2*Math.log(180/50));
+near(cutoff,.8803209508494894,1e-8);
+near(M.wallCurrent(.38)*1e12,241.78046346549058,1e-5);
+assert.ok(M.lifRate(M.wallCurrent(.88))>0);
+assert.equal(M.lifRate(M.wallCurrent(.89)),0);
+assert.match(html,/id="seed"/);
+assert.match(html,/id="newPath"/);
+assert.match(html,/id="longBatch"/);
+assert.match(html,/M\.exploreStep\(state\.explorer\)/);
+
 console.log('Border-cell maze passed: ray-casting, 36 channels, wall/arc invariance for 180-degree rotations, source distance, physical LIF, deterministic navigation, and UI controls.');

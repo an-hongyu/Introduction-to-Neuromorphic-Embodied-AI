@@ -415,6 +415,18 @@ $
 
 giving an ideal steady-state border-LIF prediction of approximately **46.8 Hz** with the Chapter 8 membrane parameters. The experiment's **Test 180° turn** button reproduces this comparison in both arena shapes.
 
+**Guided worked example — construct the border-cell-like response one stage at a time.** Before using the full research laboratory below, try the five-stage robot navigation walkthrough. Switch between the **4 × 4 m square** and **2 m radius circle**, then follow **Explore → Sense → Project → Spike → Map**. Advance the robot one movement step at a time or take 25 steps at once. The same trajectory, 36 LiDAR rays, selected world wall, physical-unit LIF state and accumulated activity are carried through the stages. Stage 4 reveals the **160 ms membrane-voltage trace**, threshold, emitted spikes, injected current and expected steady-state rate; Stage 5 reveals the **actual occupancy-normalized firing-rate map**. This is a synthetic teaching construction, not experimentally recorded border cells or an SFN learning rule.
+
+```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/border-cell-guided.html
+:label: interactive-border-guided-frame
+:class: border-guided-playground
+:title: Guided robot navigation from LiDAR to LIF membrane dynamics and border-cell-like firing field
+:width: 100%
+
+```
+
+[Open the guided border-cell walkthrough at full width](https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/border-cell-guided.html).
+
 **Run the interactive experiment.** Use **Play**, **Step once**, or **Explore 100 steps** to extend the trajectory and fill the firing map. Change the arena shape or selected wall; then use the four stage buttons to inspect the pipeline. The orange boundary always identifies the selected world-fixed wall or arc.
 
 ```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/border-cell-maze.html

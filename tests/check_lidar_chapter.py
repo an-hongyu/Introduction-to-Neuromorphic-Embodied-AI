@@ -42,6 +42,10 @@ assert 'sensor-course-lidar.png' in s and ':label: fig-sensor-lidar' in s
 assert '(85-exercises)=' in s
 assert '## 8.9 Worked neural encoder: 36 angular sectors' in s
 assert '## 8.10 Connect the encoder to spatial representations' in s
+assert '(lidar-interactive-border-maze)=' in s
+assert '### 8.9.7 Interactive square and circular mazes' in s
+assert 'border-cell-guided.html' in s and 'border-cell-maze.html' in s
+assert '0.50' in s and '0.55' in s  # distinct example and lab RF widths
 assert '## 8.11 Additional Reading Materials' in s
 assert not re.search(r'\bdatasets?\b', s, re.I)
 questions=s.split('## 8.12 Exercises',1)[1].split('## References',1)[0]

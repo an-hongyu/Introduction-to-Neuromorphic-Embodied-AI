@@ -587,19 +587,19 @@ See the [worked solutions at the end of the book](solutions-foundations.md#spati
 
 (spatial-ref-1)=
 
-[1] E. R. Kandel, J. H. Schwartz, T. M. Jessell, S. A. Siegelbaum, and A. J. Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013.[Online]. Available: [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
+[1] E. R. Kandel, J. H. Schwartz, T. M. Jessell, S. A. Siegelbaum, and A. J. Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013. [Online]. Available: [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
 
 (spatial-ref-2)=
 
-[2] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 7.[Online]. Available: [Open textbook chapter](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-07.md); [edition and license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md).
+[2] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 7. [Online]. Available: [Open textbook chapter](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-07.md); [edition and license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md).
 
 (spatial-ref-3)=
 
-[3] J. O'Keefe and L. Nadel, *The Hippocampus as a Cognitive Map*. Oxford, U.K.: Clarendon Press, 1978.[Online]. Available: [Author-authorized full text and bibliographic record](https://discovery.ucl.ac.uk/id/eprint/10103569/).
+[3] J. O'Keefe and L. Nadel, *The Hippocampus as a Cognitive Map*. Oxford, U.K.: Clarendon Press, 1978. [Online]. Available: [Author-authorized full text and bibliographic record](https://discovery.ucl.ac.uk/id/eprint/10103569/).
 
 (spatial-ref-4)=
 
-[4] J. O'Keefe and J. O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Res.*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://doi.org/10.1016/0006-8993(71)90358-1).
+[4] J. O'Keefe and J. O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Res.*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://doi.org/10.1016/0006-8993%2871%2990358-1).
 
 (spatial-ref-5)=
 
@@ -671,4 +671,4 @@ See the [worked solutions at the end of the book](solutions-foundations.md#spati
 
 (spatial-ref-22)=
 
-[22] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 7.[Online]. Available: [Online textbook](https://neuronaldynamics.epfl.ch/online/Ch7.html).
+[22] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 7. [Online]. Available: [Online textbook](https://neuronaldynamics.epfl.ch/online/Ch7.html).

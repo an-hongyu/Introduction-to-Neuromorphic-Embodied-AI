@@ -605,16 +605,18 @@ The course decks are the basis of this revision. *Robotics, Vision and Control* 
 
 [Worked solutions](solutions-embodied.md#vision-solutions) are provided at the end of the book.
 
+**Lecture-source provenance.** Reference [1] corresponds to the supplied file *Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx* (79 slides), and [2] to *Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx* (66 slides). Publication dates were not specified. The Part II source title slide says “Topic 5: Visual Perception”; the Part II label here identifies the supplied file. Figure citations use slide order, which may differ from printed page labels.
+
 ## References
 
 (vision-ref-1)=
 
-[1] Hongyu An, *Neuromorphic Robotic Systems—Visual Perception, Part I*, course lecture slides, Department of Electrical and Computer Engineering, Michigan Technological University, supplied teaching file “Neuromorphic Robotic Systems-Topic 4-1 Visual Perception.pptx,” 79 slides. Publication date not specified in the supplied file; slide numbers in this chapter refer to slide order, not occasionally offset printed page labels.
+[1] H. An, “Neuromorphic Robotic Systems—Visual Perception, Part I,” course lecture slides, Dept. Electr. Comput. Eng., Michigan Technological University, Houghton, MI, USA, n.d.
 
 (vision-ref-2)=
 
-[2] Hongyu An, *Neuromorphic Robotic Systems—Visual Perception, Part II*, course lecture slides, Department of Electrical and Computer Engineering, Michigan Technological University, supplied teaching file “Neuromorphic Robotic Systems-Topic 4-2 Visual Perception.pptx,” 66 slides. The title slide labels this material “Topic 5: Visual Perception”; Part II here identifies the supplied file without changing its internal title.
+[2] H. An, “Neuromorphic Robotic Systems—Visual Perception, Part II,” course lecture slides, Dept. Electr. Comput. Eng., Michigan Technological University, Houghton, MI, USA, n.d.
 
 (vision-ref-3)=
 
-[3] Peter Corke, *Robotics, Vision and Control: Fundamental Algorithms in Python*, 3rd ed. Cham, Switzerland: Springer, 2023, doi: 10.1007/978-3-031-06469-2. [Publisher](https://link.springer.com/book/10.1007/978-3-031-06469-2).
+[3] P. Corke, *Robotics, Vision and Control: Fundamental Algorithms in Python*, 3rd ed. Cham, Switzerland: Springer, 2023, doi: [10.1007/978-3-031-06469-2](https://doi.org/10.1007/978-3-031-06469-2). [Publisher](https://link.springer.com/book/10.1007/978-3-031-06469-2).

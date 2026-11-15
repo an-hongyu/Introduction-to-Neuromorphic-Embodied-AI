@@ -700,8 +700,8 @@ $$
 Ray-casting in the teaching arena generates each $d_k$ by intersecting the ray with the enclosing boundary; it does not directly feed the true wall-distance function to the neuron. For a square whose walls are at $\pm2$ m, the geometric distances for an interior point are
 
 $$
-d_N=2-y_r,\quad d_S=2+y_r,\quad
-d_E=2-x_r,\quad d_W=2+x_r\qquad(\mathrm{m}).
+d_N=(2\ \mathrm{m})-y_r,\quad d_S=(2\ \mathrm{m})+y_r,\quad
+d_E=(2\ \mathrm{m})-x_r,\quad d_W=(2\ \mathrm{m})+x_r.
 $$
 
 The interactive estimator instead uses **transformed, valid ray hits**. For example, with north selected,
@@ -711,6 +711,8 @@ $$
 $$
 
 For east, south, and west, replace the north maximum by $\max_k p^w_{k,x}-x_r$, $y_r-\min_kp^w_{k,y}$, and $x_r-\min_k p^w_{k,x}$, respectively. With clean geometric returns from a completely visible square these reproduce the corresponding boundary distances. If a selected wall cannot be identified from valid observations, its range must remain **unknown**, not zero.
+
+**Specific position and distance example.** Place the point robot at $(x_r,y_r)=(0,1.62)$ m in the square and select the north wall at $y=2$ m. The world-fixed boundary distance is $d_N=2-1.62=0.38$ m. If the robot faces north, forward LiDAR reads $0.38$ m; after a $180^\circ$ rotation at the **same location**, the forward ray reads $3.62$ m toward the south wall. The north-wall RF distance stays $0.38$ m in both cases. This shows why one body-relative beam is not itself a world-fixed border cell.
 
 For the circular arena, select a **90-degree arc** about its nominal north/east/south/west direction. Among valid world-frame returns lying on that arc, the model approximates
 

@@ -575,88 +575,88 @@ See the [worked solutions at the end of the book](solutions-foundations.md#spati
 
 (spatial-ref-1)=
 
-[1] Eric R. Kandel, James H. Schwartz, Thomas M. Jessell, Steven A. Siegelbaum, and Albert James Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
+[1] E. R. Kandel, J. H. Schwartz, T. M. Jessell, S. A. Siegelbaum, and A. J. Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013. [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
 
 (spatial-ref-2)=
 
-[2] Randall C. O'Reilly, Yuko Munakata, Michael J. Frank, Thomas E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 7. [Open textbook chapter](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-07.md); [edition and license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md).
+[2] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 7. [Open textbook chapter](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-07.md); [edition and license](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md).
 
 (spatial-ref-3)=
 
-[3] John O'Keefe and Lynn Nadel, *The Hippocampus as a Cognitive Map*. Oxford, U.K.: Clarendon Press, 1978. [Author-authorized full text and bibliographic record](https://discovery.ucl.ac.uk/id/eprint/10103569/).
+[3] J. O'Keefe and L. Nadel, *The Hippocampus as a Cognitive Map*. Oxford, U.K.: Clarendon Press, 1978. [Author-authorized full text and bibliographic record](https://discovery.ucl.ac.uk/id/eprint/10103569/).
 
 (spatial-ref-4)=
 
-[4] John O'Keefe and Jonathan O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Research*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://doi.org/10.1016/0006-8993(71)90358-1).
+[4] J. O'Keefe and J. O. Dostrovsky, “The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat,” *Brain Research*, vol. 34, no. 1, pp. 171–175, 1971, doi: [10.1016/0006-8993(71)90358-1](https://doi.org/10.1016/0006-8993(71)90358-1).
 
 (spatial-ref-5)=
 
-[5] Robert U. Muller and John L. Kubie, “The effects of changes in the environment on the spatial firing of hippocampal complex-spike cells,” *The Journal of Neuroscience*, vol. 7, no. 7, pp. 1951–1968, 1987, doi: [10.1523/JNEUROSCI.07-07-01951.1987](https://doi.org/10.1523/JNEUROSCI.07-07-01951.1987).
+[5] R. U. Muller and J. L. Kubie, “The effects of changes in the environment on the spatial firing of hippocampal complex-spike cells,” *The Journal of Neuroscience*, vol. 7, no. 7, pp. 1951–1968, 1987, doi: [10.1523/JNEUROSCI.07-07-01951.1987](https://doi.org/10.1523/JNEUROSCI.07-07-01951.1987).
 
 (spatial-ref-6)=
 
-[6] Mary Ann Go, Jake Rogers, Giuseppe P. Gava, Catherine E. Davey, Seigfred Prado, Yu Liu, and Simon R. Schultz, “Place cells in head-fixed mice navigating a floating real-world environment,” *Frontiers in Cellular Neuroscience*, vol. 15, Art. 618658, 2021, doi: [10.3389/fncel.2021.618658](https://doi.org/10.3389/fncel.2021.618658).
+[6] M. A. Go, J. Rogers, G. P. Gava, C. E. Davey, S. Prado, Y. Liu, and S. R. Schultz, “Place cells in head-fixed mice navigating a floating real-world environment,” *Frontiers in Cellular Neuroscience*, vol. 15, Art. 618658, 2021, doi: [10.3389/fncel.2021.618658](https://doi.org/10.3389/fncel.2021.618658).
 
 (spatial-ref-7)=
 
-[7] Torkel Hafting, Marianne Fyhn, Sturla Molden, May-Britt Moser, and Edvard I. Moser, “Microstructure of a spatial map in the entorhinal cortex,” *Nature*, vol. 436, pp. 801–806, 2005, doi: [10.1038/nature03721](https://doi.org/10.1038/nature03721).
+[7] T. Hafting, M. Fyhn, S. Molden, M.-B. Moser, and E. I. Moser, “Microstructure of a spatial map in the entorhinal cortex,” *Nature*, vol. 436, pp. 801–806, 2005, doi: [10.1038/nature03721](https://doi.org/10.1038/nature03721).
 
 (spatial-ref-8)=
 
-[8] José Antonio Pérez-Escobar, Olga Kornienko, Patrick Latuske, Laura Kohler, and Kevin Allen, “Visual landmarks sharpen grid cell metric and confer context specificity to neurons of the medial entorhinal cortex,” *eLife*, vol. 5, Art. e16937, 2016, doi: [10.7554/eLife.16937](https://doi.org/10.7554/eLife.16937).
+[8] J. A. Pérez-Escobar, O. Kornienko, P. Latuske, L. Kohler, and K. Allen, “Visual landmarks sharpen grid cell metric and confer context specificity to neurons of the medial entorhinal cortex,” *eLife*, vol. 5, Art. e16937, 2016, doi: [10.7554/eLife.16937](https://doi.org/10.7554/eLife.16937).
 
 (spatial-ref-9)=
 
-[9] Yoram Burak and Ila R. Fiete, “Accurate path integration in continuous attractor network models of grid cells,” *PLOS Computational Biology*, vol. 5, no. 2, Art. e1000291, 2009, doi: [10.1371/journal.pcbi.1000291](https://doi.org/10.1371/journal.pcbi.1000291).
+[9] Y. Burak and I. R. Fiete, “Accurate path integration in continuous attractor network models of grid cells,” *PLOS Computational Biology*, vol. 5, no. 2, Art. e1000291, 2009, doi: [10.1371/journal.pcbi.1000291](https://doi.org/10.1371/journal.pcbi.1000291).
 
 (spatial-ref-10)=
 
-[10] Jeffrey S. Taube, Robert U. Muller, and James B. Ranck, Jr., “Head-direction cells recorded from the postsubiculum in freely moving rats. I. Description and quantitative analysis,” *The Journal of Neuroscience*, vol. 10, no. 2, pp. 420–435, 1990, doi: [10.1523/JNEUROSCI.10-02-00420.1990](https://doi.org/10.1523/JNEUROSCI.10-02-00420.1990).
+[10] J. S. Taube, R. U. Muller, and J. B. Ranck, Jr., “Head-direction cells recorded from the postsubiculum in freely moving rats. I. Description and quantitative analysis,” *The Journal of Neuroscience*, vol. 10, no. 2, pp. 420–435, 1990, doi: [10.1523/JNEUROSCI.10-02-00420.1990](https://doi.org/10.1523/JNEUROSCI.10-02-00420.1990).
 
 (spatial-ref-11)=
 
-[11] Patricia Preston-Ferrer, Stefano Coletta, Markus Frey, and Andrea Burgalossi, “Anatomical organization of presubicular head-direction circuits,” *eLife*, vol. 5, Art. e14592, 2016, doi: [10.7554/eLife.14592](https://doi.org/10.7554/eLife.14592).
+[11] P. Preston-Ferrer, S. Coletta, M. Frey, and A. Burgalossi, “Anatomical organization of presubicular head-direction circuits,” *eLife*, vol. 5, Art. e14592, 2016, doi: [10.7554/eLife.14592](https://doi.org/10.7554/eLife.14592).
 
 (spatial-ref-12)=
 
-[12] Trygve Solstad, Charlotte N. Boccara, Emilio Kropff, May-Britt Moser, and Edvard I. Moser, “Representation of geometric borders in the entorhinal cortex,” *Science*, vol. 322, no. 5909, pp. 1865–1868, 2008, doi: [10.1126/science.1166466](https://doi.org/10.1126/science.1166466).
+[12] T. Solstad, C. N. Boccara, E. Kropff, M.-B. Moser, and E. I. Moser, “Representation of geometric borders in the entorhinal cortex,” *Science*, vol. 322, no. 5909, pp. 1865–1868, 2008, doi: [10.1126/science.1166466](https://doi.org/10.1126/science.1166466).
 
 (spatial-ref-13)=
 
-[13] Colin Lever, Stephen Burton, Ali Jeewajee, John O'Keefe, and Neil Burgess, “Boundary vector cells in the subiculum of the hippocampal formation,” *The Journal of Neuroscience*, vol. 29, no. 31, pp. 9771–9777, 2009, doi: [10.1523/JNEUROSCI.1319-09.2009](https://doi.org/10.1523/JNEUROSCI.1319-09.2009).
+[13] C. Lever, S. Burton, A. Jeewajee, J. O'Keefe, and N. Burgess, “Boundary vector cells in the subiculum of the hippocampal formation,” *The Journal of Neuroscience*, vol. 29, no. 31, pp. 9771–9777, 2009, doi: [10.1523/JNEUROSCI.1319-09.2009](https://doi.org/10.1523/JNEUROSCI.1319-09.2009).
 
 (spatial-ref-14)=
 
-[14] Emilio Kropff, James E. Carmichael, May-Britt Moser, and Edvard I. Moser, “Speed cells in the medial entorhinal cortex,” *Nature*, vol. 523, pp. 419–424, 2015, doi: [10.1038/nature14622](https://doi.org/10.1038/nature14622).
+[14] E. Kropff, J. E. Carmichael, M.-B. Moser, and E. I. Moser, “Speed cells in the medial entorhinal cortex,” *Nature*, vol. 523, pp. 419–424, 2015, doi: [10.1038/nature14622](https://doi.org/10.1038/nature14622).
 
 (spatial-ref-15)=
 
-[15] Davide Spalla, Alessandro Treves, and Charlotte N. Boccara, “Angular and linear speed cells in the parahippocampal circuits,” *Nature Communications*, vol. 13, Art. 1907, 2022, doi: [10.1038/s41467-022-29583-z](https://doi.org/10.1038/s41467-022-29583-z).
+[15] D. Spalla, A. Treves, and C. N. Boccara, “Angular and linear speed cells in the parahippocampal circuits,” *Nature Communications*, vol. 13, Art. 1907, 2022, doi: [10.1038/s41467-022-29583-z](https://doi.org/10.1038/s41467-022-29583-z).
 
 (spatial-ref-16)=
 
-[16] Christopher J. MacDonald, Kyle Q. Lepage, Uri T. Eden, and Howard Eichenbaum, “Hippocampal ‘time cells’ bridge the gap in memory for discontiguous events,” *Neuron*, vol. 71, no. 4, pp. 737–749, 2011, doi: [10.1016/j.neuron.2011.07.012](https://doi.org/10.1016/j.neuron.2011.07.012).
+[16] C. J. MacDonald, K. Q. Lepage, U. T. Eden, and H. Eichenbaum, “Hippocampal ‘time cells’ bridge the gap in memory for discontiguous events,” *Neuron*, vol. 71, no. 4, pp. 737–749, 2011, doi: [10.1016/j.neuron.2011.07.012](https://doi.org/10.1016/j.neuron.2011.07.012).
 
 (spatial-ref-17)=
 
-[17] Eva Pastalkova, Vladimir Itskov, Asohan Amarasingham, and György Buzsáki, “Internally generated cell assembly sequences in the rat hippocampus,” *Science*, vol. 321, no. 5894, pp. 1322–1327, 2008, doi: [10.1126/science.1159775](https://doi.org/10.1126/science.1159775).
+[17] E. Pastalkova, V. Itskov, A. Amarasingham, and G. Buzsáki, “Internally generated cell assembly sequences in the rat hippocampus,” *Science*, vol. 321, no. 5894, pp. 1322–1327, 2008, doi: [10.1126/science.1159775](https://doi.org/10.1126/science.1159775).
 
 (spatial-ref-18)=
 
-[18] Shai Abramson, Benjamin J. Kraus, John A. White, Michael E. Hasselmo, Dori Derdikman, and Genela Morris, “Flexible coding of time or distance in hippocampal cells,” *eLife*, vol. 12, Art. e83930, 2023, doi: [10.7554/eLife.83930](https://doi.org/10.7554/eLife.83930).
+[18] S. Abramson, B. J. Kraus, J. A. White, M. E. Hasselmo, D. Derdikman, and G. Morris, “Flexible coding of time or distance in hippocampal cells,” *eLife*, vol. 12, Art. e83930, 2023, doi: [10.7554/eLife.83930](https://doi.org/10.7554/eLife.83930).
 
 (spatial-ref-19)=
 
-[19] Daniel Bush, Caswell Barry, and Neil Burgess, “What do grid cells contribute to place cell firing?,” *Trends in Neurosciences*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://doi.org/10.1016/j.tins.2013.12.003).
+[19] D. Bush, C. Barry, and N. Burgess, “What do grid cells contribute to place cell firing?,” *Trends in Neurosciences*, vol. 37, no. 3, pp. 136–145, 2014, doi: [10.1016/j.tins.2013.12.003](https://doi.org/10.1016/j.tins.2013.12.003).
 
 (spatial-ref-20)=
 
-[20] Tianze Liu, Kang Jun Bai, and Hongyu An, “Replicating associative learning of rodents with a neuromorphic robot in an open-field arena,” *Frontiers in Neuroscience*, vol. 19, Art. 1565780, 2025, doi: [10.3389/fnins.2025.1565780](https://doi.org/10.3389/fnins.2025.1565780).
+[20] T. Liu, K. J. Bai, and H. An, “Replicating associative learning of rodents with a neuromorphic robot in an open-field arena,” *Frontiers in Neuroscience*, vol. 19, Art. 1565780, 2025, doi: [10.3389/fnins.2025.1565780](https://doi.org/10.3389/fnins.2025.1565780).
 
 (spatial-ref-21)=
 
-[21] Tianze Liu, Zihan Jin, Dong Song, and Hongyu An, “A Neuromorphic Robot as a Digital Twin for Rodent Spatial Representation in Dynamic Environment Navigation,” *IEEE Journal on Emerging and Selected Topics in Circuits and Systems*, 2026, doi: [10.1109/JETCAS.2026.3733540](https://doi.org/10.1109/JETCAS.2026.3733540).
+[21] T. Liu, Z. Jin, D. Song, and H. An, “A Neuromorphic Robot as a Digital Twin for Rodent Spatial Representation in Dynamic Environment Navigation,” *IEEE Journal on Emerging and Selected Topics in Circuits and Systems*, 2026, doi: [10.1109/JETCAS.2026.3733540](https://doi.org/10.1109/JETCAS.2026.3733540).
 
 (spatial-ref-22)=
 
-[22] Wulfram Gerstner, Werner M. Kistler, Richard Naud, and Liam Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 7. [Online textbook](https://neuronaldynamics.epfl.ch/online/Ch7.html).
+[22] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 7. [Online textbook](https://neuronaldynamics.epfl.ch/online/Ch7.html).

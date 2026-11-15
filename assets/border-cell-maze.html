@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7fafc">
+<title>From LiDAR to a Border-Cell-Like Firing Field | Interactive Laboratory</title>
+<style>
+:root{color-scheme:light;--ink:#1b344b;--muted:#586d7e;--blue:#185f7c;--line:#d8e3ea;--panel:#f3f8fa;--warm:#d65b44;--teal:#087e78;--green:#147453}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:14px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{margin:auto;max-width:1190px;padding:22px 19px 32px}
+h1{font-size:clamp(21px,3vw,30px);line-height:1.17;margin:5px 0 9px;letter-spacing:-.02em}
+h2{font-size:16px;line-height:1.35;margin:0 0 6px}h3{font-size:12px;margin:0 0 3px}
+p{margin:0 0 8px}.eyebrow{font-weight:750;color:var(--blue);text-transform:uppercase;letter-spacing:.11em;font-size:11px}.lead{font-size:13px;color:var(--muted);max-width:85ch;margin-bottom:17px}
+.toolbar{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.toolbar-top{display:flex;align-items:center;gap:15px 25px;flex-wrap:wrap}.fields{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.fields label,.range-label{font-size:12px;font-weight:700;color:var(--muted)}
+select,button,input{font:inherit}select{border:1px solid #b6cbd7;border-radius:6px;padding:6px 10px;min-width:116px;background:#fff;color:var(--ink)}
+button{border:1px solid #b9ccd7;background:#fff;color:var(--blue);font-size:12px;border-radius:7px;padding:8px 12px;font-weight:650;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #e1a16b;outline-offset:2px}
+button:hover{background:#e8f2f7}button[aria-pressed=true],button.active{background:var(--blue);border-color:var(--blue);color:#fff}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+button[disabled]{opacity:.5;cursor:default}.action-set{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}.step-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:14px 0 8px}.step-grid button{font-size:12px;text-align:left;padding:9px 10px}
+.step-grid button span{display:block;font-size:10px;font-weight:450;opacity:.84}
+.speed-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0 0}.speed-row label{font-weight:650;font-size:12px}.speed-row input{max-width:160px;width:100%;accent-color:var(--blue)}
+.caption-line{font-size:12px;min-height:19px;color:var(--muted)}
+.visuals{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,1fr);gap:13px}
+.card{border:1px solid var(--line);border-radius:12px;padding:13px;min-width:0;background:#fff}.head-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.minor{font-size:11px;color:var(--muted)}canvas{width:100%;height:auto;display:block}canvas.square{aspect-ratio:1;border-radius:8px;background:#f8fafc}.map-empty{color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;font-size:11px;color:var(--muted)}.dot{display:inline-block;height:9px;width:9px;border-radius:100%;margin-right:5px;vertical-align:middle}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0}
+.metric{background:#f5f9fb;border-bottom:3px solid #bfd1df;border-radius:5px;padding:10px;min-width:0}.metric small{display:block;color:var(--muted);font-size:10.5px;line-height:1.35}.metric strong{display:block;color:var(--blue);font-size:20px;font-variant-numeric:tabular-nums;margin-top:4px}
+.subplots{display:grid;grid-template-columns:1.1fr .9fr;gap:13px}.plot-card{border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}.plot-card canvas{max-height:185px}
+#rotationOutput{background:#e8f5f1;border-left:4px solid var(--teal);border-radius:6px;padding:11px 13px;margin-top:13px;min-height:40px;font-size:12px;line-height:1.6}
+.note{background:#f8fafb;border-left:3px solid #86a3b7;padding:10px 12px;margin-top:13px;font-size:12px;color:#405a6e}.kbd{font-family:ui-monospace,monospace;background:#e7eff3;border-radius:4px;padding:1px 5px}
+@media(max-width:850px){.visuals{grid-template-columns:1fr}.action-set{margin-left:0}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){main{padding:13px}.step-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.subplots{grid-template-columns:1fr}.card{padding:10px}.metric strong{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main>
+<p class="eyebrow">Chapter 4 / Chapter 8 · Interactive research-to-textbook example</p>
+<h1>From LiDAR to a border-cell-like field</h1>
+<p class="lead">Move a small robot through a square or circular arena. Observe 36 LiDAR beams, drive a leaky integrate-and-fire (LIF) neuron, and watch an occupancy-normalized firing-rate map emerge as the robot explores. Every number comes from the simplified sensor/neuron model, not from animal recordings.</p>
+<section class="toolbar" aria-label="Simulation controls">
+ <div class="toolbar-top">
+  <div class="fields">
+   <label for="arena">Maze</label><select id="arena"><option value="square">Square arena</option><option value="circle">Circular arena</option></select>
+   <label for="wall">Selected boundary</label><select id="wall"><option value="north">North wall / arc</option><option value="east">East wall / arc</option><option value="south">South wall / arc</option><option value="west">West wall / arc</option></select>
+  </div>
+  <div class="action-set"><button id="play" class="primary">▶ Play</button><button id="step">Step once</button><button id="batch">Explore 100 steps</button><button id="reset">Reset</button></div>
+ </div>
+ <div class="step-grid" role="group" aria-label="Reveal the processing stages">
+  <button data-stage="1">1 · Explore<span>Robot and trajectory</span></button>
+  <button data-stage="2">2 · Measure<span>36 LiDAR beams</span></button>
+  <button data-stage="3">3 · Encode<span>Input current → LIF spikes</span></button>
+  <button data-stage="4" aria-pressed="true">4 · Map<span>World-fixed border response</span></button>
+ </div>
+ <p id="stageDescription" class="caption-line" aria-live="polite"></p>
+ <div class="speed-row"><label for="speed">Playback speed</label><input id="speed" type="range" min="1" max="8" step="1" value="3"/><output id="speedValue" for="speed">3×</output><button id="rotate">Test 180° turn (same position)</button><span class="minor">The turn test compares steady-state predicted rates, not short-window random spike counts.</span></div>
+</section>
+<div class="visuals">
+ <section class="card">
+  <div class="head-row"><h2>Robot navigation and 36 LiDAR rays</h2><span class="minor" id="timeText">0.0 s · 0 visits</span></div>
+  <canvas id="mazeCanvas" class="square" width="680" height="680" role="img" aria-label="Animated overhead view of a robot exploring an enclosure with range beams and a highlighted selected wall"></canvas>
+  <div class="legend"><span><span class="dot" style="background:#1d607b"></span>Robot path</span><span><span class="dot" style="background:#d65b44"></span>Selected world boundary</span><span><span class="dot" style="background:#8fb6c8"></span>LiDAR rays</span></div>
+ </section>
+ <section class="card">
+  <div class="head-row"><h2>Emerging border-cell-like rate map</h2><span class="minor" id="visitedText">0 occupied bins</span></div>
+  <canvas id="mapCanvas" class="square" width="500" height="500" role="img" aria-label="Occupancy-normalized map of generated LIF spikes by the robot's world coordinates"></canvas>
+  <div class="legend"><span><span class="dot" style="background:#ffffff;border:1px solid #a8b7bf"></span>Not yet visited</span><span><span class="dot" style="background:#f1ba9d"></span>Lower rate</span><span><span class="dot" style="background:#a32238"></span>Higher rate</span></div>
+ </section>
+</div>
+<div class="metrics" aria-live="polite">
+ <div class="metric"><small>World boundary distance (LiDAR-est.)</small><strong id="distanceMetric">—</strong></div>
+ <div class="metric"><small>Selected border-LIF current</small><strong id="currentMetric">—</strong></div>
+ <div class="metric"><small>Steady-state border-LIF prediction</small><strong id="rateMetric">—</strong></div>
+ <div class="metric"><small>Border neuron spikes emitted</small><strong id="spikeMetric">0</strong></div>
+</div>
+<div class="subplots">
+ <section class="plot-card"><h2>Expected LIF response versus boundary distance</h2><p class="minor">Physical-unit LIF (200 pF, 10 nS, −65/−50 mV, 2 ms refractory); orange marker = current LiDAR-derived boundary estimate.</p><canvas id="curveCanvas" width="580" height="245" role="img" aria-label="LIF firing rate decays with increasing distance to the selected wall"></canvas></section>
+ <section class="plot-card"><h2>Recently emitted spikes</h2><p class="minor">World-boundary neuron · spikes per 160 ms simulation step, not a fitted biological raster</p><canvas id="spikeCanvas" width="430" height="245" role="img" aria-label="Recent spike-count history over a moving exploration window"></canvas></section>
+</div>
+<div id="rotationOutput" role="status" aria-live="polite">Select <strong>Test 180° turn</strong> to compare a body-facing LiDAR channel with a world-anchored border response at the <em>same position</em>.</div>
+<div class="note"><strong>Scientific interpretation.</strong> The arena geometry is used to ray-cast a synthetic LiDAR scan; its endpoints are projected into the world frame using an exact simulated pose. A specified north/east/south/west wall (or circular arc) is selected before the experiment. The highlighted map is an <em>occupancy-normalized readout of generated spikes</em>, not a learned synaptic weight map. A true biological border-cell claim requires additional neural recordings and controls; a robotics learning claim requires estimated pose, noisy mapping, and an explicit learning rule.</div>
+</main>
+<script src="border-cell-model.js"></script>
+<script>
+(function(){
+'use strict';
+const M=window.BorderCellModel;
+if(!M){document.getElementById('rotationOutput').textContent='Model script unavailable';return;}
+const byId=id=>document.getElementById(id);
+const cv=byId('mazeCanvas'),heat=byId('mapCanvas'),curve=byId('curveCanvas'),raster=byId('spikeCanvas');
+const ctx=cv.getContext('2d'),hctx=heat.getContext('2d'),cctx=curve.getContext('2d'),sctx=raster.getContext('2d');
+const color={ink:'#213b51',blue:'#1d607b',muted:'#8193a3',ray:'#9ac1d0',selected:'#d65b44',green:'#148068',grid:'#e3ebef'};
+const N=27,DT=.16;
+let state;
+const stages={1:'Observe exploration and the robot’s trajectory. The firing field is not visible yet.',
+2:'Each LiDAR beam reports a range and heading. Rays rotate with the robot; measured endpoints are projected into world coordinates.',
+3:'Valid measured distances become currents; each current drives a LIF membrane. A closer detected boundary usually produces more spikes.',
+4:'Accumulated LIF spikes are divided by time spent at each visited position. The activity map is fixed to a selected world wall / arc.'};
+function init(){
+ const shape=byId('arena').value,wall=byId('wall').value;
+ const waypoints=M.waypoints(shape),start=waypoints[0];
+ state={shape,wall,stage:4,playing:false,speed:+byId('speed').value,
+ points:waypoints,waypoint:1,position:{x:start[0],y:start[1],heading:0},
+ path:[[start[0],start[1]]],border:M.newLIF(),body:M.newLIF(),channels:Array.from({length:36},()=>M.newLIF()),
+ occupancy:new Float32Array(N*N),spikeCounts:new Float32Array(N*N),
+ t:0,steps:0,scan:[],borderDist:NaN,bodyDist:NaN,currentA:0,
+ counts:0,recent:[],test:null};
+ state.position.heading=Math.atan2(waypoints[1][1]-start[1],waypoints[1][0]-start[0]);
+ calcScan();byId('rotationOutput').innerHTML='Select <strong>Test 180° turn</strong> to compare egocentric LiDAR with the same world-fixed boundary.';
+ setStage(4);update();
+}
+function calcScan(){
+ const p=state.position;
+ state.scan=M.scan(state.shape,p.x,p.y,p.heading);
+ state.borderDist=M.estimateWallDistance(state.shape,state.wall,p.x,p.y,state.scan);
+ state.bodyDist=state.scan[18].range;
+ state.currentA=M.wallCurrent(state.borderDist);
+}
+function nextStep(){
+ const p=state.position,goals=state.points;let target=goals[state.waypoint%goals.length];
+ let dx=target[0]-p.x,dy=target[1]-p.y;let dist=Math.hypot(dx,dy);
+ if(dist<.11){state.waypoint++;target=goals[state.waypoint%goals.length];dx=target[0]-p.x;dy=target[1]-p.y;dist=Math.hypot(dx,dy);}
+ const step=Math.min(.107,dist);if(dist>0){p.heading=Math.atan2(dy,dx);p.x+=step*dx/dist;p.y+=step*dy/dist;}
+ // Border geometry is a fixed ground-truth drawing; the currents themselves
+ // depend on projected synthetic LiDAR returns, not direct trueWallDistance().
+ if(!M.inside(p.x,p.y,state.shape))throw Error('Waypoint outside enclosure');
+ state.path.push([p.x,p.y]);if(state.path.length>2500)state.path.shift();
+ calcScan();
+ const observed=Number.isFinite(state.borderDist);
+ let count=0;
+ if(observed)count=M.stepLIF(state.border,state.currentA,DT);
+ const bodyCurrent=M.sensorCurrent(state.bodyDist,Number.isFinite(state.bodyDist));
+ M.stepLIF(state.body,bodyCurrent,DT);
+ // Simulate all 36 egocentric sensory channels, with explicit validity.
+ for(let k=0;k<36;k++)if(state.scan[k].valid)
+   M.stepLIF(state.channels[k],M.sensorCurrent(state.scan[k].range,true),DT);
+ const ix=M.clamp(Math.floor((p.x+M.R)/(2*M.R)*N),0,N-1);
+ const iy=M.clamp(Math.floor((M.R-p.y)/(2*M.R)*N),0,N-1);
+ if(observed){state.occupancy[iy*N+ix]+=DT;state.spikeCounts[iy*N+ix]+=count;}
+ state.counts+=count;state.steps++;state.t+=DT;
+ state.recent.push(count);if(state.recent.length>50)state.recent.shift();
+ if(state.steps%2===0)update();
+}
+function selectMode(){const isPlaying=state.playing;state.playing=false;byId('play').textContent='▶ Play';init();if(isPlaying)togglePlay();}
+function togglePlay(){state.playing=!state.playing;byId('play').textContent=state.playing?'❚❚ Pause':'▶ Play';byId('play').setAttribute('aria-pressed',String(state.playing));}
+function setStage(n){state.stage=n;for(const btn of document.querySelectorAll('[data-stage]'))btn.setAttribute('aria-pressed',String(+btn.dataset.stage===n));byId('stageDescription').textContent=stages[n];update();}
+function xy(canvas,x,y,pad=48){const span=canvas.width-2*pad;return [pad+(x+M.R)/(2*M.R)*span,pad+(M.R-y)/(2*M.R)*span]}
+function bg(g,canvas,steps=8,pad=48){g.clearRect(0,0,canvas.width,canvas.height);g.fillStyle='#fafcfd';g.fillRect(0,0,canvas.width,canvas.height);g.strokeStyle=color.grid;g.lineWidth=1;for(let i=0;i<=steps;i++){let z=pad+i*(canvas.width-2*pad)/steps;g.beginPath();g.moveTo(z,pad);g.lineTo(z,canvas.height-pad);g.moveTo(pad,z);g.lineTo(canvas.width-pad,z);g.stroke();}}
+function boundary(g,canvas,shape,wall,highlight,pad){const [cx,cy]=xy(canvas,0,0,pad),r=(canvas.width-2*pad)/2;
+ g.lineWidth=6;g.strokeStyle='#375266';g.beginPath();
+ if(shape==='circle')g.arc(cx,cy,r,0,Math.PI*2);
+ else g.rect(pad,pad,2*r,2*r);g.stroke();
+ if(highlight){g.lineWidth=10;g.lineCap='round';g.strokeStyle=color.selected;g.beginPath();
+ if(shape==='circle'){
+ const angle=M.WALL_ANGLES[wall];g.arc(cx,cy,r,-angle-Math.PI/4,-angle+Math.PI/4,false);
+ }else{
+ if(wall==='north'){g.moveTo(pad,pad);g.lineTo(canvas.width-pad,pad)}
+ if(wall==='south'){g.moveTo(pad,canvas.height-pad);g.lineTo(canvas.width-pad,canvas.height-pad)}
+ if(wall==='east'){g.moveTo(canvas.width-pad,pad);g.lineTo(canvas.width-pad,canvas.height-pad)}
+ if(wall==='west'){g.moveTo(pad,pad);g.lineTo(pad,canvas.height-pad)}
+ }g.stroke();g.lineCap='butt';}
+}
+function mazePlot(){const g=ctx,p=state.position,pad=55;bg(g,cv,8,pad);
+ if(state.stage>=2){for(const ray of state.scan){if(!ray.valid)continue;const a=xy(cv,p.x,p.y,pad),b=xy(cv,ray.wx,ray.wy,pad);
+ g.lineWidth=ray.sector===18?2.7:1.2;g.strokeStyle=ray.sector===18?'#0b96a8':'rgba(68,125,153,.27)';g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.stroke();
+ if(state.stage>=3){g.fillStyle='rgba(29,124,134,.45)';g.beginPath();g.arc(b[0],b[1],1.5,0,7);g.fill();}}}
+ boundary(g,cv,state.shape,state.wall,state.stage>=4,pad);
+ g.strokeStyle=color.blue;g.lineWidth=2.3;g.lineCap='round';g.beginPath();state.path.forEach(([x,y],i)=>{const z=xy(cv,x,y,pad);if(i)g.lineTo(z[0],z[1]);else g.moveTo(z[0],z[1]);});g.stroke();
+ const [u,v]=xy(cv,p.x,p.y,pad);g.fillStyle='#fff';g.strokeStyle=color.blue;g.lineWidth=3;g.beginPath();g.arc(u,v,11,0,7);g.fill();g.stroke();
+ g.fillStyle=color.blue;g.beginPath();g.moveTo(u+16*Math.cos(p.heading),v-16*Math.sin(p.heading));g.lineTo(u+7*Math.cos(p.heading+2.5),v-7*Math.sin(p.heading+2.5));g.lineTo(u+7*Math.cos(p.heading-2.5),v-7*Math.sin(p.heading-2.5));g.closePath();g.fill();
+ if(state.test){const z=xy(cv,state.test.x,state.test.y,pad);g.setLineDash([4,3]);g.strokeStyle=color.green;g.lineWidth=2;g.beginPath();g.arc(z[0],z[1],21,0,7);g.stroke();g.setLineDash([]);g.fillStyle=color.green;g.font='bold 16px system-ui';g.fillText('R',z[0]+25,z[1]-15);}
+ g.font='15px system-ui';g.fillStyle='#5c7281';g.fillText('y ↑',14,28);g.fillText('x →',cv.width-54,cv.height-14);
+}
+function heatColor(rate){const t=M.clamp(rate/62,0,1);const stops=[[0,[244,241,237]],[0.35,[247,193,161]],[0.7,[222,104,91]],[1,[157,31,52]]];let l=stops[0],h=stops[stops.length-1];for(let i=1;i<stops.length;i++){if(stops[i][0]>=t){h=stops[i];l=stops[i-1];break;}}
+ const w=(t-l[0])/(h[0]-l[0]);return 'rgb('+l[1].map((x,i)=>Math.round(x+(h[1][i]-x)*w)).join(',')+')';}
+function drawMap(){const g=hctx,pad=40;bg(g,heat,8,pad);const span=heat.width-pad*2,s=span/N;let visited=0;
+ if(state.stage>=4){for(let iy=0;iy<N;iy++)for(let ix=0;ix<N;ix++){
+ const x=-M.R+(ix+.5)*2*M.R/N,y=M.R-(iy+.5)*2*M.R/N;
+ if(!M.inside(x,y,state.shape))continue;
+ const id=iy*N+ix,occ=state.occupancy[id];
+ if(occ>.001){visited++;g.fillStyle=heatColor(state.spikeCounts[id]/occ);}
+ else g.fillStyle='#fff';
+ g.fillRect(pad+ix*s+.6,pad+iy*s+.6,s-1.2,s-1.2);
+ }}
+ boundary(g,heat,state.shape,state.wall,state.stage>=4,pad);
+ const [u,v]=xy(heat,state.position.x,state.position.y,pad);g.fillStyle=color.blue;g.beginPath();g.arc(u,v,6,0,7);g.fill();
+ byId('visitedText').textContent=visited+' visited bins';
+ if(state.stage<4){g.fillStyle='rgba(255,255,255,.87)';g.fillRect(pad,pad,span,span);g.fillStyle=color.muted;g.font='bold 16px system-ui';g.textAlign='center';g.fillText('Reveal stage 4 to see the map',heat.width/2,heat.height/2);g.textAlign='left';}
+}
+function axes(g,width,height){g.clearRect(0,0,width,height);g.fillStyle='#fcfeff';g.fillRect(0,0,width,height);g.strokeStyle='#d7e3e9';g.lineWidth=1;for(let y=30;y<height-25;y+=37){g.beginPath();g.moveTo(49,y);g.lineTo(width-16,y);g.stroke();}g.strokeStyle='#71899a';g.beginPath();g.moveTo(49,18);g.lineTo(49,height-31);g.lineTo(width-16,height-31);g.stroke();}
+function curvePlot(){const g=cctx,w=curve.width,h=curve.height;axes(g,w,h);const toX=d=>49+d/2.0*(w-76),toY=r=>h-31-r/65*(h-63);
+ g.lineWidth=3;g.strokeStyle=color.green;g.beginPath();for(let i=0;i<=200;i++){const d=2*i/200;const q=M.lifRate(M.wallCurrent(d,.55));const x=toX(d),y=toY(q);if(i)g.lineTo(x,y);else g.moveTo(x,y);}g.stroke();
+ const d=state.borderDist;if(Number.isFinite(d)&&state.stage>=3){const x=toX(M.clamp(d,0,2)),y=toY(M.lifRate(state.currentA));g.fillStyle=color.selected;g.beginPath();g.arc(x,y,6,0,7);g.fill();}
+ g.font='12px system-ui';g.fillStyle=color.muted;g.fillText('0',36,h-21);g.fillText('1 m',toX(1)-10,h-13);g.fillText('2 m',w-45,h-13);g.fillText('Rate (Hz)',7,15);g.fillText('d to wall →',w-113,h-12);
+}
+function rasterPlot(){const g=sctx,w=raster.width,h=raster.height;axes(g,w,h);const a=state.recent,Nmax=12,dx=(w-76)/Math.max(50,a.length),base=h-31;
+ if(state.stage>=3){a.forEach((n,i)=>{g.fillStyle=color.selected;const ht=Math.min(n,Nmax)/Nmax*(h-65);g.fillRect(50+i*dx,base-ht,Math.max(2,dx-2),ht);});}
+ g.fillStyle=color.muted;g.font='12px system-ui';g.fillText('0',36,base+15);g.fillText('12 spikes',2,17);g.fillText('Most recent 50 steps →',w-163,h-12);
+}
+function update(){mazePlot();drawMap();curvePlot();rasterPlot();byId('timeText').textContent=state.t.toFixed(1)+' s · '+state.steps+' steps';
+ byId('distanceMetric').textContent=state.stage>=4&&Number.isFinite(state.borderDist)?state.borderDist.toFixed(2)+' m':'—';
+ byId('currentMetric').textContent=state.stage>=3&&Number.isFinite(state.borderDist)?(state.currentA*1e12).toFixed(0)+' pA':'—';
+ byId('rateMetric').textContent=state.stage>=3&&Number.isFinite(state.borderDist)?M.lifRate(state.currentA).toFixed(1)+' Hz':'—';
+ byId('spikeMetric').textContent=state.stage>=3?String(state.counts):'—';
+}
+function rotationTest(){const p=M.probe(state.shape,state.wall);state.test=p;
+ byId('rotationOutput').innerHTML='<strong>Same world position, heading reversed 180°.</strong> Forward LiDAR: '+p.bodyBefore.toFixed(2)+' m → '+p.bodyAfter.toFixed(2)+' m. World-wall distance from transformed rays: '+p.worldBefore.toFixed(2)+' m → '+p.worldAfter.toFixed(2)+' m. Predicted border LIF: <strong>'+p.rateBefore.toFixed(1)+' Hz → '+p.rateAfter.toFixed(1)+' Hz</strong>. This is a coordinate-frame invariance test, not proof of learning.';
+ update();}
+byId('arena').addEventListener('change',selectMode);byId('wall').addEventListener('change',selectMode);
+byId('play').addEventListener('click',togglePlay);byId('step').addEventListener('click',()=>{if(state.playing)togglePlay();nextStep();update();});
+byId('batch').addEventListener('click',()=>{if(state.playing)togglePlay();for(let i=0;i<100;i++)nextStep();update();});
+byId('reset').addEventListener('click',()=>{init();});byId('rotate').addEventListener('click',rotationTest);
+byId('speed').addEventListener('input',()=>{state.speed=+byId('speed').value;byId('speedValue').textContent=state.speed+'×';});
+for(const b of document.querySelectorAll('[data-stage]'))b.addEventListener('click',()=>setStage(+b.dataset.stage));
+let last=0;function loop(time){if(state.playing&&time-last>=90){last=time;for(let i=0;i<state.speed;i++)nextStep();update();}requestAnimationFrame(loop);}
+init();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

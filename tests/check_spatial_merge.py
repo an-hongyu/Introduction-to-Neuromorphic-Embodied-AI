@@ -38,6 +38,9 @@ for name in ["hippocampal-circuit", "place-recordings", "grid-recordings",
              "head-direction", "border-recordings", "speed-recordings", "time-recordings"]:
     assert f"fig-spatial-{name}" in page.ids, f"Lost literature figure: {name}"
 assert sum("grid-place-interactive.html" in src for src in page.iframes) == 1
+assert sum("border-cell-maze.html" in src for src in page.iframes) == 1
+assert "(interactive-border-maze)=" in source
+assert "  bibliography:" not in config, "Legacy BibTeX block appends duplicate APA citations below the IEEE reference list"
 exercises = source.split("## 4.10 Exercises", 1)[1].split("## References", 1)[0]
 assert [int(n) for n in re.findall(r"^(\d+)\.", exercises, re.M)] == list(range(1, 17))
 solutions = (ROOT / "chapters" / "solutions-foundations.md").read_text(encoding="utf-8")
@@ -47,4 +50,4 @@ legacy = (SITE / "chapters" / "grid-to-place" / "index.html").read_text(encoding
 assert "window.location.replace" in legacy
 assert "#grid-place-readout" in legacy
 assert "grid-place-live-example" in legacy
-print("Spatial merge passed: one chapter, per-cell models, seven literature figures, one interactive app, sixteen exercises/solutions, and legacy redirects.")
+print("Spatial merge passed: all cell models, seven literature figures, two interactive apps (grid/place and border maze), sixteen exercises/solutions, no auto-generated duplicate bibliography, and legacy redirects.")

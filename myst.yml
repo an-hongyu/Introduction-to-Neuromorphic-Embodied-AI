@@ -4,8 +4,6 @@ project:
   subtitle: From Spatial Neural Circuits to Autonomous Learning Robots
   authors:
   - name: Hongyu An
-  bibliography:
-  - spatial-references.bib
   keywords:
   - neuromorphic computing
   - embodied AI
@@ -16,6 +14,8 @@ project:
   - assets/lidar-lecture-media.html
   - assets/lif-interactive.html
   - assets/grid-place-interactive.html
+  - assets/border-cell-model.js
+  - assets/border-cell-maze.html
   toc:
   - file: index.md
   - title: Foundations

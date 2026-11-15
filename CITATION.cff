@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: >-
+  If you use or adapt original textbook content, methods, computational models,
+  or educational figures from this work, please cite this book. Cite individual
+  third-party sources separately and respect their licenses.
+title: "Introduction to Neuromorphic Embodied AI"
+authors:
+  - family-names: An
+    given-names: Hongyu
+url: "https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/"
+preferred-citation:
+  type: book
+  authors:
+    - family-names: An
+      given-names: Hongyu
+  title: "Introduction to Neuromorphic Embodied AI"
+  year: 2026
+  url: "https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/"

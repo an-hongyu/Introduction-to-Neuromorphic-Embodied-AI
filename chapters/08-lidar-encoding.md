@@ -499,7 +499,9 @@ assert counts.shape == (36, 500)
 assert np.all(counts[~preserved_mask] == 0)
 ```
 
-A physical-unit LIF implementation instead requires a chosen current mapping and the membrane, threshold, reset, and refractory parameters from [Chapter 2](03-computational-neuron-models.md). Setting a numerical rate to 40 Hz does not imply that an arbitrary current of 40 pA produces 40 Hz. Compare count, first-spike latency, and steady firing rate before selecting a motor threshold.
+The next subsection implements a physical-unit LIF neuron using a chosen **distance-to-current mapping** and the membrane, threshold, reset, and refractory parameters from [Chapter 2](03-computational-neuron-models.md). A prescribed rate of 40 Hz is not a current of 40 pA. Compare spike count, first-spike latency, and steady firing rate before selecting a motor threshold.
+
+(lidar-lif-border)=
 
 ### 8.9.5 LiDAR to LIF: nearer boundaries produce more spikes
 

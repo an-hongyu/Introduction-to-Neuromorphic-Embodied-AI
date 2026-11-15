@@ -69,6 +69,8 @@ any underlying third-party studies, images, or datasets individually.
 }
 ```
 
+**Reference-list style in the chapters:** References follow IEEE numeric style: `[1] A. A. Author, “Article title,” *Abbrev. Journal Title*, vol. X, no. Y, pp. XX–YY, year, doi: ...`. Books, lecture slides, documentation, and web pages use the corresponding IEEE entry pattern, with linked DOI/URLs and `[Online]. Available:` where appropriate. Reference numbering is local to each chapter; the chapter-specific citation anchors are retained.
+
 The repository includes a machine-readable [`CITATION.cff`](CITATION.cff)
 configured to cite the **book**, not merely its source code. GitHub displays
 **Cite this repository** on the repository landing page. A persistent DOI

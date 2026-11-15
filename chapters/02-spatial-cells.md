@@ -362,6 +362,8 @@ When interpreting a border-cell rate map, examine **occupancy-normalized activit
 
 (interactive-border-maze)=
 
+### Further study: engineering model in Chapter 8
+
 **Engineering model and interactive maze laboratory:** The selected-wall distance equations, LiDAR coordinate transformations, LIF calculations, worked rotation example, and both square/circular robot demonstrations have moved to [Chapter 8, Section 8.9.6](08-lidar-encoding.md#lidar-complete-parameter-derivation) and [Section 8.9.7](08-lidar-encoding.md#lidar-interactive-border-maze). This pointer also preserves the former link to the interactive lab.
 
 ## 4.7 Speed cells, time cells, and their models

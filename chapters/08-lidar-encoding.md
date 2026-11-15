@@ -660,7 +660,7 @@ $
 \qquad \theta_k^{\mathrm{world}}=\psi+\alpha_k.
 $
 
-Here $\psi$ is the robot heading (rad); $k=18$ measures straight ahead. This differs by a half-sector offset from the **edge-aligned binning** in Section 8.9.1, which remains suitable for aggregating a real \`LaserScan\`. In the interactive demonstration, **one ray is ray-cast at each sector center**, so there is no hidden raw high-density scan or sector-minimum aggregation.
+Here $\psi$ is the robot heading (rad); $k=18$ measures straight ahead. This differs by a half-sector offset from the **edge-aligned binning** in Section 8.9.1, which remains suitable for aggregating a real `LaserScan`. In the interactive demonstration, **one ray is ray-cast at each sector center**, so there is no hidden raw high-density scan or sector-minimum aggregation.
 
 For a valid range $d_k$, construct the affine current map by setting $I_k(0)=280$ pA and $I_k(5)=100$ pA:
 

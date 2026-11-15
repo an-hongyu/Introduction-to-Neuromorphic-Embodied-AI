@@ -46,6 +46,36 @@ jupyter book start
 - Equations, Python code, executed notebook figures, and notebook download links are included.
 - Run the Place Cell notebook locally or via the Google Colab link in the chapter.
 
+## How to cite this textbook
+
+This evolving open textbook includes original explanatory text, mathematical models,
+worked examples, visualizations, and interactive laboratories. If you reuse or build
+upon these contributions in scholarly work, please cite the book; continue to cite
+any underlying third-party studies, images, or datasets individually.
+
+**Suggested IEEE citation (online edition):**
+
+> H. An, *Introduction to Neuromorphic Embodied AI*, interactive online textbook, 2026. [Online]. Available: https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/
+
+**BibTeX:**
+
+```bibtex
+@book{An2026NeuromorphicEmbodiedAI,
+  author    = {Hongyu An},
+  title     = {Introduction to Neuromorphic Embodied AI},
+  year      = {2026},
+  publisher = {Self-published online textbook},
+  url       = {https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/}
+}
+```
+
+The repository includes a machine-readable [`CITATION.cff`](CITATION.cff)
+configured to cite the **book**, not merely its source code. GitHub displays
+**Cite this repository** on the repository landing page. A persistent DOI
+has **not yet been assigned**; once a version is archived and registered,
+replace the URL-only citation with its real DOI. Cite a specific archived
+version when exact reproducibility is needed.
+
 ## Validation and deployment
 
 ```bash

@@ -597,7 +597,7 @@ assert measured_hz[3] == 0 and not valid_mask[4]
 
 (lidar-complete-parameter-derivation)=
 
-### 8.9.6 All model sizes, distances, receptive fields, and firing parameters
+### 8.9.6 Boundary-distance model, coordinate transforms, and RF/LIF parameters
 
 The [interactive square/circular robot experiment](#lidar-interactive-border-maze) has **two implemented encoders**, which must not be confused:
 
@@ -903,7 +903,7 @@ I_w=100+180\exp\left(-\frac{0.38^2}{2(0.55)^2}\right)
 \approx 241.8\ \mathrm{pA},
 $
 
-giving an ideal steady-state border-LIF prediction of approximately **46.8 Hz** with the Chapter 8 membrane parameters. The experiment's **Test 180° turn** button reproduces this comparison in both arena shapes.
+giving an ideal steady-state border-LIF prediction of approximately **46.8 Hz** with the membrane parameters in Section 8.9.6. The experiment's **Test 180° turn** button reproduces this comparison in both arena shapes.
 
 **Guided worked example — construct the border-cell-like response one stage at a time.** Before using the full research laboratory below, try the five-stage robot navigation walkthrough. Switch between the **4 × 4 m square** and **2 m radius circle**, then follow **Explore → Sense → Project → Spike → Map**. Advance the robot one movement step at a time or take 25/250 steps at once. Set a **random seed** to replay the same exploratory route, or choose **New random path** to change the route. The same trajectory, 36 LiDAR rays, selected world wall, physical-unit LIF state and accumulated activity are carried through the stages. Stage 4 reveals the **160 ms membrane-voltage trace**, threshold, emitted spikes, injected current and expected steady-state rate; Stage 5 reveals the **actual occupancy-normalized firing-rate map**. This is a synthetic teaching construction, not experimentally recorded border cells or an SFN learning rule.
 

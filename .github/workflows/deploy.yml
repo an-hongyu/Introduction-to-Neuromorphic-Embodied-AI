@@ -44,6 +44,7 @@ jobs:
         run: |
           python tests/check_build.py
           python tests/check_spatial_merge.py
+          python tests/check_ieee_references.py
           python tools/build_exercise_center.py --check
       - name: Test border-cell numerical and staged models
         run: |

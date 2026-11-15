@@ -38,8 +38,13 @@ for name in ["hippocampal-circuit", "place-recordings", "grid-recordings",
              "head-direction", "border-recordings", "speed-recordings", "time-recordings"]:
     assert f"fig-spatial-{name}" in page.ids, f"Lost literature figure: {name}"
 assert sum("grid-place-interactive.html" in src for src in page.iframes) == 1
-assert sum("border-cell-maze.html" in src for src in page.iframes) == 1
-assert "(interactive-border-maze)=" in source
+assert sum("border-cell-maze.html" in src for src in page.iframes) == 0, "Chapter 4 should not embed a LiDAR robot lab"
+assert sum("border-cell-guided.html" in src for src in page.iframes) == 0
+assert "(interactive-border-maze)=" in source, "Retain old URL anchor as a pointer"
+assert "08-lidar-encoding.md#lidar-interactive-border-maze" in source
+assert "### 4.6.3 Turning LiDAR-driven" not in source
+assert "### 4.6.4 Interactive square and circular" not in source
+assert "### 4.6.2 Biological interpretation and experimental controls" in source
 assert "  bibliography:" not in config, "Legacy BibTeX block appends duplicate APA citations below the IEEE reference list"
 exercises = source.split("## 4.10 Exercises", 1)[1].split("## References", 1)[0]
 assert [int(n) for n in re.findall(r"^(\d+)\.", exercises, re.M)] == list(range(1, 17))

@@ -146,6 +146,66 @@
       worldBefore: worldA, worldAfter: worldB,
       rateBefore: lifRate(wallCurrent(worldA)), rateAfter: lifRate(wallCurrent(worldB))};
   }
+
+  // Seeded stochastic goal exploration for square and circular teaching arenas.
+  // Geometry and synthetic LiDAR provide the collision guard; spike rates do NOT steer the robot.
+  function createExplorer(shape, seed = 23) {
+    if (shape !== 'square' && shape !== 'circle') throw Error('Unknown arena');
+    if (!Number.isSafeInteger(seed) || seed < 1 || seed > 999999) throw Error('Seed must be an integer from 1 to 999999');
+    let randomState = seed >>> 0;
+    const random = () => { randomState = (Math.imul(1664525, randomState) + 1013904223) >>> 0; return randomState / 4294967296; };
+    return {shape, seed, x: 0, y: 0, heading: 2 * Math.PI * random() - Math.PI,
+      random, goal: null, age: 0, turnNoise: 0, steps: 0};
+  }
+  function chooseRandomGoal(e) {
+    for (let k = 0; k < 100; k++) {
+      let x, y;
+      if (e.random() < 0.48) {
+        if (e.shape === 'circle') {
+          const theta = 2 * Math.PI * e.random(), radius = 1.48 + 0.28 * e.random();
+          x = radius * Math.cos(theta); y = radius * Math.sin(theta);
+        } else {
+          const edge = Math.floor(4 * e.random()), side = (e.random() < .5 ? -1 : 1) * (1.46 + .30 * e.random());
+          const across = (2 * e.random() - 1) * 1.76;
+          x = edge % 2 ? across : side; y = edge % 2 ? side : across;
+        }
+      } else {
+        x = (2 * e.random() - 1) * 1.76;
+        y = (2 * e.random() - 1) * 1.76;
+      }
+      if (inside(x, y, e.shape, 0.20) && Math.hypot(x - e.x, y - e.y) > .65) {
+        e.goal = [x, y]; e.age = 0; return;
+      }
+    }
+    e.goal = [0, 0]; e.age = 0;
+  }
+  function exploreStep(e, stride = 0.107) {
+    if (!(stride > 0 && stride <= .107) || !Number.isFinite(stride)) throw Error('Invalid step length');
+    const distanceToGoal = e.goal ? Math.hypot(e.goal[0] - e.x, e.goal[1] - e.y) : 0;
+    if (!e.goal || distanceToGoal < .17 || e.age > 64) chooseRandomGoal(e);
+    const desired = Math.atan2(e.goal[1] - e.y, e.goal[0] - e.x);
+    e.turnNoise = clamp(.85 * e.turnNoise + (e.random() - .5) * .14, -.16, .16);
+    let heading = wrap(e.heading + clamp(.72 * wrap(desired - e.heading) + e.turnNoise, -.24, .24));
+    // Clearance is a simplified geometric point-robot guard, not measured chassis size.
+    if (rayDistance(e.shape, e.x, e.y, heading) < .34) {
+      const inward = Math.atan2(-e.y, -e.x);
+      heading = wrap(e.heading + clamp(wrap(inward - e.heading), -.45, .45));
+      e.goal = null;
+    }
+    let nextX = e.x + stride * Math.cos(heading);
+    let nextY = e.y + stride * Math.sin(heading);
+    if (!inside(nextX, nextY, e.shape, .15)) {
+      heading = Math.atan2(-e.y, -e.x);
+      nextX = e.x + stride * Math.cos(heading);
+      nextY = e.y + stride * Math.sin(heading);
+      e.goal = null;
+      if (!inside(nextX, nextY, e.shape, .15)) throw Error('No safe explorer step');
+    }
+    e.x = nextX; e.y = nextY; e.heading = heading; e.age++; e.steps++;
+    return {x:e.x, y:e.y, heading:e.heading};
+  }
+
+  // Historical raster/circle waypoint generator; retained only for legacy numerical examples.
   function waypoints(shape) {
     const p = [];
     if (shape === 'square') {
@@ -170,5 +230,5 @@
   }
   return {R, SECTORS, EL, THRESHOLD, scan, inside, rayDistance, trueWallDistance,
     estimateWallDistance, sensorCurrent, wallCurrent, lifRate, newLIF, stepLIF,
-    probe, waypoints, wrap, clamp, WALL_ANGLES};
+    probe, waypoints, createExplorer, exploreStep, wrap, clamp, WALL_ANGLES};
 });

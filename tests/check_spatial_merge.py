@@ -55,4 +55,4 @@ legacy = (SITE / "chapters" / "grid-to-place" / "index.html").read_text(encoding
 assert "window.location.replace" in legacy
 assert "#grid-place-readout" in legacy
 assert "grid-place-live-example" in legacy
-print("Spatial merge passed: all cell models, seven literature figures, two interactive apps (grid/place and border maze), sixteen exercises/solutions, no auto-generated duplicate bibliography, and legacy redirects.")
+print("Spatial chapter passed: all biological cell classes, seven literature figures, grid/place app, biological border section with legacy pointer, 16 exercises/solutions, and legacy grid redirects.")

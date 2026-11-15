@@ -15,7 +15,7 @@ EXPECTED = {
     "04-hebbian-learning.md": 9,
     "06-visual-perception.md": 3,
     "07-inertial-sensing.md": 1,
-    "08-lidar-encoding.md": 6,
+    "08-lidar-encoding.md": 5,
     "09-nengo-ros-gazebo.md": 3,
     "10-associative-learning-robot.md": 1,
     "computational-neuron-models-lab.md": 3,

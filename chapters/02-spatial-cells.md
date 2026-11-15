@@ -4,7 +4,7 @@ title: "Chapter 4 · Spatial Cells and Their Models"
 
 ## 4.1 Learning Objectives
 
-A navigation system must represent more than its current coordinates. It needs to distinguish location, orientation, movement, environmental boundaries, and the order of events. This chapter introduces the **hippocampal–entorhinal system** and six experimentally identified response classes: **place cells, grid cells, head-direction cells, border cells, speed cells, and time cells**. The last two supply movement and temporal information rather than location alone. Each cell type is introduced together with its mathematical model and interpretation. The place-cell section contains the grid-to-place readout and interactive experiment; the grid-cell section derives the input fields used by that readout.
+A navigation system must represent more than its current coordinates. It needs to distinguish location, orientation, movement, environmental boundaries, and the order of events. This chapter introduces the **hippocampal–entorhinal system** and six experimentally identified response classes: **place cells, grid cells, head-direction cells, border cells, speed cells, and time cells**. The last two supply movement and temporal information rather than location alone. Most response classes are paired with interpretable mathematical models, while **Section 4.6 emphasizes biological border-cell observations and evidence**; its LiDAR-to-LIF engineering model and interactive robot demonstrations are in Chapter 8. The place-cell section contains the grid-to-place readout and interactive experiment; the grid-cell section derives the input fields used by that readout.
 
 By the end of this chapter, you should be able to:
 
@@ -338,7 +338,7 @@ For a robot, define body yaw, camera/LiDAR mounting angle, and velocity directio
 
 (border-cell-models)=
 
-## 4.6 Border cells and their models
+## 4.6 Border cells: biological signatures
 
 ### 4.6.1 Firing near environmental limits
 
@@ -362,7 +362,7 @@ When interpreting a border-cell rate map, examine **occupancy-normalized activit
 
 (interactive-border-maze)=
 
-**Engineering model and interactive maze laboratory:** The selected-wall distance equations, LiDAR coordinate transformations, LIF calculations, worked rotation example, and both square/circular robot demonstrations have moved to [Chapter 8, Sections 8.9.6–8.9.7](08-lidar-encoding.md#lidar-interactive-border-maze). This pointer also preserves the former link to the interactive lab.
+**Engineering model and interactive maze laboratory:** The selected-wall distance equations, LiDAR coordinate transformations, LIF calculations, worked rotation example, and both square/circular robot demonstrations have moved to [Chapter 8, Section 8.9.6](08-lidar-encoding.md#lidar-complete-parameter-derivation) and [Section 8.9.7](08-lidar-encoding.md#lidar-interactive-border-maze). This pointer also preserves the former link to the interactive lab.
 
 ## 4.7 Speed cells, time cells, and their models
 

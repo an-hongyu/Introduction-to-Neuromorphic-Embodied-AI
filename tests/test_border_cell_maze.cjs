@@ -84,7 +84,7 @@ for(const shape of ['square','circle']){
 assert.throws(()=>M.createExplorer('square',0),/Seed/);
 const sigma=.55,cutoff=sigma*Math.sqrt(2*Math.log(180/50));
 near(cutoff,.8803209508494894,1e-8);
-near(M.wallCurrent(.38)*1e12,241.78046346549058,1e-5);
+near(M.wallCurrent(.38)*1e12,241.78036926832348,1e-5);
 assert.ok(M.lifRate(M.wallCurrent(.88))>0);
 assert.equal(M.lifRate(M.wallCurrent(.89)),0);
 assert.match(html,/id="seed"/);

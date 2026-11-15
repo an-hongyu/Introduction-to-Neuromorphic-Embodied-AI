@@ -877,7 +877,7 @@ For a reproducible experiment, retain the raw scan and timestamps, mounting tran
 
 Read lecture slides 2-9 for ranging and scanning; 12-19 for wavelength and conventional scanning hardware; 22-29 for survey applications and returns; 30-35 for parameters and point clouds; and 36-44 for strengths and failure modes [[1]](#lidar-ref-1). The embedded videos preserve the source lecture links, while their adjacent questions are teaching prompts rather than transcripts.
 
-For implementation, read the complete `LaserScan` definition [[2]](#lidar-ref-2). For additional context, consult the MathWorks overview [[3]](#lidar-ref-3), NEON's waveform tutorial [[4]](#lidar-ref-4), and FDA laser guidance [[4]](#lidar-ref-4). The source PDF and PPTX share 56 slide positions; the filename says Topic 6 while the title slide says Topic 5. Citations in this chapter use **1-based slide order**, not the offset printed footer.
+For implementation, read the complete `LaserScan` definition [[2]](#lidar-ref-2). For additional context, consult the MathWorks overview [[3]](#lidar-ref-3), NEON's waveform tutorial [[4]](#lidar-ref-4), and FDA laser guidance [[5]](#lidar-ref-5). The source PDF and PPTX share 56 slide positions; the filename says Topic 6 while the title slide says Topic 5. Citations in this chapter use **1-based slide order**, not the offset printed footer.
 
 Continue to [Chapter 9](09-nengo-ros-gazebo.md) for simulator integration.
 

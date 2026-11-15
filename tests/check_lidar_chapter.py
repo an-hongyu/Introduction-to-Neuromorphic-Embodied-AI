@@ -49,9 +49,23 @@ assert len(re.findall(r'^\d+\. ',answers,re.M))==16
 assert '(lidar-solutions)=' in solutions
 ns={'__name__':'__chapter8_examples__'}
 blocks=re.findall(r'```python\n(.*?)\n```',s,re.S)
-assert len(blocks)==2
+assert len(blocks)==3
 for i,code in enumerate(blocks):exec(compile(code,f'Chapter8-example-{i+1}','exec'),ns)
-encode=ns['sector_encode'];sample=ns['poisson_bin_counts']
+encode=ns['sector_encode'];sample=ns['poisson_bin_counts'];lif=ns['lidar_lif_spikes']
+# Independently verify the new distance -> current -> LIF spikes teaching example.
+test_d=np.array([0.5,1.5,3.0,4.5,np.nan])
+test_valid=np.isfinite(test_d)
+test_spikes,test_rates,test_pA=lif(test_d,test_valid)
+assert np.allclose(test_pA,[262,226,172,118,0])
+assert np.allclose(test_spikes,[52,42,23,0,0],atol=1)
+assert np.array_equal(test_rates,test_spikes)  # A one-second window
+assert test_rates[0]>test_rates[1]>test_rates[2]>test_rates[3]
+assert test_rates[3]==0 and test_rates[4]==0 and not test_valid[4]
+for bad in [lambda:lif([np.nan],[True]),lambda:lif([6.0],[True]),lambda:lif([1.0],[True],dt_s=-1)]:
+    try:bad()
+    except ValueError:pass
+    else:raise AssertionError('Invalid LIF distance encoding input was accepted')
+
 d,r,m=encode([.8,3,np.nan,5],np.deg2rad([0,90,0,179]))
 assert np.array_equal(np.flatnonzero(m),[18,27,35])
 assert np.allclose(d[m],[.8,3,5]) and np.allclose(r[m],[42.8,23,5])
@@ -124,4 +138,4 @@ assert 'lidar-solutions' in q.ids
 exercise_links = [x for x in q.links if 'lidar-encoding' in x and 'exercises' in x]
 assert exercise_links
 assert all(unquote(urlsplit(x).fragment) in p.ids for x in exercise_links)
-print('Chapter 8 verified: 17 source static figure groups, two GIFs, one teaching video, 16 exercises/answers, neural encoder examples, and no dataset figures in the published chapter.')
+print('Chapter 8 verified: source figures/videos, 16 exercises/answers, 3 executed code samples including physical-unit LiDAR-to-LIF, and no dataset figures.')

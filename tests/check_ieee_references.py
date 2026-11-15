@@ -41,7 +41,7 @@ for filename, expected in EXPECTED.items():
         assert "Art. no. no." not in entry and ".[Online]" not in entry, (filename, n)
         assert not re.search(r"doi:\s+10\.", entry), (filename, n, "unlinked DOI")
         if "doi:" in entry:
-            assert re.search(r"doi: \[10\.[^]]+\]\(https://doi\.org/[^)]+\)", entry), (filename, n)
+            assert re.search(r"doi: \[10\.[^]]+\]\(https://(?:doi\.org/|pubmed\.ncbi\.nlm\.nih\.gov/)[^)]+\)", entry), (filename, n)
         if "[Online]" in entry:
             assert "[Online]. Available:" in entry, (filename, n)
         # Organizational authors (ROS 2, MathWorks, FDA etc.) are exempt.

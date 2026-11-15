@@ -41,6 +41,7 @@ assert sum("grid-place-interactive.html" in src for src in page.iframes) == 1
 assert sum("border-cell-maze.html" in src for src in page.iframes) == 0, "Chapter 4 should not embed a LiDAR robot lab"
 assert sum("border-cell-guided.html" in src for src in page.iframes) == 0
 assert "(interactive-border-maze)=" in source, "Retain old URL anchor as a pointer"
+assert "interactive-border-maze" in page.ids, "Old Chapter 4 bookmark must resolve to the moved-model pointer"
 assert "08-lidar-encoding.md#lidar-interactive-border-maze" in source
 assert "### 4.6.3 Turning LiDAR-driven" not in source
 assert "### 4.6.4 Interactive square and circular" not in source

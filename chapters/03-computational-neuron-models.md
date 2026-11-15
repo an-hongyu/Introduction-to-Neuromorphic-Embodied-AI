@@ -554,7 +554,7 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 
 (models-ref-5)=
 
-[5] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, sec. 1.3, doi: [10.1007/978-3-319-00861-5](https://doi.org/10.1007/978-3-319-00861-5). [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
+[5] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, sec. 1.3, doi: [10.1007/978-3-319-00861-5](https://doi.org/10.1007/978-3-319-00861-5). [Online]. Available: [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
 
 
 ## Additional Reading Materials

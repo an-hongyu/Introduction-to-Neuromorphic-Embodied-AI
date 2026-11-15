@@ -923,29 +923,30 @@ Continue to [Chapter 9](09-nengo-ros-gazebo.md) for simulator integration.
 
 [Worked solutions](solutions-embodied.md#lidar-solutions) are provided at the end of the book.
 
+**Source provenance (not part of the bibliographic entries).** Reference [1] is based on the author-supplied PowerPoint *Neuromorphic Robotic Systems-Topic 6 Introduction to LIDAR.pptx* and its matching PDF (56 slides; publication date not specified). Source images, animation frames, video identifiers, and original credits remain documented in `assets/lidar-lecture/manifest.json`. The older LiDAR Toolbox URL in the lecture redirects to the updated MathWorks overview cited in [3].
+
 ## References
 
 (lidar-ref-1)=
 
-[1] Hongyu An, *Neuromorphic Robotic Systems: Introduction to LiDAR*, course lecture slides, Department of Electrical and Computer Engineering, Michigan Technological University, supplied files "Neuromorphic Robotic Systems-Topic 6 Introduction to LIDAR.pptx" and the matching PDF, 56 slides. Publication date not specified. Original images, animation frames, video identifiers, and source credits are recorded in the repository's `assets/lidar-lecture/manifest.json`.
+[1] H. An, “Neuromorphic Robotic Systems: Introduction to LiDAR,” course lecture slides, Dept. Electr. Comput. Eng., Michigan Technological University, Houghton, MI, USA, n.d.
 
 (lidar-ref-2)=
 
-[2] ROS 2 contributors, "LaserScan message," *sensor_msgs*, Jazzy distribution. [Official message definition](https://github.com/ros2/common_interfaces/blob/jazzy/sensor_msgs/msg/LaserScan.msg).
+[2] ROS 2 contributors, “LaserScan message,” *sensor_msgs*, ROS 2 Jazzy. [Online]. Available: [Official message definition](https://github.com/ros2/common_interfaces/blob/jazzy/sensor_msgs/msg/LaserScan.msg).
 
 (lidar-ref-3)=
 
-[3] The MathWorks, Inc., "Introduction to Lidar," *MATLAB and Simulink Documentation*. [Official overview](https://www.mathworks.com/help/pointcloud/gs/lidar-processing-overview.html). Accessed Nov. 13, 2026. The lecture's older LiDAR Toolbox URL redirects to this overview.
+[3] The MathWorks, Inc., “Introduction to Lidar,” *MATLAB and Simulink Documentation*. [Online]. Available: [Official overview](https://www.mathworks.com/help/pointcloud/gs/lidar-processing-overview.html). Accessed: Nov. 13, 2026.
 
 (lidar-ref-4)=
 
-[4] Xiaosheng Zhang, Kyungmok Kwon, Johannes Henriksson, Jianheng Luo, and Ming C. Wu, "A large-scale microelectromechanical-systems-based silicon photonics LiDAR," *Nature*, vol. 603, no. 7900, pp. 253-258, 2022, doi: 10.1038/s41586-022-04415-8. [Open-access article](https://pmc.ncbi.nlm.nih.gov/articles/PMC8907073/).
+[4] X. Zhang, K. Kwon, J. Henriksson, J. Luo, and M. C. Wu, “A large-scale microelectromechanical-systems-based silicon photonics LiDAR,” *Nature*, vol. 603, no. 7900, pp. 253–258, 2022, doi: [10.1038/s41586-022-04415-8](https://pmc.ncbi.nlm.nih.gov/articles/PMC8907073/).
 
 (lidar-ref-5)=
 
-[5] Leah A. Wasser, "The Basics of LiDAR - Light Detection and Ranging - Remote Sensing," *National Ecological Observatory Network*. [Tutorial linked by the lecture](https://www.neonscience.org/resources/learning-hub/tutorials/lidar-basics). Accessed Nov. 13, 2026.
+[5] L. A. Wasser, “The Basics of LiDAR - Light Detection and Ranging - Remote Sensing,” *National Ecological Observatory Network*. [Online]. Available: [NEON LiDAR tutorial](https://www.neonscience.org/resources/learning-hub/tutorials/lidar-basics). Accessed: Nov. 13, 2026.
 
 (lidar-ref-6)=
 
-[6] U.S. Food and Drug Administration, "Frequently Asked Questions About Lasers." [Official safety guidance](https://www.fda.gov/radiation-emitting-products/laser-products-and-instruments/frequently-asked-questions-about-lasers). Accessed Nov. 13, 2026.
-
+[6] U.S. Food and Drug Administration, “Frequently Asked Questions About Lasers.” [Online]. Available: [FDA safety guidance](https://www.fda.gov/radiation-emitting-products/laser-products-and-instruments/frequently-asked-questions-about-lasers). Accessed: Nov. 13, 2026.

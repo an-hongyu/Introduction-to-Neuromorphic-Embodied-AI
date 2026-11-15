@@ -91,15 +91,15 @@ Save sensor features, model parameters, random seed, software versions, spikes, 
 
 (nengo-ref-1)=
 
-[1] Nengo developers, “Frontend API,” ver. 4.0.0. [API documentation](https://www.nengo.ai/nengo/v4.0.0/frontend-api.html).
+[1] Nengo developers, “Frontend API,” ver. 4.0.0. [Online]. Available: [API documentation](https://www.nengo.ai/nengo/v4.0.0/frontend-api.html).
 
 (nengo-ref-2)=
 
-[2] Gazebo contributors, “Installing Gazebo with ROS,” *Gazebo Harmonic documentation*. [Supported pairings](https://gazebosim.org/docs/harmonic/ros_installation/).
+[2] Gazebo contributors, “Installing Gazebo with ROS,” *Gazebo Harmonic documentation*. [Online]. Available: [Supported pairings](https://gazebosim.org/docs/harmonic/ros_installation/).
 
 (nengo-ref-3)=
 
-[3] ROS 2 contributors, *common_interfaces*, Jazzy branch. [Official message definitions](https://github.com/ros2/common_interfaces/tree/jazzy).
+[3] ROS 2 contributors, *common_interfaces*, Jazzy branch. [Online]. Available: [Official message definitions](https://github.com/ros2/common_interfaces/tree/jazzy).
 
 ## Additional Reading Materials
 

@@ -10,6 +10,7 @@ subprocess.run([sys.executable, str(Path(__file__).with_name('check_visual_slide
 
 subprocess.run(['node', str(Path(__file__).with_name('test_lif_interactive.cjs'))], check=True)
 subprocess.run(['node', str(Path(__file__).with_name('test_grid_place_interactive.cjs'))], check=True)
+subprocess.run(['node', str(Path(__file__).with_name('test_border_cell_maze.cjs'))], check=True)
 
 root = Path(__file__).resolve().parents[1] / '_build/html'
 base = '/Introduction-to-Neuromorphic-Embodied-AI'
@@ -29,6 +30,9 @@ assert len(list(root.rglob('*.png'))) >= 17, 'Expected at least seventeen notebo
 assert (root / 'lif-interactive.html').is_file(), 'Missing embedded LIF application'
 assert 'Interactive LIF neuron explorer' in all_html, 'Missing LIF iframe in chapter'
 assert (root / 'grid-place-interactive.html').is_file(), 'Missing grid/place interactive asset'
+assert (root / 'border-cell-maze.html').is_file(), 'Missing border-cell robot maze HTML'
+assert (root / 'border-cell-model.js').is_file(), 'Missing border-cell maze model logic'
+assert 'Interactive square and circular mazes' in all_html, 'Missing guided border-cell maze in Chapter 4'
 assert 'Interactive grid cell to place cell mapping' in all_html, 'Missing grid/place chapter iframe'
 assert 'Grid Cells and Grid-to-Place Mapping' in all_html, 'Missing detailed grid/place chapter'
 

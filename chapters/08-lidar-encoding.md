@@ -17,6 +17,7 @@ By the end of this chapter, you should be able to:
 - Read a point cloud while keeping geometry, colorization, semantic labels, and acquisition time separate.
 - Explain how surface properties, weather, and motion can corrupt a scan.
 - Compress valid planar ranges into 36 sectors of 10 degrees each and generate a declared neural representation.
+- Explain and simulate LiDAR-to-LIF current encoding, including the case in which a weak valid range stays below spike threshold.
 - Preserve missing-data masks and distinguish body-relative sensory activity from world-relative spatial-cell models.
 
 ## 8.2 What LiDAR measures
@@ -500,6 +501,114 @@ assert np.all(counts[~preserved_mask] == 0)
 
 A physical-unit LIF implementation instead requires a chosen current mapping and the membrane, threshold, reset, and refractory parameters from [Chapter 2](03-computational-neuron-models.md). Setting a numerical rate to 40 Hz does not imply that an arbitrary current of 40 pA produces 40 Hz. Compare count, first-spike latency, and steady firing rate before selecting a motor threshold.
 
+### 8.9.5 LiDAR to LIF: nearer boundaries produce more spikes
+
+The preceding rate encoder **prescribes** firing rates; an actual **leaky integrate-and-fire (LIF)** model instead integrates a current determined by the measured distance. For each valid LiDAR sector $k$, choose the teaching input-current map
+
+$
+I_k(d_k)=I_{\mathrm{base}}+
+G\left(1-\frac{d_k}{d_{\max}}\right),
+\qquad 0\leq d_k\leq d_{\max}.
+$
+
+Here $d_k$ and $d_{\max}$ are in meters, $I_{\mathrm{base}}$ and $G$ are in amperes, and a smaller distance gives a larger current. If sector $k$ is unobserved ($m_k=0$), its distance is **unknown** rather than a distant wall; the model retains the validity mask and does not assign it a fabricated measurement.
+
+The membrane integrates this current according to the LIF equation introduced in Chapter 2:
+
+$
+C_m\frac{dV_k}{dt}=-g_L(V_k-E_L)+I_k,
+\qquad \tau_m=\frac{C_m}{g_L}.
+$
+
+A spike is emitted at $V_k\geq V_{\mathrm{th}}$; the voltage then resets to $V_{\mathrm{reset}}$ and is held for a refractory period $t_{\mathrm{ref}}$. For this worked example, use $C_m=200$ pF, $g_L=10$ nS, $E_L=V_{\mathrm{reset}}=-65$ mV, $V_{\mathrm{th}}=-50$ mV, $t_{\mathrm{ref}}=2$ ms, $I_{\mathrm{base}}=100$ pA, $G=180$ pA, and $d_{\max}=5$ m. Thus $\tau_m=20$ ms and the threshold for sustained firing with constant current is $g_L(V_{\mathrm{th}}-E_L)=150$ pA.
+
+Let $V_\infty=E_L+I_k/g_L$. When $V_\infty>V_{\mathrm{th}}$, the constant-input LIF firing rate (including the refractory time) is
+
+$
+f_{\mathrm{LIF}}(d_k)=
+\left[
+t_{\mathrm{ref}}+
+\tau_m\ln\left(\frac{V_\infty-V_{\mathrm{reset}}}
+{V_\infty-V_{\mathrm{th}}}\right)
+\right]^{-1}.
+$
+
+If $V_\infty\leq V_{\mathrm{th}}$, the steady firing rate is **zero**.
+
+**Numerical example.** These are calculated predictions from a synthetic LIF model, not neural recordings or measured robot results.
+
+| Valid distance | Input current | Predicted LIF firing rate |
+|---|---:|---:|
+| 0.5 m | 262 pA | 52.6 Hz |
+| 1.5 m | 226 pA | 42.0 Hz |
+| 3.0 m | 172 pA | 23.2 Hz |
+| 4.5 m | 118 pA | 0 Hz (below threshold) |
+
+This response is **nonlinear**. It does not equal the earlier *prescribed* linear 5–50 Hz target, nor does a chosen numerical rate automatically equal a current in pA.
+
+```python
+import numpy as np
+
+def lidar_lif_spikes(distance_m, valid_mask, duration_s=1.0, dt_s=1e-4):
+    """Distance -> input current -> LIF spikes for a fixed planar scan.
+
+    Returns counts, observed Hz, and input currents (pA).
+    A silent invalid sector still means unknown distance.
+    """
+    d = np.asarray(distance_m, dtype=float)
+    valid = np.asarray(valid_mask, dtype=bool)
+    if d.ndim != 1 or d.shape != valid.shape:
+        raise ValueError("Require matching one-dimensional arrays")
+    if np.any(valid & (~np.isfinite(d) | (d < 0) | (d > 5.0))):
+        raise ValueError("Valid ranges must be finite and within 0–5 m")
+    if not (np.isfinite(dt_s) and np.isfinite(duration_s)
+            and dt_s > 0 and duration_s > 0):
+        raise ValueError("Duration and dt must be positive and finite")
+    n_steps = int(round(duration_s / dt_s))
+    if n_steps < 1 or not np.isclose(n_steps * dt_s, duration_s):
+        raise ValueError("Duration must be a multiple of dt")
+
+    # SI units: F, S, V, A, and seconds
+    C_m, g_L = 200e-12, 10e-9
+    E_L, V_th, V_reset = -65e-3, -50e-3, -65e-3
+    decay = np.exp(-dt_s / (C_m / g_L))
+    current = np.zeros(d.size)
+    current[valid] = (100 + 180 * (1 - d[valid] / 5.0)) * 1e-12
+
+    V = np.full(d.size, E_L)
+    refractory = np.zeros(d.size, dtype=int)
+    spikes = np.zeros(d.size, dtype=int)
+    hold = int(np.ceil(2e-3 / dt_s))
+
+    for _ in range(n_steps):
+        active = valid & (refractory == 0)
+        V[active] = (E_L + (V[active] - E_L) * decay
+                     + (current[active] / g_L) * (1 - decay))
+        refractory[refractory > 0] -= 1
+        firing = active & (V >= V_th)
+        spikes[firing] += 1
+        V[firing] = V_reset
+        refractory[firing] = hold
+
+    return spikes, spikes / duration_s, current * 1e12
+
+
+d = np.array([0.5, 1.5, 3.0, 4.5, np.nan])
+valid_mask = np.isfinite(d)
+counts, measured_hz, currents_pA = lidar_lif_spikes(d, valid_mask)
+for i in range(d.size):
+    print(f"d={d[i]:4.1f} m, valid={valid_mask[i]}, "
+          f"I={currents_pA[i]:.0f} pA, "
+          f"spikes={counts[i]}, rate={measured_hz[i]:.1f} Hz")
+assert measured_hz[0] > measured_hz[1] > measured_hz[2] > measured_hz[3]
+assert measured_hz[3] == 0 and not valid_mask[4]
+
+# Apply to the 36-sector scan from Section 8.9.3:
+# counts36, hz36, pA36 = lidar_lif_spikes(distance, valid)
+```
+
+**From proximity to a border-cell-like response.** This 36-neuron implementation responds to *nearby LiDAR returns in body-relative directions*; it is an **egocentric proximity sensor**, not yet a biological border cell. For an environment-related border representation, transform observations into the world frame, identify a particular boundary, and drive a LIF neuron with its distance to that boundary. The response should remain associated with the same wall even when the robot changes heading. The next section discusses coordinate transforms, and [Chapter 4, Border Cells and Their Models](02-spatial-cells.md#border-cell-models) gives the corresponding boundary-distance model.
+
 ## 8.10 Connect the encoder to spatial representations
 
 For planar robot pose $(x_r,y_r,\psi)$ and a sensor aligned at the robot origin, a valid ray endpoint is
@@ -520,7 +629,7 @@ $$
 
 $T_{bs}$ maps sensor coordinates into the body frame, and $T_{wb}(t_i)$ maps body coordinates into the world at ray time $t_i$. The transform is a modeling extension that makes the lecture's position, attitude, and timing requirements explicit.
 
-A **36-channel sensory encoder is not itself a place-cell, grid-cell, or border-cell model**. Linking it to [Chapter 4: Spatial Cells and Their Models](02-spatial-cells.md) needs an explicit representation and test. For example, does a candidate border response stay tied to the same world boundary when the robot changes heading? Pose errors and scan distortion can imitate a changing spatial representation.
+A **36-channel sensory encoder, even when implemented with LIF neurons, is not itself a place-cell, grid-cell, or biological border-cell model**. Linking it to [Chapter 4: Spatial Cells and Their Models](02-spatial-cells.md) needs an explicit representation and test. For example, does a candidate border response stay tied to the same world boundary when the robot changes heading? Pose errors and scan distortion can imitate a changing spatial representation.
 
 For a reproducible experiment, retain the raw scan and timestamps, mounting transform, validity mask, sector aggregation rule, prescribed activity, emitted events, and motor command. First test the sensor-to-neural mapping in replay; only then judge learning or navigation. A controller receiving simulator ground-truth object labels instead of the scan is solving a different problem.
 

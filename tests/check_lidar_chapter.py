@@ -109,6 +109,9 @@ assert page.is_file()
 p=Page();p.feed(page.read_text())
 assert {'85-exercises','id-85-exercises'} & p.ids
 assert 'fig-sensor-lidar' in p.ids
+assert 'lidar-interactive-border-maze' in p.ids
+assert sum('border-cell-guided.html' in url for url in p.frames)==1
+assert sum('border-cell-maze.html' in url for url in p.frames)==1
 base='/Introduction-to-Neuromorphic-Embodied-AI'
 for rec in manifest['images']:
     key=Path(rec['file']).stem

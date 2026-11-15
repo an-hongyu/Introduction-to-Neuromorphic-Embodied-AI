@@ -550,7 +550,7 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 
 (models-ref-3)=
 
-[4] R. Brette and W. Gerstner, “Adaptive exponential integrate-and-fire model as an effective description of neuronal activity,” *J. Neurophysiol.*, vol. 94, no. 5, pp. 3637–3642, 2005, doi: [10.1152/jn.00686.2005](https://doi.org/10.1152/jn.00686.2005).
+[4] R. Brette and W. Gerstner, “Adaptive exponential integrate-and-fire model as an effective description of neuronal activity,” *J. Neurophysiol.*, vol. 94, no. 5, pp. 3637–3642, 2005, doi: [10.1152/jn.00686.2005](https://pubmed.ncbi.nlm.nih.gov/16014787/).
 
 (models-ref-5)=
 

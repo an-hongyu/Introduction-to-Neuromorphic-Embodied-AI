@@ -106,7 +106,7 @@
     return 1 / (REFRACTORY + TAU * Math.log((infinityV - RESET) / (infinityV - THRESHOLD)));
   }
   function newLIF() { return {voltage: EL, refractory: 0, spikes: 0}; }
-  function stepLIF(neuron, currentA, duration = 0.16, timestep = 0.001) {
+  function stepLIF(neuron, currentA, duration = 0.16, timestep = 0.001, onSample = null) {
     if (!Number.isFinite(duration) || !Number.isFinite(timestep) || duration <= 0 || timestep <= 0) throw Error('Invalid LIF timing');
     const n = Math.round(duration / timestep);
     if (!Number.isFinite(currentA) || currentA < 0) throw Error('Invalid LIF current');
@@ -116,15 +116,18 @@
       if (neuron.refractory > 0) {
         neuron.refractory = Math.max(0, neuron.refractory - timestep);
         neuron.voltage = RESET;
+        if (onSample) onSample(neuron.voltage, false, (i + 1) * timestep);
         continue;
       }
       neuron.voltage = EL + (neuron.voltage - EL) * alpha + (currentA / G_LEAK) * (1 - alpha);
-      if (neuron.voltage >= THRESHOLD) {
+      const fired = neuron.voltage >= THRESHOLD;
+      if (fired) {
         spikes++;
         neuron.spikes++;
         neuron.voltage = RESET;
         neuron.refractory = REFRACTORY;
       }
+      if (onSample) onSample(neuron.voltage, fired, (i + 1) * timestep);
     }
     return spikes;
   }

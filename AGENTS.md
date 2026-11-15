@@ -10,7 +10,7 @@ This repository belongs to the SFN research project.
 - Pull requests build and test the book. Merging to `main` automatically deploys GitHub Pages.
 - Do not change other repositories.
 
-- References throughout chapters, notebooks, interactive pages, and generators use one paragraph per numbered entry, full given names and surnames (retain published middle initials), and full journal titles. Keep IEEE-style bibliographic ordering and linked DOI/source records.
+- Use **IEEE reference formatting throughout the textbook**: numbered `[n]` entries, given-name initials before surnames (preserve middle/hyphenated initials), article/page titles in quotation marks, italicized book/journal names, standard journal abbreviations, `vol.`, `no.`, `pp.`/`Art. no.`, year, and direct linked `doi:` values when known. Websites use `[Online]. Available:` and verified access dates only when supplied. Preserve existing chapter-local numbering, `(chapter-ref-n)=` anchors, provenance/attribution notes, and relevant original source URLs; do not fabricate missing bibliographic fields.
 - Foundation order: Chapter 1 Neurons and Synapses; Chapter 2 Computational Models of Neurons; Chapter 3 Hebbian Learning and Synaptic Plasticity; Chapter 4 Spatial Cells and Their Models. Source filenames are stable for existing links.
 - Keep each spatial cell's model next to its biological explanation in Chapter 4. The former separate Spatial Cell Models navigation group is intentionally removed. Preserve the grid-to-place legacy route and its fragment redirects, but do not restore a duplicate model chapter. Executable laboratories remain separately accessible.
 

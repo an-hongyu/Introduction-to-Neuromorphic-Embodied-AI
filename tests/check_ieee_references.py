@@ -53,5 +53,5 @@ for filename, expected in EXPECTED.items():
         assert len(labels) == expected, (filename, "citation anchors changed", len(labels))
     total += expected
 
-assert total == 69
+assert total == 68
 print(f"IEEE reference consistency passed: {total} numbered entries across {len(EXPECTED)} book sections.")

@@ -125,26 +125,6 @@ A fixed-direction measurement reports distance along a particular line of sight.
 **Mechanical scanning and multiple elevation channels.** The rotating mechanism and the separate elevation channels sample different directions. Source: lecture slide(s) 15, 18 [[1]](#lidar-ref-1). The multichannel illustration identifies a Hesai device.
 ```
 
-The lecture also introduces two **chip-scale beam-steering approaches**. The silicon-photonic system illustrated below uses MEMS-actuated optical switches to select emission directions; the phased-array animation instead illustrates steering by changing the relative phase across emitters. These approaches differ in their physical mechanisms, even though both aim to direct light without a conventional spinning scanner [[1]](#lidar-ref-1), slides 20–21; [[4]](#lidar-ref-4).
-
-```{figure} ../assets/lidar-lecture/silicon-photonics-lidar.png
-:label: fig-lidar-silicon-photonics-lidar
-:alt: Schematic and hardware illustration of a MEMS optical-switch-based silicon-photonic LiDAR
-:width: 100%
-
-**Silicon-photonic optical switching.** The illustrated MEMS optical-switch array selects beam directions. Source: lecture slides 20–21; Zhang *et al.*, *Nature*, 2022 [[4]](#lidar-ref-4).
-```
-
-```{figure} ../assets/lidar-lecture/phased-array-animation.gif
-:label: fig-lidar-phased-array-animation
-:alt: Animated optical phased-array illustration in which changing relative phases steers the beam
-:width: 50%
-
-**Phased-array beam steering.** The original lecture animation shows how phase relationships can change an emitted beam's direction. Source: lecture slide 21 [[1]](#lidar-ref-1).
-```
-
-Do not confuse the illustrated **hardware channels** with the **36 neural channels** used later. A hardware channel may correspond to an elevation beam; our neural channel corresponds to one selected 10-degree planar sector. A single planar scanner can supply all 36 neural inputs.
-
 ## 8.5 Survey applications, intensity, and multiple returns
 
 ### 8.5.1 Airborne, terrestrial, and mobile systems
@@ -171,7 +151,7 @@ Do not map point-cloud display colors directly to neural firing rates without re
 
 ### 8.5.3 Why a pulse can have multiple returns
 
-A beam footprint can encounter leaves, branches, and ground at different depths. Some light returns from an upper surface while other light passes through gaps and returns later. The lecture illustrates the resulting peaks and discretized returns [[1]](#lidar-ref-1), slides 25-27; its linked NEON tutorial explains the same waveform interpretation [[5]](#lidar-ref-5).
+A beam footprint can encounter leaves, branches, and ground at different depths. Some light returns from an upper surface while other light passes through gaps and returns later. The lecture illustrates the resulting peaks and discretized returns [[1]](#lidar-ref-1), slides 25-27; its linked NEON tutorial explains the same waveform interpretation [[4]](#lidar-ref-4).
 
 ```{figure} ../assets/lidar-lecture/multiple-return-waveforms.png
 :label: fig-lidar-multiple-return-waveforms
@@ -265,7 +245,7 @@ The short-, medium-, and long-range categories on slide 33 are descriptive lectu
 
 Slides 12-14 compare wavelength groups and discuss repetition rate, detection, and eye safety. They motivate asking how wavelength interacts with detector technology and the environment, but their "eye-safe" wording is not a safety certification for a complete device [[1]](#lidar-ref-1).
 
-**Safety clarification.** Wavelength or visible brightness alone does not establish safe exposure. Use the instrument's specified hazard class, manufacturer instructions, and applicable laboratory safety procedures; do not look into a laser beam or defeat its protective features. This qualification follows FDA laser-safety guidance rather than the slide's wavelength-only shorthand [[6]](#lidar-ref-6).
+**Safety clarification.** Wavelength or visible brightness alone does not establish safe exposure. Use the instrument's specified hazard class, manufacturer instructions, and applicable laboratory safety procedures; do not look into a laser beam or defeat its protective features. This qualification follows FDA laser-safety guidance rather than the slide's wavelength-only shorthand [[5]](#lidar-ref-5).
 
 For the simulated encoder below, no real laser is operated. Simulating a short range or increasing a neural firing-rate parameter does not authorize changing a physical laser's power.
 
@@ -895,9 +875,9 @@ For a reproducible experiment, retain the raw scan and timestamps, mounting tran
 
 ## 8.11 Additional Reading Materials
 
-Read lecture slides 2-9 for ranging and scanning; 12-21 for wavelength and hardware; 22-29 for survey applications and returns; 30-35 for parameters and point clouds; and 36-44 for strengths and failure modes [[1]](#lidar-ref-1). The embedded videos preserve the source lecture links, while their adjacent questions are teaching prompts rather than transcripts.
+Read lecture slides 2-9 for ranging and scanning; 12-19 for wavelength and conventional scanning hardware; 22-29 for survey applications and returns; 30-35 for parameters and point clouds; and 36-44 for strengths and failure modes [[1]](#lidar-ref-1). The embedded videos preserve the source lecture links, while their adjacent questions are teaching prompts rather than transcripts.
 
-For implementation, read the complete `LaserScan` definition [[2]](#lidar-ref-2). For the specific clarifications used here, consult the MathWorks overview, the cited silicon-photonic LiDAR paper, NEON's waveform tutorial, and FDA laser guidance [[3]](#lidar-ref-3)-[[6]](#lidar-ref-6). The source PDF and PPTX share 56 slide positions; the filename says Topic 6 while the title slide says Topic 5. Citations in this chapter use **1-based slide order**, not the offset printed footer.
+For implementation, read the complete `LaserScan` definition [[2]](#lidar-ref-2). For additional context, consult the MathWorks overview [[3]](#lidar-ref-3), NEON's waveform tutorial [[4]](#lidar-ref-4), and FDA laser guidance [[4]](#lidar-ref-4). The source PDF and PPTX share 56 slide positions; the filename says Topic 6 while the title slide says Topic 5. Citations in this chapter use **1-based slide order**, not the offset printed footer.
 
 Continue to [Chapter 9](09-nengo-ros-gazebo.md) for simulator integration.
 
@@ -911,7 +891,7 @@ Continue to [Chapter 9](09-nengo-ros-gazebo.md) for simulator integration.
 5. Compute range from a 100 ns round-trip delay. Explain why dividing by two is necessary.
 6. A receiver distinguishes two returns separated by 1 ns. Compute their ideal range separation and explain why this is not automatically its absolute range accuracy.
 7. Identify the transmitter, receiver, scanner, and electrical processing path in the component figure. Distinguish hardware elevation channels from neural angular sectors.
-8. Explain why the silicon-photonic MEMS switch array and the phased-array animation should not be described as the same architecture.
+8. Explain why 36 neural angular sectors do not require a LiDAR with 36 physical laser beams. How should multiple valid rays within a sector be combined, and what should be recorded when a sector has no valid returns?
 9. Interpret red, yellow, and green in the tree-return illustration. Explain why the strongest return need not be the first return.
 10. Compare FOV with angular spacing. Compute the equal-range separation at 10 m for rays 1 degree apart and 10 degrees apart.
 11. Determine the sector indices for $-180^\circ$, $-175^\circ$, $0^\circ$, $90^\circ$, $179^\circ$, and $180^\circ$ using the chapter's convention.
@@ -941,12 +921,8 @@ Continue to [Chapter 9](09-nengo-ros-gazebo.md) for simulator integration.
 
 (lidar-ref-4)=
 
-[4] X. Zhang, K. Kwon, J. Henriksson, J. Luo, and M. C. Wu, “A large-scale microelectromechanical-systems-based silicon photonics LiDAR,” *Nature*, vol. 603, no. 7900, pp. 253–258, 2022, doi: [10.1038/s41586-022-04415-8](https://pmc.ncbi.nlm.nih.gov/articles/PMC8907073/).
+[4] L. A. Wasser, “The Basics of LiDAR - Light Detection and Ranging - Remote Sensing,” *National Ecological Observatory Network*. [Online]. Available: [NEON LiDAR tutorial](https://www.neonscience.org/resources/learning-hub/tutorials/lidar-basics). Accessed: Nov. 13, 2026.
 
 (lidar-ref-5)=
 
-[5] L. A. Wasser, “The Basics of LiDAR - Light Detection and Ranging - Remote Sensing,” *National Ecological Observatory Network*. [Online]. Available: [NEON LiDAR tutorial](https://www.neonscience.org/resources/learning-hub/tutorials/lidar-basics). Accessed: Nov. 13, 2026.
-
-(lidar-ref-6)=
-
-[6] U.S. Food and Drug Administration, “Frequently Asked Questions About Lasers.” [Online]. Available: [FDA safety guidance](https://www.fda.gov/radiation-emitting-products/laser-products-and-instruments/frequently-asked-questions-about-lasers). Accessed: Nov. 13, 2026.
+[5] U.S. Food and Drug Administration, “Frequently Asked Questions About Lasers.” [Online]. Available: [FDA safety guidance](https://www.fda.gov/radiation-emitting-products/laser-products-and-instruments/frequently-asked-questions-about-lasers). Accessed: Nov. 13, 2026.

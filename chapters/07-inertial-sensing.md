@@ -68,7 +68,7 @@ Changing sampling rate without changing $W$ changes the physical window duration
 
 (imu-ref-1)=
 
-[1] ROS 2 contributors, “Imu message,” *sensor_msgs*, Jazzy distribution. [Official message definition](https://github.com/ros2/common_interfaces/blob/jazzy/sensor_msgs/msg/Imu.msg).
+[1] ROS 2 contributors, “Imu message,” *sensor_msgs*, Jazzy distribution.[Online]. Available: [Official message definition](https://github.com/ros2/common_interfaces/blob/jazzy/sensor_msgs/msg/Imu.msg).
 
 ## Additional Reading Materials
 

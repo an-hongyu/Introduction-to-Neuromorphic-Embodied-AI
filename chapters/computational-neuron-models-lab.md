@@ -102,11 +102,11 @@ For a membrane-level reading path, use Mallot Chapter 1, especially Sections 1.2
 ## References
 
 (neuron-lab-ref-1)=
-[1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 1.[Online]. Available: [Online chapter](https://neuronaldynamics.epfl.ch/online/Ch1.html).
+[1] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, ch. 1. [Online]. Available: [Online chapter](https://neuronaldynamics.epfl.ch/online/Ch1.html).
 
 
 (neuron-lab-ref-2)=
 [2] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, ch. 1, doi: [10.1007/978-3-319-00861-5](https://doi.org/10.1007/978-3-319-00861-5). [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
 
 (neuron-lab-ref-3)=
-[3] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 1st ed. Wiki Book, 2012, chs. 2–4, supplied PDF snapshot generated Aug. 25, 2016.[Online]. Available: [Institutional publication record](https://experts.colorado.edu/display/pubid_85822); [current online edition](https://book.compcogneuro.org/).
+[3] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 1st ed. Wiki Book, 2012, chs. 2–4, supplied PDF snapshot generated Aug. 25, 2016. [Online]. Available: [Institutional publication record](https://experts.colorado.edu/display/pubid_85822); [current online edition](https://book.compcogneuro.org/).

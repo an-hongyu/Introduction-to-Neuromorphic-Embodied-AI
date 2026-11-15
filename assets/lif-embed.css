@@ -50,3 +50,12 @@ h2#references ~ h3 ~ p {
 @media(max-width:480px){
   :is(h2,h3,h4)[id^="id-8-"] > a[aria-label="Link to this Section"] {display:none}
 }
+
+/* Guided border-cell maze: generous height prevents nested scrollbars when
+   the teaching layout stacks square plots within a narrow book column. */
+.border-maze-playground > div {width:100% !important;padding-bottom:0 !important;height:2500px}
+.border-maze-playground iframe {
+  width:100% !important;height:100% !important;
+  border:1px solid #d9e4eb !important;border-radius:11px;background:#fff;
+}
+@media(max-width:480px){.border-maze-playground > div{height:2700px}}

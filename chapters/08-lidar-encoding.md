@@ -941,7 +941,7 @@ Continue to [Chapter 9](09-nengo-ros-gazebo.md) for simulator integration.
 
 (lidar-ref-4)=
 
-[4] X. Zhang, K. Kwon, J. Henriksson, J. Luo, and M. C. Wu, “A large-scale microelectromechanical-systems-based silicon photonics LiDAR,” *Nature*, vol. 603, no. 7900, pp. 253–258, 2022, doi: [10.1038/s41586-022-04415-8](https://doi.org/10.1038/s41586-022-04415-8).
+[4] X. Zhang, K. Kwon, J. Henriksson, J. Luo, and M. C. Wu, “A large-scale microelectromechanical-systems-based silicon photonics LiDAR,” *Nature*, vol. 603, no. 7900, pp. 253–258, 2022, doi: [10.1038/s41586-022-04415-8](https://pmc.ncbi.nlm.nih.gov/articles/PMC8907073/).
 
 (lidar-ref-5)=
 

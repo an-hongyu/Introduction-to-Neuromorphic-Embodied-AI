@@ -78,7 +78,7 @@ The explanations and teaching assets in this textbook are original. References s
 [2] M. F. Bear, B. W. Connors, and M. A. Paradiso, *Neuroscience: Exploring the Brain*, 4th ed. Philadelphia, PA, USA: Wolters Kluwer, 2016. [Online]. Available: [National Library of Medicine catalog](https://www.ncbi.nlm.nih.gov/nlmcatalog/101647616).
 
 (reading-ref-3)=
-[3] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, doi: [10.1007/978-3-319-00861-5](https://doi.org/10.1007/978-3-319-00861-5). [Online]. Available: [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
+[3] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, doi: [10.1007/978-3-319-00861-5](https://link.springer.com/book/10.1007/978-3-319-00861-5). [Online]. Available: [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
 
 (reading-ref-4)=
 [4] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 1st ed. Wiki Book, 2012, supplied PDF snapshot generated Aug. 25, 2016. [Online]. Available: [Institutional publication record](https://experts.colorado.edu/display/pubid_85822); [current online edition](https://book.compcogneuro.org/).

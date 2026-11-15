@@ -21,8 +21,11 @@ excluded_figures = {
     'waymo-lidar-labels.png',
     'sydney-urban-objects.png',
     'lidar-detection-example.png',
+    # Original slide media retained in the source archive but no longer shown.
+    'silicon-photonics-lidar.png',
+    'phased-array-animation.gif',
 }
-assert len(excluded_figures) == 5
+assert len(excluded_figures) == 7
 for r in manifest['images']:
     path=root/'assets/lidar-lecture'/r['file']
     assert hashlib.sha256(path.read_bytes()).hexdigest()==r['sha256'],path

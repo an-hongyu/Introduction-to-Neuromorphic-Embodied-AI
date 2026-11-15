@@ -21,6 +21,9 @@ excluded_figures = {
     'waymo-lidar-labels.png',
     'sydney-urban-objects.png',
     'lidar-detection-example.png',
+    # Original slide media retained in the source archive but no longer shown.
+    'silicon-photonics-lidar.png',
+    'phased-array-animation.gif',
 }
 assert len(excluded_figures) == 5
 for r in manifest['images']:

@@ -32,7 +32,8 @@ assert 'Interactive LIF neuron explorer' in all_html, 'Missing LIF iframe in cha
 assert (root / 'grid-place-interactive.html').is_file(), 'Missing grid/place interactive asset'
 assert (root / 'border-cell-maze.html').is_file(), 'Missing border-cell robot maze HTML'
 assert (root / 'border-cell-model.js').is_file(), 'Missing border-cell maze model logic'
-assert 'Interactive square and circular mazes' in all_html, 'Missing guided border-cell maze in Chapter 4'
+assert 'Interactive square and circular mazes' in all_html, 'Missing border-cell maze in Chapter 8'
+assert (root / 'border-cell-guided.html').is_file(), 'Missing guided LiDAR border-cell lab'
 assert 'Interactive grid cell to place cell mapping' in all_html, 'Missing grid/place chapter iframe'
 assert 'Grid Cells and Grid-to-Place Mapping' in all_html, 'Missing detailed grid/place chapter'
 

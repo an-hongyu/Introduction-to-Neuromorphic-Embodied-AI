@@ -326,7 +326,7 @@ Later SFN material will build on these ideas as a proposed research framework. I
 
 (hebb-ref-9)=
 
-[9] P. Miller, *An Introductory Course in Computational Neuroscience*. Cambridge, MA, USA: MIT Press, 2018. 
+[9] P. Miller, *An Introductory Course in Computational Neuroscience*. Cambridge, MA, USA: MIT Press, 2018.
 
 ## Additional Reading Materials
 

@@ -620,36 +620,36 @@ assert measured_hz[3] == 0 and not valid_mask[4]
 
 The [interactive square/circular robot experiment](02-spatial-cells.md#interactive-border-maze) has **two different encoders**, which must not be confused:
 
-- **Egocentric LiDAR sector neurons (36):** a range \(d_k\) measured along a robot-relative ray produces a *linear distance-to-current* function \(I_k\), followed by LIF spikes. Section 8.9.3 separately defines a **prescribed linear rate** \(r_k\), which is **not** the LIF rate.
-- **Allocentric border-selective readout (one extra LIF neuron):** valid LiDAR ray endpoints are projected to the world frame, one designated boundary is selected, and its estimated distance \(d_w\) drives a **Gaussian current receptive field**. The downstream LIF firing rate is nonlinear and is **not itself Gaussian**.
+- **Egocentric LiDAR sector neurons (36):** a range $d_k$ measured along a robot-relative ray produces a *linear distance-to-current* function $I_k$, followed by LIF spikes. Section 8.9.3 separately defines a **prescribed linear rate** $r_k$, which is **not** the LIF rate.
+- **Allocentric border-selective readout (one extra LIF neuron):** valid LiDAR ray endpoints are projected to the world frame, one designated boundary is selected, and its estimated distance $d_w$ drives a **Gaussian current receptive field**. The downstream LIF firing rate is nonlinear and is **not itself Gaussian**.
 
 The receptive-field (RF) "size" is a **model parameter**, not the physical robot diameter or a published animal measurement. The following numbers are the exact teaching-model defaults used by the interactive JavaScript source, unless labeled otherwise.
 
 | Parameter | Symbol | Value | Interpretation |
 |---|---|---:|---|
-| Square enclosure | \(L_x,L_y\) | \(4.00 \times 4.00\ \mathrm{m}\) | World coordinates \(x,y\in[-2,2]\ \mathrm{m}\) |
-| Circular enclosure | \(R\) | \(2.00\ \mathrm{m}\) | Circle centered at \((0,0)\) |
+| Square enclosure | $L_x,L_y$ | $4.00 \times 4.00\ \mathrm{m}$ | World coordinates $x,y\in[-2,2]\ \mathrm{m}$ |
+| Circular enclosure | $R$ | $2.00\ \mathrm{m}$ | Circle centered at $(0,0)$ |
 | Robot body / radius | — | **Not physically modeled** | Point robot for motion; drawn robot icon is not scaled to a chassis |
-| Safety clearance in exploration | \(m\) | \(0.15\ \mathrm{m}\) | Numerical wall guard, **not** the robot radius |
-| Ray count and FOV | \(N,\Theta\) | \(36,\ 360^\circ\) | One ray per angular sector in this interactive experiment |
-| Body-relative angular spacing | \(\Delta\alpha\) | \(10^\circ=\pi/18\ \mathrm{rad}\) | Sector 18 points forward in the *centered-forward* interactive convention |
-| Valid synthetic LiDAR range | \(d_{\min},d_{\max}\) | \(0.05,\ 5.00\ \mathrm{m}\) | Ranges outside these limits are masked invalid |
-| Body-sector current baseline/gain | \(I_{\mathrm{base}},G_s\) | \(100,\ 180\ \mathrm{pA}\) | Linear distance-to-current model |
-| Prescribed rate limits (different encoder) | \(r_{\min},r_{\max}\) | \(5,\ 50\ \mathrm{Hz}\) | Rates before Poisson event generation, **not** LIF firing |
-| Chosen world-wall/arc | \(w\) | N / E / S / W | One wall in square or one \(90^\circ\) arc in circle |
-| Border-current baseline/gain | \(I_{\mathrm{base}},G_b\) | \(100,\ 180\ \mathrm{pA}\) | One extra, world-boundary-selective LIF neuron |
-| Border RF width | \(\sigma_b\) | \(0.55\ \mathrm{m}\) | Gaussian **current** envelope in distance from selected boundary |
-| Membrane capacitance | \(C_m\) | \(200\ \mathrm{pF}\) | Chosen physical-unit LIF parameter |
-| Leak conductance | \(g_L\) | \(10\ \mathrm{nS}\) | Gives \(\tau_m=C_m/g_L=20\ \mathrm{ms}\) |
-| Leak and reset voltage | \(E_L,V_{\mathrm{reset}}\) | \(-65,\ -65\ \mathrm{mV}\) | Resting and after-spike voltages |
-| Spike threshold | \(V_{\mathrm{th}}\) | \(-50\ \mathrm{mV}\) | Cross threshold, emit spike and reset |
-| Refractory time | \(t_{\mathrm{ref}}\) | \(2\ \mathrm{ms}\) | No integration while refractory |
-| Simulation movement step | \(\ell,\Delta t\) | \(0.107\ \mathrm{m},\ 0.160\ \mathrm{s}\) | Nominal velocity \(\ell/\Delta t=0.66875\ \mathrm{m/s}\) |
-| LIF numerical integration step | \(\delta t_{\mathrm{LIF}}\) | \(0.001\ \mathrm{s}\) | Interactive JavaScript uses 160 substeps per movement step |
-| Full-lab spatial map | \(N_x,N_y\) | \(27\times27\) bins | Bin pitch \(4/27=0.1481\ \mathrm{m}\), square world extent |
-| Guided-lab spatial map | \(N_x,N_y\) | \(25\times25\) bins | Bin pitch \(4/25=0.1600\ \mathrm{m}\) |
+| Safety clearance in exploration | $m$ | $0.15\ \mathrm{m}$ | Numerical wall guard, **not** the robot radius |
+| Ray count and FOV | $N,\Theta$ | $36,\ 360^\circ$ | One ray per angular sector in this interactive experiment |
+| Body-relative angular spacing | $\Delta\alpha$ | $10^\circ=\pi/18\ \mathrm{rad}$ | Sector 18 points forward in the *centered-forward* interactive convention |
+| Valid synthetic LiDAR range | $d_{\min},d_{\max}$ | $0.05,\ 5.00\ \mathrm{m}$ | Ranges outside these limits are masked invalid |
+| Body-sector current baseline/gain | $I_{\mathrm{base}},G_s$ | $100,\ 180\ \mathrm{pA}$ | Linear distance-to-current model |
+| Prescribed rate limits (different encoder) | $r_{\min},r_{\max}$ | $5,\ 50\ \mathrm{Hz}$ | Rates before Poisson event generation, **not** LIF firing |
+| Chosen world-wall/arc | $w$ | N / E / S / W | One wall in square or one $90^\circ$ arc in circle |
+| Border-current baseline/gain | $I_{\mathrm{base}},G_b$ | $100,\ 180\ \mathrm{pA}$ | One extra, world-boundary-selective LIF neuron |
+| Border RF width | $\sigma_b$ | $0.55\ \mathrm{m}$ | Gaussian **current** envelope in distance from selected boundary |
+| Membrane capacitance | $C_m$ | $200\ \mathrm{pF}$ | Chosen physical-unit LIF parameter |
+| Leak conductance | $g_L$ | $10\ \mathrm{nS}$ | Gives $\tau_m=C_m/g_L=20\ \mathrm{ms}$ |
+| Leak and reset voltage | $E_L,V_{\mathrm{reset}}$ | $-65,\ -65\ \mathrm{mV}$ | Resting and after-spike voltages |
+| Spike threshold | $V_{\mathrm{th}}$ | $-50\ \mathrm{mV}$ | Cross threshold, emit spike and reset |
+| Refractory time | $t_{\mathrm{ref}}$ | $2\ \mathrm{ms}$ | No integration while refractory |
+| Simulation movement step | $\ell,\Delta t$ | $0.107\ \mathrm{m},\ 0.160\ \mathrm{s}$ | Nominal velocity $\ell/\Delta t=0.66875\ \mathrm{m/s}$ |
+| LIF numerical integration step | $\delta t_{\mathrm{LIF}}$ | $0.001\ \mathrm{s}$ | Interactive JavaScript uses 160 substeps per movement step |
+| Full-lab spatial map | $N_x,N_y$ | $27\times27$ bins | Bin pitch $4/27=0.1481\ \mathrm{m}$, square world extent |
+| Guided-lab spatial map | $N_x,N_y$ | $25\times25$ bins | Bin pitch $4/25=0.1600\ \mathrm{m}$ |
 
-**Angular RF versus spatial RF.** The input sector's angular support is **10 degrees**, not a 10 m receptive field. The wall readout's spatial RF is governed by **\(\sigma_b=0.55\) m**; it is not an optical LiDAR resolution. The page's RGB robot symbol has no modeled real-world dimensions. No physical robot radius, wheelbase, beam divergence, sensor noise, synaptic training, or experimentally fitted border-cell RF size is claimed.
+**Angular RF versus spatial RF.** The input sector's angular support is **10 degrees**, not a 10 m receptive field. The wall readout's spatial RF is governed by **$\sigma_b=0.55$ m**; it is not an optical LiDAR resolution. The page's RGB robot symbol has no modeled real-world dimensions. No physical robot radius, wheelbase, beam divergence, sensor noise, synaptic training, or experimentally fitted border-cell RF size is claimed.
 
 #### Derivation A — one range, one sector, and one synthetic input
 
@@ -660,9 +660,9 @@ $
 \qquad \theta_k^{\mathrm{world}}=\psi+\alpha_k.
 $
 
-Here \(\psi\) is the robot heading (rad); \(k=18\) measures straight ahead. This differs by a half-sector offset from the **edge-aligned binning** in Section 8.9.1, which remains suitable for aggregating a real \`LaserScan\`. In the interactive demonstration, **one ray is ray-cast at each sector center**, so there is no hidden raw high-density scan or sector-minimum aggregation.
+Here $\psi$ is the robot heading (rad); $k=18$ measures straight ahead. This differs by a half-sector offset from the **edge-aligned binning** in Section 8.9.1, which remains suitable for aggregating a real \`LaserScan\`. In the interactive demonstration, **one ray is ray-cast at each sector center**, so there is no hidden raw high-density scan or sector-minimum aggregation.
 
-For a valid range \(d_k\), construct the affine current map by setting \(I_k(0)=280\) pA and \(I_k(5)=100\) pA:
+For a valid range $d_k$, construct the affine current map by setting $I_k(0)=280$ pA and $I_k(5)=100$ pA:
 
 $
 \begin{aligned}
@@ -673,7 +673,7 @@ I_k(d)&=100+180\left(1-\frac{d}{5\ \mathrm{m}}\right)\ \mathrm{pA}.
 \end{aligned}
 $
 
-For example, \(d_k=1.5\ \mathrm{m}\) yields \(I_k=100+180(1-1.5/5)=226\) pA. Independently, the **prescribed-rate** interpolation in Section 8.9.3 selects two endpoints \((0,50\ \mathrm{Hz})\) and \((5\ \mathrm{m},5\ \mathrm{Hz})\):
+For example, $d_k=1.5\ \mathrm{m}$ yields $I_k=100+180(1-1.5/5)=226$ pA. Independently, the **prescribed-rate** interpolation in Section 8.9.3 selects two endpoints $(0,50\ \mathrm{Hz})$ and $(5\ \mathrm{m},5\ \mathrm{Hz})$:
 
 $
 r_k(d)=r_{\max}+
@@ -681,7 +681,7 @@ r_k(d)=r_{\max}+
 =5+45\left(1-\frac{d}{5\ \mathrm{m}}\right)\ \mathrm{Hz}.
 $
 
-At \(1.5\) m, the prescribed rate is **36.5 Hz**. The same distance produces **226 pA**, and the physical LIF model gives approximately **42.0 Hz** steady-state firing. The two firing-rate values differ because a LIF neuron is not a linear rate converter. Missing returns retain their validity mask: \(d_k=\mathrm{NaN}\) does **not** mean a measured wall at 5 m, and is never put into either formula as if it were a valid range.
+At $1.5$ m, the prescribed rate is **36.5 Hz**. The same distance produces **226 pA**, and the physical LIF model gives approximately **42.0 Hz** steady-state firing. The two firing-rate values differ because a LIF neuron is not a linear rate converter. Missing returns retain their validity mask: $d_k=\mathrm{NaN}$ does **not** mean a measured wall at 5 m, and is never put into either formula as if it were a valid range.
 
 #### Derivation B — turn body-relative rays into a boundary distance
 
@@ -697,7 +697,7 @@ d_k
 \end{bmatrix}.
 $
 
-Ray-casting in the teaching arena generates each \(d_k\) by intersecting the ray with the enclosing boundary; it does not directly feed the true wall-distance function to the neuron. For a square whose walls are at \(\pm2\) m, the geometric distances for an interior point are
+Ray-casting in the teaching arena generates each $d_k$ by intersecting the ray with the enclosing boundary; it does not directly feed the true wall-distance function to the neuron. For a square whose walls are at $\pm2$ m, the geometric distances for an interior point are
 
 $
 d_N=2-y_r,\quad d_S=2+y_r,\quad
@@ -710,7 +710,7 @@ $
 \widehat d_N=\max_{k:\,m_k=1}\bigl(p^w_{k,y}\bigr)-y_r.
 $
 
-For east, south, and west, replace the north maximum by \(\max_k p^w_{k,x}-x_r\), \(y_r-\min_kp^w_{k,y}\), and \(x_r-\min_k p^w_{k,x}\), respectively. With clean geometric returns from a completely visible square these reproduce the corresponding boundary distances. If a selected wall cannot be identified from valid observations, its range must remain **unknown**, not zero.
+For east, south, and west, replace the north maximum by $\max_k p^w_{k,x}-x_r$, $y_r-\min_kp^w_{k,y}$, and $x_r-\min_k p^w_{k,x}$, respectively. With clean geometric returns from a completely visible square these reproduce the corresponding boundary distances. If a selected wall cannot be identified from valid observations, its range must remain **unknown**, not zero.
 
 For the circular arena, select a **90-degree arc** about its nominal north/east/south/west direction. Among valid world-frame returns lying on that arc, the model approximates
 
@@ -719,7 +719,7 @@ $
 \left\|\mathbf p_k^w-\begin{bmatrix}x_r\\y_r\end{bmatrix}\right\|_2.
 $
 
-A continuous circle has radius \(R=2\) m; its exact *nearest-anywhere-boundary* distance is \(R-\sqrt{x_r^2+y_r^2}\), but **that is not generally the distance to a particular selected arc**. The 36-ray arc estimate can be slightly larger because the chosen arc is finite and LiDAR is sampled every 10 degrees.
+A continuous circle has radius $R=2$ m; its exact *nearest-anywhere-boundary* distance is $R-\sqrt{x_r^2+y_r^2}$, but **that is not generally the distance to a particular selected arc**. The 36-ray arc estimate can be slightly larger because the chosen arc is finite and LiDAR is sampled every 10 degrees.
 
 #### Derivation C — build the border neuron's Gaussian current RF
 
@@ -729,7 +729,7 @@ $
 q(d_w)=\exp\!\left[-\frac{d_w^2}{2\sigma_b^2}\right].
 $
 
-The Gaussian **is a chosen response kernel**, not a result derived from the LiDAR physics or proof of biological Gaussian tuning. Setting \(q(0)=1\), \(I_{\mathrm{base}}=100\) pA, \(G_b=180\) pA, and \(\sigma_b=0.55\) m gives
+The Gaussian **is a chosen response kernel**, not a result derived from the LiDAR physics or proof of biological Gaussian tuning. Setting $q(0)=1$, $I_{\mathrm{base}}=100$ pA, $G_b=180$ pA, and $\sigma_b=0.55$ m gives
 
 $
 \boxed{I_w(d_w)=
@@ -746,7 +746,7 @@ d_{1/2}=\sigma_b\sqrt{2\ln2}
 =0.648\ \mathrm{m}.
 $
 
-This \(0.648\) m is a **one-sided distance from the wall**, not the diameter of the robot, nor the half-maximum width of the *firing-rate* curve. At \(d_w=0.38\) m, for instance,
+This $0.648$ m is a **one-sided distance from the wall**, not the diameter of the robot, nor the half-maximum width of the *firing-rate* curve. At $d_w=0.38$ m, for instance,
 
 $
 I_w=100+180e^{-0.38^2/(2(0.55)^2)}
@@ -755,7 +755,7 @@ $
 
 #### Derivation D — convert RF current into the actual LIF firing rate
 
-With constant input current \(I\), the LIF membrane equation is
+With constant input current $I$, the LIF membrane equation is
 
 $
 C_m\frac{dV}{dt}=-g_L(V-E_L)+I,\quad
@@ -769,7 +769,7 @@ $
 V(t)=V_\infty+(V_{\mathrm{reset}}-V_\infty)e^{-t/\tau_m}.
 $
 
-Solving \(V(t_{\mathrm{cross}})=V_{\mathrm{th}}\) for the next threshold crossing yields
+Solving $V(t_{\mathrm{cross}})=V_{\mathrm{th}}$ for the next threshold crossing yields
 
 $
 t_{\mathrm{cross}}=\tau_m\ln
@@ -777,7 +777,7 @@ t_{\mathrm{cross}}=\tau_m\ln
 {V_\infty-V_{\mathrm{th}}}\right).
 $
 
-This formula is valid for **sustained firing only when** \(I>I_{\mathrm{th}}\), where
+This formula is valid for **sustained firing only when** $I>I_{\mathrm{th}}$, where
 
 $
 I_{\mathrm{th}}=g_L(V_{\mathrm{th}}-E_L)
@@ -809,9 +809,9 @@ d_{\mathrm{spike}}
 \end{aligned}
 $
 
-A border stimulus at \(0.38\) m gives \(I_w=241.8\) pA and \(f_{\mathrm{LIF}}\approx46.8\) Hz. Compare the **world-wall RF** with the **body-sector RF** below. Each row uses a *separately interpreted* distance (distance along a body ray versus distance from a selected world boundary):
+A border stimulus at $0.38$ m gives $I_w=241.8$ pA and $f_{\mathrm{LIF}}\approx46.8$ Hz. Compare the **world-wall RF** with the **body-sector RF** below. Each row uses a *separately interpreted* distance (distance along a body ray versus distance from a selected world boundary):
 
-| Distance \(d\) | Linear sector current \(I_k\) | Sector LIF rate | Gaussian border current \(I_w\) | Border LIF rate |
+| Distance $d$ | Linear sector current $I_k$ | Sector LIF rate | Gaussian border current $I_w$ | Border LIF rate |
 |---|---:|---:|---:|---:|
 | 0.20 m | 272.8 pA | about 55.7 Hz | 268.5 pA | 54.5 Hz |
 | 0.38 m | 266.3 pA | about 53.9 Hz | 241.8 pA | 46.8 Hz |
@@ -824,7 +824,7 @@ All listed rates are **ideal steady-state predictions**. The simulator advances 
 
 #### Derivation E — from random exploration to a measured spatial rate map
 
-The two teaching animations use a **seeded, stochastic, smooth-turning, boundary-aware exploration policy**, replacing the old predetermined lawnmower-like waypoints. For movement step \(n\),
+The two teaching animations use a **seeded, stochastic, smooth-turning, boundary-aware exploration policy**, replacing the old predetermined lawnmower-like waypoints. For movement step $n$,
 
 $
 \begin{bmatrix}x_{n+1}\\y_{n+1}\end{bmatrix}
@@ -834,7 +834,7 @@ $
 \qquad \ell=0.107\ \mathrm{m},\ \Delta t=0.16\ \mathrm{s}.
 $
 
-An occasional random destination is selected in the arena, including points near its boundary. With \(\psi_{\mathrm{goal}}=\operatorname{atan2}(y_g-y_n,x_g-x_n)\), define a temporally correlated heading perturbation and bounded steering update:
+An occasional random destination is selected in the arena, including points near its boundary. With $\psi_{\mathrm{goal}}=\operatorname{atan2}(y_g-y_n,x_g-x_n)$, define a temporally correlated heading perturbation and bounded steering update:
 
 $
 \begin{aligned}
@@ -851,7 +851,7 @@ $
 
 The forward ray triggers an inward turn when its synthetic clearance falls below **0.34 m**. A final geometric guard keeps the *point robot* at least **0.15 m** from the boundary. Every random draw comes from a user-visible integer seed; the same seed and arena reproduce the **same trajectory**, while choosing a different seed changes it. **This geometric policy is not learned, and border-cell spikes do not control steering.**
 
-Finally, each visited square spatial bin \(B\) accumulates actual LIF spike counts \(N_w(n)\) and occupation time:
+Finally, each visited square spatial bin $B$ accumulates actual LIF spike counts $N_w(n)$ and occupation time:
 
 $
 \boxed{\widehat f_w(B)=

@@ -50,6 +50,7 @@ jobs:
           python -m pip install playwright==1.56.0
           python -m playwright install --with-deps chromium
           python tests/check_exercise_browser.py
+          python tests/check_border_maze_browser.py
       - name: Preserve exercise browser checks
         if: always()
         uses: actions/upload-artifact@v4

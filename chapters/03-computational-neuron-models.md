@@ -542,11 +542,11 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 
 (models-ref-2)=
 
-[2] A. L. Hodgkin and A. F. Huxley, “A quantitative description of membrane current and its application to conduction and excitation in nerve,” *J. Physiol.*, vol. 117, no. 4, pp. 500–544, 1952, doi: [10.1113/jphysiol.1952.sp004764](https://doi.org/10.1113/jphysiol.1952.sp004764).
+[2] A. L. Hodgkin and A. F. Huxley, “A quantitative description of membrane current and its application to conduction and excitation in nerve,” *J. Physiol.*, vol. 117, no. 4, pp. 500–544, 1952, doi: [10.1113/jphysiol.1952.sp004764](https://pubmed.ncbi.nlm.nih.gov/12991237/).
 
 (models-ref-4)=
 
-[3] E. M. Izhikevich, “Simple model of spiking neurons,” *IEEE Trans. Neural Netw.*, vol. 14, no. 6, pp. 1569–1572, 2003, doi: [10.1109/TNN.2003.820440](https://doi.org/10.1109/TNN.2003.820440).
+[3] E. M. Izhikevich, “Simple model of spiking neurons,” *IEEE Trans. Neural Netw.*, vol. 14, no. 6, pp. 1569–1572, 2003, doi: [10.1109/TNN.2003.820440](https://pubmed.ncbi.nlm.nih.gov/18244602/).
 
 (models-ref-3)=
 
@@ -554,7 +554,7 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 
 (models-ref-5)=
 
-[5] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, sec. 1.3, doi: [10.1007/978-3-319-00861-5](https://doi.org/10.1007/978-3-319-00861-5). [Online]. Available: [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
+[5] H. A. Mallot, *Computational Neuroscience: A First Course*. Cham, Switzerland: Springer, 2013, sec. 1.3, doi: [10.1007/978-3-319-00861-5](https://link.springer.com/book/10.1007/978-3-319-00861-5). [Online]. Available: [Publisher](https://link.springer.com/book/10.1007/978-3-319-00861-5).
 
 
 ## Additional Reading Materials

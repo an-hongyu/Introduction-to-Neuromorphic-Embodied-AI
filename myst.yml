@@ -16,6 +16,7 @@ project:
   - assets/grid-place-interactive.html
   - assets/border-cell-model.js
   - assets/border-cell-maze.html
+  - assets/border-cell-guided.html
   toc:
   - file: index.md
   - title: Foundations

@@ -178,19 +178,19 @@ The resulting computational view is straightforward: **sensory signals alter mem
 
 (neuro-ref-1)=
 
-[1] E. R. Kandel, J. H. Schwartz, T. M. Jessell, S. A. Siegelbaum, and A. J. Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013, chs. 2, 6–8, 10–13, and 66–67.[Online]. Available: [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
+[1] E. R. Kandel, J. H. Schwartz, T. M. Jessell, S. A. Siegelbaum, and A. J. Hudspeth, Eds., *Principles of Neural Science*, 5th ed. New York, NY, USA: McGraw-Hill, 2013, chs. 2, 6–8, 10–13, and 66–67. [Online]. Available: [Publisher](https://www.mheducation.com/highered/mhp/product/principles-neural-science-fifth-edition.html).
 
 (neuro-ref-2)=
 
-[2] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 2.[Online]. Available: [Open textbook source](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-02.md); [edition and copyright](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md); [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
+[2] R. C. O'Reilly, Y. Munakata, M. J. Frank, T. E. Hazy, and Contributors, *Computational Cognitive Neuroscience*, 5th ed., 2024, ch. 2. [Online]. Available: [Open textbook source](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/chapter-02.md); [edition and copyright](https://github.com/compcogneuro/book/blob/e0c697b4d4d134f29cb5c2bbde41b1b6b409b63d/frontmatter.md); [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
 
 (neuro-ref-3)=
 
-[3] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6.[Online]. Available: [Online textbook](https://neuronaldynamics.epfl.ch/online/).
+[3] W. Gerstner, W. M. Kistler, R. Naud, and L. Paninski, *Neuronal Dynamics: From Single Neurons to Networks and Models of Cognition*. Cambridge, U.K.: Cambridge University Press, 2014, chs. 1–3 and 6. [Online]. Available: [Online textbook](https://neuronaldynamics.epfl.ch/online/).
 
 (neuro-ref-4)=
 
-[4] E. R. Kandel, J. H. Schwartz, and T. M. Jessell, Eds., *Principles of Neural Science*, 4th ed. New York, NY, USA: McGraw-Hill, 2000, ch. 2, Fig. 2-10.[Online]. Available: [Chapter 2 source](https://neurodatasharing.bme.gatech.edu/cloud/Fong%20et%20al/Additional%20Data/Images/Imaging%20resources/KSJ_Ch2.pdf).
+[4] E. R. Kandel, J. H. Schwartz, and T. M. Jessell, Eds., *Principles of Neural Science*, 4th ed. New York, NY, USA: McGraw-Hill, 2000, ch. 2, Fig. 2-10. [Online]. Available: [Chapter 2 source](https://neurodatasharing.bme.gatech.edu/cloud/Fong%20et%20al/Additional%20Data/Images/Imaging%20resources/KSJ_Ch2.pdf).
 
 (neuro-ref-5)=
 

@@ -35,6 +35,19 @@ try:
         assert page.locator('#d').inner_text().endswith('m') is False  # still stage 1 after a reset
         page.locator('[data-stage="5"]').click()
         assert page.locator('#d').inner_text().endswith('m')
+        page.locator('#seed').fill('98')
+        page.locator('#seed').press('Tab')
+        page.locator('#longExplore').click()
+        assert '250 movement steps' in page.locator('#status').inner_text()
+        route1=page.locator('#arena').evaluate('(c) => c.toDataURL()')
+        page.locator('#reset').click()
+        page.locator('#longExplore').click()
+        route2=page.locator('#arena').evaluate('(c) => c.toDataURL()')
+        assert route1 == route2
+        page.locator('#newPath').click()
+        page.locator('#longExplore').click()
+        route3=page.locator('#arena').evaluate('(c) => c.toDataURL()')
+        assert route1 != route3
         page.set_viewport_size({'width':390,'height':844})
         assert page.evaluate('document.body.scrollWidth <= window.innerWidth + 1')
         assert not errors,errors

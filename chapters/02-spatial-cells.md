@@ -387,7 +387,7 @@ A decisive **frame-invariance test** is to hold the robot in the same world posi
 
 ### 4.6.4 Interactive square and circular mazes: building a border-cell-like response
 
-The following laboratory makes the connection between the [36-channel LiDAR model in Chapter 8](08-lidar-encoding.md#lidar-lif-border) and the **world-fixed border-cell-like LIF model** concrete. The enclosure is either a **4 m × 4 m square** or a **circle of radius 2 m**. One robot follows a reproducible exploration trajectory while a simulated 360-degree LiDAR casts **36 rays spaced 10 degrees apart**.
+The following laboratory makes the connection between the [36-channel LiDAR model in Chapter 8](08-lidar-encoding.md#lidar-lif-border) and the **world-fixed border-cell-like LIF model** concrete. The enclosure is either a **4 m × 4 m square** or a **circle of radius 2 m**. One robot follows a **seeded, stochastic, smooth-turning exploration trajectory** (rather than a predetermined raster sweep) while a simulated 360-degree LiDAR casts **36 rays spaced 10 degrees apart**. The robot starts at the arena center and samples varied interior/near-wall goals, with synthetic wall checks and a 0.15 m point-robot clearance guard. This is an illustrative navigation policy, **not a firing-driven motor controller**.
 
 The experiment contains four stages, which can be revealed individually:
 
@@ -396,7 +396,7 @@ The experiment contains four stages, which can be revealed individually:
 3. **Encode:** Convert distance to input current and integrate a LIF neuron with membrane leak, voltage threshold, reset, and a 2 ms refractory period.
 4. **Build a spatial firing map:** Select a **world-fixed north, east, south, or west wall** (or corresponding 90-degree circular arc), estimate distance to it from transformed LiDAR returns, and accumulate a position-conditioned **occupancy-normalized spike-rate map** as the robot explores.
 
-For the wall-selective LIF neuron, use the equation from Section 4.6.3 with $I_{\mathrm{base}}=100$ pA, $G_b=180$ pA, and $\sigma_b=0.55$ m. For spatial bin $B$, the *measured simulation rate* is
+For the wall-selective LIF neuron, use the equation from Section 4.6.3 with $I_{\mathrm{base}}=100$ pA, $G_b=180$ pA, and $\sigma_b=0.55$ m. Its chosen Gaussian *current* half-maximum distance is $0.648$ m, while the LIF threshold produces sustained spikes for selected-wall distances below about $0.880$ m. The full numerical and analytical derivation—including **arena size, sensor range, 36 angular RFs, the Gaussian border RF, LIF threshold, firing rates, map bin width, and randomized trajectory equations**—is provided in [Chapter 8, Section 8.9.6](08-lidar-encoding.md#lidar-complete-parameter-derivation). For spatial bin $B$, the *measured simulation rate* is
 
 $
 \widehat r_w(B)=
@@ -415,7 +415,7 @@ $
 
 giving an ideal steady-state border-LIF prediction of approximately **46.8 Hz** with the Chapter 8 membrane parameters. The experiment's **Test 180° turn** button reproduces this comparison in both arena shapes.
 
-**Guided worked example — construct the border-cell-like response one stage at a time.** Before using the full research laboratory below, try the five-stage robot navigation walkthrough. Switch between the **4 × 4 m square** and **2 m radius circle**, then follow **Explore → Sense → Project → Spike → Map**. Advance the robot one movement step at a time or take 25 steps at once. The same trajectory, 36 LiDAR rays, selected world wall, physical-unit LIF state and accumulated activity are carried through the stages. Stage 4 reveals the **160 ms membrane-voltage trace**, threshold, emitted spikes, injected current and expected steady-state rate; Stage 5 reveals the **actual occupancy-normalized firing-rate map**. This is a synthetic teaching construction, not experimentally recorded border cells or an SFN learning rule.
+**Guided worked example — construct the border-cell-like response one stage at a time.** Before using the full research laboratory below, try the five-stage robot navigation walkthrough. Switch between the **4 × 4 m square** and **2 m radius circle**, then follow **Explore → Sense → Project → Spike → Map**. Advance the robot one movement step at a time or take 25/250 steps at once. Set a **random seed** to replay the same exploratory route, or choose **New random path** to change the route. The same trajectory, 36 LiDAR rays, selected world wall, physical-unit LIF state and accumulated activity are carried through the stages. Stage 4 reveals the **160 ms membrane-voltage trace**, threshold, emitted spikes, injected current and expected steady-state rate; Stage 5 reveals the **actual occupancy-normalized firing-rate map**. This is a synthetic teaching construction, not experimentally recorded border cells or an SFN learning rule.
 
 ```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/border-cell-guided.html
 :label: interactive-border-guided-frame
@@ -427,7 +427,7 @@ giving an ideal steady-state border-LIF prediction of approximately **46.8 Hz** 
 
 [Open the guided border-cell walkthrough at full width](https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/border-cell-guided.html).
 
-**Run the interactive experiment.** Use **Play**, **Step once**, or **Explore 100 steps** to extend the trajectory and fill the firing map. Change the arena shape or selected wall; then use the four stage buttons to inspect the pipeline. The orange boundary always identifies the selected world-fixed wall or arc.
+**Run the interactive experiment.** Use **Play**, **Step once**, **Explore 100 steps**, or **Explore 500 steps** to extend a randomized trajectory and fill the firing map. Enter the same seed to reproduce a run; use **New random path** for a different route. Change the arena shape or selected wall; then use the four stage buttons to inspect the pipeline. The orange boundary always identifies the selected world-fixed wall or arc.
 
 ```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/border-cell-maze.html
 :label: interactive-border-maze-frame
@@ -439,7 +439,7 @@ giving an ideal steady-state border-LIF prediction of approximately **46.8 Hz** 
 
 [Open the border-cell maze laboratory in a full-width page](https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/border-cell-maze.html).
 
-**Interpretation and limits.** The demonstration uses **idealized robot pose**, a **known selection of one world-fixed boundary**, noise-free geometric ray casting, and finite 10-degree angular sampling. Circular-arc distances are approximated from discrete projected hits. The 36 channels are egocentric sensor neurons; the additional *single* border-selective LIF readout is allocentric by construction. **Accumulating spikes into a spatial map is not synaptic learning.** A research extension should estimate pose and boundary identity under uncertainty, specify a neural learning rule, and compare learned field stability with frozen and shuffled controls. A biological border-cell claim would require independent neural recordings [[12]](#spatial-ref-12).
+**Interpretation and limits.** The demonstration uses **idealized robot pose**, a **known selection of one world-fixed boundary**, noise-free geometric ray casting, finite 10-degree angular sampling, and a **seeded random-goal policy with geometric collision guarding** (not a learned control policy). Circular-arc distances are approximated from discrete projected hits. The 36 channels are egocentric sensor neurons; the additional *single* border-selective LIF readout is allocentric by construction. **Accumulating spikes into a spatial map is not synaptic learning.** A research extension should estimate pose and boundary identity under uncertainty, specify a neural learning rule, and compare learned field stability with frozen and shuffled controls. A biological border-cell claim would require independent neural recordings [[12]](#spatial-ref-12).
 
 ## 4.7 Speed cells, time cells, and their models
 

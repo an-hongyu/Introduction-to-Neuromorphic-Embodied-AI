@@ -46,6 +46,21 @@ try:
         for n in [1, 2, 3, 4]:
             page.locator(f'[data-stage="{n}"]').click()
             assert page.locator(f'[data-stage="{n}"]').get_attribute('aria-pressed') == 'true'
+        # Same seed must redraw an identical route; a new seed must differ.
+        page.locator('#seed').fill('78')
+        page.locator('#seed').press('Tab')
+        page.locator('#batch').click()
+        route1=page.locator('#mazeCanvas').evaluate('(c) => c.toDataURL()')
+        page.locator('#reset').click()
+        page.locator('#batch').click()
+        route2=page.locator('#mazeCanvas').evaluate('(c) => c.toDataURL()')
+        assert route1 == route2
+        page.locator('#newPath').click()
+        page.locator('#batch').click()
+        route3=page.locator('#mazeCanvas').evaluate('(c) => c.toDataURL()')
+        assert route3 != route1
+        page.locator('#longBatch').click()
+        assert '600 steps' in page.locator('#timeText').inner_text()
         page.set_viewport_size({'width': 390, 'height': 850})
         page.screenshot(path=str(DEST / 'border-maze-mobile.png'), full_page=True)
         assert page.evaluate('document.body.scrollWidth <= window.innerWidth + 1')

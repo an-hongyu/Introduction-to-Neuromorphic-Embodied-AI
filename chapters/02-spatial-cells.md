@@ -4,14 +4,14 @@ title: "Chapter 4 · Spatial Cells and Their Models"
 
 ## 4.1 Learning Objectives
 
-A navigation system must represent more than its current coordinates. It needs to distinguish location, orientation, movement, environmental boundaries, and the order of events. This chapter introduces the **hippocampal–entorhinal system** and six experimentally identified response classes: **place cells, grid cells, head-direction cells, border cells, speed cells, and time cells**. The last two supply movement and temporal information rather than location alone. Each cell type is introduced together with its mathematical model and interpretation. The place-cell section contains the grid-to-place readout and interactive experiment; the grid-cell section derives the input fields used by that readout.
+A navigation system must represent more than its current coordinates. It needs to distinguish location, orientation, movement, environmental boundaries, and the order of events. This chapter introduces the **hippocampal–entorhinal system** and six experimentally identified response classes: **place cells, grid cells, head-direction cells, border cells, speed cells, and time cells**. The last two supply movement and temporal information rather than location alone. Most response classes are paired with interpretable mathematical models, while **Section 4.6 emphasizes biological border-cell observations and evidence**; its LiDAR-to-LIF engineering model and interactive robot demonstrations are in Chapter 8. The place-cell section contains the grid-to-place readout and interactive experiment; the grid-cell section derives the input fields used by that readout.
 
 By the end of this chapter, you should be able to:
 
 - Identify the hippocampus, dentate gyrus, CA3, CA1, subiculum, and medial and lateral entorhinal cortex, and trace their principal connections.
 - Distinguish the experimental signatures of place, grid, head-direction, border, speed, and time cells.
 - Read spatial rate maps, polar tuning curves, speed-response curves, and trial-aligned temporal activity plots.
-- Construct place, grid, head-direction, border, speed, and time tuning functions with explicit variables and units.
+- Construct place, grid, head-direction, speed, and time tuning functions with explicit variables and units; interpret the biological evidence for boundary-selective firing. The LiDAR-based border-response implementation is taught in Chapter 8.
 - Implement a weighted grid-to-place readout and explain how spacing, orientation, phase, normalization, and threshold affect its output.
 - Explain how self-motion and environmental cues can jointly support navigation, and design controls for competing explanations of neural tuning.
 - Relate these representations to neuromorphic robots without treating sensor measurements or simulator ground truth as evidence of biological equivalence.
@@ -338,7 +338,7 @@ For a robot, define body yaw, camera/LiDAR mounting angle, and velocity directio
 
 (border-cell-models)=
 
-## 4.6 Border cells and their models
+## 4.6 Border cells: biological signatures
 
 ### 4.6.1 Firing near environmental limits
 
@@ -354,92 +354,17 @@ Related **boundary-vector cells** were reported in the subiculum [[13]](#spatial
 **Boundary-related firing in recorded neurons.** In panel A, identify the active arc near the arena perimeter and compare light/dark conditions for the same cell. The plots quantify how strongly firing remains boundary-associated. Reproduced from Pérez-Escobar et al., Fig. 5 [[8]](#spatial-ref-8), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized and format-converted only.
 ```
 
-### 4.6.2 Boundary-distance model and coordinate transformations
+### 4.6.2 Biological interpretation and experimental controls
 
-For an arena with a selected wall $w$, a simple near-wall rate is
+A boundary-associated firing pattern is a **measured spatial response**, not simply the output of a short-range obstacle detector. The original entorhinal border-cell observations describe firing associated with specific environmental limits [[12]](#spatial-ref-12). The related subicular boundary-vector cells can reflect the distance and allocentric direction of a boundary [[13]](#spatial-ref-13). These labels describe experimentally observed tuning; they do not establish that one Gaussian equation or a particular sensor explains the neural circuit.
 
-$$
-r_w(\mathbf{x})=r_0+A\exp[-d_w(\mathbf{x})^2/(2\sigma_b^2)].
-$$
-
-$d_w$ is distance to that wall and $\sigma_b$ is a distance scale, both in meters. This produces a band near one chosen boundary. Replacing $d_w$ by distance to the nearest wall changes the represented variable and makes the cell respond around the whole enclosure. Neither construction is a complete boundary-vector model.
-
-For a two-dimensional robot, a beam of range $d$ and bearing $\alpha$ gives a sensor-frame endpoint $[d\cos\alpha,d\sin\alpha]^\top$. To express it in a world frame, use calibrated mounting and timestamped pose transforms. A 36-sector LiDAR encoder is therefore **egocentric sensory input**; an allocentric boundary representation requires additional computation. Test boundary sensitivity by changing enclosure geometry while controlling occupancy, orientation, and sensory visibility.
-
-### 4.6.3 Turning LiDAR-driven LIF spikes into a border-cell-like model
-
-A useful first experiment is to connect the **distance encoder** of [Chapter 8, Section 8.9.5](08-lidar-encoding.md#lidar-lif-border) to the LIF membrane model of Chapter 2. When a valid LiDAR return is closer, the model injects a larger current into the corresponding 10-degree sector neuron, producing more spikes. This demonstrates **obstacle proximity coding**, not automatically a biological border cell.
-
-To model firing associated with a **particular environmental wall**, first project accepted LiDAR endpoints from sensor coordinates into world coordinates using the calibrated sensor-to-body transform and the robot's timestamped pose. Associate the reconstructed boundary with a selected wall $w$ and estimate the robot's distance $d_w(\mathbf{x})$ to that wall. As a teaching model, drive a LIF neuron using
-
-$
-I_w(\mathbf{x})=I_{\mathrm{base}}+
-G_b\exp\left[-\frac{d_w(\mathbf{x})^2}{2\sigma_b^2}\right].
-$
-
-Use the same LIF equation, threshold, reset, and refractory period as in Chapter 8, replacing its sector current $I_k$ with $I_w$. Here $G_b$ and $I_{\mathrm{base}}$ are currents, and $d_w$ and $\sigma_b$ are distances in meters. **Only use this rule when the selected wall is actually known or supported by observations**: loss of LiDAR returns is not evidence of open space.
-
-**Example: wall at $x=0$.** Let a robot move on the positive-$x$ side of the wall. With $d_w(x)=x$, $\sigma_b=0.5$ m, $I_{\mathrm{base}}=100$ pA, and $G_b=180$ pA, the input currents at $x=0.2$, $0.5$, and $1.0$ m are about $266.2$, $209.2$, and $124.4$ pA. With the Chapter 8 LIF parameters, the first two distances produce sustained firing, whereas the last current is below the 150 pA threshold. These are synthetic predictions rather than measured neural responses.
-
-A decisive **frame-invariance test** is to hold the robot in the same world position but rotate it by $180^\circ$. The wall moves to a different body-relative LiDAR sector, whereas the *world-wall distance* and the correctly transformed border-cell-like response should remain approximately unchanged. Additional controls should test changes of wall identity, boundary geometry, occupancy, and sensor visibility. Such tests establish which variables the model represents; they do not by themselves establish equivalence to recorded entorhinal border cells [[12]](#spatial-ref-12).
+When interpreting a border-cell rate map, examine **occupancy-normalized activity**, track which boundary is associated with the firing field, and control for the animal's heading, locomotor speed, and visual access. Compare the same cell when boundaries or enclosure geometry change, and ask whether an apparent wall response can be explained by where and how the animal sampled the arena. The light/dark recordings illustrated above provide a biological comparison [[8]](#spatial-ref-8), not a robot simulation.
 
 (interactive-border-maze)=
 
-### 4.6.4 Interactive square and circular mazes: building a border-cell-like response
+### Further study: engineering model in Chapter 8
 
-The following laboratory makes the connection between the [36-channel LiDAR model in Chapter 8](08-lidar-encoding.md#lidar-lif-border) and the **world-fixed border-cell-like LIF model** concrete. The enclosure is either a **4 m × 4 m square** or a **circle of radius 2 m**. One robot follows a **seeded, stochastic, smooth-turning exploration trajectory** (rather than a predetermined raster sweep) while a simulated 360-degree LiDAR casts **36 rays spaced 10 degrees apart**. The robot starts at the arena center and samples varied interior/near-wall goals, with synthetic wall checks and a 0.15 m point-robot clearance guard. This is an illustrative navigation policy, **not a firing-driven motor controller**.
-
-The experiment contains four stages, which can be revealed individually:
-
-1. **Explore:** Move the robot along a path and record position, time, and heading.
-2. **Measure:** Obtain the 36 body-relative ranges and project each valid ray endpoint to a world coordinate using the robot's pose.
-3. **Encode:** Convert distance to input current and integrate a LIF neuron with membrane leak, voltage threshold, reset, and a 2 ms refractory period.
-4. **Build a spatial firing map:** Select a **world-fixed north, east, south, or west wall** (or corresponding 90-degree circular arc), estimate distance to it from transformed LiDAR returns, and accumulate a position-conditioned **occupancy-normalized spike-rate map** as the robot explores.
-
-For the wall-selective LIF neuron, use the equation from Section 4.6.3 with $I_{\mathrm{base}}=100$ pA, $G_b=180$ pA, and $\sigma_b=0.55$ m. Its chosen Gaussian *current* half-maximum distance is $0.648$ m, while the LIF threshold produces sustained spikes for selected-wall distances below about $0.880$ m. The full numerical and analytical derivation—including **arena size, sensor range, 36 angular RFs, the Gaussian border RF, LIF threshold, firing rates, map bin width, and randomized trajectory equations**—is provided in [Chapter 8, Section 8.9.6](08-lidar-encoding.md#lidar-complete-parameter-derivation). For spatial bin $B$, the *measured simulation rate* is
-
-$
-\widehat r_w(B)=
-\frac{\sum_{t:\mathbf{x}_t\in B} N_w(t)}
-     {\sum_{t:\mathbf{x}_t\in B}\Delta t},
-$
-
-where $N_w(t)$ is the number of LIF spikes emitted during the time step $\Delta t=0.16$ s. **Unvisited bins remain blank**: a lack of occupancy is not evidence of a silent cell. The displayed field emerges gradually from accumulated robot observations, not from a fitted Gaussian heatmap.
-
-**Worked rotation example.** In the square maze, put the robot at $(x,y)=(0,1.62)$ m near the *north* wall ($y=2$ m). With the robot initially facing north, its forward LiDAR ray measures $0.38$ m. After an exact $180^\circ$ turn at the **same position**, the forward ray measures $3.62$ m. But the **world-frame north-wall distance remains $0.38$ m** in both orientations. The world-wall current is
-
-$
-I_w=100+180\exp\left(-\frac{0.38^2}{2(0.55)^2}\right)
-\approx 241.8\ \mathrm{pA},
-$
-
-giving an ideal steady-state border-LIF prediction of approximately **46.8 Hz** with the Chapter 8 membrane parameters. The experiment's **Test 180° turn** button reproduces this comparison in both arena shapes.
-
-**Guided worked example — construct the border-cell-like response one stage at a time.** Before using the full research laboratory below, try the five-stage robot navigation walkthrough. Switch between the **4 × 4 m square** and **2 m radius circle**, then follow **Explore → Sense → Project → Spike → Map**. Advance the robot one movement step at a time or take 25/250 steps at once. Set a **random seed** to replay the same exploratory route, or choose **New random path** to change the route. The same trajectory, 36 LiDAR rays, selected world wall, physical-unit LIF state and accumulated activity are carried through the stages. Stage 4 reveals the **160 ms membrane-voltage trace**, threshold, emitted spikes, injected current and expected steady-state rate; Stage 5 reveals the **actual occupancy-normalized firing-rate map**. This is a synthetic teaching construction, not experimentally recorded border cells or an SFN learning rule.
-
-```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/border-cell-guided.html
-:label: interactive-border-guided-frame
-:class: border-guided-playground
-:title: Guided robot navigation from LiDAR to LIF membrane dynamics and border-cell-like firing field
-:width: 100%
-
-```
-
-[Open the guided border-cell walkthrough at full width](https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/border-cell-guided.html).
-
-**Run the interactive experiment.** Use **Play**, **Step once**, **Explore 100 steps**, or **Explore 500 steps** to extend a randomized trajectory and fill the firing map. Enter the same seed to reproduce a run; use **New random path** for a different route. Change the arena shape or selected wall; then use the four stage buttons to inspect the pipeline. The orange boundary always identifies the selected world-fixed wall or arc.
-
-```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/border-cell-maze.html
-:label: interactive-border-maze-frame
-:class: border-maze-playground
-:title: Interactive square and circular maze showing LiDAR to LIF spikes and a world-fixed border-cell-like rate map
-:width: 100%
-
-```
-
-[Open the border-cell maze laboratory in a full-width page](https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/border-cell-maze.html).
-
-**Interpretation and limits.** The demonstration uses **idealized robot pose**, a **known selection of one world-fixed boundary**, noise-free geometric ray casting, finite 10-degree angular sampling, and a **seeded random-goal policy with geometric collision guarding** (not a learned control policy). Circular-arc distances are approximated from discrete projected hits. The 36 channels are egocentric sensor neurons; the additional *single* border-selective LIF readout is allocentric by construction. **Accumulating spikes into a spatial map is not synaptic learning.** A research extension should estimate pose and boundary identity under uncertainty, specify a neural learning rule, and compare learned field stability with frozen and shuffled controls. A biological border-cell claim would require independent neural recordings [[12]](#spatial-ref-12).
+**Engineering model and interactive maze laboratory:** The selected-wall distance equations, LiDAR coordinate transformations, LIF calculations, worked rotation example, and both square/circular robot demonstrations have moved to [Chapter 8, Section 8.9.6](08-lidar-encoding.md#lidar-complete-parameter-derivation) and [Section 8.9.7](08-lidar-encoding.md#lidar-interactive-border-maze). This pointer also preserves the former link to the interactive lab.
 
 ## 4.7 Speed cells, time cells, and their models
 
@@ -568,7 +493,7 @@ For primary discoveries, begin with place cells [[4]](#spatial-ref-4), grid cell
 3. Calculate rates for bins with $(K_b,T_b)=(12,0.6\,\mathrm{s})$ and $(30,3\,\mathrm{s})$.
 4. Design a control that helps distinguish speed-related firing from firing caused by repeated visits to one location.
 5. Explain why an imposed Gaussian place field and a learned place field require different evidence.
-6. List the transformations needed to convert a body-relative LiDAR observation into an environment-relative boundary measurement.
+6. Distinguish entorhinal border cells from subicular boundary-vector cells. What behavioral and environmental controls help determine whether an observed boundary-associated firing field is specific to one boundary?
 7. Trace the hippocampal trisynaptic pathway and name a route that bypasses DG or CA3. Why is a strictly feedforward grid-to-place diagram incomplete?
 8. An ideal time cell fires 3 s after treadmill onset. An ideal distance cell fires after 0.6 m of travel. Predict their firing times at 0.2 and 0.3 m/s, and explain how the test separates the hypotheses.
 9. What additional interpretation is required when a place-field map comes from calcium imaging rather than extracellular spike recordings? Why is a normalized color scale not an absolute firing-rate scale?

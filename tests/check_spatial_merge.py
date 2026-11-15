@@ -38,8 +38,14 @@ for name in ["hippocampal-circuit", "place-recordings", "grid-recordings",
              "head-direction", "border-recordings", "speed-recordings", "time-recordings"]:
     assert f"fig-spatial-{name}" in page.ids, f"Lost literature figure: {name}"
 assert sum("grid-place-interactive.html" in src for src in page.iframes) == 1
-assert sum("border-cell-maze.html" in src for src in page.iframes) == 1
-assert "(interactive-border-maze)=" in source
+assert sum("border-cell-maze.html" in src for src in page.iframes) == 0, "Chapter 4 should not embed a LiDAR robot lab"
+assert sum("border-cell-guided.html" in src for src in page.iframes) == 0
+assert "(interactive-border-maze)=" in source, "Retain old URL anchor as a pointer"
+assert "interactive-border-maze" in page.ids, "Old Chapter 4 bookmark must resolve to the moved-model pointer"
+assert "08-lidar-encoding.md#lidar-interactive-border-maze" in source
+assert "### 4.6.3 Turning LiDAR-driven" not in source
+assert "### 4.6.4 Interactive square and circular" not in source
+assert "### 4.6.2 Biological interpretation and experimental controls" in source
 assert "  bibliography:" not in config, "Legacy BibTeX block appends duplicate APA citations below the IEEE reference list"
 exercises = source.split("## 4.10 Exercises", 1)[1].split("## References", 1)[0]
 assert [int(n) for n in re.findall(r"^(\d+)\.", exercises, re.M)] == list(range(1, 17))
@@ -50,4 +56,4 @@ legacy = (SITE / "chapters" / "grid-to-place" / "index.html").read_text(encoding
 assert "window.location.replace" in legacy
 assert "#grid-place-readout" in legacy
 assert "grid-place-live-example" in legacy
-print("Spatial merge passed: all cell models, seven literature figures, two interactive apps (grid/place and border maze), sixteen exercises/solutions, no auto-generated duplicate bibliography, and legacy redirects.")
+print("Spatial chapter passed: all biological cell classes, seven literature figures, grid/place app, biological border section with legacy pointer, 16 exercises/solutions, and legacy grid redirects.")

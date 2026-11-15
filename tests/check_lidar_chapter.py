@@ -42,6 +42,10 @@ assert 'sensor-course-lidar.png' in s and ':label: fig-sensor-lidar' in s
 assert '(85-exercises)=' in s
 assert '## 8.9 Worked neural encoder: 36 angular sectors' in s
 assert '## 8.10 Connect the encoder to spatial representations' in s
+assert '(lidar-interactive-border-maze)=' in s
+assert '### 8.9.7 Interactive square and circular mazes' in s
+assert 'border-cell-guided.html' in s and 'border-cell-maze.html' in s
+assert '0.50' in s and '0.55' in s  # distinct example and lab RF widths
 assert '## 8.11 Additional Reading Materials' in s
 assert not re.search(r'\bdatasets?\b', s, re.I)
 questions=s.split('## 8.12 Exercises',1)[1].split('## References',1)[0]
@@ -105,6 +109,9 @@ assert page.is_file()
 p=Page();p.feed(page.read_text())
 assert {'85-exercises','id-85-exercises'} & p.ids
 assert 'fig-sensor-lidar' in p.ids
+assert 'lidar-interactive-border-maze' in p.ids
+assert sum('border-cell-guided.html' in url for url in p.frames)==1
+assert sum('border-cell-maze.html' in url for url in p.frames)==1
 base='/Introduction-to-Neuromorphic-Embodied-AI'
 for rec in manifest['images']:
     key=Path(rec['file']).stem

@@ -15,7 +15,7 @@ p{margin:0 0 8px}.eyebrow{font-weight:750;color:var(--blue);text-transform:upper
 .toolbar{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px}
 .toolbar-top{display:flex;align-items:center;gap:15px 25px;flex-wrap:wrap}.fields{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
 .fields label,.range-label{font-size:12px;font-weight:700;color:var(--muted)}
-select,button,input{font:inherit}select{border:1px solid #b6cbd7;border-radius:6px;padding:6px 10px;min-width:116px;background:#fff;color:var(--ink)}
+select,button,input{font:inherit}#seed{width:84px;border:1px solid #b6cbd7;border-radius:6px;padding:6px;color:var(--ink)}select{border:1px solid #b6cbd7;border-radius:6px;padding:6px 10px;min-width:116px;background:#fff;color:var(--ink)}
 button{border:1px solid #b9ccd7;background:#fff;color:var(--blue);font-size:12px;border-radius:7px;padding:8px 12px;font-weight:650;cursor:pointer}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #e1a16b;outline-offset:2px}
 button:hover{background:#e8f2f7}button[aria-pressed=true],button.active{background:var(--blue);border-color:var(--blue);color:#fff}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -47,8 +47,9 @@ button[disabled]{opacity:.5;cursor:default}.action-set{display:flex;gap:6px;flex
   <div class="fields">
    <label for="arena">Maze</label><select id="arena"><option value="square">Square arena</option><option value="circle">Circular arena</option></select>
    <label for="wall">Selected boundary</label><select id="wall"><option value="north">North wall / arc</option><option value="east">East wall / arc</option><option value="south">South wall / arc</option><option value="west">West wall / arc</option></select>
+   <label for="seed">Random seed</label><input id="seed" type="number" min="1" max="999999" step="1" value="23"/>
   </div>
-  <div class="action-set"><button id="play" class="primary">▶ Play</button><button id="step">Step once</button><button id="batch">Explore 100 steps</button><button id="reset">Reset</button></div>
+  <div class="action-set"><button id="play" class="primary">▶ Play</button><button id="step">Step once</button><button id="batch">Explore 100 steps</button><button id="longBatch">Explore 500 steps</button><button id="newPath">New random path</button><button id="reset">Reset</button></div>
  </div>
  <div class="step-grid" role="group" aria-label="Reveal the processing stages">
   <button data-stage="1">1 · Explore<span>Robot and trajectory</span></button>
@@ -82,7 +83,7 @@ button[disabled]{opacity:.5;cursor:default}.action-set{display:flex;gap:6px;flex
  <section class="plot-card"><h2>Recently emitted spikes</h2><p class="minor">World-boundary neuron · spikes per 160 ms simulation step, not a fitted biological raster</p><canvas id="spikeCanvas" width="430" height="245" role="img" aria-label="Recent spike-count history over a moving exploration window"></canvas></section>
 </div>
 <div id="rotationOutput" role="status" aria-live="polite">Select <strong>Test 180° turn</strong> to compare a body-facing LiDAR channel with a world-anchored border response at the <em>same position</em>.</div>
-<div class="note"><strong>Scientific interpretation.</strong> The arena geometry is used to ray-cast a synthetic LiDAR scan; its endpoints are projected into the world frame using an exact simulated pose. A specified north/east/south/west wall (or circular arc) is selected before the experiment. The highlighted map is an <em>occupancy-normalized readout of generated spikes</em>, not a learned synaptic weight map. A true biological border-cell claim requires additional neural recordings and controls; a robotics learning claim requires estimated pose, noisy mapping, and an explicit learning rule.</div>
+<div class="note"><strong>Trajectory parameters:</strong> seeded stochastic goals, correlated small heading changes, and a 0.15 m modeled wall-clearance guard. Each 0.16 s simulation step travels 0.107 m (nominal 0.669 m/s). A seed reproduces the same motion; <strong>New random path</strong> changes it. This is not neural motor control. <strong>Scientific interpretation.</strong> The arena geometry is used to ray-cast a synthetic LiDAR scan; its endpoints are projected into the world frame using an exact simulated pose. A specified north/east/south/west wall (or circular arc) is selected before the experiment. The highlighted map is an <em>occupancy-normalized readout of generated spikes</em>, not a learned synaptic weight map. A true biological border-cell claim requires additional neural recordings and controls; a robotics learning claim requires estimated pose, noisy mapping, and an explicit learning rule.</div>
 </main>
 <script src="border-cell-model.js"></script>
 <script>
@@ -102,14 +103,15 @@ const stages={1:'Observe exploration and the robot’s trajectory. The firing fi
 4:'Accumulated LIF spikes are divided by time spent at each visited position. The activity map is fixed to a selected world wall / arc.'};
 function init(){
  const shape=byId('arena').value,wall=byId('wall').value;
- const waypoints=M.waypoints(shape),start=waypoints[0];
- state={shape,wall,stage:4,playing:false,speed:+byId('speed').value,
- points:waypoints,waypoint:1,position:{x:start[0],y:start[1],heading:0},
- path:[[start[0],start[1]]],border:M.newLIF(),body:M.newLIF(),channels:Array.from({length:36},()=>M.newLIF()),
+ const seed=Math.max(1,Math.min(999999,Math.trunc(Number(byId('seed').value)||23)));
+ byId('seed').value=String(seed);
+ const explorer=M.createExplorer(shape,seed);
+ state={shape,wall,seed,explorer,stage:4,playing:false,speed:+byId('speed').value,
+ position:{x:explorer.x,y:explorer.y,heading:explorer.heading},
+ path:[[explorer.x,explorer.y]],border:M.newLIF(),body:M.newLIF(),channels:Array.from({length:36},()=>M.newLIF()),
  occupancy:new Float32Array(N*N),spikeCounts:new Float32Array(N*N),
  t:0,steps:0,scan:[],borderDist:NaN,bodyDist:NaN,currentA:0,
  counts:0,recent:[],test:null};
- state.position.heading=Math.atan2(waypoints[1][1]-start[1],waypoints[1][0]-start[0]);
  calcScan();byId('rotationOutput').innerHTML='Select <strong>Test 180° turn</strong> to compare egocentric LiDAR with the same world-fixed boundary.';
  setStage(4);update();
 }
@@ -121,13 +123,10 @@ function calcScan(){
  state.currentA=M.wallCurrent(state.borderDist);
 }
 function nextStep(){
- const p=state.position,goals=state.points;let target=goals[state.waypoint%goals.length];
- let dx=target[0]-p.x,dy=target[1]-p.y;let dist=Math.hypot(dx,dy);
- if(dist<.11){state.waypoint++;target=goals[state.waypoint%goals.length];dx=target[0]-p.x;dy=target[1]-p.y;dist=Math.hypot(dx,dy);}
- const step=Math.min(.107,dist);if(dist>0){p.heading=Math.atan2(dy,dx);p.x+=step*dx/dist;p.y+=step*dy/dist;}
- // Border geometry is a fixed ground-truth drawing; the currents themselves
- // depend on projected synthetic LiDAR returns, not direct trueWallDistance().
- if(!M.inside(p.x,p.y,state.shape))throw Error('Waypoint outside enclosure');
+ state.position=M.exploreStep(state.explorer);
+ const p=state.position;
+ // The explorer's safety guard is geometric, not a learned spike policy.
+ if(!M.inside(p.x,p.y,state.shape,.15))throw Error('Unsafe explorer position');
  state.path.push([p.x,p.y]);if(state.path.length>2500)state.path.shift();
  calcScan();
  const observed=Number.isFinite(state.borderDist);
@@ -201,7 +200,7 @@ function rasterPlot(){const g=sctx,w=raster.width,h=raster.height;axes(g,w,h);co
  if(state.stage>=3){a.forEach((n,i)=>{g.fillStyle=color.selected;const ht=Math.min(n,Nmax)/Nmax*(h-65);g.fillRect(50+i*dx,base-ht,Math.max(2,dx-2),ht);});}
  g.fillStyle=color.muted;g.font='12px system-ui';g.fillText('0',36,base+15);g.fillText('12 spikes',2,17);g.fillText('Most recent 50 steps →',w-163,h-12);
 }
-function update(){mazePlot();drawMap();curvePlot();rasterPlot();byId('timeText').textContent=state.t.toFixed(1)+' s · '+state.steps+' steps';
+function update(){mazePlot();drawMap();curvePlot();rasterPlot();byId('timeText').textContent=state.t.toFixed(1)+' s · '+state.steps+' steps · seed '+state.seed;
  byId('distanceMetric').textContent=state.stage>=4&&Number.isFinite(state.borderDist)?state.borderDist.toFixed(2)+' m':'—';
  byId('currentMetric').textContent=state.stage>=3&&Number.isFinite(state.borderDist)?(state.currentA*1e12).toFixed(0)+' pA':'—';
  byId('rateMetric').textContent=state.stage>=3&&Number.isFinite(state.borderDist)?M.lifRate(state.currentA).toFixed(1)+' Hz':'—';
@@ -211,8 +210,11 @@ function rotationTest(){const p=M.probe(state.shape,state.wall);state.test=p;
  byId('rotationOutput').innerHTML='<strong>Same world position, heading reversed 180°.</strong> Forward LiDAR: '+p.bodyBefore.toFixed(2)+' m → '+p.bodyAfter.toFixed(2)+' m. World-wall distance from transformed rays: '+p.worldBefore.toFixed(2)+' m → '+p.worldAfter.toFixed(2)+' m. Predicted border LIF: <strong>'+p.rateBefore.toFixed(1)+' Hz → '+p.rateAfter.toFixed(1)+' Hz</strong>. This is a coordinate-frame invariance test, not proof of learning.';
  update();}
 byId('arena').addEventListener('change',selectMode);byId('wall').addEventListener('change',selectMode);
+byId('seed').addEventListener('change',selectMode);
+byId('newPath').addEventListener('click',()=>{byId('seed').value=String(+byId('seed').value>=999999?1:(+byId('seed').value||23)+1);init();});
 byId('play').addEventListener('click',togglePlay);byId('step').addEventListener('click',()=>{if(state.playing)togglePlay();nextStep();update();});
 byId('batch').addEventListener('click',()=>{if(state.playing)togglePlay();for(let i=0;i<100;i++)nextStep();update();});
+byId('longBatch').addEventListener('click',()=>{if(state.playing)togglePlay();for(let i=0;i<500;i++)nextStep();update();});
 byId('reset').addEventListener('click',()=>{init();});byId('rotate').addEventListener('click',rotationTest);
 byId('speed').addEventListener('input',()=>{state.speed=+byId('speed').value;byId('speedValue').textContent=state.speed+'×';});
 for(const b of document.querySelectorAll('[data-stage]'))b.addEventListener('click',()=>setStage(+b.dataset.stage));

@@ -619,4 +619,4 @@ The course decks are the basis of this revision. *Robotics, Vision and Control* 
 
 (vision-ref-3)=
 
-[3] P. Corke, *Robotics, Vision and Control: Fundamental Algorithms in Python*, 3rd ed. Cham, Switzerland: Springer, 2023, doi: [10.1007/978-3-031-06469-2](https://doi.org/10.1007/978-3-031-06469-2). [Online]. Available: [Publisher](https://link.springer.com/book/10.1007/978-3-031-06469-2).
+[3] P. Corke, *Robotics, Vision and Control: Fundamental Algorithms in Python*, 3rd ed. Cham, Switzerland: Springer, 2023, doi: [10.1007/978-3-031-06469-2](https://link.springer.com/book/10.1007/978-3-031-06469-2). [Online]. Available: [Publisher](https://link.springer.com/book/10.1007/978-3-031-06469-2).

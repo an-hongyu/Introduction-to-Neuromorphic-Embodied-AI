@@ -111,7 +111,7 @@ function init(){
  path:[[explorer.x,explorer.y]],border:M.newLIF(),body:M.newLIF(),channels:Array.from({length:36},()=>M.newLIF()),
  occupancy:new Float32Array(N*N),spikeCounts:new Float32Array(N*N),
  t:0,steps:0,scan:[],borderDist:NaN,bodyDist:NaN,currentA:0,
- counts:0,recent:[],test:null};
+ counts:0,recent:[],test:null,batchMode:false};
  calcScan();byId('rotationOutput').innerHTML='Select <strong>Test 180° turn</strong> to compare egocentric LiDAR with the same world-fixed boundary.';
  setStage(4);update();
 }
@@ -142,7 +142,7 @@ function nextStep(){
  if(observed){state.occupancy[iy*N+ix]+=DT;state.spikeCounts[iy*N+ix]+=count;}
  state.counts+=count;state.steps++;state.t+=DT;
  state.recent.push(count);if(state.recent.length>50)state.recent.shift();
- if(state.steps%2===0)update();
+ if(state.steps%2===0&&!state.batchMode)update();
 }
 function selectMode(){const isPlaying=state.playing;state.playing=false;byId('play').textContent='▶ Play';init();if(isPlaying)togglePlay();}
 function togglePlay(){state.playing=!state.playing;byId('play').textContent=state.playing?'❚❚ Pause':'▶ Play';byId('play').setAttribute('aria-pressed',String(state.playing));}
@@ -213,8 +213,8 @@ byId('arena').addEventListener('change',selectMode);byId('wall').addEventListene
 byId('seed').addEventListener('change',selectMode);
 byId('newPath').addEventListener('click',()=>{byId('seed').value=String(+byId('seed').value>=999999?1:(+byId('seed').value||23)+1);init();});
 byId('play').addEventListener('click',togglePlay);byId('step').addEventListener('click',()=>{if(state.playing)togglePlay();nextStep();update();});
-byId('batch').addEventListener('click',()=>{if(state.playing)togglePlay();for(let i=0;i<100;i++)nextStep();update();});
-byId('longBatch').addEventListener('click',()=>{if(state.playing)togglePlay();for(let i=0;i<500;i++)nextStep();update();});
+byId('batch').addEventListener('click',()=>{if(state.playing)togglePlay();state.batchMode=true;try{for(let i=0;i<100;i++)nextStep();}finally{state.batchMode=false;}update();});
+byId('longBatch').addEventListener('click',()=>{if(state.playing)togglePlay();state.batchMode=true;try{for(let i=0;i<500;i++)nextStep();}finally{state.batchMode=false;}update();});
 byId('reset').addEventListener('click',()=>{init();});byId('rotate').addEventListener('click',rotationTest);
 byId('speed').addEventListener('input',()=>{state.speed=+byId('speed').value;byId('speedValue').textContent=state.speed+'×';});
 for(const b of document.querySelectorAll('[data-stage]'))b.addEventListener('click',()=>setStage(+b.dataset.stage));

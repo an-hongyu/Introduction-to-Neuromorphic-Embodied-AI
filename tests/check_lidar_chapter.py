@@ -25,7 +25,7 @@ excluded_figures = {
     'silicon-photonics-lidar.png',
     'phased-array-animation.gif',
 }
-assert len(excluded_figures) == 5
+assert len(excluded_figures) == 7
 for r in manifest['images']:
     path=root/'assets/lidar-lecture'/r['file']
     assert hashlib.sha256(path.read_bytes()).hexdigest()==r['sha256'],path

@@ -591,6 +591,7 @@ The three panels below update with each change in object pose:
 
 ```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/visual-ensemble-interactive.html
 :label: visual-ensemble-playground
+:class: visual-ensemble-playground
 :title: Interactive 3D triangle-versus-square receptive-field laboratory
 :width: 100%
 ```

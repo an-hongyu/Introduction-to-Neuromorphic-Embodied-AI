@@ -21,6 +21,8 @@ try:
         page.goto(f'http://127.0.0.1:{server.server_port}/border-cell-maze.html')
         assert 'border-cell-like' in page.title().lower()
         assert page.locator('#mazeCanvas').is_visible()
+        assert page.locator('#mode').input_value() == 'all'
+        assert not page.locator('#wallPicker').is_visible()
         assert page.locator('#mapCanvas').is_visible()
         assert page.locator('#distanceMetric').inner_text() != ''
         assert page.locator('#visitedText').inner_text() == '0 visited bins'
@@ -39,6 +41,8 @@ try:
         assert '200 steps' in page.locator('#timeText').inner_text()
         assert '0 visited bins' != page.locator('#visitedText').inner_text()
         page.screenshot(path=str(DEST / 'border-circle-desktop.png'), full_page=True)
+        page.locator('#mode').select_option('single')
+        assert page.locator('#wallPicker').is_visible()
         page.locator('#wall').select_option('east')
         page.locator('#batch').click()
         page.locator('#rotate').click()

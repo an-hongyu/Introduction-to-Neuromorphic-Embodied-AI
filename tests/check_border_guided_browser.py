@@ -16,6 +16,8 @@ try:
         page.on('pageerror',lambda e:errors.append(str(e)))
         page.goto(f'http://127.0.0.1:{server.server_port}/border-cell-guided.html')
         assert page.locator('#arena').is_visible()
+        assert page.locator('#mode').input_value() == 'all'
+        assert not page.locator('#wallPicker').is_visible()
         assert page.locator('#map').is_visible()
         assert 'Reveal stage 5' in page.locator('#mapStatus').inner_text() or 'Map hidden' in page.locator('#mapStatus').inner_text()
         page.locator('#explore').click()
@@ -30,6 +32,8 @@ try:
         assert '50 movement steps' in page.locator('#status').inner_text()
         page.locator('#shape').select_option('circle')
         assert '0 movement steps' in page.locator('#status').inner_text()
+        page.locator('#mode').select_option('single')
+        assert page.locator('#wallPicker').is_visible()
         page.locator('#wall').select_option('east')
         page.locator('#explore').click()
         assert page.locator('#d').inner_text().endswith('m') is False  # still stage 1 after a reset

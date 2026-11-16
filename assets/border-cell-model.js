@@ -92,6 +92,38 @@
     if (selected.length < 1) return NaN;
     return Math.min.apply(null, selected.map(h => Math.hypot(h.wx - x, h.wy - y)));
   }
+  // Nearest-boundary mode pools the complete enclosing border. It is not the
+  // receptive field of a biologically identified single-wall-selective cell.
+  function trueNearestBoundaryDistance(shape, x, y) {
+    if (!inside(x, y, shape)) return NaN;
+    return shape === 'circle' ? R - Math.hypot(x, y)
+      : Math.min(R - y, R + y, R - x, R + x);
+  }
+  function estimateNearestBoundaryDistance(shape, x, y, hits) {
+    if (!inside(x, y, shape) || !Array.isArray(hits)) return NaN;
+    const valid = hits.filter(h => h.valid && Number.isFinite(h.wx) && Number.isFinite(h.wy));
+    if (shape === 'square') {
+      // Reconstruct each of the four enclosing wall coordinates from world-frame
+      // LiDAR hits, then take their minimum distance. No direct trueWallDistance().
+      if (valid.length < 4) return NaN;
+      const distances = ['north', 'east', 'south', 'west'].map(w =>
+        estimateWallDistance(shape, w, x, y, valid));
+      return distances.every(Number.isFinite) ? Math.min(...distances) : NaN;
+    }
+    // Infer the enclosing circular radius from valid LiDAR hit endpoints.
+    // For noiseless, full-visibility rays, each world-frame hit has norm R.
+    // The median radius is less vulnerable than one return to a bad hit.
+    if (valid.length < 3) return NaN;
+    const radii = valid.map(h => Math.hypot(h.wx, h.wy)).sort((a, b) => a - b);
+    const mid = Math.floor(radii.length / 2);
+    const radiusEstimate = radii.length % 2 ? radii[mid] : .5 * (radii[mid - 1] + radii[mid]);
+    return clamp(radiusEstimate - Math.hypot(x, y), 0, MAX_RANGE);
+  }
+  function estimateBoundaryDistance(shape, mode, wall, x, y, hits) {
+    if (mode === 'all') return estimateNearestBoundaryDistance(shape, x, y, hits);
+    if (mode === 'single') return estimateWallDistance(shape, wall, x, y, hits);
+    throw Error('Invalid boundary mode');
+  }
   function sensorCurrent(range, valid = true) {
     return valid && Number.isFinite(range) && range >= 0 && range <= MAX_RANGE ?
       (100 + 180 * (1 - range / MAX_RANGE)) * 1e-12 : 0;
@@ -131,7 +163,7 @@
     }
     return spikes;
   }
-  function probe(shape, wall, x = 0, y = 1.6) {
+  function probe(shape, wall, mode = 'single') {
     // Choose a position near the selected cardinal wall/arc.
     const q = R - 0.38;
     const center = WALL_ANGLES[wall];
@@ -140,8 +172,8 @@
     const before = scan(shape, px, py, headingA);
     const after = scan(shape, px, py, headingB);
     const forwardA = before[18], forwardB = after[18];
-    const worldA = estimateWallDistance(shape, wall, px, py, before);
-    const worldB = estimateWallDistance(shape, wall, px, py, after);
+    const worldA = estimateBoundaryDistance(shape, mode, wall, px, py, before);
+    const worldB = estimateBoundaryDistance(shape, mode, wall, px, py, after);
     return {x: px, y: py, bodyBefore: forwardA.range, bodyAfter: forwardB.range,
       worldBefore: worldA, worldAfter: worldB,
       rateBefore: lifRate(wallCurrent(worldA)), rateAfter: lifRate(wallCurrent(worldB))};
@@ -229,6 +261,7 @@
     return p;
   }
   return {R, SECTORS, EL, THRESHOLD, scan, inside, rayDistance, trueWallDistance,
-    estimateWallDistance, sensorCurrent, wallCurrent, lifRate, newLIF, stepLIF,
+    estimateWallDistance, estimateNearestBoundaryDistance, trueNearestBoundaryDistance,
+    estimateBoundaryDistance, sensorCurrent, wallCurrent, lifRate, newLIF, stepLIF,
     probe, waypoints, createExplorer, exploreStep, wrap, clamp, WALL_ANGLES};
 });

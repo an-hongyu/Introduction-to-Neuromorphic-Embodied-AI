@@ -577,6 +577,56 @@ Processing order matters. Smoothing before nonlinear red clipping need not equal
 
 Finally, red contrast is not an allocentric position code. Connecting it to [Chapter 4's spatial representations](02-spatial-cells.md) requires a specified geometry, pose estimate, or learned mapping. For the association experiment, retain the measured graded cue or convert it into an event using a declared threshold; do not substitute a simulator's hidden object label for the image-derived measurement.
 
+
+### 6.10.5 Interactive experiment: 3D receptive fields and shape ensembles
+
+**Research question.** Can the spatial responses of small local receptive fields (RFs) distinguish a **three-sided triangle** from a **four-sided square**, despite image translation, planar rotation, and moderate perspective distortion? The separate issue of recognizing an *equilateral* triangle from a heavily foreshortened monocular view is not solved here.
+
+The three panels below update with each change in object pose:
+
+1. **Input:** a synthetic 3D planar polygon projected through a perspective camera onto a 60 × 60 grayscale image.
+2. **Layer 1:** nonoverlapping 3 × 3 or 5 × 5 RFs compute local pixel averages followed by neighboring RF gradients. These are illustrative instantaneous neural activities, not experimentally calibrated firing rates.
+3. **Layer 2:** the RF population reconstructs a coarse silhouette; the inferred convex hull is fitted by a three-corner or four-corner explanatory model. Colored edges and corners are derived from RF activity, not from source vertices.
+4. **Layer 3:** a deterministic **triangle / square / uncertain** heuristic readout. This is not a trained SFN, calibrated confidence, nor evidence of biological shape-invariant learning.
+
+```{iframe} /Introduction-to-Neuromorphic-Embodied-AI/visual-ensemble-interactive.html
+:label: visual-ensemble-playground
+:class: visual-ensemble-playground
+:title: Interactive 3D triangle-versus-square receptive-field laboratory
+:width: 100%
+```
+
+[Open the full-width visual ensemble laboratory](https://an-hongyu.github.io/Introduction-to-Neuromorphic-Embodied-AI/visual-ensemble-interactive.html).
+
+#### 6.10.5.1 How the geometric neural proxy is evaluated
+
+Let \(r\) be the RF patch width (3 or 5 pixels). Let \(I\) denote the rendered image. The RF response is
+
+$$
+m_{ij}=\frac{1}{r^2}\sum_{u=0}^{r-1}\sum_{v=0}^{r-1}I(ri+u,rj+v).
+$$
+
+Finite differences between neighboring \(m_{ij}\) produce local edge activity. Thresholded interpolation of the *pooled RF means* estimates the silhouette. This is followed by a convex-hull approximation; denote its area by \(A_H\). Compare it with the **largest inscribed triangle** whose three vertices lie on that recovered hull:
+
+$$
+\rho=\frac{\max_{a,b,c\in H}A(\triangle abc)}{A_H}.
+$$
+
+A triangle has an ideal ratio close to 1, whereas an ideal square's largest inscribed triangle covers half its area. Perspective deformation preserves the number of corners of a nondegenerate polygon, but near edge-on projection, coarse sampling, occlusion, and clipping can erase the evidence. In this *teaching prototype*, the heuristic reports **triangle** for \(\rho\geq0.63\), **square** for \(\rho\leq0.585\), and **uncertain** between them; image-boundary truncation also returns uncertain. These thresholds were evaluated on the declared synthetic test distribution, not validated on external camera recordings.
+
+#### 6.10.5.2 Reproducible synthetic benchmark
+
+The regression in `tests/test_visual_ensemble.cjs` enumerates 15° planar-rotation steps from 0° to 345°, yaw (-50°,-25°,0°,25°,50°), pitch (-40°,0°,40°), and horizontal translations (-5,0,5) pixels at camera distance 4. Fully visible instances with every projected vertex 2–58 pixels inside the 60 × 60 image form the test set; clipped/edge cases are excluded. The generator provides ground-truth labels **only to the evaluator**, not the classifier.
+
+| RF size | True shape | Correct / tested | Wrong | Uncertain | Excluded by visibility |
+|---|---|---:|---:|---:|---:|
+| 3 × 3 | Triangle | 1,020 / 1,020 | 0 | 0 | 60 |
+| 3 × 3 | Square | 1,080 / 1,080 | 0 | 0 | 0 |
+| 5 × 5 | Triangle | 1,020 / 1,020 | 0 | 0 | 60 |
+| 5 × 5 | Square | 1,080 / 1,080 | 0 | 0 | 0 |
+
+**Interpretation and limitations.** This is *4,200 successful synthetic classifications out of 4,200 included samples*, not a held-out learned-model accuracy. There are no random textures, biological recordings, real-world lighting, multiple objects, sensor noise, or out-of-plane occlusions in this benchmark. Because the decision is an explicit area-ratio computation on an RF-derived hull, it does **not** establish that a spike-flow network has learned three- or four-corner assembly. A future SFN experiment should replace the geometry heuristic with trainable spiking edge/corner ensembles, measure spike counts and flow capacities, and evaluate on held-out poses and noisy/cropped images.
+
 ## 6.11 Additional Reading Materials
 
 Review Part I slides 3–26 for the perception context, 28–51 for light and image formation, 54–70 for digital sensors, and 76 for measurement units [[1]](#vision-ref-1). Review Part II slides 5–24 for color perception and matching, 25–43 for digital images and point operations, 44–59 for filtering and dyadic operations, and 64–66 for chromaticity and the MATLAB example [[2]](#vision-ref-2).

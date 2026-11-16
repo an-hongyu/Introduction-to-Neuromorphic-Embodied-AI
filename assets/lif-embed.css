@@ -65,3 +65,9 @@ h2#references ~ h3 ~ p {
 .border-guided-playground iframe {width:100% !important;height:100% !important;border:1px solid #d9e4eb !important;border-radius:11px;background:#fff}
 @media(max-width:780px){.border-guided-playground > div{height:3050px}}
 @media(max-width:480px){.border-guided-playground > div{height:3350px}}
+
+/* Chapter 6 visual ensemble laboratory: prevent clipped iframe rendering. */
+.visual-ensemble-playground > div {width:100% !important;padding-bottom:0 !important;height:1200px}
+.visual-ensemble-playground iframe {width:100% !important;height:100% !important;border:1px solid #d9e4eb !important;border-radius:10px;background:#fff}
+@media(max-width:690px){.visual-ensemble-playground > div{height:1700px}}
+@media(max-width:420px){.visual-ensemble-playground > div{height:2500px}}

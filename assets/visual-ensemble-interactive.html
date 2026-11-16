@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D Visual Ensembles · Chapter 6 Interactive Laboratory</title>
+<style>
+:root{color-scheme:light;--ink:#193046;--sub:#62768b;--line:#dce5eb;--bg:#f2f7fa;--a:#107f91}
+*{box-sizing:border-box}body{margin:0;background:white;color:var(--ink);font:14px/1.5 system-ui,-apple-system,sans-serif}
+main{max-width:1150px;margin:auto;padding:19px}h1{font-size:23px;margin:2px 0 5px}h2{font-size:14px;margin:0 0 8px}
+.eyebrow{color:var(--a);font-size:10px;letter-spacing:.13em;font-weight:800}.sub,.hint{color:var(--sub);font-size:12px}
+.controls{background:var(--bg);padding:13px;border:1px solid var(--line);border-radius:12px;margin:14px 0}.top{display:flex;flex-wrap:wrap;align-items:end;gap:13px;justify-content:space-between}
+select,button{font:inherit;font-size:12px;border:1px solid #c8d8e3;border-radius:7px;background:white;padding:8px;color:var(--ink)}
+button{cursor:pointer}button.active{background:#087e89;color:white;border-color:#087e89}
+fieldset{border:0;padding:0;margin:0}legend,label{font-size:12px;font-weight:650}.buttons{display:flex;gap:5px}
+.sliders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px 20px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.control label{display:flex;justify-content:space-between;color:var(--sub)}output{font-variant-numeric:tabular-nums;color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--a)}.panels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.panel,.readout{border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.panel h2{min-height:39px}.panel .stage{display:block;color:#0e8e89;letter-spacing:.06em;font-size:10px}
+canvas{display:block;width:100%;aspect-ratio:1;border-radius:8px;background:#f6f9fc}
+#input{cursor:grab;touch-action:none}
+.small{font-size:11px;color:var(--sub);margin-top:9px}
+.readouts{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:12px 0}
+.bar{display:grid;grid-template-columns:105px 1fr 42px;align-items:center;gap:8px;font-size:12px;margin:10px 0}.track{height:10px;background:#e8eef3;border-radius:8px;overflow:hidden}.fill{height:100%;border-radius:8px}.value{text-align:right;font-variant-numeric:tabular-nums}
+.pill{background:#edf1f5;border-radius:14px;padding:4px 9px;font-weight:750;font-size:12px}.pill.ok{background:#ddf5e9;color:#006c46}
+.note{background:#f2f7fa;border-radius:9px;padding:12px;font-size:12px;color:#536477;margin-top:12px}
+@media(max-width:690px){.sliders{grid-template-columns:repeat(2,minmax(0,1fr))}.panels{grid-template-columns:repeat(2,minmax(0,1fr))}.panel:first-child{grid-column:1/-1}.panel:first-child canvas{max-width:360px;margin:auto}.readouts{grid-template-columns:1fr}}
+@media(max-width:420px){.panels{grid-template-columns:1fr}.panel:first-child{grid-column:auto}}
+</style></head><body><main>
+<div class="eyebrow">CHAPTER 6 / EXPERIMENT · PROTOTYPE, NOT TRAINED SFN</div>
+<h1>3D Visual RF and Shape Ensembles</h1>
+<p class="sub">Drag the object to translate; Shift-drag or right-drag to change the viewing angle. Change between a triangle and square to inspect Layer 2 and Layer 3 responses in real time.</p>
+<div class="controls">
+ <div class="top">
+  <fieldset><legend>RF patch size</legend><div class="buttons"><button type="button" id="rf3" class="active" aria-pressed="true">3 × 3</button><button type="button" id="rf5" aria-pressed="false">5 × 5</button></div></fieldset>
+  <div><label for="shape">3D source shape</label><div><select id="shape"><option value="triangle">Equilateral triangle</option><option value="square">Square</option><option value="scalene">Scalene triangle (control)</option></select></div></div>
+  <div class="buttons"><button id="random" type="button">Random pose</button><button id="reset" type="button">Reset</button></div>
+ </div>
+ <div class="sliders">
+  <div class="control"><label for="roll">Roll <output id="rollVal">0°</output></label><input id="roll" type="range" min="0" max="360" value="0"></div>
+  <div class="control"><label for="yaw">Yaw <output id="yawVal">0°</output></label><input id="yaw" type="range" min="-80" max="80" value="0"></div>
+  <div class="control"><label for="pitch">Pitch <output id="pitchVal">0°</output></label><input id="pitch" type="range" min="-80" max="80" value="0"></div>
+  <div class="control"><label for="x">Horizontal translation <output id="xVal">0 px</output></label><input id="x" type="range" min="-25" max="25" value="0"></div>
+  <div class="control"><label for="y">Vertical translation <output id="yVal">0 px</output></label><input id="y" type="range" min="-25" max="25" value="0"></div>
+  <div class="control"><label for="distance">Camera distance <output id="distanceVal">4.0</output></label><input id="distance" type="range" min="3" max="9" step="0.1" value="4"></div>
+ </div>
+</div>
+<div class="panels">
+ <section class="panel"><h2><span class="stage">INPUT · PERSPECTIVE CAMERA</span>RF-tiled 3D silhouette</h2><canvas id="input" width="300" height="300" aria-label="Drag to move projected shape"></canvas><div class="small">Left-drag: move. Shift/right-drag: tilt. Wheel: distance.</div></section>
+ <section class="panel"><h2><span class="stage">LAYER 1 · LOCAL RF</span>Instantaneous RF edge response</h2><canvas id="l1" width="300" height="300"></canvas><div class="small" id="rfCount">—</div></section>
+ <section class="panel"><h2><span class="stage">LAYER 2 · FEATURE ENSEMBLES</span>Candidate edges and corners</h2><canvas id="l2" width="300" height="300"></canvas><div class="small" id="featureCount">—</div></section>
+</div>
+<div class="readouts">
+ <section class="readout"><h2>Layer 2 · Instantaneous feature responses</h2><div id="edges"></div><div id="corners"></div></section>
+ <section class="readout"><h2>Layer 3 · Triangle vs. Square</h2><div id="decision" role="status" aria-live="polite" class="pill">—</div><div id="shapes"></div><div class="small">Three-corner / four-corner decision uses only pooled RF activity. It never reads the source shape label.</div><div class="small" id="ratio"></div></section>
+</div>
+<div class="note"><b>Interpretation:</b> This is a synthetic geometry-and-RF feasibility experiment, not a trained Spike Flow Network. The class scores are uncalibrated heuristic activations, not probabilities. The pipeline uses 60 × 60 raster pixels, nonoverlapping 3 × 3 or 5 × 5 pooled RFs, RF-based silhouette recovery, and a three-vertex vs four-vertex model comparison. Strong tilt, clipping, occlusion, and noise are not guaranteed. A non-equilateral triangle remains a triangle; image-only inference cannot always determine whether its 3D source was equilateral.</div>
+</main>
+<script src="./visual-ensemble-model.js"></script>
+<script id="visual-ensemble-interface">
+(function(){
+ "use strict";
+ const M=window.SFNVisualModel, $=id=>document.getElementById(id);
+ const defaults={rf:3,shape:"triangle",roll:0,yaw:0,pitch:0,x:0,y:0,distance:4};
+ const state={...defaults}, controls=["roll","yaw","pitch","x","y","distance"];
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ let request=false;
+ function schedule(){if(request)return;request=true;requestAnimationFrame(()=>{request=false;render();});}
+ function sync(){
+  for(const name of controls){$(name).value=state[name];$(name+"Val").textContent=(name==="distance"?Number(state[name]).toFixed(1):Math.round(state[name]))+(["roll","yaw","pitch"].includes(name)?"°":["x","y"].includes(name)?" px":"");}
+  $("shape").value=state.shape;
+  for(let n of [3,5]){$("rf"+n).classList.toggle("active",state.rf===n);$("rf"+n).setAttribute("aria-pressed",String(state.rf===n));}
+ }
+ for(let name of controls)$(name).addEventListener("input",ev=>{state[name]=Number(ev.target.value);sync();schedule();});
+ $("shape").addEventListener("change",ev=>{state.shape=ev.target.value;sync();schedule();});
+ for(let n of [3,5])$("rf"+n).addEventListener("click",()=>{state.rf=n;sync();schedule();});
+ $("reset").addEventListener("click",()=>{Object.assign(state,defaults);sync();schedule();});
+ $("random").addEventListener("click",()=>{
+  state.roll=Math.floor(Math.random()*360);state.yaw=Math.round((Math.random()-.5)*100);state.pitch=Math.round((Math.random()-.5)*80);state.x=Math.round((Math.random()-.5)*10);state.y=Math.round((Math.random()-.5)*10);state.distance=4;sync();schedule();
+ });
+ let dragging=null;const input=$("input");
+ input.addEventListener("contextmenu",ev=>ev.preventDefault());
+ input.addEventListener("pointerdown",ev=>{ev.preventDefault();dragging={id:ev.pointerId,x:ev.clientX,y:ev.clientY,tilt:ev.button===2||ev.shiftKey};input.setPointerCapture(ev.pointerId);input.style.cursor="grabbing";});
+ input.addEventListener("pointermove",ev=>{
+  if(!dragging||ev.pointerId!==dragging.id)return;
+  const r=input.getBoundingClientRect(),dx=ev.clientX-dragging.x,dy=ev.clientY-dragging.y;
+  if(dragging.tilt){state.yaw=clamp(state.yaw+dx*.5,-80,80);state.pitch=clamp(state.pitch+dy*.5,-80,80);}
+  else{state.x=clamp(state.x+dx*60/r.width,-25,25);state.y=clamp(state.y+dy*60/r.height,-25,25);}
+  dragging.x=ev.clientX;dragging.y=ev.clientY;sync();schedule();
+ });
+ for(const type of ["pointerup","pointercancel","lostpointercapture"])input.addEventListener(type,()=>{dragging=null;input.style.cursor="grab";});
+ input.addEventListener("wheel",ev=>{ev.preventDefault();state.distance=clamp(Math.round((state.distance+ev.deltaY*.003)*10)/10,3,9);sync();schedule();},{passive:false});
+ const ctx=id=>$(id).getContext("2d");
+ function background(c,color){c.fillStyle=color;c.fillRect(0,0,300,300);}
+ function grid(c){c.beginPath();for(let i=0;i<=60;i+=state.rf){let t=i*5+.5;c.moveTo(t,0);c.lineTo(t,300);c.moveTo(0,t);c.lineTo(300,t);}c.strokeStyle="rgba(90,115,145,.23)";c.lineWidth=.65;c.stroke();}
+ function inputCanvas(pts){let c=ctx("input");background(c,"#f7fafd");c.beginPath();c.moveTo(pts[0].x*5,pts[0].y*5);for(let i=1;i<pts.length;i++)c.lineTo(pts[i].x*5,pts[i].y*5);c.closePath();c.fillStyle="rgba(84,197,227,.48)";c.fill();c.lineWidth=2.5;c.strokeStyle="#087ba1";c.stroke();grid(c);
+  const zs=pts.map(p=>p.z),zmin=Math.min(...zs),zmax=Math.max(...zs);for(const [i,p] of pts.entries()){const t=(p.z-zmin)/Math.max(1e-8,zmax-zmin);c.beginPath();c.arc(p.x*5,p.y*5,4,0,Math.PI*2);c.fillStyle="rgb("+Math.round(251-159*t)+",110,100)";c.fill();c.font="bold 11px sans-serif";c.fillStyle="#29495a";c.fillText("V"+(i+1),p.x*5+7,p.y*5-8);}
+ }
+ function l1Canvas(r){let c=ctx("l1");background(c,"#f8fafc");for(let q of r.cells){let t=q.edge,r0=Math.round(247-12*t),g=Math.round(249-160*t),b=Math.round(251-209*t);c.fillStyle="rgb("+r0+","+g+","+b+")";c.fillRect(q.x*5,q.y*5,state.rf*5,state.rf*5);c.strokeStyle="rgba(255,255,255,.5)";c.strokeRect(q.x*5+.25,q.y*5+.25,state.rf*5-.5,state.rf*5-.5);} $("rfCount").textContent=r.cells.length+" RF patches · "+r.cells.filter(q=>q.edge>.18).length+" strong edge responses";}
+ function l2Canvas(a){let c=ctx("l2");background(c,"#101d32");
+  for(let q of a.rf.cells){if(q.edge<.09)continue;c.fillStyle="rgba(58,189,246,"+(.06+.45*q.edge).toFixed(3)+")";c.fillRect(q.x*5,q.y*5,state.rf*5-1,state.rf*5-1);}
+  const colors=["#ad94ff","#40ddc6","#ff8498","#ffca67"];
+  for(let [i,e] of a.edges.entries()){c.beginPath();c.moveTo(e.a.x*5,e.a.y*5);c.lineTo(e.b.x*5,e.b.y*5);c.lineWidth=3.2;c.strokeStyle=colors[i%4];c.stroke();}
+  c.font="bold 10px system-ui,sans-serif";
+  for(let [i,p] of a.corners.entries()){c.beginPath();c.arc(p.x*5,p.y*5,5,0,Math.PI*2);c.fillStyle="#ffcd66";c.fill();c.fillStyle="#fff0b9";c.fillText("C"+(i+1),p.x*5+9,p.y*5-6);}
+  $("featureCount").textContent=a.edges.length+" candidate edges · "+a.corners.length+" candidate corners";
+ }
+ function bar(label,n,color){const v=clamp(n||0,0,1);return '<div class="bar"><span>'+label+'</span><div class="track"><div class="fill" style="width:'+(100*v).toFixed(1)+'%;background:'+color+'"></div></div><span class="value">'+v.toFixed(2)+'</span></div>';}
+ function render(){
+  let out=M.evaluate(state);inputCanvas(out.projected);l1Canvas(out.rf);l2Canvas(out);
+  $("edges").innerHTML=[0,1,2,3].map(i=>bar("Edge E"+(i+1),out.edges[i]?.strength||0,["#ae96ff","#27bfab","#f58d99","#f6bb52"][i])).join("");
+  $("corners").innerHTML=[0,1,2,3].map(i=>bar("Corner C"+(i+1),out.corners[i]?.strength||0,"#e6af46")).join("");
+  $("shapes").innerHTML=bar("Triangle ensemble",out.triangle,"#12a89d")+bar("Square ensemble",out.square,"#6685d8");
+  let d=$("decision");d.className="pill"+(out.decision!=="uncertain"?" ok":"");d.textContent=out.decision==="triangle"?"TRIANGLE":out.decision==="square"?"SQUARE":"UNCERTAIN / OUT OF VIEW";
+  $("ratio").textContent="Largest inscribed triangle / recovered convex hull area = "+out.ratio.toFixed(3)+(out.touching?" · target touches image boundary":"");
+ }
+ sync();render();
+})();
+</script></body></html>

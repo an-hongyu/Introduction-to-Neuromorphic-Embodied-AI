@@ -599,19 +599,19 @@ The three panels below update with each change in object pose:
 
 ### 6.11.1 How the geometric neural proxy is evaluated
 
-Let `r` be the RF patch width (3 or 5 pixels). Let (I) denote the rendered image. The RF response is
+Let \(r\) be the RF patch width (3 or 5 pixels). Let \(I\) denote the rendered image. The RF response is
 
-$
+$$
 m_{ij}=\frac{1}{r^2}\sum_{u=0}^{r-1}\sum_{v=0}^{r-1}I(ri+u,rj+v).
-$
+$$
 
-Finite differences between neighboring (m_{ij}) produce local edge activity. Thresholded interpolation of these RF activities estimates the silhouette. This is followed by a convex-hull approximation; denote its area by (A_H). Compare it with the **largest inscribed triangle** whose three vertices lie on that recovered hull:
+Finite differences between neighboring \(m_{ij}\) produce local edge activity. Thresholded interpolation of the *pooled RF means* estimates the silhouette. This is followed by a convex-hull approximation; denote its area by \(A_H\). Compare it with the **largest inscribed triangle** whose three vertices lie on that recovered hull:
 
-$
+$$
 \rho=\frac{\max_{a,b,c\in H}A(\triangle abc)}{A_H}.
-$
+$$
 
-A triangle has an ideal ratio close to 1, whereas an ideal square's largest inscribed triangle covers half its area. Perspective deformation preserves the number of corners of a nondegenerate polygon, but near edge-on projection, coarse sampling, occlusion, and clipping can erase the evidence. In this *teaching prototype*, the heuristic reports **triangle** for (ho\geq0.63), **square** for (ho\leq0.585), and **uncertain** between them; image-boundary truncation also returns uncertain. These thresholds were evaluated on the declared synthetic test distribution, not validated on external camera recordings.
+A triangle has an ideal ratio close to 1, whereas an ideal square's largest inscribed triangle covers half its area. Perspective deformation preserves the number of corners of a nondegenerate polygon, but near edge-on projection, coarse sampling, occlusion, and clipping can erase the evidence. In this *teaching prototype*, the heuristic reports **triangle** for \(\rho\geq0.63\), **square** for \(\rho\leq0.585\), and **uncertain** between them; image-boundary truncation also returns uncertain. These thresholds were evaluated on the declared synthetic test distribution, not validated on external camera recordings.
 
 ### 6.11.2 Reproducible synthetic benchmark
 

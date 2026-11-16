@@ -4,7 +4,7 @@ title: "Chapter 2 · Computational Models of Neurons"
 
 ## 2.1 Learning objectives and the modeling question
 
-A computational neuron model uses mathematical equations, sometimes combined with explicit spike-and-reset rules, to describe a neuron's electrophysiological behavior. This chapter focuses on three models: the **leaky integrate-and-fire (LIF) model**, the **Hodgkin-Huxley (HH) model**, and the **Izhikevich model**. They provide different ways to describe membrane integration, action-potential generation, and neuronal firing patterns [[1]](#models-ref-1), [[2]](#models-ref-2), [[3]](#models-ref-4).
+A computational neuron model uses mathematical equations to describe a neuron's electrophysiological behavior. This chapter focuses on three models: the **leaky integrate-and-fire (LIF) model**, the **Hodgkin-Huxley (HH) model**, and the **Izhikevich model**. They provide different ways to describe membrane integration, action-potential generation, and neuronal firing patterns [[1]](#models-ref-1), [[2]](#models-ref-2), [[3]](#models-ref-4).
 
 By the end of this chapter, you should be able to:
 

@@ -13,6 +13,9 @@ assert.match(html, /occupancy-normalized/i);
 assert.match(html, /not a learned synaptic weight map/i);
 assert.match(html, /for\(let i=0;i<100;i\+\+\)nextStep\(\)/);
 assert.equal(M.SECTORS, 36);
+assert.match(html, /id="mode"/);
+assert.match(html, /value="all">All borders/);
+assert.match(html, /state\.mode==='all'\?'all':state\.wall/);
 assert.equal(M.waypoints('square').length, 40);
 assert.ok(M.waypoints('circle').length > 150);
 function near(a,b,tol=1e-7) { assert.ok(Math.abs(a-b)<=tol, `${a} != ${b}`); }
@@ -30,6 +33,22 @@ for(const shape of ['square','circle']) {
     near(p.bodyAfter,3.62,1e-7);
     near(p.worldBefore,.38,1e-7);
     assert.ok(p.rateBefore>35 && p.rateBefore<60);
+  }
+  // All-border mode must agree with geometry for the full enclosing perimeter.
+  for (const [x,y] of [[0,0],[.5,.3],[-1.1,.4],[0,1.55]]) {
+    const scans = [M.scan(shape,x,y,.23), M.scan(shape,x,y,.23+Math.PI)];
+    const d = scans.map(h=>M.estimateBoundaryDistance(shape,'all','north',x,y,h));
+    near(d[0],d[1],1e-7);
+    near(d[0],M.trueNearestBoundaryDistance(shape,x,y),1e-7);
+    assert.ok(d[0]>=0 && d[0]<=2);
+    for (const wall of ['north','east','south','west'])
+      near(M.estimateBoundaryDistance(shape,'single',wall,x,y,scans[0]),M.estimateWallDistance(shape,wall,x,y,scans[0]));
+  }
+  for (const wall of ['north','south','east','west']) {
+    const p=M.probe(shape,wall,'all');
+    near(p.worldBefore,p.worldAfter,1e-7);
+    near(p.rateBefore,p.rateAfter,1e-7);
+    near(p.worldBefore,.38,1e-7);
   }
   // Changing heading should permute world points but preserve selected-world distance.
   for(const [x,y] of [[0,0],[.5,.3],[-1.1,.4],[0,1.55]]) {

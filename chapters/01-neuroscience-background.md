@@ -78,6 +78,16 @@ $$
 
 Here $C_m$ is membrane capacitance, $g_L$ is leak conductance, $E_L$ is its reversal potential, and $I_{\mathrm{in}}$ is applied inward-positive current. The membrane time constant is $\tau_m=C_m/g_L$. For example, $C_m=200\,\mathrm{pF}$ and $g_L=10\,\mathrm{nS}$ give $\tau_m=20\,\mathrm{ms}$. This passive equation explains gradual voltage integration, but not the full biological spike waveform. [Chapter 2](03-computational-neuron-models.md) develops the LIF, Hodgkin–Huxley, and Izhikevich models.
 
+For an electrical interpretation, see the [equivalent RC circuit in Chapter 2](03-computational-neuron-models.md#fig-lif-rc-circuit). The capacitor represents membrane charge storage, and the resistor represents the leak pathway. The threshold/reset block in that diagram is added for the LIF model.
+
+```{figure} ../assets/lif-rc-circuit.svg
+:label: fig-ch1-passive-rc
+:alt: Equivalent circuit showing membrane capacitance, a leak resistor and reversal-potential source, and an abstract threshold/reset block.
+:width: 100%
+
+**Electrical interpretation of the membrane.** The capacitor represents charge storage, while the resistor and reversal-potential source represent the passive leak pathway. The threshold/reset block is added for the LIF model introduced in Chapter 2. Original teaching schematic reused from Chapter 2.
+```
+
 **From graded voltage to a spike.** Small inputs produce **graded** voltage responses. When depolarization is sufficient to recruit regenerative voltage-gated currents, the neuron generates an **action potential**, or **spike**. A spike is an all-or-none event under a given set of cellular conditions; its amplitude is not a simple analog readout of input strength. Stronger sustained input can instead change the **timing and frequency** of spikes. Threshold varies with membrane state and recent activity, so a fixed threshold is a useful model approximation rather than a universal biological constant.
 
 ```{figure} ../assets/ch1-neuroscience/action-potential-waveforms.webp
@@ -132,7 +142,11 @@ For $g_{\mathrm{syn}}=3\,\mathrm{nS}$, $E_{\mathrm{syn}}=0\,\mathrm{mV}$, and $V
 **EPSPs and IPSPs combine at the receiving neuron.** Their timing and relative effects help determine whether threshold is reached. Source: *Neuroscience Foundations – Synapse*, slide 29 [[7]](#neuro-ref-7).
 ```
 
-An inhibitory conductance can also reduce the response to excitation without producing a large negative voltage shift. This **shunting inhibition** increases total membrane conductance and shortens the passive integration time constant. If $C_m=200\,\mathrm{pF}$, $g_L=10\,\mathrm{nS}$, and an additional $g_I=20\,\mathrm{nS}$ has $E_I=E_L$, then $\tau_{\mathrm{eff}}=200/(10+20)=6.67\,\mathrm{ms}$. Under a constant 120 pA input, the steady voltage shift is $120/30=4$ mV. These are passive-model predictions, not complete spike simulations.
+An inhibitory conductance can also reduce the response to excitation without producing a large negative voltage shift. This **shunting inhibition** increases total membrane conductance and shortens the passive integration time constant.
+
+Consider $C_m=200\,\mathrm{pF}$, $g_L=10\,\mathrm{nS}$, and a constant 120 pA input. Without additional inhibitory conductance, the time constant is $\tau_m=200/10=20\,\mathrm{ms}$ and the steady voltage shift from $E_L$ is $120/10=12$ mV.
+
+Now add $g_I=20\,\mathrm{nS}$ with $E_I=E_L$. The total conductance becomes 30 nS, giving $\tau_{\mathrm{eff}}=200/30=6.67\,\mathrm{ms}$ and a steady voltage shift of $120/30=4$ mV. The same input therefore produces a smaller voltage change, from 12 mV without inhibition to 4 mV with inhibition. Because $E_I=E_L$, the no-input equilibrium remains unchanged. These are passive-model predictions, not complete spike simulations.
 
 **Spatial and temporal integration.** A neuron combines signals arriving from many synapses. **Spatial summation** combines inputs at different locations; **temporal summation** combines inputs that arrive close together in time. The location of a synapse matters because a local dendritic EPSP may attenuate before reaching the axon initial segment. Therefore, two distal 6 mV EPSPs do not necessarily produce a 12 mV depolarization at the spike-initiation zone.
 
@@ -153,6 +167,8 @@ $$
 With $A=6$ mV and $\tau=20$ ms, a second identical event arriving 5 ms later produces an illustrative total contribution of $6+6e^{-5/20}\approx10.67$ mV. With a separation of 20 ms, the total is $6+6e^{-1}\approx8.21$ mV. From a $-65$ mV resting value, those passive sums predict $-54.33$ mV and $-56.79$ mV, respectively. Against an illustrative $-55$ mV threshold, **the timing—not just the number of inputs—changes the predicted outcome**. This exponential voltage kernel is a teaching approximation, not a detailed synaptic conductance model.
 
 **Transmission versus plasticity.** A synapse can transmit a signal without changing its strength. **Synaptic plasticity** refers to changes in the effectiveness of later transmission. Short-term facilitation and depression alter responses over relatively brief periods; long-term potentiation (LTP) and depression (LTD) describe longer-lasting strengthening or weakening. A larger second voltage peak alone does not prove facilitation, because it may reflect overlap with the first EPSP. A connection weight $w_{ij}$ in a model summarizes an effective influence, not a single biological molecule. [Chapter 3](04-hebbian-learning.md) introduces explicit Hebbian and spike-timing-dependent learning rules.
+
+**Intrinsic excitability changes** alter how readily a neuron generates spikes in response to a given input. For example, changes in firing threshold or membrane ion-channel properties can change the neuron's response even when synaptic strength stays the same. Synaptic plasticity changes the effectiveness of connections between neurons, while intrinsic excitability changes affect the neuron's own response to input.
 
 The resulting computational view is straightforward: **sensory signals alter membrane and synaptic state; neurons integrate those signals; output spikes influence downstream neurons; and plasticity can change future responses**. The following chapters turn this biological picture into equations, neural codes, and robotic controllers.
 

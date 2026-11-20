@@ -102,8 +102,11 @@ print(f'R = {1000 / leak_ns:.1f} MΩ; tau = {capacitance_pf / leak_ns:.1f} ms')
 EXAMPLE1 = r'''
 current = np.full(round(duration_ms / dt_ms), current_pa)
 time, voltage, spikes = simulate_lif(current, **parameters)
-rate = 0.0 if len(spikes) < 2 else 1000.0 / np.diff(spikes).mean()
-print(f'{len(spikes)} spikes in {duration_ms:g} ms; interval-based rate = {rate:.2f} Hz')
+if len(spikes) < 2:
+    rate_text = 'not enough spikes to calculate the rate'
+else:
+    rate_text = f'{1000.0 / np.diff(spikes).mean():.2f} Hz'
+print(f'{len(spikes)} spikes in {duration_ms:g} ms; interval-based rate = {rate_text}')
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.1), constrained_layout=True)
 plot_response(axes[0], time, voltage, spikes, 'Voltage / spike events', '#24628a', threshold_mv)
 axes[0].set(xlim=(0, min(160, duration_ms)), title='A. Change the parameters above')
@@ -112,7 +115,7 @@ currents = np.linspace(80, 300, 23)
 simulated = []
 for value in currents:
     _, _, events = simulate_lif(np.full(round(2000 / dt_ms), value), **parameters)
-    simulated.append(0.0 if len(events) < 2 else 1000 / np.diff(events).mean())
+    simulated.append(np.nan if len(events) < 2 else 1000 / np.diff(events).mean())
 expected = [analytical_rate(i, **{k: v for k, v in parameters.items() if k != 'dt_ms'})
             for i in currents]
 axes[1].plot(currents, expected, color='#24628a', label='Analytical')
@@ -157,7 +160,7 @@ for column, separation in enumerate([separation_ms, 40.0]):
     axes[0, column].set(title=f'Onset separation = {separation:g} ms; spikes = {len(events)}', ylim=(-66, -43))
     axes[0, column].legend(fontsize=8, loc='lower right')
     axes[1, column].step(sample, current, where='post', color='#24628a')
-    axes[1, column].set(xlabel='Time (ms)', ylabel='Input current (pA)', xlim=(0, 100), ylim=(-20, 650))
+    axes[1, column].set(xlabel='Time (ms)', ylabel='Input current (pA)', xlim=(0, 100), ylim=(min(-20.0, float(current.min()) - 20.0), max(650.0, float(current.max()) * 1.1)))
 plt.show()
 '''
 

@@ -56,6 +56,10 @@ print("Spikes in one simulated second:", counts.sum())
 
 The expected total is 20; an individual realization need not equal 20. Independent Poisson sampling does not include an absolute refractory period, adaptation, or history-dependent firing. It is a baseline assumption to test, not a definition of biological spiking [[1]](#models-ref-1).
 
+**Connection to spatial firing-rate maps.** A spatial firing-rate map estimates how strongly a neuron responds at different locations. Divide the environment into spatial bins. If the neuron produces $N$ spikes during a total observation time $T>0$ seconds in one spatial bin, its estimated firing rate there is $\hat r=N/T$. The time spent in that bin is called its occupancy time.
+
+Assuming a constant rate $r$ within the spatial bin and independent Poisson counts, $N\sim\operatorname{Poisson}(rT)$. The estimated rate has variance $\operatorname{Var}(\hat r)=r/T$. Thus, a shorter occupancy time gives a more uncertain rate estimate. For example, at $r=20$ Hz, the standard deviation of the estimated rate is approximately 6.32 Hz for $T=0.5$ s, compared with 3.16 Hz for $T=2$ s. Chapter 4 develops spatial firing-rate maps further.
+
 ## 2.4 Leaky integrate-and-fire: integrate, cross threshold, reset
 
 The **leaky integrate-and-fire (LIF)** model uses a passive voltage equation between spikes:
@@ -532,7 +536,7 @@ Begin the practical sequence with the [Computational Models of Neurons laborator
 2. For the LIF parameters above, explain why 100 pA does not produce sustained firing from reset.
 3. Change capacitance to 400 pF while keeping conductance and current fixed. Which steady-state quantities remain the same, and which timing quantities change?
 4. Explain the difference between a reset rule and a modeled action-potential waveform.
-5. Choose a model for (a) occupancy-map uncertainty, (b) adaptation, and (c) sodium-channel dynamics. Defend each choice.
+5. Choose a model for (a) sampling uncertainty in a spatial firing-rate map, (b) adaptation, and (c) sodium-channel dynamics. Defend each choice.
 
 ## References
 

@@ -26,6 +26,92 @@ class QuietHandler(SimpleHTTPRequestHandler):
         pass
 
 
+def answer_adaptive(player, question, *, correct):
+    assert player.locator('#adaptive-question').inner_text() == question['prompt']
+    choice = question['answer'] if correct else (question['answer'] + 1) % len(question['options'])
+    player.locator(f'#adaptive-options input[value="{choice}"]').check()
+    player.locator('#adaptive-submit').click()
+    assert player.locator('#adaptive-feedback').get_attribute('data-result') == ('correct' if correct else 'wrong')
+    assert player.locator('#adaptive-source').get_attribute('href') == question['sourceHref']
+
+
+def check_adaptive_practice(browser, base, data):
+    context = browser.new_context(viewport={'width': 1400, 'height': 960})
+    try:
+        book = context.new_page()
+        player_page = context.new_page()
+        chapters = data['adaptive']
+        for topic, objectives in chapters.items():
+            # The entry point for every numbered chapter is its own chapter-end iframe.
+            chapter_path = objectives[0]['questions'][0]['sourceHref'].split('#')[0]
+            origin = base.removesuffix('/' + PREFIX)
+            response = book.goto(f'{origin}{chapter_path}#adaptive-practice-{topic}')
+            assert response and response.ok, topic
+            selector = 'iframe[src*="mode=adaptive"]'
+            assert book.locator(selector).count() == 1, topic
+            player = book.frame_locator(selector)
+            player.locator('#adaptive-question').wait_for()
+            assert player.locator('#adaptive-question').inner_text() == objectives[0]['questions'][0]['prompt']
+
+            practice_url = base + f'/exercise-practice.html?topic={topic}&mode=adaptive'
+            player_page.goto(practice_url)
+            player_page.locator('#adaptive-content').wait_for()
+            for index, objective in enumerate(objectives):
+                questions = objective['questions']
+                # For every concept, two misses yield two lessons and two fresh follow-ups.
+                for question_index in range(2):
+                    answer_adaptive(player_page, questions[question_index], correct=False)
+                    lesson = objective['lessons'][question_index]
+                    assert lesson['title'] in player_page.locator('#adaptive-lesson-title').inner_text()
+                    assert player_page.locator('#adaptive-lesson-body').inner_text() == lesson['body']
+                    assert player_page.locator('#adaptive-progress').get_attribute('value') == str(index)
+                    if topic == 'ch1' and index == 0 and question_index == 0:
+                        player_page.reload()
+                        player_page.locator('#adaptive-lesson').wait_for()
+                        assert player_page.locator('#adaptive-lesson-body').inner_text() == lesson['body']
+                    player_page.get_by_role('button', name='Try a new question').click()
+
+                answer_adaptive(player_page, questions[2], correct=True)
+                assert player_page.locator('#adaptive-progress').get_attribute('value') == str(index)
+                player_page.get_by_role('button', name='Check with another question').click()
+                answer_adaptive(player_page, questions[3], correct=True)
+                assert player_page.locator('#adaptive-feedback-title').inner_text() == 'Concept mastered'
+                assert player_page.locator('#adaptive-progress').get_attribute('value') == str(index + 1)
+                player_page.get_by_role('button', name='Continue chapter').click()
+            assert player_page.locator('#adaptive-summary-title').inner_text() == 'Chapter practice mastered'
+            player_page.reload()
+            player_page.locator('#adaptive-summary-title').wait_for()
+            assert player_page.locator('#adaptive-progress').get_attribute('value') == str(len(objectives))
+
+        # In a new profile, a miss breaks the streak, and exhausting the bank does not grant mastery.
+        fresh = browser.new_context(viewport={'width': 390, 'height': 844})
+        try:
+            mobile = fresh.new_page()
+            target = next(o for o in chapters['ch8'] if o['id'] == 'border-readout')
+            chapter_path = target['questions'][0]['sourceHref'].split('#')[0]
+            mobile.goto(origin + chapter_path + '#adaptive-practice-ch8')
+            mobile.locator(selector).wait_for()
+            player = mobile.frame_locator(selector)
+            player.get_by_text('Concepts in this chapter').click()
+            player.get_by_role('button', name=target['title'], exact=False).click()
+            for idx, question in enumerate(target['questions']):
+                answer_adaptive(player, question, correct=idx in (0, len(target['questions']) - 1))
+                if idx < len(target['questions']) - 1:
+                    player.locator('#adaptive-next').click()
+            assert player.locator('#adaptive-summary-title').inner_text() == 'More review needed'
+            assert player.locator('#adaptive-progress').get_attribute('value') == '0'
+            child = next(frame for frame in mobile.frames if 'mode=adaptive' in frame.url)
+            child.wait_for_function('document.querySelector("main").getBoundingClientRect().height <= innerHeight + 3')
+            assert child.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+            player.locator('#adaptive-repeat').click()
+            assert player.locator('#adaptive-question').inner_text() == target['questions'][0]['prompt']
+        finally:
+            fresh.close()
+    finally:
+        context.close()
+    return sum(map(len, chapters.values()))
+
+
 def run_checks(base: str) -> dict:
     with sync_playwright() as pw:
         launch = dict(headless=True, args=['--no-sandbox'])
@@ -160,9 +246,11 @@ def run_checks(base: str) -> dict:
             assert book.locator('iframe[src*="exercise-practice.html"]').count() == 1
             book.screenshot(path=str(OUT / 'exercise-center-home.png'), full_page=False)
             assert not errors, errors
+            adaptive_count = check_adaptive_practice(browser, base, data)
             return {
                 'correct_answer_paths': 120, 'incorrect_answer_paths': 120,
                 'written_exercise_count': 96, 'readable_choice_answers': 120,
+                'adaptive_concepts_verified': adaptive_count,
                 'verified': ['source links', 'retry', 'reveal', 'first-attempt accounting',
                              'reload persistence', 'topic-scoped reset', 'filters', 'shuffle',
                              'storage unavailable fallback', 'actual chapter iframe resizing',

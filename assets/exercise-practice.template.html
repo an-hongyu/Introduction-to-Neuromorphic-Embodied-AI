@@ -5,7 +5,30 @@
 @media(max-width:520px){main{padding:13px}.card{padding:17px}.controls{grid-template-columns:1fr}h1{font-size:1.4rem}.question-title{font-size:1.07rem}.option{font-size:.92rem}.navigation{gap:6px}.navigation button{padding:9px 12px}.navigation select{min-width:90px}.stats{gap:5px 14px}.actions button{flex:1}.feedback{padding:13px}}
 @media(prefers-color-scheme:dark){:root{color-scheme:dark;--ink:#e3eef1;--muted:#abc0c9;--line:#39505d;--accent:#77d5ca;--soft:#193e43;--bg:#14242d;--paper:#1b2f3a;--wrong:#ffb59f;--wrongbg:#482e2a;--good:#93ddb4;--goodbg:#203d34}button.primary{color:#102b32}.card{box-shadow:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.adaptive .intro{font-size:1rem;margin-bottom:13px}
+.adaptive .stats{font-size:.9rem;margin-bottom:8px}
+.adaptive .card{margin-top:14px}
+.adaptive .topic-caption,.adaptive legend,.adaptive .source{font-size:.9rem}
+.adaptive .question-title{display:table;max-width:100%;padding:0}
+.adaptive .option-text{font-size:1rem}
+.adaptive .actions[hidden],.adaptive .feedback[hidden]{display:none}
+.adaptive .feedback p,.mini-lesson p{font-size:1rem;overflow-wrap:anywhere}
+.mini-lesson{margin-top:12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:14px}
+.mini-lesson h3{font-size:1rem;margin:0 0 6px}
+.mini-lesson p{margin:0}
+.adaptive-summary p:last-child{margin-bottom:0}
+.adaptive-topics{margin-top:14px}
+.adaptive-topics summary{font-weight:650;padding:6px 0;cursor:pointer}
+.adaptive-topics ul{list-style:none;padding:0;margin:6px 0 0}
+.adaptive-topics li+li{margin-top:5px}
+.adaptive-topics button{display:flex;gap:8px;align-items:baseline;justify-content:space-between;text-align:left;width:100%;font-weight:500}
+.adaptive-topics button[aria-current]{border-color:var(--accent);background:var(--soft)}
+.concept-status{font-size:.82rem;color:var(--muted);text-align:right;flex:0 0 auto}
+.concept-status[data-status="mastered"]{color:var(--good)}
+.concept-status[data-status="review"]{color:var(--wrong)}
+@media(max-width:520px){.adaptive .option{padding:10px}.adaptive .option[data-state]{padding:9px}.adaptive-topics button{flex-wrap:wrap}}
 </style></head><body><main>
+<div id="question-bank" hidden>
 <p class="eyebrow">Introduction to Neuromorphic Embodied AI</p><h1>Interactive Questions</h1>
 <p class="intro">Choose one answer to see feedback immediately. Read the explanation, revisit the source section, and try again. This is practice, not a graded exam.</p>
 <div class="controls"><label><span class="control-label">Topic</span><select id="topic" aria-label="Practice topic"></select></label><label><span class="control-label">Question set</span><select id="filter" aria-label="Question filter"><option value="all">All questions in topic</option><option value="unanswered">Not yet attempted</option><option value="missed">First-try misses / revealed</option><option value="calculation">Calculation questions</option><option value="application">Application questions</option></select></label></div>
@@ -20,15 +43,75 @@
 <div class="tools"><button id="shuffle">Shuffle question order</button><button id="reset">Reset this topic</button></div>
 <div class="footer-links"><a id="full-page" target="_blank" rel="noopener">Open this question in a full page</a><a id="practice-home" target="_top">Exercise center</a></div>
 <p class="privacy">Progress is stored only in this browser on this device. No account, name, email, or answers are sent to a server. On shared devices, use Reset this topic after studying. Answer keys are included for self-study, not secure examinations.</p><p class="storage-warning" id="storage-warning" hidden>Browser storage is unavailable. Practice still works, but progress will not be saved after this page closes.</p>
-<noscript><p>Interactive grading needs JavaScript. The exercise center also provides the full question bank and expandable worked answers without it.</p></noscript>
+</div>
+<section id="adaptive" class="adaptive" hidden aria-labelledby="adaptive-title">
+  <h1 id="adaptive-title">Adaptive chapter practice</h1>
+  <p class="intro">Answer two different questions in a row correctly to master each concept. If you miss one, read a short lesson and try a new question on the same concept.</p>
+  <p id="adaptive-load-error" role="alert" hidden>Practice did not load. Reload the page to try again.</p>
+  <div id="adaptive-content" hidden>
+    <p id="adaptive-progress-label" class="stats" role="status"></p>
+    <progress id="adaptive-progress" aria-labelledby="adaptive-progress-label"></progress>
+    <section id="adaptive-card" class="card" aria-labelledby="adaptive-concept">
+      <p id="adaptive-concept" class="topic-caption"></p>
+      <form id="adaptive-form">
+        <fieldset id="adaptive-choices">
+          <legend id="adaptive-question" class="question-title" tabindex="-1"></legend>
+          <div id="adaptive-options"></div>
+        </fieldset>
+        <div class="actions">
+          <button id="adaptive-submit" class="primary" type="submit">Check answer</button>
+        </div>
+      </form>
+      <div id="adaptive-feedback" class="feedback" hidden aria-live="polite" aria-atomic="true">
+        <h3 id="adaptive-feedback-title" tabindex="-1"></h3>
+        <p id="adaptive-explanation"></p>
+        <p class="source"><a id="adaptive-source" target="_top">Review the chapter</a></p>
+      </div>
+      <section id="adaptive-lesson" class="mini-lesson" hidden aria-labelledby="adaptive-lesson-title">
+        <h3 id="adaptive-lesson-title"></h3>
+        <p id="adaptive-lesson-body"></p>
+      </section>
+      <div id="adaptive-summary" class="adaptive-summary" hidden>
+        <h2 id="adaptive-summary-title" tabindex="-1"></h2>
+        <p id="adaptive-summary-text"></p>
+      </div>
+      <div class="actions">
+        <button id="adaptive-next" class="primary" type="button" hidden></button>
+        <button id="adaptive-repeat" type="button" hidden>Restart this concept</button>
+      </div>
+    </section>
+    <details id="adaptive-topics" class="adaptive-topics">
+      <summary>Concepts in this chapter</summary>
+      <ul id="adaptive-concept-list"></ul>
+    </details>
+    <p id="adaptive-storage-warning" class="storage-warning" hidden>Progress will reset when this page closes because browser storage is unavailable.</p>
+  </div>
+  <p class="footer-links"><a id="adaptive-bank-link" target="_blank" rel="noopener">Open the chapter question bank</a></p>
+</section>
+<noscript><p>Turn on JavaScript for interactive practice. The exercise center also provides the readable question bank and expandable worked answers.</p></noscript>
 </main>
 <script id="question-data" type="application/json">__QUESTION_DATA__</script>
 <script>
 'use strict';
 const DATA=JSON.parse(document.getElementById('question-data').textContent);
 const $=id=>document.getElementById(id), KEY='neai-practice-v1';
-const ALL=DATA.questions, byId=new Map(ALL.map(q=>[q.id,q])), topicMap=new Map(DATA.topics.map(t=>[t.id,t]));
 const params=new URLSearchParams(location.search);
+const adaptiveTopic = params.get('mode') === 'adaptive' && Object.hasOwn(DATA.adaptive, params.get('topic'))
+  ? params.get('topic') : null;
+
+let heightTimer,lastHeight=0;
+function sendHeight(){clearTimeout(heightTimer);heightTimer=setTimeout(()=>{const height=Math.ceil(document.querySelector('main').getBoundingClientRect().height)+4;if(height!==lastHeight){lastHeight=height;if(parent!==window)parent.postMessage({type:'neai-practice-height',height},location.origin);}},35);}
+window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='neai-practice-measure'){lastHeight=0;sendHeight();}});
+window.addEventListener('resize',()=>{lastHeight=0;sendHeight();});new ResizeObserver(sendHeight).observe(document.querySelector('main'));
+
+if (adaptiveTopic) {
+  $('adaptive').hidden = false;
+  $('adaptive-bank-link').href = `${DATA.home}${adaptiveTopic}/`;
+  import('./exercise-adaptive.js')
+    .then(({ startAdaptivePractice }) => startAdaptivePractice(adaptiveTopic, DATA.adaptive[adaptiveTopic], params))
+    .catch(() => { $('adaptive-load-error').hidden = false; });
+} else {
+const ALL=DATA.questions, byId=new Map(ALL.map(q=>[q.id,q])), topicMap=new Map(DATA.topics.map(t=>[t.id,t]));
 let topic=topicMap.has(params.get('topic'))?params.get('topic'):'all';
 let filter='all', position=0, order=ALL.map(q=>q.id), view=[], state={}, persist=true;
 try {
@@ -72,11 +155,9 @@ $('next').addEventListener('click',()=>{if(position<view.length-1){position++;dr
 $('jump').addEventListener('change',()=>{position=view.findIndex(q=>q.id===$('jump').value);draw(true);});
 $('shuffle').addEventListener('click',()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}makeView();draw(true);});
 $('reset').addEventListener('click',()=>{const name=topic==='all'?'all topics':topicMap.get(topic).title;if(!confirm(`Reset saved progress for ${name}? This cannot be undone.`))return;for(const q of topicQuestions())delete state[q.id];save();makeView();draw();});
-let heightTimer,lastHeight=0;
-function sendHeight(){clearTimeout(heightTimer);heightTimer=setTimeout(()=>{const height=Math.ceil(document.querySelector('main').getBoundingClientRect().height)+4;if(height!==lastHeight){lastHeight=height;if(parent!==window)parent.postMessage({type:'neai-practice-height',height},location.origin);}},35);}
-window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='neai-practice-measure'){lastHeight=0;sendHeight();}});
-window.addEventListener('resize',()=>{lastHeight=0;sendHeight();});new ResizeObserver(sendHeight).observe(document.querySelector('main'));
+$('question-bank').hidden = false;
 $('topic').add(new Option('All topics - 120 questions','all'));for(const t of DATA.topics)$('topic').add(new Option(t.title,t.id));$('topic').value=topic;makeView(params.get('q'));draw();$('storage-warning').hidden=persist;
+}
 // A small read-only hook makes the same answer checker testable in browser QA.
 Object.defineProperty(window,'practiceTestData',{value:DATA,writable:false});
 </script></body></html>

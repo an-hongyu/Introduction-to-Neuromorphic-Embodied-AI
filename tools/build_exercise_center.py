@@ -108,56 +108,113 @@ def relocate(content: str, stem: str) -> str:
     return re.sub(r'\[([^\]]+)\]\(([^)]+)\)', move, content)
 
 
-def iframe(topic_id: str) -> str:
-    return f'''```{{iframe}} {BASE}/exercise-practice.html?topic={topic_id}
-:label: practice-player-{topic_id}
+def iframe(topic_id: str, *, adaptive: bool = False) -> str:
+    query = f'topic={topic_id}' + ('&mode=adaptive' if adaptive else '')
+    label = 'Adaptive chapter practice' if adaptive else 'Interactive practice questions'
+    player_id = f'adaptive-player-{topic_id}' if adaptive else f'practice-player-{topic_id}'
+    return f'''```{{iframe}} {BASE}/exercise-practice.html?{query}
+:label: {player_id}
 :class: exercise-playground
-:title: Interactive practice questions for {topic_id}
+:title: {label} for {topic_id}
 :width: 100%
-```
-
-[Open practice in a full page](/exercise-practice.html?topic={topic_id}) | [Readable question bank](question-bank.md)
-'''
+```'''
 
 
-def add_portal(stem: str, topic_id: str) -> None:
+def practice_links(topic_id: str) -> str:
+    return (f'[Open practice in a full page](/exercise-practice.html?topic={topic_id})'
+            ' | [Readable question bank](question-bank.md)')
+
+
+def add_portal(stem: str, topic_id: str, *, adaptive: bool) -> None:
     path = f'chapters/{stem}.md'
-    doc = text(path)
+    original = text(path)
+    doc = original
     marker = f'<!-- exercise-center:{topic_id} -->'
-    if marker in doc:
-        return
-    heading, _ = section_body(doc)
+    heading, body = section_body(doc)
     target = '## ' + heading + '\n'
-    portal = f'\n{marker}\n[Interactive questions and expandable worked answers](../exercises/{topic_id}.md) are available in the dedicated exercise section.\n'
-    assert doc.count(target) == 1
-    write(path, doc.replace(target, target + portal, 1))
+    anchor = f'(adaptive-practice-{topic_id})='
+    if adaptive and anchor not in doc:
+        block = f'''{anchor}
+## Adaptive chapter practice
+
+Answer two different questions in a row correctly to master a concept. If you miss a question, review a short lesson and try a new one on the same concept.
+
+{iframe(topic_id, adaptive=True)}
+
+[Open adaptive practice in a full page](/exercise-practice.html?topic={topic_id}&mode=adaptive)
+'''
+        assert doc.count(target + body) == 1
+        doc = doc.replace(target + body, (target + body).rstrip() + '\n\n' + block + '\n', 1)
+    if marker not in doc:
+        portal = f'\n{marker}\n[Interactive questions and expandable worked answers](../exercises/{topic_id}.md) are available in the dedicated exercise section.\n'
+        assert doc.count(target) == 1
+        doc = doc.replace(target, target + portal, 1)
+    if doc != original:
+        write(path, doc)
+
+
+def make_question(row: tuple, topic: tuple, question_id: str, offset: int, sections: dict) -> dict:
+    section, kind, prompt, options, explanation = row
+    assert len(options) == 4 and len(set(options)) == 4, question_id
+    assert kind in ('Concept', 'Calculation', 'Application', 'Practice'), question_id
+    assert all(part.strip() for part in (prompt, explanation, *options)), question_id
+    stem = source_for(topic, section)
+    if stem not in sections:
+        source = text(f'chapters/{stem}.md')
+        sections[stem] = set(re.findall(r'^#{2,4} (\S+)', source, re.M))
+    assert section in sections[stem], (question_id, section)
+    displayed = list(options[-offset:]) + list(options[:-offset]) if offset else list(options)
+    sig = hashlib.sha256(json.dumps(row, ensure_ascii=True).encode()).hexdigest()[:16]
+    return dict(id=question_id, topic=topic[0], kind=kind, prompt=prompt, options=displayed,
+                answer=offset, explanation=explanation, sourceStem=stem, sourceSection=section,
+                sourceHref=chapter_url(stem), sourceLabel=f'Review section {section}', sig=sig)
+
+
+def adaptive_objectives(topic: tuple, base_questions: list[dict], rows: list[tuple], sections: dict) -> list[dict]:
+    tid = topic[0]
+    objectives = []
+    for key, title, original, lessons, variants in rows:
+        assert re.fullmatch(r'[a-z]+(?:-[a-z]+)*', key), (tid, key)
+        assert len(lessons) >= 2 and len(set(lessons)) == len(lessons), (tid, key)
+        assert all(heading.strip() and body.strip() for heading, body in lessons), (tid, key)
+        assert all(1 <= number <= len(base_questions) for number in original), (tid, key)
+        questions = [base_questions[number - 1] for number in original]
+        for index, (section, prompt, correct, distractors, explanation) in enumerate(variants, 1):
+            row = (section, 'Practice', prompt, (correct, *distractors), explanation)
+            questions.append(make_question(row, topic, f'{tid}-{key}-{index}', 0, sections))
+        assert len(questions) >= 4 and len(variants) >= 2, (tid, key)
+        assert len({q['prompt'].strip().casefold() for q in questions}) == len(questions), (tid, key)
+        sig_material = [(q['id'], q['sig'], q['answer']) for q in questions]
+        sig = hashlib.sha256(json.dumps(sig_material).encode()).hexdigest()[:16]
+        objectives.append(dict(id=key, title=title, sig=sig, questions=questions,
+                               lessons=[dict(title=heading, body=body) for heading, body in lessons]))
+    assert len({objective['id'] for objective in objectives}) == len(objectives), tid
+    return objectives
 
 
 def data_and_groups() -> tuple[dict, dict]:
     rows = runpy.run_path(str(ROOT / 'exercises/question_bank.py'))['QUESTION_ROWS']
+    adaptive_rows = runpy.run_path(str(ROOT / 'exercises/adaptive_bank.py'))['OBJECTIVES']
     assert set(rows) == {t[0] for t in TOPICS}
+    assert set(adaptive_rows) == {t[0] for t in TOPICS if t[0].startswith('ch')}
     all_questions, metadata, all_groups = [], [], {}
+    adaptive, sections = {}, {}
     for ti, t in enumerate(TOPICS):
         tid, title, _, _, _ = t
         groups = groups_for(t)
         all_groups[tid] = groups
         metadata.append(dict(id=tid, title=title, choiceCount=len(rows[tid]), writtenCount=sum(len(g['questions']) for g in groups)))
-        for qi, row in enumerate(rows[tid], 1):
-            section, kind, prompt, options, explanation = row
-            assert len(options) == 4 and len(set(options)) == 4
-            assert kind in ('Concept', 'Calculation', 'Application')
-            stem = source_for(t, section)
-            source = text(f'chapters/{stem}.md')
-            assert re.search(r'^#{2,4} '+re.escape(section)+r'(?:\s|$)', source, re.M), (tid, section)
-            offset = (qi-1+ti) % 4
-            displayed = options[-offset:] + options[:-offset] if offset else list(options)
-            sig = hashlib.sha256(json.dumps(row, ensure_ascii=True).encode()).hexdigest()[:16]
-            all_questions.append(dict(id=f'{tid}-{qi:03d}', topic=tid, kind=kind, prompt=prompt, options=displayed,
-                                      answer=offset, explanation=explanation, sourceStem=stem, sourceSection=section,
-                                      sourceHref=chapter_url(stem), sourceLabel=f'Review section {section}', sig=sig))
+        topic_questions = [
+            make_question(row, t, f'{tid}-{qi:03d}', (qi - 1 + ti) % 4, sections)
+            for qi, row in enumerate(rows[tid], 1)
+        ]
+        all_questions.extend(topic_questions)
+        if tid in adaptive_rows:
+            adaptive[tid] = adaptive_objectives(t, topic_questions, adaptive_rows[tid], sections)
     assert len(all_questions) == 120
     assert len({q['id'] for q in all_questions}) == 120
-    return dict(version=1, base=BASE, home=BASE+'/exercises/', topics=metadata, questions=all_questions), all_groups
+    return dict(version=1, base=BASE, home=BASE+'/exercises/', topics=metadata,
+                questions=all_questions, adaptive=adaptive), all_groups
 
 
 def generate() -> None:
@@ -182,7 +239,7 @@ Select an option for immediate feedback and an explanation. Use **Try again**, *
 '''
     for t in data['topics']:
         index += f"| [{t['title']}]({t['id']}.md) | {t['choiceCount']} | {t['writtenCount']} |\n"
-    index += '\n## Start practicing\n\n' + iframe('all')
+    index += ('\n## Start practicing\n\n' + iframe('all') + '\n\n' + practice_links('all') + '\n')
     index += '\n## How the exercise section is organized\n\nThe original chapter-end questions remain available for reading in context. The topic pages here reproduce them directly from the current chapters, with answers drawn from the existing end-of-book solution pages. Open an answer only after trying the problem. Computational experiments still require running the relevant notebook; a reference protocol is not a claimed experimental result.\n\n[Read the complete multiple-choice bank and answer explanations](question-bank.md). The original [foundation solutions](../chapters/solutions-foundations.md), [sensor and robotics solutions](../chapters/solutions-embodied.md), and [laboratory solutions](../chapters/solutions-laboratories.md) remain available.\n'
     write('exercises/index.md', index)
     review = '''---
@@ -195,23 +252,30 @@ This readable version contains the same 120 questions and answer explanations as
 '''
     for t in data['topics']:
         tid = t['id']
+        adaptive = tid in data['adaptive']
+        chapter_link = ''
+        if adaptive:
+            stem = groups[tid][0]['stem']
+            objective_count = len(data['adaptive'][tid])
+            chapter_link = (f'[Start adaptive chapter practice](../chapters/{stem}.md#adaptive-practice-{tid})'
+                            f' to work through {objective_count} concepts with short lessons and fresh questions.\n\n')
         doc = f'''---
 title: "{t['title']} - Exercises"
 ---
 
 [Exercise center](index.md) | [Readable choice questions](question-bank.md#practice-bank-{tid})
 
-## Interactive questions
+{chapter_link}## Interactive questions
 
 This topic has **{t['choiceCount']} multiple-choice questions**. Choose one option to receive a correctness check, the correct answer, an explanation, and a link to the relevant chapter section.
 
-'''+iframe(tid)+'\n## Original written exercises and worked answers\n\nThese questions and answers are drawn from the existing book. Calculations use the original model conventions. Open-ended experiment questions provide a suggested method rather than invented measurements.\n'
+'''+iframe(tid)+'\n\n'+practice_links(tid)+'\n\n## Original written exercises and worked answers\n\nThese questions and answers are drawn from the existing book. Calculations use the original model conventions. Open-ended experiment questions provide a suggested method rather than invented measurements.\n'
         for gi, group in enumerate(groups[tid], 1):
             stem, sol = group['stem'], group['solution']
             doc += f"\n### {group['heading']}\n\n[Read the original context](../chapters/{stem}.md) | [Book-end solutions](../chapters/{sol}.md)\n"
             for i, (question, answer) in enumerate(zip(group['questions'], group['answers']), 1):
                 doc += f'\n(practice-{tid}-{gi}-written-{i})=\n#### Exercise {i}\n\n'+relocate(question,stem)+'\n\n:::{admonition} Show answer and reasoning\n:class: dropdown\n\n'+relocate(answer,sol)+'\n:::\n'
-            add_portal(stem,tid)
+            add_portal(stem, tid, adaptive=adaptive)
         write(f'exercises/{tid}.md',doc)
         review += f"\n(practice-bank-{tid})=\n## {t['title']}\n\n[Interactive practice]({tid}.md)\n"
         for q in (q for q in data['questions'] if q['topic']==tid):
@@ -225,7 +289,7 @@ This topic has **{t['choiceCount']} multiple-choice questions**. Choose one opti
     write('exercises/generated-manifest.json',json.dumps(manifest,indent=2)+'\n')
     config=yaml.safe_load(text('myst.yml'))
     static=config['project'].setdefault('static_files',[])
-    for path in ['assets/exercise-practice.html','assets/exercise-resize.js']:
+    for path in ['assets/exercise-practice.html', 'assets/exercise-resize.js', 'assets/exercise-adaptive.js']:
         if path not in static:static.append(path)
     toc=config['project']['toc']
     toc[:]=[x for x in toc if x.get('title')!='Exercises & Interactive Questions']
@@ -267,11 +331,17 @@ def get_built_data() -> tuple[Path,str,dict]:
     return p,s,json.loads(m.group(1))
 
 
+def adaptive_questions(data: dict):
+    for objectives in data['adaptive'].values():
+        for objective in objectives:
+            yield from objective['questions']
+
+
 def post_build() -> None:
     root=ROOT/'_build/html'
     p,s,data=get_built_data()
     cache={}
-    for q in data['questions']:
+    for q in [*data['questions'], *adaptive_questions(data)]:
         stem=q['sourceStem'];slug=re.sub(r'^\d+-','',stem)
         if stem not in cache:
             parser=Headings();parser.feed((root/'chapters'/slug/'index.html').read_text());cache[stem]=parser
@@ -288,7 +358,7 @@ def post_build() -> None:
         h=page.read_text()
         if script not in h and '</body>' in h:
             page.write_text(h.replace('</body>',script+'</body>'))
-    print('Resolved all 120 source-section anchors and installed same-origin iframe resizing.')
+    print('Resolved practice source-section anchors and installed same-origin iframe resizing.')
 
 
 def check() -> None:
@@ -299,12 +369,16 @@ def check() -> None:
     assert sum(t['writtenCount'] for t in data['topics'])==96
     root=ROOT/'_build/html'
     assert (root/'exercise-resize.js').is_file()
+    assert (root/'exercise-adaptive.js').is_file()
     assert '__QUESTION_DATA__' not in s
     assert 'fetch(' not in s and 'XMLHttpRequest' not in s, 'Practice should not send responses to a server'
     assert 'localStorage' in s and 'aria-live="polite"' in s
     answers=[q['answer'] for q in data['questions']]
     assert all(answers.count(i)>=20 for i in range(4))
-    for q,e in zip(data['questions'],expected['questions']):
+    assert data['adaptive'].keys() == expected['adaptive'].keys()
+    for q,e in zip([*data['questions'], *adaptive_questions(data)],
+                   [*expected['questions'], *adaptive_questions(expected)], strict=True):
+        assert q['id'] == e['id']
         assert q['options']==e['options'] and q['answer']==e['answer']
         assert q['explanation']==e['explanation']
         url,anchor=q['sourceHref'].split('#')
@@ -321,6 +395,12 @@ def check() -> None:
             for i in range(1,len(g['questions'])+1):
                 assert f'practice-{tid}-{gi}-written-{i}' in parser.ids
         assert 'exercise-practice.html?topic='+tid in page_html
+        if tid in data['adaptive']:
+            stem = groups[tid][0]['stem']
+            slug = re.sub(r'^\d+-', '', stem)
+            chapter = (root/'chapters'/slug/'index.html').read_text()
+            assert f'id="adaptive-practice-{tid}"' in chapter, tid
+            assert f'src="{BASE}/exercise-practice.html?topic={tid}&amp;mode=adaptive"' in chapter, tid
     review=Headings();review.feed((root/'exercises/question-bank/index.html').read_text())
     assert review.details==120,review.details
     assert not (ROOT/'chapters/05-neural-encoding.md').exists()
@@ -332,7 +412,8 @@ def check() -> None:
     assert math.isclose(5+45*(1-1.5/5),36.5)
     assert math.isclose(3e8*100e-9/2,15) and math.isclose(42.8*.5,21.4)
     assert 800*600*3==1440000
-    print('Exercise checks passed: 120 choices/explanations, 96 original questions/answers, all topic pages, numerical examples, and 120 exact source links.')
+    objectives = sum(map(len, data['adaptive'].values()))
+    print(f'Exercise checks passed: 120 bank questions, 96 written exercises, and {objectives} adaptive concepts across all chapter pages.')
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--post-build',action='store_true');ap.add_argument('--check',action='store_true');args=ap.parse_args()

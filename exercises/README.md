@@ -5,6 +5,13 @@ Each row identifies a real source section and supplies one correct option,
 three distractors, and an explanation. The builder rotates correct-option
 positions; the browser shuffles question order without changing the answer key.
 
+`adaptive_bank.py` adds the concept-level paths embedded after the written
+exercises in each numbered chapter. It selects starting questions from the
+existing bank and adds two or more new variants and two mini-lessons per
+concept. The adaptive player requires two correct answers in a row on distinct
+questions. A miss breaks the streak and opens a mini-lesson. After the last
+question, learners can review and restart that concept.
+
 The chapter-end written exercises and book-end solutions remain the canonical
 sources. `tools/build_exercise_center.py` extracts them, verifies one answer per
 question, and produces the standalone exercise section with collapsed answers.
@@ -29,5 +36,7 @@ available to the client: this is self-study, not secure examination software.
 immediate feedback, explanations, topic/type filters, question navigation,
 shuffle, scoped reset, and desktop/mobile layouts. `assets/exercise-resize.js`
 accepts bounded resize messages only from the matching same-origin frame.
+`assets/exercise-adaptive.js` runs the adaptive mode and stores its progress
+by chapter and concept.
 The readable question-bank page and original worked-answer dropdowns also work
 without JavaScript. Existing images, videos, notebooks, and cover are unchanged.

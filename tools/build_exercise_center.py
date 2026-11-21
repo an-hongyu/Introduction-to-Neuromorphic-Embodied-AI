@@ -121,7 +121,7 @@ def iframe(topic_id: str, *, adaptive: bool = False) -> str:
 
 
 def practice_links(topic_id: str) -> str:
-    return (f'[Open practice in a full page]({BASE}/exercise-practice.html?topic={topic_id})'
+    return (f'[Open practice in a full page](/exercise-practice.html?topic={topic_id})'
             ' | [Readable question bank](question-bank.md)')
 
 
@@ -141,7 +141,7 @@ Answer two different questions in a row correctly to master a concept. If you mi
 
 {iframe(topic_id, adaptive=True)}
 
-[Open adaptive practice in a full page]({BASE}/exercise-practice.html?topic={topic_id}&mode=adaptive)
+[Open adaptive practice in a full page](/exercise-practice.html?topic={topic_id}&mode=adaptive)
 '''
         assert doc.count(target + body) == 1
         doc = doc.replace(target + body, (target + body).rstrip() + '\n\n' + block + '\n', 1)

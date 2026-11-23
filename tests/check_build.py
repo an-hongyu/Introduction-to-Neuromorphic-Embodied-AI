@@ -16,6 +16,7 @@ root = Path(__file__).resolve().parents[1] / '_build/html'
 base = '/Introduction-to-Neuromorphic-Embodied-AI'
 html_files = list(root.rglob('*.html'))
 assert (root / 'index.html').is_file(), 'Homepage was not generated'
+assert (root / 'chapters' / 'preface.html').is_file() or (root / 'chapters' / 'preface' / 'index.html').is_file(), 'Author Preface was not generated'
 assert len(html_files) >= 22, f'Expected at least 22 book pages, found {len(html_files)}'
 all_html = '\n'.join(p.read_text() for p in html_files)
 for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',

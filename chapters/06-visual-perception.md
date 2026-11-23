@@ -4,7 +4,6 @@ title: "Chapter 6 · Visual Perception and Encoding"
 
 ## 6.1 Learning objectives
 
-
 This chapter follows the two supplied **Visual Perception** lecture decks: Part I develops robot perception, light, image formation, and camera sensors; Part II develops color perception, digital images, and image processing [[1]](#vision-ref-1), [[2]](#vision-ref-2). The final RGB-to-LIF experiment is retained from this textbook as an explicit application, rather than presented as an experiment reported in the slides.
 
 By the end of this chapter, you should be able to:

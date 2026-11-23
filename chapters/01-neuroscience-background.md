@@ -4,7 +4,7 @@ title: "Chapter 1 · Introduction to Neural Systems, Neurons, and Synapses"
 
 ## Learning objectives
 
-The nervous system as the core cognition and intelligence function of the animals links sensation to action through networks of neurons. To build neuromorphic systems, we first need to understand **how neural signals arise within a cell and how they pass between cells**. This chapter introduces the neural system at three levels: the nervous system, the individual neuron, and the synapse.
+The nervous system as the core cognition and intelligence function of the animals links sensation to action through networks of neurons. To build neuromorphic AI systems, we first need to understand **how neural signals arise within a cell and how they pass between cells**. This chapter introduces the neural system at three levels: the nervous system, the individual neuron, and the synapse.
 
 By the end of this chapter, you should be able to:
 

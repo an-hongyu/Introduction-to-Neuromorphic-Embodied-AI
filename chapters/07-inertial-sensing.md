@@ -4,12 +4,15 @@ title: "Chapter 7 · Inertial Sensing and Vibration Encoding"
 
 ## 7.1 Learning objectives
 
+An inertial measurement unit (IMU) provides information about a robot's acceleration and rotation, but its readings also depend on sensor orientation, gravity, and measurement bias. This chapter introduces those measurements and shows how to build a causal vibration detector for the course's associative-learning robot. The vibration cue serves as the unconditioned stimulus (US) and must be detected from a sensor signal, not supplied as a hidden simulation flag.
+
 By the end of this chapter, you should be able to:
 
-- Distinguish acceleration, angular velocity, and orientation.
-- Implement a causal vibration detector.
-- Calculate the latency introduced by the detector's analysis window.
-- Identify when gravity compensation is required for inertial measurements. In the course project, a vibration cue provides the US. It must be detected from a sensor signal rather than substituted with a simulation's hidden stimulus flag.
+- Distinguish acceleration, angular velocity, and orientation, including their units and sensor reference frames.
+- Explain when gravity compensation or baseline calibration is needed for inertial measurements.
+- Implement a causal vibration detector from accelerometer measurements.
+- Calculate and interpret the latency introduced by the detector's analysis window.
+- Explain how a detected vibration becomes an input cue for the robot's associative-learning experiment.
 
 ## 7.2 What does an IMU measure?
 

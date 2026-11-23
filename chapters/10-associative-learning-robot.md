@@ -4,7 +4,9 @@ title: "Chapter 10 · Capstone: An Associative Learning Robot"
 
 ## 10.1 Learning objectives and experimental question
 
-Can pairing a visual cue with a vibration cue make the visual cue alone elicit a motor response? By the end of this chapter, you should be able to:
+This capstone brings together visual perception, inertial sensing, synaptic learning, and spiking neural responses in one controlled robot-learning question: can pairing a visual cue with a vibration cue make the visual cue alone elicit a motor response? The chapter separates baseline tests, training, and independent recall so that an observed response is not automatically mistaken for evidence of learning.
+
+By the end of this chapter, you should be able to:
 
 - Formulate visual-cue and vibration-cue association as a controlled experiment.
 - Connect visual and inertial sensing measurements to neural inputs.

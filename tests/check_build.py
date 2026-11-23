@@ -26,6 +26,8 @@ for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
              'Course-to-Book Reading Map', 'Curriculum and Development Roadmap', 'colab.research.google.com']:
     assert text in all_html, f'Missing published content: {text}'
 assert 'katex' in all_html or 'MathJax' in all_html or '<math' in all_html, 'No rendered mathematics'
+assert 'Toward Robots That Learn from Experience' in all_html, 'Preface heading is missing'
+assert 'Tinotenda Taderera' in all_html, 'Reviewer acknowledgement is missing from the published book'
 assert len(list(root.rglob('*.ipynb'))) >= 8, 'Expected eight downloadable laboratories'
 assert len(list(root.rglob('*.png'))) >= 17, 'Expected at least seventeen notebook figure outputs'
 assert (root / 'lif-interactive.html').is_file(), 'Missing embedded LIF application'

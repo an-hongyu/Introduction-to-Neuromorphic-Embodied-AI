@@ -2,9 +2,11 @@
 title: "Chapter 1 · Introduction to Neural Systems, Neurons, and Synapses"
 ---
 
+## Learning objectives
+
 The nervous system links sensation to action through networks of neurons. To build neuromorphic systems, we first need to understand **how neural signals arise within a cell and how they pass between cells**. This chapter develops that picture at three levels: the nervous system, the individual neuron, and the synapse.
 
-**Learning objectives.** By the end of this chapter, you should be able to:
+By the end of this chapter, you should be able to:
 
 - Describe the central and peripheral nervous systems and how sensory and motor pathways support behavior.
 - Identify the major parts of a neuron and explain their roles in communication.

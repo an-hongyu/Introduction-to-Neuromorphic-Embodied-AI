@@ -16,6 +16,7 @@ root = Path(__file__).resolve().parents[1] / '_build/html'
 base = '/Introduction-to-Neuromorphic-Embodied-AI'
 html_files = list(root.rglob('*.html'))
 assert (root / 'index.html').is_file(), 'Homepage was not generated'
+assert (root / 'chapters' / 'preface.html').is_file() or (root / 'chapters' / 'preface' / 'index.html').is_file(), 'Author Preface was not generated'
 assert len(html_files) >= 22, f'Expected at least 22 book pages, found {len(html_files)}'
 all_html = '\n'.join(p.read_text() for p in html_files)
 for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
@@ -25,6 +26,8 @@ for text in ['Introduction to Neuromorphic Embodied AI', 'Closed-Loop Overview',
              'Course-to-Book Reading Map', 'Curriculum and Development Roadmap', 'colab.research.google.com']:
     assert text in all_html, f'Missing published content: {text}'
 assert 'katex' in all_html or 'MathJax' in all_html or '<math' in all_html, 'No rendered mathematics'
+assert 'Toward Robots That Learn from Experience' in all_html, 'Preface heading is missing'
+assert 'Tinotenda Taderera' in all_html, 'Reviewer acknowledgement is missing from the published book'
 assert len(list(root.rglob('*.ipynb'))) >= 8, 'Expected eight downloadable laboratories'
 assert len(list(root.rglob('*.png'))) >= 17, 'Expected at least seventeen notebook figure outputs'
 assert (root / 'lif-interactive.html').is_file(), 'Missing embedded LIF application'

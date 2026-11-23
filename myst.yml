@@ -21,6 +21,7 @@ project:
   - assets/border-cell-guided.html
   toc:
   - file: index.md
+  - file: chapters/preface.md
   - title: Foundations
     children:
     - file: chapters/01-neuroscience-background.md

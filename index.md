@@ -19,6 +19,8 @@ How can a robot form a spatial representation, remember where it has been, and l
 
 Each computational chapter links **biological evidence**, **explicit assumptions**, **mathematical models**, **executable Python**, and **experiments**. No biological claim should be inferred solely from the behavior of a simulation.
 
+**Before you begin:** [Read the Preface — Toward Robots That Learn from Experience](chapters/preface.md) for the author's three-year teaching perspective, the motivation for reliable on-device learning, and guidance on using the book.
+
 :::{card} Start here
 Begin with [Chapter 1: Neurons and Synapses](chapters/01-neuroscience-background.md), then study [Chapter 2: Computational Models of Neurons](chapters/03-computational-neuron-models.md), [Chapter 3: Hebbian Learning and Synaptic Plasticity](chapters/04-hebbian-learning.md), and [Chapter 4: Spatial Cells and Their Models](chapters/02-spatial-cells.md).
 :::

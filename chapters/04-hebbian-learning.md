@@ -116,7 +116,16 @@ $
 (\rho_{\mathrm{post}}-\rho_T).
 $
 
-With positive presynaptic activity, the **postsynaptic rate determines the sign**: activity below threshold depresses the weight, activity above threshold potentiates it, and equality gives zero update. Presynaptic activity scales the magnitude. The shape of this curve is not an experimentally fitted law and does not guarantee bounded learning.
+With **positive presynaptic activity** and a **positive threshold** (\(\rho_{\mathrm{pre}}>0\), \(\rho_T>0\)), the postsynaptic rate determines the sign **except at zero activity**. Depression requires \(0<\rho_{\mathrm{post}}<\rho_T\); potentiation requires \(\rho_{\mathrm{post}}>\rho_T\). At \(\rho_{\mathrm{post}}=0\) and at \(\rho_{\mathrm{post}}=\rho_T\), the product is zero, so the weight does **not** change. Likewise, \(\rho_{\mathrm{pre}}=0\) gives no change for any postsynaptic rate.
+
+| Condition (assuming \(\rho_{\mathrm{pre}}>0\), \(\rho_T>0\)) | Weight change |
+|---|---|
+| \(\rho_{\mathrm{post}}=0\) | No change |
+| \(0<\rho_{\mathrm{post}}<\rho_T\) | Depression (LTD in this teaching rule) |
+| \(\rho_{\mathrm{post}}=\rho_T\) | No change |
+| \(\rho_{\mathrm{post}}>\rho_T\) | Potentiation (LTP in this teaching rule) |
+
+Presynaptic activity scales the magnitude; it cannot make an inactive postsynaptic factor negative. The shape of this curve is not an experimentally fitted law and does not guarantee bounded learning.
 
 ```{figure} ../assets/hebb-course/rate-threshold-plasticity.svg
 :label: fig-hebbian-continuous-threshold
@@ -190,7 +199,22 @@ $$
 
 $e_{ji}$ is an eligibility trace; $\tau_e$ is its decay time constant; $f$ forms local coactivity; and $M(t)$ is a modulatory signal. Here $f$ and $e$ share units, and $\eta$ must make the weight derivative dimensionally consistent. The modulator might represent a reward-related quantity in a chosen algorithm; it is not automatically identical to a measured dopamine signal.
 
-If a trace is set to 1 and receives no further input, it decays to $e^{-\Delta/\tau_e}$ after delay $\Delta$. With $\tau_e=0.5$ s, a reward arriving 0.5 s later encounters a trace of approximately 0.368. A much later reward has less effect under this chosen decay law. This is a mechanism for retaining candidate credit, not a guarantee of correct causal attribution.
+If a trace is set to 1 at \(t=0\) and receives no further input, it follows \(e(t)=e^{-t/\tau_e}\). With \(\tau_e=0.5\) s, a reward arriving 0.5 s later encounters a trace of approximately \(e(0.5)=e^{-1}=0.368\). A much later reward has less effect under this chosen decay law.
+
+**Worked example — how does delayed reward actually change the weight?** To make the second differential equation calculable, suppose \(e\) and \(M\) are dimensionless, \(\eta=0.1\ \mathrm{s}^{-1}\), and the reward-related modulator is \(M(t)=1\) from \(t=0.5\) to \(0.6\) s and zero otherwise. The trace **continues to decay** throughout the 0.1 s reward pulse:
+
+$
+\begin{aligned}
+\Delta w
+&=\int_{0.5}^{0.6}\eta M(t)e(t)\,dt\\
+&=(0.1\ \mathrm{s}^{-1})\int_{0.5\ \mathrm{s}}^{0.6\ \mathrm{s}}
+e^{-t/(0.5\ \mathrm{s})}\,dt\\
+&=0.05\,(e^{-1}-e^{-1.2})\\
+&\approx\boxed{0.00333}.
+\end{aligned}
+$
+
+For a pulse of the **same strength and duration delivered immediately** from 0 to 0.1 s, the corresponding result is \(\Delta w=0.05(1-e^{-0.2})\approx0.00906\). Delaying this pulse therefore reduces the update in this example. A single instantaneous reward value \(M(0.5)\), without a defined duration or impulse area, is **not sufficient** to calculate a finite weight change from \(dw/dt\). These numbers describe a chosen credit-assignment mechanism, not a measured dopamine-to-weight conversion.
 
 ## 3.8 Worked example: association, partial cues, and interference
 

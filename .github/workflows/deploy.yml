@@ -32,6 +32,8 @@ jobs:
         run: python tools/fetch_spatial_figures.py
       - name: Execute Place Cell notebook
         run: python tests/execute_notebook.py
+      - name: Verify student-editable laboratory experiments
+        run: python tests/check_editable_labs.py
       - name: Build Jupyter Book
         env:
           BASE_URL: /${{ github.event.repository.name }}

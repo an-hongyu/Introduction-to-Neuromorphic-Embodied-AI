@@ -104,11 +104,21 @@ This equation **imposes** a field. It does not explain learning, remapping, or t
 
 ### 4.3.4 From a place-field rate to spike events
 
-For a simulation time step $\Delta t$ in seconds, assume conditionally independent, inhomogeneous Poisson firing. The number of spikes in a bin has distribution
+For a simulation time step \(\Delta t\) in seconds, assume conditionally independent, inhomogeneous Poisson firing. Using the rate evaluated at one position to represent the **entire** time bin assumes that the position-dependent rate changes little during that bin:
 
-$$N_i[t]\sim\operatorname{Poisson}(r_i(\mathbf{x}_t)\Delta t).$$
+$
+N_i[t]\sim\operatorname{Poisson}\!\bigl(r_i(\mathbf{x}_t)\Delta t\bigr)
+\quad\text{(approximately constant rate within the bin).}
+$
 
-For bins small enough that multiple events are rare, a binary event can be drawn with probability $1-\exp[-r_i(\mathbf{x}_t)\Delta t]$. In this notebook we sample Poisson counts, which remain valid even for larger bins.
+More generally, if the robot moves appreciably or the rate varies during the bin, use the **integrated intensity**
+
+$
+\Lambda_i[t]=\int_t^{t+\Delta t}r_i(\mathbf{x}(s))\,ds,
+\qquad N_i[t]\sim\operatorname{Poisson}(\Lambda_i[t]).
+$
+
+The Poisson **count** model is valid for larger bins when this integrated intensity is correctly evaluated; multiplying one instantaneous rate by a large bin width may be inaccurate. For bins small enough that multiple events are rare, a binary event can be drawn with probability \(1-e^{-\Lambda_i[t]}\) (or \(1-e^{-r_i(\mathbf{x}_t)\Delta t}\) under the constant-rate approximation). Laboratory 2 compares different bin widths using the same underlying synthetic trajectory to isolate this approximation from changes in movement.
 
 This assumption generates stochastic events from a specified rate; it does not implement membrane dynamics, refractoriness, or learning [[22]](#spatial-ref-22). Reconstruct the rate with the occupancy-normalized estimator in [Section 4.8](#spatial-tuning-estimation), and compare it with the imposed field on sufficiently visited bins.
 
@@ -149,7 +159,20 @@ $$
 
 Use $0\leq\tau<1$ and $r_{P,\max}=25\ \mathrm{Hz}$. If the total weight is zero, define $S=0$. Then $0\leq S\leq1$ and $0\leq r_P\leq25$ Hz. The associated binary activation is $\mathbf1[S>\tau]$. Both numerator and denominator of $S$ use the selected first $N$ inputs; excluded grids contribute nothing.
 
-This normalization deliberately removes pure multiplicative gain changes when $\zeta=0$. Increasing $\kappa$ changes the raw grid-rate panels but leaves this normalized readout unchanged. A model using the unnormalized sum $z$ would behave differently. The browser reports both kinds of quantities so that display normalization cannot be mistaken for a biological gain mechanism.
+**Worked numerical example — two grid inputs, one place-like output.** At one illustrative position, suppose both grid cells have \(g_{j,\max}=30\) Hz, with observed model rates \(g_1=27\) Hz and \(g_2=24\) Hz. Such theoretical maxima are consistent with the chapter's \(r_G=20\) Hz, \(\kappa=0.5\), and \(\zeta=0\), because \(20(3\times0.5)=30\) Hz. Choose weights \(w_1=2\), \(w_2=1\), threshold \(\tau=0.78\), and \(r_{P,\max}=25\) Hz.
+
+$
+\begin{aligned}
+h_1&=\frac{27}{30}=0.90,\qquad h_2=\frac{24}{30}=0.80,\\
+S&=\frac{2(0.90)+1(0.80)}{2+1}=\frac{2.60}{3}\approx0.8667,\\
+r_P&=25\left[\frac{0.8667-0.78}{1-0.78}\right]_+
+\approx\boxed{9.85\ \mathrm{Hz}}.
+\end{aligned}
+$
+
+The binary activation is \(\mathbf1[S>\tau]=1\), but the 9.85 Hz value is a **continuous rate proxy**, not a generated spike train. These input rates and weights are a small **teaching calculation**, not a claimed measurement or a reproduction of the six-grid preset.
+
+This normalization deliberately removes pure multiplicative gain changes when \(\zeta=0\). Increasing \(\kappa\) changes the raw grid-rate panels but leaves this normalized readout unchanged. A model using the unnormalized sum \(z\) would behave differently. The browser reports both kinds of quantities so that display normalization cannot be mistaken for a biological gain mechanism.
 
 **Why diversity and threshold matter.**
 

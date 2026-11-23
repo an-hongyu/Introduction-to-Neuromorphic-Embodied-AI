@@ -6,6 +6,8 @@ title: "Overview · Neuromorphic Embodied AI"
 
 ## O.1 Learning objectives
 
+This overview introduces neuromorphic embodied intelligence as a closed loop: a robot senses its surroundings, updates its internal neural state, acts, and receives new sensory information as a result. It also previews the spatial representations and modeling assumptions that connect the book's neuroscience foundations to autonomous robotic behavior.
+
 By the end of this chapter, you should be able to:
 
 - Distinguish embodied intelligence from offline perception.

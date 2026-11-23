@@ -4,9 +4,7 @@ title: "Chapter 8 \u00b7 Neural Encoding for LiDAR Sensing"
 
 ## 8.1 Learning objectives
 
-A LiDAR does not directly report an obstacle-avoidance decision or a place-cell response. It measures light returned from the environment. Those measurements must be associated with directions and acquisition times, interpreted in a coordinate frame, and transformed into the inputs consumed by a neural model.
-
-This chapter follows the supplied **Introduction to LiDAR** lecture: ranging principles, scanning hardware, survey applications, return signals, sensor parameters, point clouds, and sensing limitations [[1]](#lidar-ref-1). The original lecture images, two animations, and three video links accompany the discussion. Sections 8.9-8.10 extend that material into the book's existing **36-channel neural encoder**; its parameters are teaching choices, not sensor specifications or experimental results reported in the lecture.
+LiDAR measures returned light, not navigation decisions or biological spatial-cell responses. This chapter follows the supplied **Introduction to LiDAR** lecture to explain ranging, scanning hardware, sensor parameters, point clouds, and sensing limitations using its original figures, animations, and videos [[1]](#lidar-ref-1). It then develops a **36-channel neural encoder**, a LiDAR-to-LIF model, and interactive boundary-response robot experiments. These computational parameters are teaching choices, not specifications or biological findings from the lecture.
 
 By the end of this chapter, you should be able to:
 

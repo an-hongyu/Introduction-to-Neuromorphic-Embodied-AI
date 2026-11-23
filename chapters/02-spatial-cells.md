@@ -4,7 +4,7 @@ title: "Chapter 4 · Spatial Cells and Their Models"
 
 ## 4.1 Learning Objectives
 
-A navigation system must represent more than its current coordinates. It needs to distinguish location, orientation, movement, environmental boundaries, and the order of events. This chapter introduces the **hippocampal–entorhinal system** and six experimentally identified response classes: **place cells, grid cells, head-direction cells, border cells, speed cells, and time cells**. The last two supply movement and temporal information rather than location alone. Most response classes are paired with interpretable mathematical models, while **Section 4.6 emphasizes biological border-cell observations and evidence**; its LiDAR-to-LIF engineering model and interactive robot demonstrations are in Chapter 8. The place-cell section contains the grid-to-place readout and interactive experiment; the grid-cell section derives the input fields used by that readout.
+Spatial navigation requires information about location, heading, movement, boundaries, and time. This chapter introduces the **hippocampal–entorhinal system** and the evidence and computational models for **place, grid, head-direction, border, speed, and time cells**. It also develops a grid-to-place readout with an interactive example. **Section 4.6** focuses on biological border-cell observations; the LiDAR-to-LIF boundary-response model and robot experiments are developed in Chapter 8.
 
 By the end of this chapter, you should be able to:
 

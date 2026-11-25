@@ -8,13 +8,13 @@ The nervous system as the core cognition and intelligence function of the animal
 
 By the end of this chapter, you should be able to:
 
-- Describe the central and peripheral nervous systems and how sensory and motor pathways support behavior.
-- Identify the major parts of a neuron and explain their roles in communication.
-- Explain membrane potential, action-potential initiation, and spike propagation.
-- Trace the main steps of chemical synaptic transmission.
-- Distinguish excitatory and inhibitory influences, and explain spatial and temporal synaptic integration.
-- Describe how changes in synaptic efficacy can contribute to learning and plasticity.
-
+1. Identify the main parts of a neuron and explain how it receives, combines, and sends signals.
+2. Define membrane potential as the voltage difference between the inside and outside of a neuron.
+3. Explain what an action potential (spike) is, how it starts, and how it travels along the axon.
+4. Define a synapse as a junction where one neuron communicates with another cell.
+5. Explain how a neurotransmitter acts as a chemical messenger by binding to receptors on the receiving cell.
+6. Trace chemical synaptic transmission from the arrival of a spike at the axon terminal to neurotransmitter release and its effect on the receiving neuron’s likelihood of firing.
+   
 ## 1.1 Nervous System
 
 A nervous system allows an organism to sense its surroundings, combine sensory information with its internal state, and coordinate behavior. In vertebrates, the **central nervous system (CNS)** consists of the brain and spinal cord. The **peripheral nervous system (PNS)** connects the CNS with receptors, muscles, and organs. Sensory pathways carry information toward central circuits; motor pathways carry commands toward effectors. These pathways form a feedback loop rather than a one-way chain.
